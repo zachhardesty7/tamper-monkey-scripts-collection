@@ -9,7 +9,7 @@
 // @require      https://gist.github.com/raw/2625891/waitForKeyElements.js
 // ==/UserScript==
 
-// TODO: occasionally funky for using real after the new ones
+// TODO: occasionally funky for using real after the new percs
 // TODO: eliminate jQuery functions (other than ready)
 
 // gogogo

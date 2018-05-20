@@ -2,7 +2,7 @@
 // @name         Add Soundcloud External Download Button
 // @namespace    http://zachhardesty.com
 // @version      1.0
-// @description  adds a button on main page and song page to download song automatically from anything2mp3.com
+// @description  adds a button on main page and song page to download song automatically from https://soundcloudmp3.org/
 // @author       Zach Hardesty
 // @match        https://soundcloud.com/*
 // @match        https://soundcloudmp3.org/*

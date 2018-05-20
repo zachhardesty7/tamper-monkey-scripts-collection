@@ -18,10 +18,10 @@
 // @args None
 function main () {
   // active ticker
-  const pageTicker = document.querySelector('.productSymbol').firstElementChild.textContent
+  if (window.location.href.includes('https://www.binance.com/trade.html')) {
+    const pageTicker = document.querySelector('.productSymbol').firstElementChild.textContent
 
-  // fetch current USD conversion rates and store in global data
-  fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,BNB,' + pageTicker + '&tsyms=USD')
+    fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,BNB,' + pageTicker + '&tsyms=USD')
     .then(resp => resp.json())
     .then(function (data) {
       GM_setValue('BTCUSD', data.BTC.USD)
@@ -30,18 +30,25 @@ function main () {
       GM_setValue(pageTicker + 'USD', data[pageTicker].USD)
 
       // either add USD to basic exchange or to balance pages
-      if (window.location.href.includes('https://www.binance.com/trade.html')) {
-        waitForKeyElements('input.ng-pristine.ng-valid', addTickerConversionRate)
-
-      } else {
-        // if elem are loaded then add USD value below BTC val
-        waitForKeyElements('.td.ng-scope', addBTCConversionRate)
-      }
+      waitForKeyElements('input.ng-pristine.ng-valid', addTickerConversionRate)
     })
 
     .catch(function (error) {
       console.log(error)
     })
+  } else {
+    fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
+    .then(resp => resp.json())
+    .then(function (data) {
+      GM_setValue('BTCUSD', data.BTC.USD)
+      // if elem are loaded then add USD value below BTC val
+      waitForKeyElements('.td.ng-scope', addBTCConversionRate)
+     })
+
+    .catch(function (error) {
+      console.log(error)
+    })
+  }
 }
 
 // runs on the addition of each ticker
