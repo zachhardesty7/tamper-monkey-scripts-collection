@@ -9,6 +9,8 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js
 // ==/UserScript==
 
+/* eslint no-undef: "off" */
+
 // runs on page load
 // gets rough dollar conversion using api data and generates pie chart
 // @args None

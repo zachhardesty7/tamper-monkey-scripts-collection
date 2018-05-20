@@ -9,6 +9,8 @@
 // @downloadURL  http://zachhardesty.com/userscripts/harvest-hourly-pay.user.js
 // ==/UserScript==
 
+/* eslint no-undef: "off" */
+
 (function () {
   'use strict'
   function addPay () {

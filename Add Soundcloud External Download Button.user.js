@@ -12,6 +12,8 @@
 // @grant        GM_setValue
 // ==/UserScript==
 
+/* eslint no-undef: "off" */
+
 // adds button to soundcloud
 // @args jNode node of most recently added children (for lazy load)
 function addButton (jNode) {

@@ -13,6 +13,8 @@
 // @grant        GM_setValue
 // ==/UserScript==
 
+/* eslint no-undef: "off" */
+
 // TODO: refactor to eliminate unnecessary library - waitForKeyElements
 
 // @args None
@@ -22,32 +24,32 @@ function main () {
     const pageTicker = document.querySelector('.productSymbol').firstElementChild.textContent
 
     fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,BNB,' + pageTicker + '&tsyms=USD')
-    .then(resp => resp.json())
-    .then(function (data) {
-      GM_setValue('BTCUSD', data.BTC.USD)
-      GM_setValue('ETHUSD', data.ETH.USD)
-      GM_setValue('BNBUSD', data.BNB.USD)
-      GM_setValue(pageTicker + 'USD', data[pageTicker].USD)
+      .then(resp => resp.json())
+      .then(function (data) {
+        GM_setValue('BTCUSD', data.BTC.USD)
+        GM_setValue('ETHUSD', data.ETH.USD)
+        GM_setValue('BNBUSD', data.BNB.USD)
+        GM_setValue(pageTicker + 'USD', data[pageTicker].USD)
 
-      // either add USD to basic exchange or to balance pages
-      waitForKeyElements('input.ng-pristine.ng-valid', addTickerConversionRate)
-    })
+        // either add USD to basic exchange or to balance pages
+        waitForKeyElements('input.ng-pristine.ng-valid', addTickerConversionRate)
+      })
 
-    .catch(function (error) {
-      console.log(error)
-    })
+      .catch(function (error) {
+        console.log(error)
+      })
   } else {
     fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
-    .then(resp => resp.json())
-    .then(function (data) {
-      GM_setValue('BTCUSD', data.BTC.USD)
-      // if elem are loaded then add USD value below BTC val
-      waitForKeyElements('.td.ng-scope', addBTCConversionRate)
-     })
+      .then(resp => resp.json())
+      .then(function (data) {
+        GM_setValue('BTCUSD', data.BTC.USD)
+        // if elem are loaded then add USD value below BTC val
+        waitForKeyElements('.td.ng-scope', addBTCConversionRate)
+      })
 
-    .catch(function (error) {
-      console.log(error)
-    })
+      .catch(function (error) {
+        console.log(error)
+      })
   }
 }
 
@@ -103,7 +105,7 @@ HTMLElement.prototype.changeValueDetection = function () {
   var oldVal = element.value
   var GUID = function () { var S4 = function () { return (Math.floor(Math.random() * 0x10000).toString(16)) }; return (S4() + S4() + '-' + S4() + '-' + S4() + '-' + S4() + '-' + S4() + S4() + S4()) }
   var uiq = 'GUID-' + GUID()
-  if (window.changeValueDetectionEvents === undefined)window.changeValueDetectionEvents = new Event('changeValueDetection')
+  if (window.changeValueDetectionEvents === undefined) window.changeValueDetectionEvents = new Event('changeValueDetection')
   element.setAttribute('data-uiq', uiq)
   window[uiq] = setInterval(function () {
     if (element.value !== oldVal) {

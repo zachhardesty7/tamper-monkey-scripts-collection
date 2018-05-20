@@ -9,6 +9,8 @@
 // @require      https://gist.github.com/raw/2625891/waitForKeyElements.js
 // ==/UserScript==
 
+/* eslint no-undef: "off" */
+
 // TODO: occasionally funky for using real after the new percs
 // TODO: eliminate jQuery functions (other than ready)
 
