@@ -33,6 +33,8 @@ Code will automatically execute on the proper website pages!
     * Display pre-tax income based on clocked hours, must update with pay rate, defaults to $16 / hour ![][harvest-img]
 * [Soundcloud][soundcloud]
     * Add seemless download button that uses an external service for any track ![][soundcloud-img]
+* [Google Docs][gdocs]
+    * Add a status bar at the bottom of the page to track word count and settings inside of the script to control excluding quotes, parenthesis, brackets, etc from count ![docs-img]
 
 _For more information on Tampermonkey itself, please refer to their [website][tampermonkey-website]._
 
@@ -44,6 +46,8 @@ _For more information on Tampermonkey itself, please refer to their [website][ta
     * Unnecessary usage of 'waitForKeyElements.js'
 * Soundcloud
     * Button does not appear on all types of pages
+* Docs
+    * Requires user to scroll throughout document to counteract lazy loading of page content
 
 ## Contributing
 
@@ -76,12 +80,14 @@ limitations under the License.
 * [WaitForKeyElements.js][waitjs] - A utility function, for Greasemonkey scripts, that detects and handles AJAXed content.
 * [JQuery][jquery] - jQuery is a fast, small, and feature-rich JavaScript library. (Only used because above library requires it.)
 * [SoundCloud to MP3][soundcloud-download] - With SoundCloud MP3 you can convert and download music in High Quality MP3 format.
-* [ChangeValueDetection][detectorjs] - simple interval observer to detect change from user, JS, or anything else
+* [ChangeValueDetection][detectorjs] - Simple interval observer to detect change from user, JS, or anything else
+* [Google Docs Wordcount][docs-greasemonkey] - Inspiration for my script, changed formatting, style, and added a few filtering options
 
 <!-- Markdown link & img dfn's -->
 [binance]: https://www.binance.com
 [harvest]: https://www.getharvest.com/
 [soundcloud]: https://soundcloud.com/
+[gdocs]: https://www.google.com/docs/about/
 [standard]: https://github.com/standard/standard
 [chartjs]: https://github.com/chartjs/Chart.js
 [api]: https://min-api.cryptocompare.com/
@@ -89,6 +95,7 @@ limitations under the License.
 [jquery]: https://jquery.com/
 [soundcloud-download]: https://soundcloudmp3.org/
 [detectorjs]: https://gist.github.com/inter-coder/d674758f727fa866f9e9
+[docs-greasemonkey]: https://greasyfork.org/en/scripts/22057-google-docs-wordcount/code
 [tampermonkey-chrome]: https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en
 [tampermonkey-edge]: https://www.microsoft.com/en-us/store/p/tampermonkey/9nblggh5162s?rtc=1
 [tampermonkey-safari]: https://safari.tampermonkey.net/tampermonkey.safariextz 
@@ -100,3 +107,4 @@ limitations under the License.
 [binance-img-bal]: http://zachhardesty.com/github/bal.png
 [binance-img-exchange]: http://zachhardesty.com/github/exchange.png
 [soundcloud-img]: http://zachhardesty.com/github/soundcloud.png
+[docs-img]: http://zachhardesty.com/github/docs.png
