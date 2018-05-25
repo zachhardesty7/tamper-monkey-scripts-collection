@@ -1,6 +1,6 @@
-# Tamper Monkey Scripts Collection
+# Tampermonkey Scripts Collection
 
-Making life just a little easier on some websites with simple user interface improvements.
+Making life just a little easier on various websites with simple user interface improvements.
 
 ## Description
 
