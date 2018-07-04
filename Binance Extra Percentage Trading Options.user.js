@@ -5,45 +5,53 @@
 // @description  add more options to the simple market page (5%, 10%, 15%, 20%, 33%, 40%, 66%, 80%, 90%)
 // @author       Zach Hardesty
 // @match        https://www.binance.com/trade.htm*
+// @match        https://www.binance.com/*/trade/*
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js
 // @require      https://gist.github.com/raw/2625891/waitForKeyElements.js
 // ==/UserScript==
 
 /* eslint no-undef: "off" */
 
-// TODO: occasionally funky for using real after the new percs
+// TODO: occasionally funky for using real per after adding the new per
 // TODO: eliminate jQuery functions (other than ready)
 
-// gogogo
+const formSelector = `#__next > div > main > div:nth-child(3) > div >
+                      div > div:nth-child(1) > div:nth-child(1) > div:nth-child(2)
+                      > div:nth-child(2) > div:nth-child(2) > div:nth-child(2)`
+
 function main () {
   // only opperate once all necessary elements have loaded
-  waitForKeyElements('.orderforms-hd', addPercentages, true)
+  // brittle but necessary selector (thanks binance for removing readable class names)
+  waitForKeyElements(formSelector, addPercentages, true)
 }
 
 // finds possible amount able to buy
 function getBalanceBuy () {
-  return document.querySelectorAll('.orderforms-hd div .f-fr')[0]
+  return document.querySelectorAll(formSelector + 'div:nth-child(1) > form > div:nth-child(3) > div > input')[0]
     .textContent
     .match(/\d+\.\d+/g)[0] /
-        document.querySelectorAll('#buyPrice')[0]
-          .value
+    document.querySelectorAll('#__next > div > main > div:nth-child(3) > div > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2) > span:nth-child(1)')[0]
+      .value
 }
 
 // finds quanitity able to sell
 function getBalanceSell () {
-  return document.querySelectorAll('.orderforms-hd div .f-fr')[1]
+  return document.querySelectorAll('#__next > div > main > div:nth-child(3) > div > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > form > div:nth-child(1) > div > div')[1]
     .textContent
     .match(/\d+\.\d+/g)[0]
 }
 
-// runs on the addition of each ticker
 // @args jNode node of most recently checked page
 function addPercentages (jNode) {
   // new percentages
   const p = [0.05, 0.10, 0.15, 0.33, 0.40, 0.66, 0.80, 0.90]
 
   // grab all necessary elems from node
-  const form = jNode.parent().children('form').children('.orderforms-inputs')
+  // form = jNode.children(':nth-child(1)').children('form')
+  const form = jNode.children(':nth-child(1)').children('form')
+
+  // everything below here isn't right anymore
+
   const type = jNode.parent().children('form').attr('name')
   const pers = form.children('.field.percent').children('.iptwrap')
 
@@ -94,10 +102,10 @@ function addPercentages (jNode) {
       // handle field for total on limit and stop-limit orders
       if (form.children().length === 4) {
         total.val(form.children(':nth-child(1)').children('.iptwrap').children('input').val() *
-                    newQuantity)
+          newQuantity)
       } else if (form.children().length === 5) {
         total.val(form.children(':nth-child(2)').children('.iptwrap').children('input').val() *
-                    newQuantity)
+          newQuantity)
       }
     })
   }
