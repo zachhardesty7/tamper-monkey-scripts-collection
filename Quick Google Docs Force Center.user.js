@@ -16,5 +16,5 @@
     document.querySelector('.kix-appview-editor').scrollLeft =
       (document.querySelector('.kix-zoomdocumentplugin-outer').scrollWidth -
        document.querySelector('.kix-appview-editor').clientWidth) / 2
-  }, 1000)
+  }, 500)
 })()
