@@ -26,15 +26,17 @@ Code will automatically execute on the proper website pages!
 ## Usage
 
 * [Binance][binance]
-    * Add text to display current amounts of crypto in approx. USD value ![][binance-img-bal]
-    * Add chart.js pie chart to display distribution of portfolio holdings ![][binance-img-pie]
-    * Add a few extra options for percent of holding to buy or sell ![][binance-img-exchange]
+    * Add text to display current amounts of crypto in approx. USD value ![balance line with USD conversion][binance-img-bal]
+    * Add chart.js pie chart to display distribution of portfolio holdings ![pie chart of ratios][binance-img-pie]
+    * Add a few extra options for percent of holding to buy or sell ![view of extra option][binance-img-exchange]
 * [Harvest][harvest]
-    * Display pre-tax income based on clocked hours, must update with pay rate, defaults to $16 / hour ![][harvest-img]
+    * Display pre-tax income based on clocked hours, must update with pay rate, defaults to $16 / hour ![conversion next to hours worked][harvest-img]
 * [Soundcloud][soundcloud]
-    * Add seemless download button that uses an external service for any track ![][soundcloud-img]
+    * Add seemless download button that uses an external service for any track ![soundcloud external download button][soundcloud-img]
 * [Google Docs][gdocs]
-    * Add a status bar at the bottom of the page to track word count and settings inside of the script to control excluding quotes, parenthesis, brackets, etc from count ![docs-img]
+    * Center document on screen and prevent horizontal scrolling
+    * Add a status bar at the bottom of the page to track word count and settings inside of the script to control excluding quotes, parenthesis, brackets, etc from count
+    * Separate count for seeing word count of selected text ![footer count][docs-img]
 
 _For more information on Tampermonkey itself, please refer to their [website][tampermonkey-website]._
 
@@ -48,6 +50,8 @@ _For more information on Tampermonkey itself, please refer to their [website][ta
     * Button does not appear on all types of pages
 * Docs
     * Requires user to scroll throughout document to counteract lazy loading of page content
+    * Selecting text while using filters can cause some funky word counts (regex would get far too complicated to realistically fix these issues)
+    * Uses 15.4 KB library to determine selected text that's slightly overkill and results in text being processed twice
 
 ## Contributing
 
@@ -65,7 +69,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-http://www.apache.org/licenses/LICENSE-2.0
+[Full Apache 2.0 License Source](http://www.apache.org/licenses/LICENSE-2.0)
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -74,6 +78,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 ## Acknowledgements
+
 * [Javascript Standard Style][standard] - strictly enforced guide of good practices (and no semicolons)
 * [Chart.js][chartjs] - Simple HTML5 Charts using the canvas element
 * [CryptoCompare API][api] - The best free API for getting cryptocurrency live pricing data
@@ -98,11 +103,11 @@ limitations under the License.
 [docs-greasemonkey]: https://greasyfork.org/en/scripts/22057-google-docs-wordcount/code
 [tampermonkey-chrome]: https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en
 [tampermonkey-edge]: https://www.microsoft.com/en-us/store/p/tampermonkey/9nblggh5162s?rtc=1
-[tampermonkey-safari]: https://safari.tampermonkey.net/tampermonkey.safariextz 
+[tampermonkey-safari]: https://safari.tampermonkey.net/tampermonkey.safariextz
 [tampermonkey-firefox]: https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/
 [tampermonkey-opera]: https://addons.opera.com/en/extensions/details/tampermonkey-beta/
 [tampermonkey-website]: https://tampermonkey.net/
-[harvest-img]: http://zachhardesty.com/github/harvest.png 
+[harvest-img]: http://zachhardesty.com/github/harvest.png
 [binance-img-pie]: http://zachhardesty.com/github/pie.png
 [binance-img-bal]: http://zachhardesty.com/github/bal.png
 [binance-img-exchange]: http://zachhardesty.com/github/exchange.png

@@ -65,8 +65,6 @@
       filtered = filtered.replace(new RegExp(filter, 'g'), ' ')
     }
 
-    console.log(filtered)
-
     // remove extra spaces and line breaks and get counts
     let words = filtered.trim().replace(/\u00A0/g, ' ').replace(/ {2,}/g, ' ').split(' ')
     if (words.includes('~~')) {
