@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Google Docs Force Center
+// @name         Quick Google Docs Force Center
 // @namespace    http://zachhardesty.com
-// @version      1.0
-// @description  force center align page content display on Google Docs, useful for smaller screens and laptops that accidentally scroll horizontally since you often don't need all of the margin on screen
+// @version      0.1
+// @description  Force center align on Google Docs
 // @author       Zach Hardesty
 // @match        https://docs.google.com/document/*
 // @grant        none
@@ -15,6 +15,6 @@
   setInterval(() => {
     document.querySelector('.kix-appview-editor').scrollLeft =
       (document.querySelector('.kix-zoomdocumentplugin-outer').scrollWidth -
-       document.querySelector('.kix-appview-editor').clientWidth) / 2
+     document.querySelector('.kix-appview-editor').clientWidth) / 2
   }, 500)
 })()

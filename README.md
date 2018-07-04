@@ -37,6 +37,8 @@ Code will automatically execute on the proper website pages!
     * Center document on screen and prevent horizontal scrolling
     * Add a status bar at the bottom of the page to track word count and settings inside of the script to control excluding quotes, parenthesis, brackets, etc from count
     * Separate count for seeing word count of selected text (temporarily missing) ![footer count][docs-img]
+* Google Search
+    * simple script that hides the "People also search for" prompt that sometimes appears when returning to the same search results
 
 _For more information on Tampermonkey itself, please refer to their [website][tampermonkey-website]._
 
