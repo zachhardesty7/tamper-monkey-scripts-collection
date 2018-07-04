@@ -5,12 +5,20 @@
 // @description  Adds a word counter with options to Google Docs
 // @author       Zach Hardesty
 // @match        https://docs.google.com/document/*
+// @require      https://raw.githubusercontent.com/JensPLarsen/ChromeExtension-GoogleDocsUtil/master/googleDocsUtil.js
 // @grant        none
 // ==/UserScript==
+
+/* eslint no-undef: "off" */
 
 // heavy inspiration from:
 // https://greasyfork.org/en/scripts/22057-google-docs-wordcount/code
 // https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
+
+// strikingly complex (uses DOM bounding boxes) to get currently selected text:
+// may implement only necessary functions to save space, library size: (15.4 KB)
+// https://github.com/JensPLarsen/ChromeExtension-GoogleDocsUtil
+
 (function () {
   'use strict'
   // words not counted between these when true
@@ -18,6 +26,7 @@
   const PARENTHESIS = true
   const QUOTES = true
   const MISC = true // skips works cited, personal titles
+  const SELECTED = true // if selected text present, word count only counts it
 
   let display = document.createElement('div')
   display.id = 'zh-display'
@@ -27,6 +36,9 @@
   document.querySelector('body').append(display)
 
   async function setCount () {
+    let doc = googleDocsUtil.getGoogleDocument()
+    let selected = doc.selectedText
+
     let pages = document.querySelector('.kix-paginateddocumentplugin').children[1].children
     let body = ''
     for (let page of pages) {
@@ -59,7 +71,13 @@
     if (QUOTES) regex.push('Works Cited(.|\\n.*)*|(Unit \\d (Primary Source Analysis|Exam: Part \\d( - #\\d+)*))')
     if (MISC) regex.push('(“(.(?!“))+”)')
 
-    // apply regex filtering
+    // apply regex filtering to body
+    // let selected = selected
+    for (let filter of regex) {
+      selected = selected.replace(new RegExp(filter, 'g'), ' ')
+    }
+
+    // apply regex filtering to selected text if necessary
     let filtered = body
     for (let filter of regex) {
       filtered = filtered.replace(new RegExp(filter, 'g'), ' ')
@@ -69,6 +87,9 @@
     let words = filtered.trim().replace(/\u00A0/g, ' ').replace(/ {2,}/g, ' ').split(' ')
     if (words.includes('~~')) {
       document.querySelector('#zh-display').textContent = 'Word Count: (scroll to bottom or remove empty page) | Pages: ' + pages.length
+    } else if (selected.length > 0 && SELECTED) {
+      selected = selected.trim().replace(/\u00A0/g, ' ').replace(/ {2,}/g, ' ').split(' ')
+      document.querySelector('#zh-display').textContent = 'Word Count: ' + selected.length + ' of ' + words.length + ' (selected) | Pages: ' + pages.length
     } else {
       document.querySelector('#zh-display').textContent = 'Word Count: ' + words.length + ' | Pages: ' + pages.length
     }

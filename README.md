@@ -36,9 +36,11 @@ Code will automatically execute on the proper website pages!
 * [Google Docs][gdocs]
     * Center document on screen and prevent horizontal scrolling
     * Add a status bar at the bottom of the page to track word count and settings inside of the script to control excluding quotes, parenthesis, brackets, etc from count
-    * Separate count for seeing word count of selected text (temporarily missing) ![footer count][docs-img]
+    * Separate count for seeing word count of selected text ![footer count][docs-img]
 * Google Search
     * simple script that hides the "People also search for" prompt that sometimes appears when returning to the same search results
+* [Etsy][etsy]
+    * hide ad results on search page
 
 _For more information on Tampermonkey itself, please refer to their [website][tampermonkey-website]._
 
@@ -95,6 +97,7 @@ limitations under the License.
 [harvest]: https://www.getharvest.com/
 [soundcloud]: https://soundcloud.com/
 [gdocs]: https://www.google.com/docs/about/
+[etsy]: https://www.etsy.com/
 [standard]: https://github.com/standard/standard
 [chartjs]: https://github.com/chartjs/Chart.js
 [api]: https://min-api.cryptocompare.com/
