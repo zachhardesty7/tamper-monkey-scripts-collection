@@ -41,6 +41,8 @@ Code will automatically execute on the proper website pages!
     * simple script that hides the "People also search for" prompt that sometimes appears when returning to the same search results
 * [Etsy][etsy]
     * hide ad results on search page
+* Github
+    * add a large or giant banner if project hasn't been updated in 6 months or 1+ years respectively
 
 _For more information on Tampermonkey itself, please refer to their [website][tampermonkey-website]._
 
