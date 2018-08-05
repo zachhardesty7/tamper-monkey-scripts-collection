@@ -43,6 +43,8 @@ Code will automatically execute on the proper website pages!
     * hide ad results on search page
 * Github
     * add a large or giant banner if project hasn't been updated in 6 months or 1+ years respectively
+* YouTube
+    * filter out videos on subscription page and home page based on given keyword
 
 _For more information on Tampermonkey itself, please refer to their [website][tampermonkey-website]._
 
