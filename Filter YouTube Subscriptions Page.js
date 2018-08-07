@@ -26,17 +26,15 @@ const keywords = [
 
 function main () {
   // only opperate once necessary element has loaded
-  // waitForKeyElements('.feed-item-container.browse-list-item-container.yt-section-hover-container .feed-item-dismissable .multirow-shelf .shelf-content', func, true)
-
-  waitForKeyElements('.yt-shelf-grid-item', func, false)
+  waitForKeyElements('#dismissable.style-scope.ytd-grid-video-renderer', func, false)
 }
 
 // @args jNode node of most recently checked page
 function func (jNode) {
   // remove video
   for (const keyword of keywords) {
-    if (jNode[0].firstElementChild.firstElementChild.lastElementChild.firstElementChild.textContent.toLowerCase().includes(keyword)) {
-      jNode[0].remove()
+    if (jNode[0].querySelector('#details').querySelector('#meta').firstElementChild.textContent.toLowerCase().includes(keyword)) {
+      jNode[0].parentElement.remove()
     }
   }
 }
