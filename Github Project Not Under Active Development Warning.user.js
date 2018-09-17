@@ -29,7 +29,8 @@ function renderWarning () {
     justify-content: center;
     align-items: center;
     color: white;
-    font-size: 36px;`
+    font-size: 36px;
+  `
 
   banner.textContent = "WARNING: repo hasn't received an update in 1+ year(s)"
 
@@ -45,7 +46,8 @@ function renderCaution () {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;`
+    font-size: 24px;
+  `
 
   banner.textContent = "Caution: repo hasn't received an update in 6+ months"
 

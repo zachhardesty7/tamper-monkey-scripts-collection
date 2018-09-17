@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Filter YouTube Subscriptions Page
 // @namespace    http://zachhardesty.com
-// @version      0.1.0
+// @version      0.1.1
 // @description  hide videos with given title keywords
 // @author       Zach Hardesty
 // @match        https://www.youtube.com/feed/subscriptions*
@@ -21,6 +21,7 @@ const keywords = [
   'dirt every day',
   'roadkill',
   'standard chess',
+  'no man\'s sky',
   'hearthstone'
 ]
 

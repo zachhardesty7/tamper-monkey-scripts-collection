@@ -30,9 +30,11 @@
 
   let display = document.createElement('div')
   display.id = 'zh-display'
-  display.style = `position: fixed; width: 100%; left: 0px; bottom: 0px; color: rgba(0,0,0,.7);
+  display.style = `
+    position: fixed; width: 100%; left: 0px; bottom: 0px; color: rgba(0,0,0,.7);
     height: 15px; background-color: #EDEDEE; z-index: 100; font-family: Arial;
-    font-size: 12px; padding-top: 5px; padding-left: 5px; border-top: 1px solid #d9d9d9;`
+    font-size: 12px; padding-top: 5px; padding-left: 5px; border-top: 1px solid #d9d9d9;
+  `
   document.querySelector('body').append(display)
 
   async function setCount () {
