@@ -26,7 +26,7 @@ const keywords = [
 ]
 
 function main () {
-  // only opperate once necessary element has loaded
+  // only operate once necessary element has loaded
   waitForKeyElements('#dismissable.style-scope.ytd-grid-video-renderer', func, false)
 }
 

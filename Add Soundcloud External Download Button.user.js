@@ -42,14 +42,14 @@ function addButton (jNode) {
   }
 }
 
-// auto-run on soundcloudmp3
+// auto-run on soundcloud mp3
 // if referred from soundcloud, grab data from GM storage
 // paste and submit to begin conversion to mp3
 (function () {
   if (!window.location.href.includes('soundcloudmp3') &&
         window.location.href.includes('soundcloud')) {
     // library that detects ajax changes
-    // requires jQuery *sadface*
+    // requires jQuery - boo
     waitForKeyElements('.l-listen-wrapper', addButton)
     waitForKeyElements('.lazyLoadingList__list > .soundList__item', addButton)
   } else if (window.location.href.includes('soundcloudmp3') &&

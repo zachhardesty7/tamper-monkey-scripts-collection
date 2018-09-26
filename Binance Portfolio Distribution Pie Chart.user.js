@@ -60,14 +60,14 @@ function main () {
     // build canvas element
     let page = document.querySelector('.chargeWithdraw-title')
     let canvas = document.createElement('canvas')
-    canvas.id = 'zhchart'
+    canvas.id = 'zh-chart'
     canvas.height = 250
     canvas.width = 250
     canvas.style = 'height: 250px; width: 250px; display: block; float: right'
 
     // insert canvas and capture elem
     page.appendChild(canvas)
-    var ctx = document.querySelector('#zhchart').getContext('2d')
+    var ctx = document.querySelector('#zh-chart').getContext('2d')
 
     // scrape value of portfolio data in BTC
     let data = document.querySelectorAll('.td.ng-scope')
@@ -86,7 +86,7 @@ function main () {
         return response.json()
       })
       .then(function (data) {
-        // capture 6 largest assests for pie chart
+        // capture 6 largest assets for pie chart
         for (let i = 0; i < 6; i++) {
           let maxName = getMaxInObject(portfolio)
           let maxVal = (parseFloat(portfolio[maxName]) * data.USD).toFixed(2)
@@ -95,7 +95,7 @@ function main () {
           delete portfolio[maxName]
         }
 
-        // accumulate remaining assests for "other" category of pie chart
+        // accumulate remaining assets for "other" category of pie chart
         let otherCryptosVal = 0
         for (let ticker in portfolio) {
           otherCryptosVal += parseFloat(portfolio[ticker])

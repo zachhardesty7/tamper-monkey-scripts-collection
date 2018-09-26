@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Google Docs Wordcount - With Options
+// @name         Google Docs Word Count - With Options
 // @namespace    http://zachhardesty.com
 // @version      0.2
 // @description  Adds a word counter with options to Google Docs

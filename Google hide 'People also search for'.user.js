@@ -12,7 +12,7 @@
 /* eslint no-undef: "off" */
 
 function main () {
-  // only opperate once necessary element has loaded
+  // only operate once necessary element has loaded
   waitForKeyElements('.exp-outline', hideSuggestions, true)
 }
 

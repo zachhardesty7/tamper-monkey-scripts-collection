@@ -20,7 +20,7 @@ const formSelector = `#__next > div > main > div:nth-child(3) > div >
                       > div:nth-child(2) > div:nth-child(2) > div:nth-child(2)`
 
 function main () {
-  // only opperate once all necessary elements have loaded
+  // only operate once all necessary elements have loaded
   // brittle but necessary selector (thanks binance for removing readable class names)
   waitForKeyElements(formSelector, addPercentages, true)
 }
@@ -34,7 +34,7 @@ function getBalanceBuy () {
       .value
 }
 
-// finds quanitity able to sell
+// finds quantity able to sell
 function getBalanceSell () {
   return document.querySelectorAll('#__next > div > main > div:nth-child(3) > div > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > form > div:nth-child(1) > div > div')[1]
     .textContent
@@ -53,11 +53,11 @@ function addPercentages (jNode) {
   // everything below here isn't right anymore
 
   const type = jNode.parent().children('form').attr('name')
-  const pers = form.children('.field.percent').children('.iptwrap')
+  const percents = form.children('.field.percent').children('.iptwrap')
 
   // style new grid of percentages
-  pers.parent().css({ 'margin-bottom': '15px', 'text-align': 'right' })
-  pers.children().last().css({ 'margin-right': '8px' })
+  percents.parent().css({ 'margin-bottom': '15px', 'text-align': 'right' })
+  percents.children().last().css({ 'margin-right': '8px' })
 
   // to keep in scope, init
   let quantity
@@ -69,7 +69,7 @@ function addPercentages (jNode) {
     total = form.children(':nth-child(4)').children('.iptwrap').children('input')
 
     // market order
-    // total auto calced at time of purchase
+    // total auto-calc at time of purchase
   } else if (form.children().length === 3) {
     quantity = form.children(':nth-child(2)').children('.iptwrap').children('input')
 
@@ -87,7 +87,7 @@ function addPercentages (jNode) {
     button.textContent = (per * 100).toFixed(0) + '%'
     button.style = 'margin-bottom: 8px'
 
-    pers.append(button)
+    percents.append(button)
 
     // handle updating fields when button clicked
     button.addEventListener('click', el => {
@@ -111,17 +111,17 @@ function addPercentages (jNode) {
   }
 
   // gotta sort all those values
-  var listitems = pers.children().get()
-  listitems.sort(function (a, b) {
+  var listItems = percents.children().get()
+  listItems.sort(function (a, b) {
     a = parseInt($(a).text())
     b = parseInt($(b).text())
 
     return +a - +b
   })
 
-  // and add them back to the nodelist
-  $.each(listitems, function (_, item) {
-    pers.append(item)
+  // and add them back to the nodeList
+  $.each(listItems, function (_, item) {
+    percents.append(item)
   })
 }
 

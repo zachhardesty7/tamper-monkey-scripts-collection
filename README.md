@@ -4,7 +4,7 @@ Making life just a little easier on various websites with simple user interface 
 
 ## Description
 
-This repo hosts a handful of different script files that Tampermonkey injects into the relevant websites. Certain websites just seemed to be missing something or something simple could really improve the functionality. I took it upon myself to add these features in the most seemless way possible. If you encounter any issues, check the known issues below. Uses [Standard JS formatting][standard].
+This repo hosts a handful of different script files that Tampermonkey injects into the relevant websites. Certain websites just seemed to be missing something or something simple could really improve the functionality. I took it upon myself to add these features in the most seamless way possible. If you encounter any issues, check the known issues below. Uses [Standard JS formatting][standard].
 
 ## Getting Started
 
@@ -16,8 +16,7 @@ Tampermonkey browser extension (download links)
 
 ### Installation
 
-* Download and compress all files in this repo into a .zip file.
-* Import .zip into Tampermonkey under the utilities tab.
+Download and import .zip into Tampermonkey under the utilities tab.
 
 ### Execution
 
@@ -32,7 +31,7 @@ Code will automatically execute on the proper website pages!
 * [Harvest][harvest]
     * Display pre-tax income based on clocked hours, must update with pay rate, defaults to $16 / hour ![conversion next to hours worked][harvest-img]
 * [Soundcloud][soundcloud]
-    * Add seemless download button that uses an external service for any track ![soundcloud external download button][soundcloud-img]
+    * Add seamless download button that uses an external service for any track ![soundcloud external download button][soundcloud-img]
 * [Google Docs][gdocs]
     * Center document on screen and prevent horizontal scrolling
     * Add a status bar at the bottom of the page to track word count and settings inside of the script to control excluding quotes, parenthesis, brackets, etc from count
@@ -88,27 +87,27 @@ limitations under the License.
 ## Acknowledgements
 
 * [Javascript Standard Style][standard] - strictly enforced guide of good practices (and no semicolons)
-* [Chart.js][chartjs] - Simple HTML5 Charts using the canvas element
+* [Chart.js][chartJS] - Simple HTML5 Charts using the canvas element
 * [CryptoCompare API][api] - The best free API for getting cryptocurrency live pricing data
-* [WaitForKeyElements.js][waitjs] - A utility function, for Greasemonkey scripts, that detects and handles AJAXed content.
+* [WaitForKeyElements.js][waitJS] - A utility function, for Greasemonkey scripts, that detects and handles AJAX content.
 * [JQuery][jquery] - jQuery is a fast, small, and feature-rich JavaScript library. (Only used because above library requires it.)
-* [SoundCloud to MP3][soundcloud-download] - With SoundCloud MP3 you can convert and download music in High Quality MP3 format.
-* [ChangeValueDetection][detectorjs] - Simple interval observer to detect change from user, JS, or anything else
-* [Google Docs Wordcount][docs-greasemonkey] - Inspiration for my script, changed formatting, style, and added a few filtering options
+* [SoundCloud to MP3][soundcloudDownload] - With SoundCloud MP3 you can convert and download music in High Quality MP3 format.
+* [ChangeValueDetection][detectorJS] - Simple interval observer to detect change from user, JS, or anything else
+* [Google Docs Word Count][docs-greasemonkey] - Inspiration for my script, changed formatting, style, and added a few filtering options
 
-<!-- Markdown link & img dfn's -->
+<!-- Markdown link & img definitions -->
 [binance]: https://www.binance.com
 [harvest]: https://www.getharvest.com/
 [soundcloud]: https://soundcloud.com/
 [gdocs]: https://www.google.com/docs/about/
 [etsy]: https://www.etsy.com/
 [standard]: https://github.com/standard/standard
-[chartjs]: https://github.com/chartjs/Chart.js
+[chartJS]: https://github.com/chartJS/Chart.js
 [api]: https://min-api.cryptocompare.com/
-[waitjs]: https://gist.github.com/BrockA/2625891
+[waitJS]: https://gist.github.com/BrockA/2625891
 [jquery]: https://jquery.com/
-[soundcloud-download]: https://soundcloudmp3.org/
-[detectorjs]: https://gist.github.com/inter-coder/d674758f727fa866f9e9
+[soundcloudDownload]: https://soundcloudmp3.org/
+[detectorJS]: https://gist.github.com/inter-coder/d674758f727fa866f9e9
 [docs-greasemonkey]: https://greasyfork.org/en/scripts/22057-google-docs-wordcount/code
 [tampermonkey-chrome]: https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en
 [tampermonkey-edge]: https://www.microsoft.com/en-us/store/p/tampermonkey/9nblggh5162s?rtc=1
