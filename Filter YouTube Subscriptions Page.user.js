@@ -1,3 +1,5 @@
+/* eslint-disable no-undef, no-console, max-len */
+
 // ==UserScript==
 // @name         Filter YouTube Subscriptions Page
 // @namespace    http://zachhardesty.com
@@ -11,8 +13,6 @@
 // @require      https://gist.github.com/raw/2625891/waitForKeyElements.js
 // ==/UserScript==
 
-/* eslint no-undef: "off" */
-
 const keywords = [
   'binding of isaac',
   'dark souls',
@@ -25,21 +25,15 @@ const keywords = [
   'hearthstone'
 ]
 
-function main () {
-  // only operate once necessary element has loaded
-  waitForKeyElements('#dismissable.style-scope.ytd-grid-video-renderer', func, false)
-}
+// only operate once necessary element has loaded
+waitForKeyElements('#dismissable.style-scope.ytd-grid-video-renderer', func, false)
 
 // @args jNode node of most recently checked page
-function func (jNode) {
+function func(jNode) {
   // remove video
-  for (const keyword of keywords) {
+  keywords.forEach((keyword) => {
     if (jNode[0].querySelector('#details').querySelector('#meta').firstElementChild.textContent.toLowerCase().includes(keyword)) {
       jNode[0].parentElement.remove()
     }
-  }
+  })
 }
-
-(function () {
-  main()
-})()

@@ -1,3 +1,5 @@
+/* eslint-disable no-undef, no-console, max-len */
+
 // ==UserScript==
 // @name         Binance Portfolio Distribution Pie Chart
 // @namespace    http://zachhardesty.com
@@ -9,12 +11,10 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js
 // ==/UserScript==
 
-/* eslint no-undef: "off" */
-
 // runs on page load
 // gets rough dollar conversion using api data and generates pie chart
 // @args None
-function main () {
+(function generateChart() {
   // stored data for colors
   const colors = {
     red: 'rgb(255, 99, 132)',
@@ -28,7 +28,7 @@ function main () {
   }
 
   // stored data for chart
-  let chartConfig = {
+  const chartConfig = {
     type: 'pie',
     data: {
       datasets: [{
@@ -56,10 +56,10 @@ function main () {
   }
 
   // begin program on page load finish
-  window.onload = function () {
+  window.onload = function buildChart() {
     // build canvas element
-    let page = document.querySelector('.chargeWithdraw-title')
-    let canvas = document.createElement('canvas')
+    const page = document.querySelector('.chargeWithdraw-title')
+    const canvas = document.createElement('canvas')
     canvas.id = 'zh-chart'
     canvas.height = 250
     canvas.width = 250
@@ -67,14 +67,14 @@ function main () {
 
     // insert canvas and capture elem
     page.appendChild(canvas)
-    var ctx = document.querySelector('#zh-chart').getContext('2d')
+    const ctx = document.querySelector('#zh-chart').getContext('2d')
 
     // scrape value of portfolio data in BTC
-    let data = document.querySelectorAll('.td.ng-scope')
-    let portfolio = {}
-    data.forEach(elem => {
-      let name = elem.firstElementChild.children[0].textContent
-      let val = elem.firstElementChild.children[5].firstChild.textContent
+    const portfolioRawData = document.querySelectorAll('.td.ng-scope')
+    const portfolio = {}
+    portfolioRawData.forEach((elem) => {
+      const name = elem.firstElementChild.children[0].textContent
+      const val = elem.firstElementChild.children[5].firstChild.textContent
       if (val !== 0) {
         portfolio[name] = val
       }
@@ -82,14 +82,12 @@ function main () {
 
     // get cur BTC to USD conversion rate
     fetch('https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD')
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (data) {
+      .then(response => response.json())
+      .then((data) => {
         // capture 6 largest assets for pie chart
-        for (let i = 0; i < 6; i++) {
-          let maxName = getMaxInObject(portfolio)
-          let maxVal = (parseFloat(portfolio[maxName]) * data.USD).toFixed(2)
+        for (let i = 0; i < 6; i += 1) {
+          const maxName = getMaxInObject(portfolio)
+          const maxVal = (parseFloat(portfolio[maxName]) * data.USD).toFixed(2)
           chartConfig.data.datasets[0].data.push(maxVal)
           chartConfig.data.labels.push(maxName)
           delete portfolio[maxName]
@@ -97,45 +95,41 @@ function main () {
 
         // accumulate remaining assets for "other" category of pie chart
         let otherCryptosVal = 0
-        for (let ticker in portfolio) {
+        Object.values(portfolio).forEach((ticker) => {
           otherCryptosVal += parseFloat(portfolio[ticker])
-        }
+        })
 
         // update chart data with other category
         chartConfig.data.datasets[0].data.push((otherCryptosVal * data.USD).toFixed(2))
         chartConfig.data.labels.push('other')
 
         // randomize color order and update config
-        let keys = Object.keys(colors)
-        keys.sort(function () { return Math.random() - 0.5 })
-        for (let i = 0; i < chartConfig.data.datasets[0].data.length; i++) {
+        const keys = Object.keys(colors)
+        keys.sort(() => Math.random() - 0.5)
+        for (let i = 0; i < chartConfig.data.datasets[0].data.length; i += 1) {
           chartConfig.data.datasets[0].backgroundColor.push(keys[i])
         }
 
         // generate pie chart
         window.myPie = new Chart(ctx, chartConfig)
       })
-      .catch(function (error) {
-        console.log(error)
+      .catch((error) => {
+        console.log(error) // eslint-disable-line no-console
       })
   }
-}
+})()
 
 // finds max val in object
 // @returns matching key
-function getMaxInObject (obj) {
+function getMaxInObject(obj) {
   let maxKey = ''
   let maxVal = 0
-  for (let key in obj) {
+  Object.keys.forEach((key) => {
     if (obj[key] > maxVal) {
       maxVal = obj[key]
       maxKey = key
     }
-  }
+  })
+
   return maxKey
 }
-
-// execute main program
-(function () {
-  main()
-})()

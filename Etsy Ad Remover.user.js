@@ -1,7 +1,9 @@
+/* eslint-disable no-undef, no-console, max-len */
+
 // ==UserScript==
 // @name        Etsy Ad Remover
 // @namespace   https://zachhardesty.com/
-// @description Removes search ads from Etsy
+// @description removes annoying and inconspicuous search ads from Etsy
 // @include     https://www.etsy.com/search*
 // @include     https://www.etsy.com/market/*
 // @version     1.0.0
@@ -9,10 +11,16 @@
 // @require     https://gist.github.com/raw/2625891/waitForKeyElements.js
 // ==/UserScript==
 
-/* eslint no-undef: "off" */
+function actionFunction(jNode) {
+  jNode
+    .parent()
+    .parent()
+    .parent()
+    .parent()
+    .parent()
+    .parent()
+    .parent()
+    .remove()
+}
 
 waitForKeyElements('.ad-indicator', actionFunction)
-
-function actionFunction (jNode) {
-  jNode.parent().parent().parent().parent().parent().parent().parent().remove()
-}

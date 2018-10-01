@@ -1,3 +1,5 @@
+/* eslint-disable no-undef, no-console, max-len */
+
 // ==UserScript==
 // @name         Github Project Not Under Active Development Warning
 // @namespace    http://zachhardesty.com
@@ -7,19 +9,17 @@
 // @match        https://github.com/*/*
 // ==/UserScript==
 
-/* eslint no-undef: "off" */
-
-function main () {
+(function calcAge() {
   const date = new Date(document.querySelector('.repository-content .commit-tease').lastElementChild.lastElementChild.firstElementChild.attributes[0].textContent)
   const dif = (Date.now() - date) / 1000 / 60 / 60 / 24 // in days
   if (dif > 365) { renderWarning() } else if (dif > 182.5) { renderCaution() }
-}
+})()
 
-function displayMessage (elem) {
+function displayMessage(elem) {
   document.querySelector('.repohead-details-container').insertAdjacentElement('afterend', elem)
 }
 
-function renderWarning () {
+function renderWarning() {
   const banner = document.createElement('div')
   banner.style = `
     background-color: red;
@@ -37,7 +37,7 @@ function renderWarning () {
   displayMessage(banner)
 }
 
-function renderCaution () {
+function renderCaution() {
   const banner = document.createElement('div')
   banner.style = `
     background-color: yellow;
@@ -53,7 +53,3 @@ function renderCaution () {
 
   displayMessage(banner)
 }
-
-(function () {
-  main()
-})()

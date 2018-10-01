@@ -1,3 +1,5 @@
+/* eslint-disable no-undef, no-console, max-len */
+
 // ==UserScript==
 // @name         Google hide "People also search for"
 // @namespace    http://zachhardesty.com
@@ -9,21 +11,13 @@
 // @require      https://gist.github.com/raw/2625891/waitForKeyElements.js
 // ==/UserScript==
 
-/* eslint no-undef: "off" */
-
-function main () {
-  // only operate once necessary element has loaded
-  waitForKeyElements('.exp-outline', hideSuggestions, true)
-}
-
 // @args jNode node of most recently checked page
-function hideSuggestions (jNode) {
+function hideSuggestions(jNode) {
   // remove text
   jNode.parent().children('div').children(':nth-child(3)').remove()
   // remove border
   jNode.remove()
 }
 
-(function () {
-  main()
-})()
+// only operate once necessary element has loaded
+waitForKeyElements('.exp-outline', hideSuggestions, true)
