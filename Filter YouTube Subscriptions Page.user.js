@@ -22,6 +22,9 @@ const keywords = [
   'roadkill',
   'standard chess',
   'no man\'s sky',
+  'unboxing',
+  'week to wicked',
+  'engine masters',
   'hearthstone'
 ]
 
