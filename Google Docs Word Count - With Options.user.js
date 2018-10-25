@@ -42,7 +42,7 @@
 
     const pages = document.querySelector('.kix-paginateddocumentplugin').children[1].children
     let body = ''
-    pages.forEach((page) => {
+    Array.from(pages).forEach((page) => {
       const content = page.lastElementChild.firstElementChild
       const text = content.textContent
       if (text === '') {
@@ -82,7 +82,7 @@
     // apply regex filtering to selected text if necessary
     let filtered = body
     regex.forEach((reg) => {
-      filtered = filtered.replace(new RegExp(filter, 'g'), ' ')
+      filtered = filtered.replace(new RegExp(reg, 'g'), ' ')
     })
 
     // remove extra spaces and line breaks and get counts
