@@ -1,4 +1,6 @@
-/* eslint-disable no-undef, no-console, max-len */
+/* eslint-env browser, jquery, greasemonkey */
+/* eslint-disable max-len */
+/* global waitForKeyElements */
 
 // ==UserScript==
 // @name         Binance Extra Percentage Trading Options
@@ -94,7 +96,7 @@ function addPercentages(jNode) {
       type.includes('buy') ? balance = getBalanceBuy() : balance = getBalanceSell()
 
       // update quantity field
-      const newQuantity = balance * per
+      const newQuantity = balance * percent
       quantity.val(newQuantity)
 
       // handle field for total on limit and stop-limit orders
@@ -109,10 +111,10 @@ function addPercentages(jNode) {
   // gotta sort all those values
   const listItems = percents.children().get()
   listItems.sort((a, b) => {
-    textA = parseInt($(a).text(), 10)
-    textB = parseInt($(b).text(), 10)
+    const textA = parseInt($(a).text(), 10)
+    const textB = parseInt($(b).text(), 10)
 
-    return +a - +b
+    return +textA - +textB
   })
 
   // and add them back to the nodeList

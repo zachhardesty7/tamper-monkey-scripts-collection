@@ -1,4 +1,5 @@
-/* eslint-disable no-undef, no-console, max-len */
+/* eslint-env browser, jquery, greasemonkey */
+/* eslint-disable max-len */
 
 // ==UserScript==
 // @name         Harvest Hourly Pay
@@ -16,8 +17,8 @@
     // ** hourly pay rate - replace this **
     const rate = 16
     function timeToDecimal(t) {
-      splitT = t.split(':')
-      return parseFloat(parseInt(splitT[0], 10) + parseInt(splitT[1], 10) / 60)
+      const splitTime = t.split(':')
+      return parseFloat(parseInt(splitTime[0], 10) + parseInt(splitTime[1], 10) / 60)
     }
     const hoursPerDay = document.querySelectorAll('.day-view-week-nav li a span')
     hoursPerDay.forEach((time) => {

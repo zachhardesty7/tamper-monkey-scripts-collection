@@ -1,4 +1,6 @@
-/* eslint-disable no-undef, no-console, max-len */
+/* eslint-env browser, jquery, greasemonkey */
+/* eslint-disable max-len */
+/* global waitForKeyElements */
 
 // ==UserScript==
 // @name         Add Binance BTC to USD Conversion
@@ -66,7 +68,7 @@ function addBTCConversionRate(jNode) {
     const USDValElem = document.createElement('p')
 
     USDValElem.textContent = `≈ ${USDVal} USD`
-    USDValElem.style = 'color: #A0A0A0'
+    USDValElem.style = 'color: #a0a0a0'
     BTCElement.append(USDValElem)
   }
 }

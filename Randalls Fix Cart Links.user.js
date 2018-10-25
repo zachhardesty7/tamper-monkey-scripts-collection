@@ -1,4 +1,6 @@
-/* eslint-disable no-undef, no-console, max-len */
+/* eslint-env browser, jquery, greasemonkey */
+/* eslint-disable max-len */
+/* global waitForKeyElements */
 
 // ==UserScript==
 // @name        Randall's Fix Cart Links

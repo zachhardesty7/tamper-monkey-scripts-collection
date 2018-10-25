@@ -1,4 +1,6 @@
-/* eslint-disable no-undef, no-console, max-len */
+/* eslint-env browser, jquery, greasemonkey */
+/* eslint-disable max-len */
+/* global Chart */
 
 // ==UserScript==
 // @name         Binance Portfolio Distribution Pie Chart
@@ -24,7 +26,7 @@
     blue: 'rgb(54, 162, 235)',
     grey: 'rgb(201, 203, 207)',
     purple: 'rgb(153, 102, 255)',
-    teal: '#59D2FE'
+    teal: '#59d2fe'
   }
 
   // stored data for chart
@@ -114,7 +116,7 @@
         window.myPie = new Chart(ctx, chartConfig)
       })
       .catch((error) => {
-        console.log(error) // eslint-disable-line no-console
+        console.log(error)
       })
   }
 })()

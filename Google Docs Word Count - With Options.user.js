@@ -1,4 +1,6 @@
-/* eslint-disable no-undef, no-console, max-len */
+/* eslint-env browser, jquery, greasemonkey */
+/* eslint-disable max-len */
+/* global googleDocsUtil */
 
 // ==UserScript==
 // @name         Google Docs Word Count - With Options

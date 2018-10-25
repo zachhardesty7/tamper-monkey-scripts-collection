@@ -1,4 +1,5 @@
-/* eslint-disable no-undef, no-console, max-len */
+/* eslint-env browser, jquery, greasemonkey */
+/* eslint-disable max-len */
 
 // ==UserScript==
 // @name         Github Project Not Under Active Development Warning
