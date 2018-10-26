@@ -11,7 +11,9 @@
 // @grant        none
 // ==/UserScript==
 
-(function centerDocs() {
+document.addEventListener('DOMContentLoaded', centerDocs, false)
+
+function centerDocs() {
   document.querySelector('.kix-appview-editor').style = 'overflow-x: hidden'
 
   setInterval(() => {
@@ -19,4 +21,4 @@
       (document.querySelector('.kix-zoomdocumentplugin-outer').scrollWidth -
       document.querySelector('.kix-appview-editor').clientWidth) / 2
   }, 250)
-})()
+}

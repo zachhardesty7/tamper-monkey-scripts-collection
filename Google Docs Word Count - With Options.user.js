@@ -27,14 +27,25 @@
   const PARENTHESIS = true
   const QUOTES = true
   const MISC = true // skips works cited, personal titles
+
   const SELECTED = true // if selected text present, word count only counts it
 
   const display = document.createElement('div')
   display.id = 'zh-display'
   display.style = `
-    position: fixed; width: 100%; left: 0px; bottom: 0px; color: rgba(0,0,0,.7);
-    height: 15px; background-color: #EDEDEE; z-index: 100; font-family: Arial;
-    font-size: 12px; padding-top: 5px; padding-left: 5px; border-top: 1px solid #d9d9d9;
+    position: fixed;
+    width: 100%;
+    left: 0px;
+    bottom: 0px;
+    color: rgba(0,0,0,.7);
+    height: 15px;
+    background-color: #ededee;
+    z-index: 100;
+    font-family: Arial;
+    font-size: 12px;
+    padding-top: 5px;
+    padding-left: 5px;
+    border-top: 1px solid #d9d9d9;
   `
   document.querySelector('body').append(display)
 
@@ -47,28 +58,22 @@
     Array.from(pages).forEach((page) => {
       const content = page.lastElementChild.firstElementChild
       const text = content.textContent
-      if (text === '') {
-        body += ' ~~ '
-        /* gets stuck at bottom and won't load last page
-        let bottoms = document.querySelectorAll('.kix-page-bottom')
 
-        let elem = bottoms[bottoms.length - 1];
-        elem.scrollIntoView()
-
-        await sleep(5000)
-        if (text !== '')
-          document.querySelectorAll('.kix-page')[0].children[0].scrollIntoView()
-        */
-      }
+      // pages that are unloaded will appear to have no text
+      // add a marker to the cumulative body to indicate that
+      // a word count should not be displayed
+      if (text === '') body += ' ~~ '
       body += text
     })
 
-    body = body.trim().replace(/\u00A0/g, ' ')
+    // clean extra spaces
+    body = body.replace(/\u00A0/g, ' ').trim()
 
     // generate regex from settings
-    // must escape \'s
-    // all in regex form: /(“(.(?!“))+”)|(\((.(?!\())+\)|\[(.(?!\[))+\])
-    // |Works Cited(\n.*)*|(Unit \d (Primary Source Analysis|Exam: Part \d - #\d+))/g
+    // must escape \'s in JS
+    // in standard regex form:
+    //   /(“(.(?!“))+”)|(\((.(?!\())+\)|\[(.(?!\[))+\])
+    //     |Works Cited(\n.*)*|(Unit \d (Primary Source Analysis|Exam: Part \d - #\d+))/g
     const regex = []
     if (BRACKETS) regex.push('\\[(.(?!\\[))+\\]')
     if (PARENTHESIS) regex.push('\\((.(?!\\())+\\)')
@@ -76,7 +81,6 @@
     if (MISC) regex.push('(“(.(?!“))+”)')
 
     // apply regex filtering to body
-    // let selected = selected
     regex.forEach((reg) => {
       selected = selected.replace(new RegExp(reg, 'g'), ' ')
     })
@@ -89,8 +93,8 @@
 
     // remove extra spaces and line breaks and get counts
     const words = filtered.trim().replace(/\u00A0/g, ' ').replace(/ {2,}/g, ' ').split(' ')
-    if (words.includes('~~')) {
-      document.querySelector('#zh-display').textContent = `Word Count: (scroll to bottom or remove empty page) | Pages: ${pages.length}`
+    if (words.includes('~~')) { // empty or unloaded pages present
+      document.querySelector('#zh-display').textContent = `Word Count: (scroll to bottom & remove empty pages) | Pages: ${pages.length}`
     } else if (selected.length > 0 && SELECTED) {
       selected = selected.trim().replace(/\u00A0/g, ' ').replace(/ {2,}/g, ' ').split(' ')
       document.querySelector('#zh-display').textContent = `Word Count: ${selected.length} of ${words.length} (selected) | Pages: ${pages.length}`
@@ -98,11 +102,6 @@
       document.querySelector('#zh-display').textContent = `Word Count: ${words.length} | Pages: ${pages.length}`
     }
   }
-
-  /* unused currently
-  function sleep (ms) {
-    return new Promise(resolve => setTimeout(resolve, ms))
-  } */
 
   setInterval(setCount, 1000)
 })()
