@@ -8,8 +8,8 @@
 // @version      1.0
 // @description  adds a quick display for visual representation of portfolio distribution breakdown (USD) on "balance" page and "deposits & withdrawals" page
 // @author       Zach Hardesty
-// @match        https://www.binance.com/userCenter/balances.html
-// @match        https://www.binance.com/userCenter/depositWithdraw.html
+// @match        https://www.binance.com/userCenter/balances*
+// @match        https://www.binance.com/userCenter/depositWithdraw*
 // @require      https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js
 // ==/UserScript==
 
@@ -75,8 +75,8 @@
     const portfolioRawData = document.querySelectorAll('.td.ng-scope')
     const portfolio = {}
     portfolioRawData.forEach((elem) => {
-      const name = elem.firstElementChild.children[0].textContent
-      const val = elem.firstElementChild.children[5].firstChild.textContent
+      const name = elem.firstElementChild.children[0].textContent.replace(/\s/g, '')
+      const val = parseFloat(elem.firstElementChild.children[5].firstChild.textContent)
       if (val !== 0) {
         portfolio[name] = val
       }
@@ -89,7 +89,7 @@
         // capture 6 largest assets for pie chart
         for (let i = 0; i < 6; i += 1) {
           const maxName = getMaxInObject(portfolio)
-          const maxVal = (parseFloat(portfolio[maxName]) * data.USD).toFixed(2)
+          const maxVal = (portfolio[maxName] * data.USD).toFixed(2)
           chartConfig.data.datasets[0].data.push(maxVal)
           chartConfig.data.labels.push(maxName)
           delete portfolio[maxName]
@@ -97,8 +97,8 @@
 
         // accumulate remaining assets for "other" category of pie chart
         let otherCryptosVal = 0
-        Object.values(portfolio).forEach((ticker) => {
-          otherCryptosVal += parseFloat(portfolio[ticker])
+        Object.values(portfolio).forEach((tickerVal) => {
+          otherCryptosVal += tickerVal
         })
 
         // update chart data with other category
@@ -126,7 +126,7 @@
 function getMaxInObject(obj) {
   let maxKey = ''
   let maxVal = 0
-  Object.keys.forEach((key) => {
+  Object.keys(obj).forEach((key) => {
     if (obj[key] > maxVal) {
       maxVal = obj[key]
       maxKey = key
