@@ -41,20 +41,22 @@
       el = el && el.parentElement
     }
 
-    setAttr(el, 'style', 'display: none', i)
+    setAttr(el, 'style', 'display: none')
   }
 
   const link = window.location.href
 
   if (link.match(/https*:\/\/.*?amazon\.com\/dp\/.*/g) || link.match(/https*:\/\/.*?amazon\.com\/gp\/product\/.*/g) || link.match(/https*:\/\/.*?amazon\.com\/.*\/dp\/.*/g)) {
-    // hide nav junk / ads
-    hide('#nav-upnav')
+    // hide nav junk / banner ads
     hide('#navSwmHoliday')
+    hide('#universal-detail-ilm')
+    hide('#detail-ilm_div')
     hide('#dp div', 0)
     hide('#dp div', 1)
 
     // hide sharing
     hide('#tellAFriendBox_feature_div')
+    hide('#tellAFriendBylineBox_feature_div')
 
     // hide product sales help & options nobody uses (protection plan, etc)
     hide('#image-canvas-caption')
@@ -78,13 +80,15 @@
     hide('#digitalDashLowProminenceAccordion_feature_div')
     hide('#digital-dash-create-high-prominence')
     hide('#buyNow')
+    hideParentX('.oneclick-guide', 1)
+    hideParentX('.oneclick-guide', 2, 1)
+    hide('#digital-dash-create')
     getEl('.a-column.a-span6.a-span-last').lastElementChild.style = 'display: none'
 
     // clean up empty section dividers
     Array.from(document.querySelectorAll('.bucket')).forEach((divider) => {
       setStyle(divider, 'display: block')
     })
-
     Array.from(document.querySelectorAll('.bucketDivider')).forEach((divider) => {
       hide(divider)
     })
@@ -103,6 +107,7 @@
     hide('#sims-consolidated-2_feature_div')
     hide('#dpx-btf-hlcx-comparison_feature_div')
     hide('#HLCXComparisonWidget_feature_div')
+    hide('#featureAwarenessWidget_feature_div')
     hideParentX('#widget_container .a-carousel-container', 1)
     hide('.a-section', document.querySelectorAll('.a-section').length - 5)
 
@@ -116,8 +121,18 @@
     hide('#giveaway_feature_div')
     hide('#view_to_purchase-sims-feature')
     hide('#store-disclaimer_feature_div')
+    hideParentX('#fiona-publisher-signup-link', 2)
+    hideParentX('#hero-quick-promo', 2)
     setStyle('#aplus', 'padding: 15px 0; border-top: lightgrey 1px solid')
     setStyle('#reviewsMedley', 'margin-bottom: 0 !important')
+  }
+
+  // search page
+  if (link.match(/https*:\/\/.*?amazon\.com\/s\/.*/g)) {
+    Array.from(document.querySelectorAll('.AdHolder')).forEach((ad) => {
+      hide(ad) // sponsored listings
+    })
+    hide('#centerBelowExtra') // search feedback
   }
 
   // wishlist page
@@ -141,6 +156,9 @@
   hide('#nav-subnav')
   hide('#nav-belt .nav-right')
 
+  // hide recent items
+  hide('#raw-sitewide-rhf')
+
   // minimize size and hide useless giant footer section
   setStyle('#navFooter', 'margin-top: 0px')
   hide('.navFooterLine.navFooterLinkLine.navFooterPadItemLine')
@@ -149,11 +167,10 @@
 
   // hide generally useless last remaining part of footer section
   hide('#navFooter .navFooterVerticalColumn.navAccessibility')
-
   setStyle('.nav-footer-line', 'margin-top: 0px')
   setStyle('#navBackToTop div', 'margin-bottom: 0px')
 
-  // add button to allow display as normal
+  // add button to allow footer display restore
   setAttr('#navFooter .nav-footer-line', 'innerHTML', `
     <a
       id='view-footer'
@@ -163,6 +180,7 @@
     </a>
   `)
 
+  // activate button to restore footer display
   on(getEl('#view-footer'), 'click', () => {
     hide('#view-footer')
     setStyle('.nav-footer-line', 'margin-top: 30px')
