@@ -31,7 +31,7 @@
   }
 
   const setStyle = (target, val, i = 0) => {
-    setAttr(target, 'style', val, i = 0)
+    setAttr(target, 'style', val, i)
   }
 
   const hideParentX = (target, x = 0, i = 0) => {
@@ -80,10 +80,20 @@
     hide('#digitalDashLowProminenceAccordion_feature_div')
     hide('#digital-dash-create-high-prominence')
     hide('#buyNow')
+    hideParentX('#add-to-registry-wedding-button', 2)
     hideParentX('.oneclick-guide', 1)
     hideParentX('.oneclick-guide', 2, 1)
+    hide('#tradeInInstantSavings_feature_div')
     hide('#digital-dash-create')
+    hideParentX('#tradeInButton_feature_div', 1)
     getEl('.a-column.a-span6.a-span-last').lastElementChild.style = 'display: none'
+
+    // misc ads -- does not prevent loading or tracking
+    hide('#amsDetailRight_feature_div')
+    hide('#dp-ads-center-promo_feature_div')
+    hide('#ape_Detail_dp-ads-center-promo_Desktop_placement')
+    hide('#ADPlaceholder')
+    hide('#ape_Detail_ad-endcap-1_Glance_placement')
 
     // clean up empty section dividers
     Array.from(document.querySelectorAll('.bucket')).forEach((divider) => {
@@ -125,6 +135,21 @@
     hideParentX('#hero-quick-promo', 2)
     setStyle('#aplus', 'padding: 15px 0; border-top: lightgrey 1px solid')
     setStyle('#reviewsMedley', 'margin-bottom: 0 !important')
+
+    // remove unnatural black background of title bar on some pages
+    setStyle('#ppd-top', 'background: none')
+    setStyle('#titleBar.superleaf', 'background: none')
+    setStyle('.superleafParent #wayfinding-breadcrumbs_container', 'background: none')
+    // fix colors
+    setStyle('.superleafParent #wayfinding-breadcrumbs_feature_div .a-color-tertiary', 'color: #111 !important')
+    setStyle('a#breadcrumb-back-link.a-link-normal.a-color-tertiary', 'color: #111 !important')
+    setStyle('#superLeafTitleFeatureGroup #titleSection #title', 'color: black')
+    setStyle('#titleBar.superleaf .a-color-secondary', 'color: #555 !important')
+    setStyle('#titleBar-left', 'color: black')
+    setStyle('#superLeafGameReviews_feature_div .a-icon-popover', 'filter: none')
+    setStyle('#titleBar a:link, #titleBar.superleaf .a-link-normal', 'color: #0066c0')
+    setStyle('.superleaf .ac-for-text', 'color: #888')
+    setStyle('#superleafActionPanelWrapper', 'box-shadow: rgba(0, 0, 0, 0.45) -0.5px 1px 4px -0.5px')
   }
 
   // search page
