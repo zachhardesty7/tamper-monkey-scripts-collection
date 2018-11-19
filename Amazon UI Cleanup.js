@@ -16,6 +16,12 @@
       : typeof (target) === 'object' && target
   )
 
+  const getElAll = target => (
+    typeof (target) === 'string'
+      ? document.querySelectorAll(target)
+      : typeof (target) === 'object' && target
+  )
+
   const on = (target, event, func) => {
     const el = getEl(target)
     if (el && el.addEventListener) el.addEventListener(event, func)
@@ -75,6 +81,7 @@
     hide('#simpleBundle_feature_div')
     hide('#buyNow_feature_div')
     hide('#oneClick_feature_div')
+    hideParentX('#oneClickSignIn', 1)
     hide('#glowContextualIngressPt_feature_div')
     hide('#digitalDashLowProminence_feature_div')
     hide('#digitalDashLowProminenceAccordion_feature_div')
@@ -85,8 +92,8 @@
     hideParentX('.oneclick-guide', 2, 1)
     hide('#tradeInInstantSavings_feature_div')
     hide('#digital-dash-create')
-    hideParentX('#tradeInButton_feature_div', 1)
-    getEl('.a-column.a-span6.a-span-last').lastElementChild.style = 'display: none'
+    hide('#tradeInButton_feature_div')
+    // getEl('.a-column.a-span6.a-span-last').lastElementChild.style = 'display: none'
 
     // misc ads -- does not prevent loading or tracking
     hide('#amsDetailRight_feature_div')
@@ -96,15 +103,15 @@
     hide('#ape_Detail_ad-endcap-1_Glance_placement')
 
     // clean up empty section dividers
-    Array.from(document.querySelectorAll('.bucket')).forEach((divider) => {
+    Array.from(getElAll('.bucket')).forEach((divider) => {
       setStyle(divider, 'display: block')
     })
-    Array.from(document.querySelectorAll('.bucketDivider')).forEach((divider) => {
+    Array.from(getElAll('.bucketDivider')).forEach((divider) => {
       hide(divider)
     })
 
     // hide related products and recommendations
-    Array.from(document.querySelectorAll('.a-section.similarities-widget')).forEach((widget) => {
+    Array.from(getElAll('.a-section.similarities-widget')).forEach((widget) => {
       hideParentX(widget, 1)
     })
     hide('#sims-fbt')
@@ -119,7 +126,7 @@
     hide('#HLCXComparisonWidget_feature_div')
     hide('#featureAwarenessWidget_feature_div')
     hideParentX('#widget_container .a-carousel-container', 1)
-    hide('.a-section', document.querySelectorAll('.a-section').length - 5)
+    hide('.a-section', getElAll('.a-section').length - 5)
 
     // hide other junk sections
     hide('#sp_detail')
@@ -135,26 +142,32 @@
     hideParentX('#hero-quick-promo', 2)
     setStyle('#aplus', 'padding: 15px 0; border-top: lightgrey 1px solid')
     setStyle('#reviewsMedley', 'margin-bottom: 0 !important')
+    hide('#superleafProductAlert_feature_div')
+    hide('#dpx-legal_feature_div')
 
-    // remove unnatural black background of title bar on some pages
+    // remove unnatural black background of title bar on some pages (video game consoles)
     setStyle('#ppd-top', 'background: none')
     setStyle('#titleBar.superleaf', 'background: none')
     setStyle('.superleafParent #wayfinding-breadcrumbs_container', 'background: none')
     // fix colors
-    setStyle('.superleafParent #wayfinding-breadcrumbs_feature_div .a-color-tertiary', 'color: #111 !important')
+    Array.from(getElAll('.superleafParent #wayfinding-breadcrumbs_feature_div .a-color-tertiary')).forEach((breadcrumb) => {
+      setStyle(breadcrumb, 'color: #111 !important')
+    })
     setStyle('a#breadcrumb-back-link.a-link-normal.a-color-tertiary', 'color: #111 !important')
     setStyle('#superLeafTitleFeatureGroup #titleSection #title', 'color: black')
     setStyle('#titleBar.superleaf .a-color-secondary', 'color: #555 !important')
     setStyle('#titleBar-left', 'color: black')
     setStyle('#superLeafGameReviews_feature_div .a-icon-popover', 'filter: none')
-    setStyle('#titleBar a:link, #titleBar.superleaf .a-link-normal', 'color: #0066c0')
+    Array.from(getElAll('#titleBar a:link, #titleBar.superleaf .a-link-normal')).forEach((item) => {
+      setStyle(item, 'color: #0066c0 !important')
+    })
     setStyle('.superleaf .ac-for-text', 'color: #888')
-    setStyle('#superleafActionPanelWrapper', 'box-shadow: rgba(0, 0, 0, 0.45) -0.5px 1px 4px -0.5px')
+    setStyle('#superleafActionPanelWrapper', 'box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 4px -1px')
   }
 
   // search page
   if (link.match(/https*:\/\/.*?amazon\.com\/s\/.*/g)) {
-    Array.from(document.querySelectorAll('.AdHolder')).forEach((ad) => {
+    Array.from(getElAll('.AdHolder')).forEach((ad) => {
       hide(ad) // sponsored listings
     })
     hide('#centerBelowExtra') // search feedback
