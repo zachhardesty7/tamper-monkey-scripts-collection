@@ -6,7 +6,7 @@
 // @name         Binance Portfolio Distribution Pie Chart
 // @namespace    http://zachhardesty.com
 // @version      1.0
-// @description  adds a quick display for visual representation of portfolio distribution breakdown (USD) on "balance" page and "deposits & withdrawals" page
+// @description  adds a simple visual representation of portfolio distribution (USD) on "balance" and "deposits & withdrawals" pages
 // @author       Zach Hardesty
 // @match        https://www.binance.com/userCenter/balances*
 // @match        https://www.binance.com/userCenter/depositWithdraw*
