@@ -18,8 +18,8 @@
 
   const getElAll = target => (
     typeof (target) === 'string'
-      ? document.querySelectorAll(target)
-      : typeof (target) === 'object' && target
+      ? Array.from(document.querySelectorAll(target))
+      : typeof (target) === 'object' && Array.from(target)
   )
 
   const on = (target, event, func) => {
@@ -103,15 +103,17 @@
     hide('#ape_Detail_ad-endcap-1_Glance_placement')
 
     // clean up empty section dividers
-    Array.from(getElAll('.bucket')).forEach((divider) => {
+    getElAll('.bucket').forEach((divider) => {
       setStyle(divider, 'display: block')
     })
-    Array.from(getElAll('.bucketDivider')).forEach((divider) => {
+    getElAll('.bucketDivider').forEach((divider) => {
       hide(divider)
     })
+    hideParentX('#promoGrid', 4)
+    hide('#messages')
 
     // hide related products and recommendations
-    Array.from(getElAll('.a-section.similarities-widget')).forEach((widget) => {
+    getElAll('.a-section.similarities-widget').forEach((widget) => {
       hideParentX(widget, 1)
     })
     hide('#sims-fbt')
@@ -119,6 +121,7 @@
     hide('#p13n-m-desktop-dp-sims_session-similarities-sims-feature-3')
     hide('#p13n-m-desktop-dp-sims_purchase-similarities-sims-feature-3')
     hide('#p13n-m-desktop-dp-sims_purchase-similarities-sims-feature-2')
+    hide('#beautyRecommendations_feature_div')
     hide('#rhf')
     hide('#sponsoredProducts2_feature_div')
     hide('#sims-consolidated-2_feature_div')
@@ -150,7 +153,7 @@
     setStyle('#titleBar.superleaf', 'background: none')
     setStyle('.superleafParent #wayfinding-breadcrumbs_container', 'background: none')
     // fix colors
-    Array.from(getElAll('.superleafParent #wayfinding-breadcrumbs_feature_div .a-color-tertiary')).forEach((breadcrumb) => {
+    getElAll('.superleafParent #wayfinding-breadcrumbs_feature_div .a-color-tertiary').forEach((breadcrumb) => {
       setStyle(breadcrumb, 'color: #111 !important')
     })
     setStyle('a#breadcrumb-back-link.a-link-normal.a-color-tertiary', 'color: #111 !important')
@@ -158,7 +161,7 @@
     setStyle('#titleBar.superleaf .a-color-secondary', 'color: #555 !important')
     setStyle('#titleBar-left', 'color: black')
     setStyle('#superLeafGameReviews_feature_div .a-icon-popover', 'filter: none')
-    Array.from(getElAll('#titleBar a:link, #titleBar.superleaf .a-link-normal')).forEach((item) => {
+    getElAll('#titleBar a:link, #titleBar.superleaf .a-link-normal').forEach((item) => {
       setStyle(item, 'color: #0066c0 !important')
     })
     setStyle('.superleaf .ac-for-text', 'color: #888')
