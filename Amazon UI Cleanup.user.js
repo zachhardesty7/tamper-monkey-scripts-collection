@@ -118,6 +118,7 @@
     })
     hide('#sims-fbt')
     hide('#bundleV2_feature_div')
+    hide('#cerberus_feature_div')
     hide('#p13n-m-desktop-dp-sims_session-similarities-sims-feature-3')
     hide('#p13n-m-desktop-dp-sims_purchase-similarities-sims-feature-3')
     hide('#p13n-m-desktop-dp-sims_purchase-similarities-sims-feature-2')
