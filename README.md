@@ -46,12 +46,18 @@ Code will automatically execute on the proper website pages!
     * filter out videos on subscription page and home page based on given keyword
 * Amazon
     * hide all of the junk that clutter Amazon's UI (biased decisions)
+* iCloud Notes
+    * convert your note editor to a beautiful dark theme to ease your eyes (uses an interesting method of intercepting function calls on the canvas context object prototype to theme canvas items)
 
 _For more information on Tampermonkey itself, please refer to their [website][tampermonkey-website]._
 
 ## Known Issues
 
 * ONLY TESTED ON CHROME
+* iCloud Notes
+    * checkbox, cursor & any other non-text item in the editor doesn't convert to white match the dark theme
+        * log of canvas context function calls needs to be analyzed to determine which calls need to be intercepted
+    * yellow accents look slightly off with the dark theme
 * Binance
     * Interacting with new percentages does not trigger an official angular event so it's more of a visual indicator until you press 'buy' or 'sell'
     * Unnecessary usage of 'waitForKeyElements.js'
