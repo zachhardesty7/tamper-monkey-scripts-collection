@@ -102,6 +102,7 @@ limitations under the License.
 * [SoundCloud to MP3][soundcloudDownload] - With SoundCloud MP3 you can convert and download music in High Quality MP3 format.
 * [ChangeValueDetection][detectorJS] - Simple interval observer to detect change from user, JS, or anything else
 * [Google Docs Word Count][docs-greasemonkey] - Inspiration for my script, changed formatting, style, and added a few filtering options
+* [Canvas Prototype Intercept][canvas-intercept] - Beautiful, simple library to help debug 3rd party canvas contexts and optionally intercept calls for various purposes. Essentially allows theming a 3rd party canvas by studying logs.
 
 <!-- Markdown link & img definitions -->
 [binance]: https://www.binance.com
