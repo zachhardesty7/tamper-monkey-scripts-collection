@@ -55,9 +55,7 @@ _For more information on Tampermonkey itself, please refer to their [website][ta
 
 * ONLY TESTED ON CHROME
 * iCloud Notes
-    * checkbox, cursor & any other non-text item in the editor doesn't convert to white match the dark theme
-        * log of canvas context function calls needs to be analyzed to determine which calls need to be intercepted
-    * yellow accents look slightly off with the dark theme
+    * urls are indistinguishable from underlined text
 * Binance
     * Interacting with new percentages does not trigger an official angular event so it's more of a visual indicator until you press 'buy' or 'sell'
     * Unnecessary usage of 'waitForKeyElements.js'

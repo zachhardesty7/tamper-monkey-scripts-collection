@@ -110,13 +110,38 @@
 
   // fortunately, targeting the canvas context is still possible.
   // by wrapping the canvas prototype, we can detect calls from the parent script.
-  // we look for calls to 'ctx.fillText()' and intercept them to modify
-  // the style of the text to match the dark theme before the text is painted.
+  // we look for calls to 'ctx.fillText()' (and other things) and intercept them to modify
+  // the style of the objects to match the dark theme before they are painted.
   wrapObject(CanvasRenderingContext2D.prototype, [
     'canvas'
   ], getCanvasName, (instance, expr) => {
+    // all text
     if (expr.includes('fillText')) {
-      instance.__proxyOriginal.fillStyle.set.call(instance, 'rgba(204, 204, 204, 1)')
+      instance.__proxyOriginal.fillStyle.set.call(instance, theme.light)
+
+    // title blinking cursor
+    } else if ((expr.includes('fillRect(') && expr.includes(', 1, 28)')) || (expr.includes('rect(') && expr.includes(', 3, 30)'))) {
+      instance.__proxyOriginal.fillStyle.set.call(instance, theme.light)
+
+    // header blinking cursor
+    } else if ((expr.includes('fillRect(') && expr.includes(', 1, 23)')) || (expr.includes('rect(') && expr.includes(', 3, 25)'))) {
+      instance.__proxyOriginal.fillStyle.set.call(instance, theme.light)
+
+    // regular blinking cursor
+    } else if ((expr.includes('fillRect(') && expr.includes(', 1, 22)')) || (expr.includes('rect(') && expr.includes(', 3, 24)'))) {
+      instance.__proxyOriginal.fillStyle.set.call(instance, theme.light)
+
+    // unchecked checkbox
+    } else if (expr.includes('r$__111.png')) {
+      instance.__proxyOriginal.filter.set.call(instance, 'invert(100%) hue-rotate(170deg) brightness(3) contrast(0.75)')
+
+    // checked checkbox
+    } else if (expr.includes('r$__113.png')) {
+      instance.__proxyOriginal.filter.set.call(instance, 'invert(100%) hue-rotate(170deg) brightness(3) contrast(0.75)')
+
+    // text underline
+    } else if ((expr.includes('fillRect(') && expr.includes(', 1)'))) {
+      instance.__proxyOriginal.fillStyle.set.call(instance, theme.light)
     }
   })
 })()
