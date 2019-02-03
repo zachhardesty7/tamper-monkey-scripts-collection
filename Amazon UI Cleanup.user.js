@@ -106,9 +106,7 @@
     getElAll('.bucket').forEach((divider) => {
       setStyle(divider, 'display: block')
     })
-    getElAll('.bucketDivider').forEach((divider) => {
-      hide(divider)
-    })
+    getElAll('.bucketDivider').forEach(hide)
     hideParentX('#promoGrid', 4)
     hide('#messages')
 
@@ -116,12 +114,14 @@
     getElAll('.a-section.similarities-widget').forEach((widget) => {
       hideParentX(widget, 1)
     })
+    hide('[name="goKindleStaticPopDiv"]')
     hide('#sims-fbt')
     hide('#bundleV2_feature_div')
     hide('#cerberus_feature_div')
     hide('#p13n-m-desktop-dp-sims_session-similarities-sims-feature-3')
     hide('#p13n-m-desktop-dp-sims_purchase-similarities-sims-feature-3')
     hide('#p13n-m-desktop-dp-sims_purchase-similarities-sims-feature-2')
+    hide('#relatedMaterials_feature_div')
     hide('#beautyRecommendations_feature_div')
     hide('#rhf')
     hide('#sponsoredProducts2_feature_div')
@@ -143,11 +143,13 @@
     hide('#view_to_purchase-sims-feature')
     hide('#store-disclaimer_feature_div')
     hideParentX('#fiona-publisher-signup-link', 2)
-    hideParentX('#hero-quick-promo', 2)
+    hideParentX('#hero-quick-promo', 1)
+    hide('#extraProductInfoTxtBookFeatureGroup')
     setStyle('#aplus', 'padding: 15px 0; border-top: lightgrey 1px solid')
     setStyle('#reviewsMedley', 'margin-bottom: 0 !important')
     hide('#superleafProductAlert_feature_div')
     hide('#dpx-legal_feature_div')
+    hide('#cm_cr_skyfall_medley.cr-skyfall-feedback-section')
 
     // remove unnatural black background of title bar on some pages (video game consoles)
     setStyle('#ppd-top', 'background: none')
