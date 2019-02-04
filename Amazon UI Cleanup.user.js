@@ -93,6 +93,7 @@
     hide('#tradeInInstantSavings_feature_div')
     hide('#digital-dash-create')
     hide('#tradeInButton_feature_div')
+    hide('#add-to-baby-button-group')
     // getEl('.a-column.a-span6.a-span-last').lastElementChild.style = 'display: none'
 
     // misc ads -- does not prevent loading or tracking
@@ -150,6 +151,8 @@
     hide('#superleafProductAlert_feature_div')
     hide('#dpx-legal_feature_div')
     hide('#cm_cr_skyfall_medley.cr-skyfall-feedback-section')
+    hide('#flipAndSampleAudio')
+    hide('#authorFollow_feature_div')
 
     // remove unnatural black background of title bar on some pages (video game consoles)
     setStyle('#ppd-top', 'background: none')
