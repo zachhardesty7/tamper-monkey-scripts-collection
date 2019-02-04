@@ -108,10 +108,12 @@
       setStyle(divider, 'display: block')
     })
     getElAll('.bucketDivider').forEach(hide)
-    hideParentX('#promoGrid', 4)
+    hide('#promoGrid')
     hide('#messages')
 
     // hide related products and recommendations
+    hide('#skyCitySoftMerge_feature_div')
+    hide('#recommendations_feature_div')
     getElAll('.a-section.similarities-widget').forEach((widget) => {
       hideParentX(widget, 1)
     })
