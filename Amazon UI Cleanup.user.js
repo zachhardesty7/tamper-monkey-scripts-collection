@@ -59,8 +59,6 @@
     hide('#detail-ilm_div')
     hide('#dp div', 0)
     hide('#dp div', 1)
-    hide('.site-stripe-margin-control')
-    hide('#atfTop3_feature_div')
 
     // hide sharing
     hide('#tellAFriendBox_feature_div')
@@ -96,8 +94,6 @@
     hide('#digital-dash-create')
     hide('#tradeInButton_feature_div')
     hide('#add-to-baby-button-group')
-    hide('.tradein-instant-savings-launch-wrapper')
-    hideParentX('.a-section > #accessory-upsell', 1)
     // getEl('.a-column.a-span6.a-span-last').lastElementChild.style = 'display: none'
 
     // misc ads -- does not prevent loading or tracking
@@ -119,7 +115,7 @@
     hide('#skyCitySoftMerge_feature_div')
     hide('#recommendations_feature_div')
     getElAll('.a-section.similarities-widget').forEach((widget) => {
-      hideParentX(widget, 1)
+      hide(widget)
     })
     hide('[name="goKindleStaticPopDiv"]')
     hide('#sims-fbt')
@@ -138,7 +134,6 @@
     hide('#featureAwarenessWidget_feature_div')
     hideParentX('#widget_container .a-carousel-container', 1)
     hide('.a-section', getElAll('.a-section').length - 5)
-    hide('#dpx-custom-comp-chart-wrapper')
 
     // hide other junk sections
     hide('#sp_detail')
@@ -160,15 +155,13 @@
     hide('#cm_cr_skyfall_medley.cr-skyfall-feedback-section')
     hide('#flipAndSampleAudio')
     hide('#authorFollow_feature_div')
-    hide('#alexaInteractionCannedPpdLeft_feature_div')
-    hide('#jumpLinks_feature_div')
-    hide('#atfRight5_feature_div')
-    hide('#ods-back-to-top-btn')
+    hide('.askQuestionExamples')
 
     // remove unnatural black background of title bar on some pages (video game consoles)
     setStyle('#ppd-top', 'background: none')
     setStyle('#titleBar.superleaf', 'background: none')
     setStyle('.superleafParent #wayfinding-breadcrumbs_container', 'background: none')
+
     // fix colors
     getElAll('.superleafParent #wayfinding-breadcrumbs_feature_div .a-color-tertiary').forEach((breadcrumb) => {
       setStyle(breadcrumb, 'color: #111 !important')
