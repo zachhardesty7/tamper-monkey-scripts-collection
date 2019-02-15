@@ -2,12 +2,14 @@
 /* global P */
 
 // ==UserScript==
-// @name        Piaza Archive Question on Delete Key
+// @name        Piazza Bind Delete Key to Archive
 // @namespace   https://zachhardesty.com/
 // @description bind the delete key to quickly archive posts
 // @include     https://piazza.com/class/*
 // @version     1.0.0
 // ==/UserScript==
+
+// FIXME: doesn't work on first element?
 
 (function f() {
   // curried function to call on delete press event listener
@@ -33,8 +35,9 @@
   // interval until the tabIndex of the updated element is set
   const resetListeners = i => () => {
     const ensureIndex = setInterval(() => {
-      const el = document.querySelectorAll('.feed_item')[i]
-      el.tabIndex = '0'
+      const els = document.querySelectorAll('.feed_item')
+      els.forEach((el) => { el.tabIndex = '0' })
+      const el = els[i]
 
       if (el.tabIndex === 0) {
         const archive = el.querySelector('.feed_item_dropdown_selector .archive_action')
