@@ -20,7 +20,7 @@ Download and import .zip into Tampermonkey under the utilities tab.
 
 ### Execution
 
-Code will automatically execute on the proper website pages!
+Code will automatically execute on the designated websites!
 
 ## Usage
 
@@ -44,10 +44,15 @@ Code will automatically execute on the proper website pages!
     * add a large or giant banner if project hasn't been updated in 6 months or 1+ years respectively
 * YouTube
     * filter out videos on subscription page and home page based on given keyword
+    * add a watch later button underneath videos to save you a click (on a slow popup menu)
 * Amazon
     * hide all of the junk that clutter Amazon's UI (biased decisions)
 * iCloud Notes
     * convert your note editor to a beautiful dark theme to ease your eyes (uses an interesting method of intercepting function calls on the canvas context object prototype to theme canvas items)
+* Reddit
+  * on saved posts / comments page
+    * enable middle click to open in new tab for comments
+    * move the save / unsave and report buttons out of the hidden menu
 
 _For more information on Tampermonkey itself, please refer to their [website][tampermonkey-website]._
 

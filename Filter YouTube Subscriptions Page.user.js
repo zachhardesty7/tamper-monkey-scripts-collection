@@ -16,6 +16,7 @@
 // ==/UserScript==
 
 const keywords = [
+  'pixelmon',
   'binding of isaac',
   'dark souls',
   'darkest dungeon',
