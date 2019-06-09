@@ -6,7 +6,7 @@
 // ==UserScript==
 // @name         Apple iCloud Notes Dark Theme
 // @namespace    http://zachhardesty.com
-// @version      1.0.0
+// @version      1.1.0
 // @description  best dark mode out there!
 // @author       Zach Hardesty
 // @match        https://www.icloud.com/applications/notes*
@@ -18,6 +18,7 @@
   const theme = {
     lighter: '#d7dae0',
     light: '#cccccc',
+    medium: 'rgba(204, 204, 204, .5)', // same as light w 50% opacity
     dark: '#282c34',
     darker: 'rgb(33, 37, 43)',
     darkest: 'rgb(29, 31, 35)'
@@ -42,12 +43,10 @@
       color: ${theme.lighter} !important;
     }
 
-    /* header bar backgrounds */
+    /* header/footer bar backgrounds */
+    .nav-bar,
     .bottom-toolbar-view,
-    .notes-note-list-toolbar-view,
-    .notes-list-toolbar,
-    .notes-note-list-content-view,
-    .notes-note-pad-toolbar-view > div {
+    .notes-note-list-content-view {
       background-color: ${theme.darker} !important;
     }
 
@@ -70,10 +69,25 @@
     }
 
     /* horizontal dividers */
-    .notes-note-list-toolbar-view,
-    .folder-panel-view .notes-list-toolbar,
-    .notes-note-pad-toolbar-view {
+    .nav-bar {
       border-bottom: 1px solid ${theme.darker} !important;
+    }
+    .bottom-toolbar-view {
+      border-top: 2px solid ${theme.darker} !important;
+    }
+
+    /* scrolling (folder window) */
+    .cw-scroll-indicator .cw-scroll-indicator-thumb {
+      background-color: ${theme.medium} !important;
+    }
+    .cw-scroll-indicator.cw-scroll-indicator-enlarged .cw-scroll-indicator-thumb {
+      background-color: ${theme.dark} !important;
+    }
+    .cw-scroll-indicator.cw-scroll-indicator-enlarged.vertical {
+      border-left: none !important;
+    }
+    .cw-scroll-indicator.cw-scroll-indicator-enlarged {
+      background-color: ${theme.medium} !important;
     }
 
     /* iCloud logo to white */
