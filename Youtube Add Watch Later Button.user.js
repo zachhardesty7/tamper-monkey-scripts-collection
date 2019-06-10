@@ -1,4 +1,4 @@
-/* global waitForKeyElements */
+/* global onElementReady */
 /* eslint-disable no-underscore-dangle */
 
 // ==UserScript==
@@ -6,9 +6,8 @@
 // @namespace   https://zachhardesty.com/
 // @description reveals the save and report buttons and makes links right clickable
 // @include     https://www.youtube.com/watch*
-// @version     1.0
-// @require     http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js
-// @require     https://gist.github.com/raw/2625891/waitForKeyElements.js
+// @version     1.0.0
+// @require     https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 
 // ==/UserScript==
 
@@ -16,11 +15,9 @@
  * build the button element tediously but like the rest
  *
  * @TODO add user feedback
- * @param {*} jNode jquery node
+ * @param {*} buttons html node
  */
-function addButton(jNode) {
-  const buttons = jNode[0]
-
+function addButton(buttons) {
   const container = document.createElement('ytd-button-renderer')
   container.buttonRenderer = true
   container.style.color = 'var(--yt-spec-icon-inactive)'
@@ -160,4 +157,4 @@ async function post(window) {
 }
 
 // YouTube uses a bunch of duplicate 'id' tag values. why?
-waitForKeyElements('#info #info-contents #menu #top-level-buttons', addButton)
+onElementReady('#info #info-contents #menu #top-level-buttons', false, addButton)

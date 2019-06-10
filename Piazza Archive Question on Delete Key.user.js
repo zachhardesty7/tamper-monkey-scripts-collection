@@ -1,5 +1,4 @@
-/* eslint-env browser, jquery, greasemonkey */
-/* global P waitForKeyElements */
+/* global P onElementReady */
 
 // ==UserScript==
 // @name        Piazza Bind Delete Key to Archive
@@ -7,15 +6,12 @@
 // @description bind the delete key to quickly archive posts
 // @include     https://piazza.com/class/*
 // @version     1.0.0
-// @require     http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js
-// @require     https://gist.github.com/raw/2625891/waitForKeyElements.js
+// @require     https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
 
 // FIXME: can sometimes archive the wrong post if other keys are pressed before delete
 
-function f(jNode) {
-  const el = jNode[0]
-
+function f(el) {
   // curried function to call on delete press event listener
   // calls function as if archive dropdown menu item was pressed
   const archiveItem = archive => (e) => {
@@ -26,7 +22,7 @@ function f(jNode) {
   const setListeners = (item) => {
     const archive = item.querySelector('.feed_item_dropdown_selector .archive_action').onclick
 
-    item.tabIndex = '0'
+    item.tabIndex = '0' // eslint-disable-line no-param-reassign
     item.addEventListener('keydown', archiveItem(archive))
     item.addEventListener('click', resetListeners(i))
   }
@@ -37,7 +33,7 @@ function f(jNode) {
   const resetListeners = i => () => {
     const ensureIndex = setInterval(() => {
       const items = document.querySelectorAll('.feed_item')
-      items.forEach((n) => { n.tabIndex = '0' })
+      items.forEach((n) => { n.tabIndex = '0' }) // eslint-disable-line no-param-reassign
       const item = items[i]
 
       if (item.tabIndex === 0 || item.tabIndex === '0') {
@@ -63,4 +59,4 @@ function f(jNode) {
 }
 
 // instantiate function listeners
-waitForKeyElements('.feed_item', f)
+onElementReady('.feed_item', false, f)

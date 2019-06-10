@@ -1,14 +1,12 @@
-/* eslint-disable no-undef */
+/* global onElementReady */
 
 // ==UserScript==
 // @name        Reddit Improve Saved Comments
 // @namespace   https://zachhardesty.com/
 // @description reveals the save and report buttons and makes links right clickable
 // @include     https://www.reddit.com/user/*/saved/*
-// @version     1.0
-// @require     http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js
-// @require     https://gist.github.com/raw/2625891/waitForKeyElements.js
-
+// @version     1.0.0
+// @require     https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
 
 /**
@@ -19,8 +17,7 @@
  */
 const getReactInstance = DOMNode => DOMNode[Object.keys(DOMNode)[0]]
 
-function improveComments(jNode) {
-  const buttons = jNode[0] // escape jQuery
+function improveComments(buttons) {
   const moreButton = buttons.querySelector('button:nth-child(4)')
   const moreComponent = getReactInstance(moreButton)
 
@@ -42,15 +39,13 @@ function improveComments(jNode) {
 
   // not defined in a separate function just because this is a quick
   // way to ensure that all of the important parts are loaded
-  const comment = jNode[0].parentElement.parentElement.parentElement
+  const comment = buttons.parentElement.parentElement.parentElement
     .parentElement.parentElement.parentElement.parentElement
-
-  const link = getReactInstance(comment).return.memoizedProps.comment.permalink
 
   // wrap the entirety of the comment
   const container = comment.parentElement
   const wrapper = document.createElement('a')
-  wrapper.href = link
+  wrapper.href = getReactInstance(comment).return.memoizedProps.comment.permalink
   wrapper.append(comment) // move all original DOM children
   wrapper.onclick = e => e.preventDefault() // allow original click handler to take over
 
@@ -59,4 +54,4 @@ function improveComments(jNode) {
 
 // gross, but Reddit uses styled-components / emotion and has almost no
 // constant selectors that don't change between renders
-waitForKeyElements('div.Comment > div > div > div:last-child > div > div:nth-child(2) > div:nth-child(2) > div:last-child', improveComments)
+onElementReady('div.Comment > div > div > div:last-child > div > div:nth-child(2) > div:nth-child(2) > div:last-child', false, improveComments)

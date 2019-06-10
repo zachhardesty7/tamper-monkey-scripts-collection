@@ -1,15 +1,13 @@
-/* eslint-env browser, greasemonkey */
 /* eslint-disable max-len, no-underscore-dangle */
 /* cSpell: ignore cosk icloud */
 
 // ==UserScript==
 // @name         Apple iCloud Notes Dark Theme
-// @namespace    http://zachhardesty.com
+// @namespace    https://zachhardesty.com
 // @version      2.0.0
 // @description  best dark mode out there!
 // @author       Zach Hardesty
 // @match        https://www.icloud.com/applications/notes*
-// @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // @grant        none
 // ==/UserScript==
 
@@ -106,12 +104,8 @@
   const head = document.head || document.getElementsByTagName('head')[0]
 
   style.type = 'text/css'
-  if (style.styleSheet) {
-    // IE8 and below
-    style.styleSheet.cssText = css
-  } else {
-    style.appendChild(document.createTextNode(css))
-  }
+  style.appendChild(document.createTextNode(css))
+
   head.appendChild(style)
 })()
 

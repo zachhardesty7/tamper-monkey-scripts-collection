@@ -3,13 +3,13 @@
 
 // ==UserScript==
 // @name         Harvest Hourly Pay
-// @namespace    http://zachhardesty.com
+// @namespace    https://zachhardesty.com
 // @version      1.0
 // @description  adds total money made per day and week to Harvest (excl. taxes)
 // @author       Zach Hardesty
 // @match        https://*.harvestapp.com/*
 // @grant        none
-// @downloadURL  http://zachhardesty.com/userscripts/harvest-hourly-pay.user.js
+// @downloadURL  https://zachhardesty.com/userscripts/harvest-hourly-pay.user.js
 // ==/UserScript==
 
 (function harvestPay() {

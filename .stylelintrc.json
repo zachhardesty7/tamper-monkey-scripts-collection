@@ -1,8 +1,4 @@
 {
-  "extends": "stylelint-config-recommended-scss",
-  "plugins": [
-    "stylelint-scss"
-  ],
   "rules": {
     "block-opening-brace-space-before": "always",
     "block-closing-brace-newline-after": [
@@ -14,12 +10,6 @@
         ]
       }
     ],
-    "at-rule-name-space-after": "always",
-    "scss/at-else-closing-brace-newline-after": "always-last-in-chain",
-    "scss/at-else-closing-brace-space-after": "always-intermediate",
-    "scss/at-else-empty-line-before": "never",
-    "scss/at-else-if-parentheses-space-before": "always",
-    "scss/at-if-closing-brace-newline-after": "always-last-in-chain",
-    "scss/at-if-closing-brace-space-after": "always-intermediate"
+    "at-rule-name-space-after": "always"
   }
 }

@@ -1,34 +1,31 @@
-/* eslint-env browser, jquery, greasemonkey */
-/* eslint-disable max-len */
-/* global waitForKeyElements */
+/* global onElementReady */
 
 // ==UserScript==
 // @name         Add Soundcloud External Download Button
-// @namespace    http://zachhardesty.com
+// @namespace    https://zachhardesty.com
 // @version      1.0
 // @description  adds a button on main page and song page to download song automatically from https://soundcloudmp3.org/
 // @author       Zach Hardesty
 // @match        https://soundcloud.com/*
 // @match        https://soundcloudmp3.org/*
-// @require      http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js
-// @require      https://gist.github.com/raw/2625891/waitForKeyElements.js
+// @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // @grant        GM_getValue
 // @grant        GM_setValue
 // ==/UserScript==
 
 // adds button to soundcloud
-// @args jNode node of most recently added children (for lazy load)
-function addButton(jNode) {
+// @args el of most recently added children (for lazy load)
+function addButton(el) {
   const link = window.location.href
   const button = document.createElement('button')
   button.textContent = 'External Download'
   // if on soundcloud home and song node is not a playlist, append SC styled button
-  if (link.includes('stream') && !jNode[0].querySelector('.soundTitle__title').href.includes('/sets/')) {
+  if (link.includes('stream') && !el.querySelector('.soundTitle__title').href.includes('/sets/')) {
     button.className = 'mp3-button sc-button sc-button-small'
-    jNode[0].querySelector('.soundActions .sc-button-group').append(button)
+    el.querySelector('.soundActions .sc-button-group').append(button)
     // add click listener to GM store the url of the song and open anything2mp3
-    jNode[0].querySelector('.mp3-button').addEventListener('click', (e) => {
-      GM_setValue('link', jNode[0].querySelector('.soundTitle__title').href)
+    el.querySelector('.mp3-button').addEventListener('click', (e) => {
+      GM_setValue('link', el.querySelector('.soundTitle__title').href)
       window.open('https://soundcloudmp3.org/', '_blank')
     })
     // else if on individual song page (and not playlist), append SC styled button
@@ -52,8 +49,8 @@ function addButton(jNode) {
         window.location.href.includes('soundcloud')) {
     // library that detects ajax changes
     // requires jQuery - boo
-    waitForKeyElements('.l-listen-wrapper', addButton)
-    waitForKeyElements('.lazyLoadingList__list > .soundList__item', addButton)
+    onElementReady('.l-listen-wrapper', false, addButton)
+    onElementReady('.lazyLoadingList__list > .soundList__item', false, addButton)
   } else if (window.location.href.includes('soundcloudmp3') &&
         document.referrer.includes('soundcloud') &&
         !window.location.href.includes('converter')) {
@@ -62,7 +59,7 @@ function addButton(jNode) {
     document.querySelector('#conversionForm div span button').click()
   } else if (window.location.href.includes('converter')) {
     // hide modal breaks download plus it goes away after the download is triggered
-    // waitForKeyElements('.modal-footer button',
+    // onElementReady('.modal-footer button', false,
     //   document.querySelector(".modal-footer button").click());
     const timer = setInterval(() => {
       if (document.querySelector('#ready-group').className !== 'hidden') {

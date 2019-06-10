@@ -1,6 +1,4 @@
-/* eslint-env browser, jquery, greasemonkey */
-/* eslint-disable max-len */
-/* global waitForKeyElements */
+/* global onElementReady */
 
 // ==UserScript==
 // @name        Etsy Ad Remover
@@ -9,20 +7,19 @@
 // @include     https://www.etsy.com/search*
 // @include     https://www.etsy.com/market/*
 // @version     1.0.0
-// @require     http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js
-// @require     https://gist.github.com/raw/2625891/waitForKeyElements.js
+// @require     https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
 
-function actionFunction(jNode) {
-  jNode
-    .parent()
-    .parent()
-    .parent()
-    .parent()
-    .parent()
-    .parent()
-    .parent()
+function actionFunction(el) {
+  el
+    .parentElement
+    .parentElement
+    .parentElement
+    .parentElement
+    .parentElement
+    .parentElement
+    .parentElement
     .remove()
 }
 
-waitForKeyElements('.ad-indicator', actionFunction)
+onElementReady('.ad-indicator', false, actionFunction)

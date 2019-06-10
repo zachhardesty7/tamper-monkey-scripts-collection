@@ -1,18 +1,15 @@
-/* eslint-env browser, jquery, greasemonkey */
-/* eslint-disable max-len */
-/* global waitForKeyElements */
+/* global onElementReady */
 
 // ==UserScript==
 // @name         Filter YouTube Subscriptions Page
-// @namespace    http://zachhardesty.com
+// @namespace    https://zachhardesty.com
 // @version      0.1.1
 // @description  hide videos with given title keywords
 // @author       Zach Hardesty
 // @match        https://www.youtube.com/feed/subscriptions*
 // @match        https://www.youtube.com/
 // @match        https://www.youtube.com/?*
-// @require      http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js
-// @require      https://gist.github.com/raw/2625891/waitForKeyElements.js
+// @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
 
 const keywords = [
@@ -32,14 +29,14 @@ const keywords = [
 ]
 
 // only operate once necessary element has loaded
-waitForKeyElements('#dismissable.style-scope.ytd-grid-video-renderer', func, false)
+onElementReady('#dismissable.style-scope.ytd-grid-video-renderer', false, func)
 
-// @args jNode node of most recently checked page
-function func(jNode) {
+// @args el of most recently checked page
+function func(el) {
   // remove video
   keywords.forEach((keyword) => {
-    if (jNode[0].querySelector('#details').querySelector('#meta').firstElementChild.textContent.toLowerCase().includes(keyword)) {
-      jNode[0].parentElement.remove()
+    if (el.querySelector('#details').querySelector('#meta').firstElementChild.textContent.toLowerCase().includes(keyword)) {
+      el.parentElement.remove()
     }
   })
 }

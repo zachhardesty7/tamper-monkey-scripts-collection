@@ -3,7 +3,7 @@
 
 // ==UserScript==
 // @name         Quick Google Docs Force Center
-// @namespace    http://zachhardesty.com
+// @namespace    https://zachhardesty.com
 // @version      0.1
 // @description  force center align of page display on Google Docs
 // @author       Zach Hardesty

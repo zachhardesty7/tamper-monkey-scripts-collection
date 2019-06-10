@@ -63,7 +63,7 @@ _For more information on Tampermonkey itself, please refer to their [website][ta
     * COMPLETELY BROKEN due to 2d -> webgl canvas
 * Binance
     * Interacting with new percentages does not trigger an official angular event so it's more of a visual indicator until you press 'buy' or 'sell'
-    * Unnecessary usage of 'waitForKeyElements.js'
+    * Unnecessary usage of 'onElementReady.js'
 * Soundcloud
     * Button does not appear on all types of pages
 * Docs
@@ -100,7 +100,7 @@ limitations under the License.
 * [Javascript Standard Style][standard] - strictly enforced guide of good practices (and no semicolons)
 * [Chart.js][chartJS] - Simple HTML5 Charts using the canvas element
 * [CryptoCompare API][api] - The best free API for getting cryptocurrency live pricing data
-* [WaitForKeyElements.js][waitJS] - A utility function, for Greasemonkey scripts, that detects and handles AJAX content.
+* [onElementReady.js][waitJS] - A utility function, for Greasemonkey scripts, that detects and handles AJAX content.
 * [JQuery][jquery] - jQuery is a fast, small, and feature-rich JavaScript library. (Only used because above library requires it.)
 * [SoundCloud to MP3][soundcloudDownload] - With SoundCloud MP3 you can convert and download music in High Quality MP3 format.
 * [ChangeValueDetection][detectorJS] - Simple interval observer to detect change from user, JS, or anything else
@@ -126,9 +126,9 @@ limitations under the License.
 [tampermonkey-firefox]: https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/
 [tampermonkey-opera]: https://addons.opera.com/en/extensions/details/tampermonkey-beta/
 [tampermonkey-website]: https://tampermonkey.net/
-[harvest-img]: http://zachhardesty.com/github/harvest.png
-[binance-img-pie]: http://zachhardesty.com/github/pie.png
-[binance-img-bal]: http://zachhardesty.com/github/bal.png
-[binance-img-exchange]: http://zachhardesty.com/github/exchange.png
-[soundcloud-img]: http://zachhardesty.com/github/soundcloud.png
-[docs-img]: http://zachhardesty.com/github/docs.png
+[harvest-img]: https://zachhardesty.com/github/harvest.png
+[binance-img-pie]: https://zachhardesty.com/github/pie.png
+[binance-img-bal]: https://zachhardesty.com/github/bal.png
+[binance-img-exchange]: https://zachhardesty.com/github/exchange.png
+[soundcloud-img]: https://zachhardesty.com/github/soundcloud.png
+[docs-img]: https://zachhardesty.com/github/docs.png
