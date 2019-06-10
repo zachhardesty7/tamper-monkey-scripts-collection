@@ -1,16 +1,15 @@
-/* eslint-env browser, jquery, greasemonkey */
+/* eslint-env browser, greasemonkey */
 /* eslint-disable max-len, no-underscore-dangle */
-/* global wrapObject getCanvasName */
 /* cSpell: ignore cosk icloud */
 
 // ==UserScript==
 // @name         Apple iCloud Notes Dark Theme
 // @namespace    http://zachhardesty.com
-// @version      1.1.0
+// @version      2.0.0
 // @description  best dark mode out there!
 // @author       Zach Hardesty
 // @match        https://www.icloud.com/applications/notes*
-// @require      https://robwu.nl/s/canvas-interceptor.js
+// @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // @grant        none
 // ==/UserScript==
 
@@ -24,6 +23,7 @@
     darkest: 'rgb(29, 31, 35)'
   }
 
+  // simple surrounding UI
   const css = `
     /* text */
     .password-title,
@@ -113,49 +113,96 @@
     style.appendChild(document.createTextNode(css))
   }
   head.appendChild(style)
-
-  // remove default canvas prototype wrapping (used for debugging)
-  CanvasRenderingContext2D.prototype.__proxyUnwrap()
-
-  // iCloud notes uses canvas rendering for text content.
-  // it's not possible to directly edit the color of text
-  // (or anything else) that's already been drawn to a canvas -
-  // what the user sees is only a pixel representation of text.
-
-  // fortunately, targeting the canvas context is still possible.
-  // by wrapping the canvas prototype, we can detect calls from the parent script.
-  // we look for calls to 'ctx.fillText()' (and other things) and intercept them to modify
-  // the style of the objects to match the dark theme before they are painted.
-  wrapObject(CanvasRenderingContext2D.prototype, [
-    'canvas'
-  ], getCanvasName, (instance, expr) => {
-    // all text
-    if (expr.includes('fillText')) {
-      instance.__proxyOriginal.fillStyle.set.call(instance, theme.light)
-
-    // title blinking cursor
-    } else if ((expr.includes('fillRect(') && expr.includes(', 1, 28)')) || (expr.includes('rect(') && expr.includes(', 3, 30)'))) {
-      instance.__proxyOriginal.fillStyle.set.call(instance, theme.light)
-
-    // header blinking cursor
-    } else if ((expr.includes('fillRect(') && expr.includes(', 1, 23)')) || (expr.includes('rect(') && expr.includes(', 3, 25)'))) {
-      instance.__proxyOriginal.fillStyle.set.call(instance, theme.light)
-
-    // regular blinking cursor
-    } else if ((expr.includes('fillRect(') && expr.includes(', 1, 22)')) || (expr.includes('rect(') && expr.includes(', 3, 24)'))) {
-      instance.__proxyOriginal.fillStyle.set.call(instance, theme.light)
-
-    // unchecked checkbox
-    } else if (expr.includes('r$__111.png')) {
-      instance.__proxyOriginal.filter.set.call(instance, 'invert(100%) hue-rotate(170deg) brightness(3) contrast(0.75)')
-
-    // checked checkbox
-    } else if (expr.includes('r$__113.png')) {
-      instance.__proxyOriginal.filter.set.call(instance, 'invert(100%) hue-rotate(170deg) brightness(3) contrast(0.75)')
-
-    // text underline
-    } else if ((expr.includes('fillRect(') && expr.includes(', 1)'))) {
-      instance.__proxyOriginal.fillStyle.set.call(instance, theme.light)
-    }
-  })
 })()
+
+// experimental modifying WebGL canvas
+/*
+
+function getPixels(ctx) {
+  return ctx.readPixels
+    ? getPixels3d(ctx)
+    : getPixels2d(ctx)
+}
+
+function getPixels3d(gl) {
+  var canvas = gl.canvas
+  var height = canvas.height
+  var width  = canvas.width
+  var buffer = new Uint8Array(width * height * 4)
+
+  gl.readPixels(0, 0
+    , canvas.width
+    , canvas.height
+    , gl.RGBA
+    , gl.UNSIGNED_BYTE
+    , buffer
+  )
+
+  return buffer
+}
+
+function getPixels2d(ctx) {
+  var canvas = ctx.canvas
+  var height = canvas.height
+  var width  = canvas.width
+
+  return ctx.getImageData(0, 0, width, height).data
+}
+
+function webglToCanvas2d(webgl, canvas2D) {
+
+  var outCanvas = canvas2D ? canvas2D.canvas || canvas2D : document.createElement('canvas');
+  var outContext = outCanvas.getContext('2d');
+  var outImageData;
+
+  webgl = webgl instanceof WebGLRenderingContext ? webgl : webgl.getContext('webgl') || webgl.getContext('experimental-webgl');
+
+  outCanvas.width = webgl.canvas.width;
+  outCanvas.height = webgl.canvas.height;
+  outImageData = outContext.getImageData(0, 0, outCanvas.width, outCanvas.height);
+
+  outImageData.data.set(new Uint8ClampedArray(getPixels3d(webgl).buffer));
+  outContext.putImageData(outImageData, 0, 0);
+  outContext.translate(0, outCanvas.height);
+  outContext.scale(1, -1);
+  outContext.drawImage(outCanvas, 0, 0);
+  outContext.setTransform(1, 0, 0, 1, 0, 0);
+
+  return outCanvas;
+};
+
+function wait(el) {
+    // el.getContext('webgl', {preserveDrawingBuffer: true})
+    window.setTimeout(() => canvas(el), 8000, 'That was really slow!');
+}
+
+function canvas(el) {
+  console.log('MADE IT INTO THE FUNCTION')
+  if (!el.className) {
+
+      const ctx = el.getContext('webgl', {preserveDrawingBuffer: true})
+      const canvas2d = webglToCanvas2d(ctx);
+
+      console.log(el.toDataURL())
+      console.log({canvas2d})
+
+      canvas2d.className = 'test'
+      console.log(canvas2d.toDataURL())
+      el.parentElement.append(canvas2d)
+      el.remove()
+  }
+}
+
+onElementReady('canvas:not([class])', false, wait)
+
+HTMLCanvasElement.prototype.getContext = function(origFn) {
+    return function(type, attributes) {
+        if (type === 'webgl') {
+            attributes = Object.assign({}, attributes, {
+                preserveDrawingBuffer: true,
+            });
+        }
+        return origFn.call(this, type, attributes);
+    };
+}(HTMLCanvasElement.prototype.getContext);
+*/

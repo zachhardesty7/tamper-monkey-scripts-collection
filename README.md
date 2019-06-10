@@ -48,7 +48,7 @@ Code will automatically execute on the designated websites!
 * Amazon
     * hide all of the junk that clutter Amazon's UI (biased decisions)
 * iCloud Notes
-    * convert your note editor to a beautiful dark theme to ease your eyes (uses an interesting method of intercepting function calls on the canvas context object prototype to theme canvas items)
+    * kinda convert your note editor to a beautiful dark theme to ease your eyes (uses an interesting method of intercepting function calls on the canvas context object prototype to theme canvas items)
 * Reddit
   * on saved posts / comments page
     * enable middle click to open in new tab for comments
@@ -60,7 +60,7 @@ _For more information on Tampermonkey itself, please refer to their [website][ta
 
 * ONLY TESTED ON CHROME
 * iCloud Notes
-    * urls are indistinguishable from underlined text
+    * COMPLETELY BROKEN due to 2d -> webgl canvas
 * Binance
     * Interacting with new percentages does not trigger an official angular event so it's more of a visual indicator until you press 'buy' or 'sell'
     * Unnecessary usage of 'waitForKeyElements.js'
@@ -105,7 +105,6 @@ limitations under the License.
 * [SoundCloud to MP3][soundcloudDownload] - With SoundCloud MP3 you can convert and download music in High Quality MP3 format.
 * [ChangeValueDetection][detectorJS] - Simple interval observer to detect change from user, JS, or anything else
 * [Google Docs Word Count][docs-greasemonkey] - Inspiration for my script, changed formatting, style, and added a few filtering options
-* [Canvas Prototype Intercept][canvas-intercept] - Beautiful, simple library to help debug 3rd party canvas contexts and optionally intercept calls for various purposes. Essentially allows theming a 3rd party canvas by studying logs.
 
 <!-- Markdown link & img definitions -->
 [binance]: https://www.binance.com
