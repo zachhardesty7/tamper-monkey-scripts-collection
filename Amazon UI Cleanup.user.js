@@ -8,38 +8,109 @@
 // @version     0.0.0
 // ==/UserScript==
 
+/**
+ * @typedef {string | NodeListOf<Element> | Element | Element[] | null} DOMTargetItems
+ * @typedef {string | Element | null} DOMTargetItem
+ *
+ */
 (function f() {
   // create functions to add null checking and prevent script errors
+  /**
+   * retrieves node from selector or passes through element(s) or false otherwise,
+   * designed to allow repeatedly calling on return value without breaking
+   *
+   * @param {DOMTargetItem} target selector or element
+   * @param {number} i position of item to return if selector finds multiple matches
+   * @returns {Element | object | boolean} targeted DOM element or input object or false otherise
+   */
   const getEl = (target, i = 0) => (
     typeof (target) === 'string'
       ? document.querySelectorAll(target) && document.querySelectorAll(target)[i]
       : typeof (target) === 'object' && target
   )
 
+  /**
+   * retrieves nodes from selector or passes through element(s) or false otherwise,
+   * designed to allow repeatedly calling on return value without breaking
+   *
+   * @param {DOMTargetItems} target selector or elements
+   * @returns {Element | object | boolean} targeted DOM element or input object or false otherise
+   */
   const getElAll = target => (
     typeof (target) === 'string'
       ? Array.from(document.querySelectorAll(target))
       : typeof (target) === 'object' && Array.from(target)
   )
 
+  /**
+   * adds an event listener func to a given selector (if it exists)
+   *
+   * @param {DOMTargetItem} target selector or elements
+   * @param {Event} event trigger to listen for
+   * @param {Function} func executed after event trigger
+   * @returns {void}
+   */
   const on = (target, event, func) => {
     const el = getEl(target)
     if (el && el.addEventListener) el.addEventListener(event, func)
   }
 
+  /**
+   * sets property on a given selector (if it exists)
+   *
+   * @param {DOMTargetItem} target selector or element
+   * @param {string} attr trigger to listen for
+   * @param {string} val desired property value
+   * @param {number} i position of item to assign to if selector finds multiple matches
+   * @returns {void}
+   */
   const setAttr = (target, attr, val, i = 0) => {
     const el = getEl(target, i)
     if (el) el[attr] = val
   }
 
-  const hide = (target, i = 0) => {
-    setAttr(target, 'style', 'display: none', i)
-  }
-
+  /**
+   * sets style on a given selector (if it exists), extends setAttr
+   *
+   * @param {DOMTargetItem} target selector or element
+   * @param {string} val desired style property value
+   * @param {number} i position of item to assign to if selector finds multiple matches
+   * @returns {void}
+   */
   const setStyle = (target, val, i = 0) => {
     setAttr(target, 'style', val, i)
   }
 
+  /**
+   * sets style to 'display: none' on a given selector (if it exists), extends setStyle
+   *
+   * @param {DOMTargetItem} target selector or element
+   * @param {number} i position of item to hide if selector finds multiple matches
+   * @returns {void}
+   */
+  const hide = (target, i = 0) => {
+    setStyle(target, 'display: none', i)
+  }
+
+  /**
+   * sets style to 'display: none' on all results of a given selector (if they exist), extends hide
+   *
+   * @param {DOMTargetItem} target selector or element
+   * @returns {void}
+   */
+  const hideAll = (target) => {
+    getElAll(target).forEach(hide)
+  }
+
+  /**
+   * sets style to 'display: none' on a given selector's `X`
+   * parent (if chain exists), extends setStyle
+   *
+   * @param {DOMTargetItem} target selector or element
+   * @param {number} x vertical depth of item from parent to hide
+   * @param {number} i position of item to assign to if selector finds multiple matches
+   * @returns {void}
+   */
   const hideParentX = (target, x = 0, i = 0) => {
     let el = getEl(target, i)
 
@@ -47,7 +118,7 @@
       el = el && el.parentElement
     }
 
-    setAttr(el, 'style', 'display: none')
+    setStyle(el, 'display: none')
   }
 
   const link = window.location.href
@@ -107,16 +178,14 @@
     getElAll('.bucket').forEach((divider) => {
       setStyle(divider, 'display: block')
     })
-    getElAll('.bucketDivider').forEach(hide)
+    hideAll('.bucketDivider')
     hide('#promoGrid')
     hide('#messages')
 
     // hide related products and recommendations
     hide('#skyCitySoftMerge_feature_div')
     hide('#recommendations_feature_div')
-    getElAll('.a-section.similarities-widget').forEach((widget) => {
-      hide(widget)
-    })
+    hideAll('.a-section.similarities-widget')
     hide('[name="goKindleStaticPopDiv"]')
     hide('#sims-fbt')
     hide('#bundleV2_feature_div')
@@ -134,6 +203,11 @@
     hide('#featureAwarenessWidget_feature_div')
     hideParentX('#widget_container .a-carousel-container', 1)
     hide('.a-section', getElAll('.a-section').length - 5)
+    hide('#beautyBadging_feature_div') // Luxury Beauty green tag
+    hide('#ccxssContent') // post ATC recommendations panel
+    // REVIEW: experimental, hide junk at the bottom of the page without ID or class
+    hideAll('#dpx-giveaway_feature_div ~ div')
+    hideAll('#dpx-giveaway_feature_div ~ table')
 
     // hide other junk sections
     hide('#sp_detail')
@@ -156,6 +230,7 @@
     hide('#flipAndSampleAudio')
     hide('#authorFollow_feature_div')
     hide('.askQuestionExamples')
+    hide('#acBadge_feature_div')
 
     // remove unnatural black background of title bar on some pages (video game consoles)
     setStyle('#ppd-top', 'background: none')
