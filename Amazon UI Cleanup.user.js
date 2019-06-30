@@ -5,7 +5,7 @@
 // @namespace   https://zachhardesty.com/
 // @description removes annoying largely not useful elements from Amazon
 // @include     https://*amazon.com*
-// @version     0.0.0
+// @version     1.0.0
 // ==/UserScript==
 
 /**
@@ -205,6 +205,7 @@
     hide('.a-section', getElAll('.a-section').length - 5)
     hide('#beautyBadging_feature_div') // Luxury Beauty green tag
     hide('#ccxssContent') // post ATC recommendations panel
+    // hide('#attach-accessories') // post ATC recommendations panel FIXME: broken due to lazy load
     // REVIEW: experimental, hide junk at the bottom of the page without ID or class
     hideAll('#dpx-giveaway_feature_div ~ div')
     hideAll('#dpx-giveaway_feature_div ~ table')

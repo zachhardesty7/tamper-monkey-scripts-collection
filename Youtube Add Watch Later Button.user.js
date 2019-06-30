@@ -6,7 +6,7 @@
 // @namespace   https://zachhardesty.com/
 // @description reveals the save and report buttons and makes links right clickable
 // @include     https://www.youtube.com/watch*
-// @version     1.0.0
+// @version     1.0.1
 // @require     https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 
 // ==/UserScript==
@@ -70,17 +70,7 @@ function addButton(buttons) {
   text.style.color = 'var(--yt-spec-text-secondary)'
   text.textContent = 'later'
 
-  link.addEventListener('click', e => console.log(findNested(window._yt_player)) || post(window)) // meat of the script
-}
-
-function findNested(o) {
-  const keys = Object.keys(o)
-  for (let i = 0; i < keys.length; i += 1) {
-    const token = o[keys[i]].XSRF_TOKEN
-    if (token) return token
-  }
-
-  throw new Error('Not able to find XSRF token')
+  link.addEventListener('click', (e) => { post(window) }) // meat of the script
 }
 
 /**
@@ -92,7 +82,7 @@ async function post(window) {
   // the 3 unique data points required, stored in strange places
   const { csn } = window.ytInitialData.responseContext.webResponseContextExtensionData.ytConfigData
   const addedVideoId = window.ytInitialData.currentVideoEndpoint.watchEndpoint.videoId
-  const token = findNested(window._yt_player) // location varies when minified build changes
+  const token = window.ytcfg.data_.XSRF_TOKEN // location varies when minified build changes
 
   // // get exact playlist ID
   // document.querySelector('#top-level-buttons').children[3].click()
@@ -157,4 +147,5 @@ async function post(window) {
 }
 
 // YouTube uses a bunch of duplicate 'id' tag values. why?
+// this makes it much more likely to target right one, but at the cost of being brittle
 onElementReady('#info #info-contents #menu #top-level-buttons', false, addButton)
