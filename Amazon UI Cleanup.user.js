@@ -5,7 +5,7 @@
 // @namespace   https://zachhardesty.com/
 // @description removes annoying largely not useful elements from Amazon
 // @include     https://*amazon.com*
-// @version     1.0.0
+// @version     1.0.1
 // ==/UserScript==
 
 /**
@@ -173,6 +173,7 @@
     hide('#ape_Detail_dp-ads-center-promo_Desktop_placement')
     hide('#ADPlaceholder')
     hide('#ape_Detail_ad-endcap-1_Glance_placement')
+    hide('#productAlert_feature_div') // amazon hub
 
     // clean up empty section dividers
     getElAll('.bucket').forEach((divider) => {
@@ -204,6 +205,7 @@
     hideParentX('#widget_container .a-carousel-container', 1)
     hide('.a-section', getElAll('.a-section').length - 5)
     hide('#beautyBadging_feature_div') // Luxury Beauty green tag
+    hide('#almMultiOfferEgress_feature_div') // "other ways to buy"
     hide('#ccxssContent') // post ATC recommendations panel
     // hide('#attach-accessories') // post ATC recommendations panel FIXME: broken due to lazy load
     // REVIEW: experimental, hide junk at the bottom of the page without ID or class
@@ -232,6 +234,8 @@
     hide('#authorFollow_feature_div')
     hide('.askQuestionExamples')
     hide('#acBadge_feature_div')
+    hide('#hsxShCelDpAmznCertBdg') // works w alexa
+    hide('#dpx-smarthome-hub_feature_div') // add alexa for voice control
 
     // remove unnatural black background of title bar on some pages (video game consoles)
     setStyle('#ppd-top', 'background: none')
