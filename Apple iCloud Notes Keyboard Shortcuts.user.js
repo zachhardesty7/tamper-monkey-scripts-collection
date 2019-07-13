@@ -1,7 +1,6 @@
 /* eslint-env browser, jquery, greasemonkey */
 /* eslint-disable max-len, no-underscore-dangle */
-/* global wrapObject getCanvasName */
-/* cSpell: ignore cosk icloud */
+/* cSpell: ignore cosk topo */
 
 // ==UserScript==
 // @name         Apple iCloud Notes Dark Theme
@@ -15,7 +14,7 @@
 // ==/UserScript==
 
 (function addShortcuts() {
-  window.dispatchEvent(new MouseEvent('mouseup'))
+	window.dispatchEvent(new MouseEvent('mouseup'))
 })()
 
 /*

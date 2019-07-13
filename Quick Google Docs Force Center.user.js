@@ -11,14 +11,14 @@
 // @grant        none
 // ==/UserScript==
 
-document.addEventListener('DOMContentLoaded', centerDocs, false)
+window.addEventListener('load', centerDocs, false)
 
 function centerDocs() {
-  document.querySelector('.kix-appview-editor').style = 'overflow-x: hidden'
+	document.querySelector('.kix-appview-editor').style = 'overflow-x: hidden'
 
-  setInterval(() => {
-    document.querySelector('.kix-appview-editor').scrollLeft =
+	setInterval(() => {
+		document.querySelector('.kix-appview-editor').scrollLeft =
       (document.querySelector('.kix-zoomdocumentplugin-outer').scrollWidth -
       document.querySelector('.kix-appview-editor').clientWidth) / 2
-  }, 250)
+	}, 250)
 }

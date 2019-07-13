@@ -14,36 +14,40 @@
 // TODO: refactor to eliminate unnecessary library - onElementReady
 
 function convertBTCToUSD() {
-  fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
-    .then(resp => resp.json())
-    .then((data) => {
-      // if elem are loaded then add USD value below BTC val
-      onElementReady('.td.ng-scope', false, (e) => addBTCConversionRate(e, data.BTC.USD))
+	fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
+		.then(resp => resp.json())
+		.then((data) => {
+			// if el are loaded then add USD value below BTC val
+			onElementReady('.td.ng-scope', false, e => addBTCConversionRate(e, data.BTC.USD))
 
-      return null
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+			return null
+		})
+		.catch((error) => {
+			console.log(error)
+		})
 }
 
-// runs on the addition of each ticker
-// adds rough dollar conversion using stored global data below BTC value
-// @args el node of most recently added ticker
+/**
+ * runs on the addition of each ticker and
+ * adds rough dollar conversion using stored global data below BTC value
+ *
+ * @param {HTMLElement} el - node of most recently added ticker
+ * @param {number} BTCUSD - literal value
+ */
 function addBTCConversionRate(el, BTCUSD) {
-  const BTCElement = el.firstElementChild.children[5]
+	const BTCElement = el.firstElementChild.children[5]
 
-  if (BTCElement.textContent !== 0) {
-    // convert to pretty USD format
-    const USDVal = (BTCElement.textContent * BTCUSD)
-      .toFixed(2)
-      .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
-    const USDValElem = document.createElement('p')
+	if (BTCElement.textContent !== 0) {
+		// convert to pretty USD format
+		const USDVal = (BTCElement.textContent * BTCUSD)
+			.toFixed(2)
+			.replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
+		const USDValElem = document.createElement('p')
 
-    USDValElem.textContent = `≈ ${USDVal} USD`
-    USDValElem.style = 'color: #a0a0a0'
-    BTCElement.append(USDValElem)
-  }
+		USDValElem.textContent = `≈ ${USDVal} USD`
+		USDValElem.style = 'color: #a0a0a0'
+		BTCElement.append(USDValElem)
+	}
 }
 
 window.addEventListener('load', convertBTCToUSD)

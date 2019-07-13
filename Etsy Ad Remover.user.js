@@ -10,16 +10,14 @@
 // @require     https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
 
-function actionFunction(el) {
-  el
-    .parentElement
-    .parentElement
-    .parentElement
-    .parentElement
-    .parentElement
-    .parentElement
-    .parentElement
-    .remove()
-}
-
-onElementReady('.ad-indicator', false, actionFunction)
+onElementReady('.ad-indicator', false, (el) => {
+	el
+		.parentElement
+		.parentElement
+		.parentElement
+		.parentElement
+		.parentElement
+		.parentElement
+		.parentElement
+		.remove()
+})

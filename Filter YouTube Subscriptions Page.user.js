@@ -1,4 +1,5 @@
 /* global onElementReady */
+/* cspell:disable pixelmon */
 
 // ==UserScript==
 // @name         Filter YouTube Subscriptions Page
@@ -13,30 +14,27 @@
 // ==/UserScript==
 
 const keywords = [
-  'pixelmon',
-  'binding of isaac',
-  'dark souls',
-  'darkest dungeon',
-  'hot rod garage',
-  'dirt every day',
-  'roadkill',
-  'standard chess',
-  'no man\'s sky',
-  'unboxing',
-  'week to wicked',
-  'engine masters',
-  'hearthstone'
+	'pixelmon',
+	'binding of isaac',
+	'dark souls',
+	'darkest dungeon',
+	'hot rod garage',
+	'dirt every day',
+	'roadkill',
+	'standard chess',
+	'no man\'s sky',
+	'unboxing',
+	'week to wicked',
+	'engine masters',
+	'hearthstone',
 ]
 
-// only operate once necessary element has loaded
-onElementReady('#dismissable.style-scope.ytd-grid-video-renderer', false, func)
-
-// @args el of most recently checked page
-function func(el) {
-  // remove video
-  keywords.forEach((keyword) => {
-    if (el.querySelector('#details').querySelector('#meta').firstElementChild.textContent.toLowerCase().includes(keyword)) {
-      el.parentElement.remove()
-    }
-  })
-}
+// only operate once necessary el has loaded
+onElementReady('#dismissable.style-scope.ytd-grid-video-renderer', false, (el) => {
+	// remove video
+	keywords.forEach((keyword) => {
+		if (el.querySelector('#details').querySelector('#meta').firstElementChild.textContent.toLowerCase().includes(keyword)) {
+			el.parentElement.remove()
+		}
+	})
+})

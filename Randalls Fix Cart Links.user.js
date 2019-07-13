@@ -12,11 +12,9 @@
 // IT'S SUCH BAD UX TO NOT INCLUDE AN
 // HREF ON ALL <a /> TAGS
 
-function fixCart(el) {
-  const link = el.querySelector('a')
-  link.href = `http://shop.randalls.com${
-    link.onclick.toString().match(/\/product-details\.\d+\.html/gm)
-  }`
-}
-
-onElementReady('.cartdesc', false, fixCart)
+onElementReady('.cartdesc', false, (el) => {
+	const link = el.querySelector('a')
+	link.href = `http://shop.randalls.com${
+		link.onclick.toString().match(/\/product-details\.\d+\.html/gm)
+	}`
+})

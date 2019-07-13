@@ -12,17 +12,17 @@
 // ==/UserScript==
 
 (function setDark() {
-  const theme = {
-    lighter: '#d7dae0',
-    light: '#cccccc',
-    medium: 'rgba(204, 204, 204, .5)', // same as light w 50% opacity
-    dark: '#282c34',
-    darker: 'rgb(33, 37, 43)',
-    darkest: 'rgb(29, 31, 35)'
-  }
+	const theme = {
+		lighter: '#d7dae0',
+		light: '#cccccc',
+		medium: 'rgba(204, 204, 204, .5)', // same as light w 50% opacity
+		dark: '#282c34',
+		darker: 'rgb(33, 37, 43)',
+		darkest: 'rgb(29, 31, 35)',
+	}
 
-  // simple surrounding UI
-  const css = `
+	// simple surrounding UI
+	const css = `
     /* text */
     .password-title,
     .password-description,
@@ -99,14 +99,14 @@
     */
   `
 
-  // attach stylesheet to inner frame
-  const style = document.createElement('style')
-  const head = document.head || document.getElementsByTagName('head')[0]
+	// attach stylesheet to inner frame
+	const style = document.createElement('style')
+	const head = document.head || document.getElementsByTagName('head')[0]
 
-  style.type = 'text/css'
-  style.appendChild(document.createTextNode(css))
+	style.type = 'text/css'
+	style.appendChild(document.createTextNode(css))
 
-  head.appendChild(style)
+	head.appendChild(style)
 })()
 
 // experimental modifying WebGL canvas
