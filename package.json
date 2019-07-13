@@ -6,7 +6,7 @@
   "devDependencies": {
     "babel-eslint": "^10.0.2",
     "eslint": "^6.0.1",
-    "eslint-config-hardesty": "^1.0.1",
+    "eslint-config-hardesty": "^1.0.3",
     "stylelint": "^10.1.0"
   }
 }

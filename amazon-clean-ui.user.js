@@ -1,4 +1,5 @@
 /* eslint-env browser, jquery, greasemonkey */
+/* cspell:disable alexa */
 
 // ==UserScript==
 // @name        Amazon - Clean UI
@@ -11,7 +12,6 @@
 /**
  * @typedef {string | NodeListOf<Element> | Element | Element[] | null} DOMTargetItems
  * @typedef {string | Element | null} DOMTargetItem
- *
  */
 (function f() {
 	// create functions to add null checking and prevent script errors

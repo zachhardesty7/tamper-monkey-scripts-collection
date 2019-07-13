@@ -882,10 +882,10 @@ eslint-config-airbnb@^17.1.1:
     object.assign "^4.1.0"
     object.entries "^1.1.0"
 
-eslint-config-hardesty@^1.0.1:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-hardesty/-/eslint-config-hardesty-1.0.2.tgz#bf030c40d6f691a25fcb71eb2b20095942cb8a79"
-  integrity sha512-Aede43uT0DNAQAFFKWNX5e3JGtH83CdL0SOBgyCJnmphfi2LRhqyCweLzyol9hzLt22Jh89a6KnY7f/XfFcWqg==
+eslint-config-hardesty@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/eslint-config-hardesty/-/eslint-config-hardesty-1.0.3.tgz#f74529001bfcb40f22e915f77b687ca0689946cb"
+  integrity sha512-zZlqAlUntmCH1lATMnn4Fd7h91I4RSCrRkIsdEP1KmtoUKPyFdv+2hsjnDlwX553ZRoq3BajpT1HmcCVc6hPRg==
   dependencies:
     eslint-config-airbnb "^17.1.1"
     eslint-config-standard "^13.0.1"
