@@ -1,7 +1,7 @@
 /* global onElementReady */
 
 // ==UserScript==
-// @name         Add Binance BTC to USD Conversion
+// @name         Binance - Add BTC to USD Conversion
 // @namespace    https://zachhardesty.com
 // @version      1.2.0
 // @description  adds a quick and rough conversion to get value of coin in USD on "balance" page and on "deposits & withdrawals" page
@@ -13,7 +13,7 @@
 
 // TODO: refactor to eliminate unnecessary library - onElementReady
 
-function convertBTCToUSD() {
+(function convertBTCToUSD() {
 	fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
 		.then(resp => resp.json())
 		.then((data) => {
@@ -23,9 +23,9 @@ function convertBTCToUSD() {
 			return null
 		})
 		.catch((error) => {
-			console.log(error)
+			console.error(error)
 		})
-}
+})()
 
 /**
  * runs on the addition of each ticker and
@@ -49,5 +49,3 @@ function addBTCConversionRate(el, BTCUSD) {
 		BTCElement.append(USDValElem)
 	}
 }
-
-window.addEventListener('load', convertBTCToUSD)

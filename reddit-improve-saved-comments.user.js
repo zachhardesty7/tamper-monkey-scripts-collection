@@ -1,7 +1,7 @@
 /* global onElementReady */
 
 // ==UserScript==
-// @name        Reddit Improve Saved Comments
+// @name        Reddit - Improve Saved Comments
 // @namespace   https://zachhardesty.com/
 // @description reveals the save and report buttons and makes links right clickable
 // @include     https://www.reddit.com/user/*/saved/*

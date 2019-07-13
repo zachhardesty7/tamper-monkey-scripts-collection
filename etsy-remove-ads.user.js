@@ -1,7 +1,7 @@
 /* global onElementReady */
 
 // ==UserScript==
-// @name        Etsy Ad Remover
+// @name        Etsy - Remove Ads
 // @namespace   https://zachhardesty.com/
 // @description removes annoying and inconspicuous search ads from Etsy
 // @include     https://www.etsy.com/search*

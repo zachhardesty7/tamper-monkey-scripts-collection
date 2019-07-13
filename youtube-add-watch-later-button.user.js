@@ -3,7 +3,7 @@
 /* cspell:disable ytcfg */
 
 // ==UserScript==
-// @name        YouTube Add Watch Later Button
+// @name        YouTube - Add Watch Later Button
 // @namespace   https://zachhardesty.com/
 // @description reveals the save and report buttons and makes links right clickable
 // @include     https://www.youtube.com/watch*

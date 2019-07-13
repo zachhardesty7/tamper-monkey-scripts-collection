@@ -2,7 +2,7 @@
 /* cspell:disable pixelmon */
 
 // ==UserScript==
-// @name         Filter YouTube Subscriptions Page
+// @name         YouTube - Filter Subscriptions Page
 // @namespace    https://zachhardesty.com
 // @version      0.1.1
 // @description  hide videos with given title keywords

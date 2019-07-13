@@ -3,7 +3,7 @@
 /* cSpell: ignore cosk topo */
 
 // ==UserScript==
-// @name         Apple iCloud Notes Dark Theme
+// @name         iCloud Notes - Keyboard Shortcuts
 // @namespace    https://zachhardesty.com
 // @version      1.0.0
 // @description  best dark mode out there!

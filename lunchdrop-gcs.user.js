@@ -2,7 +2,7 @@
 /* cspell:disable lunchdrop */
 
 // ==UserScript==
-// @name        Test Lunchdrop Sec
+// @name        Lunchdrop - Giftcards
 // @namespace   https://zachhardesty.com/
 // @description test lunchdrop sec
 // @include     https://lunchdrop.com/app/gift-cards*

@@ -1,7 +1,7 @@
 /* global P onElementReady */
 
 // ==UserScript==
-// @name        Piazza Bind Delete Key to Archive
+// @name        Piazza - Archive with Delete Key
 // @namespace   https://zachhardesty.com/
 // @description bind the delete key to quickly archive posts
 // @include     https://piazza.com/class/*

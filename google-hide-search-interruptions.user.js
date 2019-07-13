@@ -1,7 +1,7 @@
 /* global onElementReady */
 
 // ==UserScript==
-// @name         Google hide "People also search for"
+// @name         Google Search - Hide "People also search for"
 // @namespace    https://zachhardesty.com
 // @version      1.0.0
 // @description  hide the annoying popup below the search result you just clicked on when you return to the search page

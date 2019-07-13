@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 
 // ==UserScript==
-// @name         Harvest Hourly Pay
+// @name         Harvest - Hourly Pay
 // @namespace    https://zachhardesty.com
 // @version      1.0
 // @description  adds total money made per day and week to Harvest (excl. taxes)

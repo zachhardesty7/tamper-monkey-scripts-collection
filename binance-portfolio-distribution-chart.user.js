@@ -3,7 +3,7 @@
 /* global Chart */
 
 // ==UserScript==
-// @name         Binance Portfolio Distribution Pie Chart
+// @name         Binance - Portfolio Distribution Pie Chart
 // @namespace    https://zachhardesty.com
 // @version      1.0
 // @description  adds a simple visual representation of portfolio distribution (USD) on "balance" and "deposits & withdrawals" pages

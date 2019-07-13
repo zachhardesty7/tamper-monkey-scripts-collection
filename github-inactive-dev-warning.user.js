@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 
 // ==UserScript==
-// @name         Github Project Not Under Active Development Warning
+// @name         Github - Inactive Development Warning
 // @namespace    https://zachhardesty.com
 // @version      0.1.0
 // @description  display big banner if project's last commit over 6 months ago and giant banner if over 1 year ago

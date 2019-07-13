@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 
 // ==UserScript==
-// @name         Quick Google Docs Force Center
+// @name         Google Docs - Force Center Document View
 // @namespace    https://zachhardesty.com
 // @version      0.1
 // @description  force center align of page display on Google Docs

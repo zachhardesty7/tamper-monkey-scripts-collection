@@ -3,7 +3,7 @@
 /* global googleDocsUtil */
 
 // ==UserScript==
-// @name         Google Docs Word Count - With Options
+// @name         Google Docs - Word Count (With Options)
 // @namespace    https://zachhardesty.com
 // @version      0.2
 // @description  adds a word counter with options to Google Docs

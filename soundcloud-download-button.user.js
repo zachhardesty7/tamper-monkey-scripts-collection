@@ -2,7 +2,7 @@
 /* cspell:disable soundcloudmp */
 
 // ==UserScript==
-// @name         Add Soundcloud External Download Button
+// @name         Soundcloud - Add External Download Button
 // @namespace    https://zachhardesty.com
 // @version      1.0
 // @description  adds a button on main page and song page to download song automatically from https://soundcloudmp3.org/

@@ -2,7 +2,7 @@
 /* cspell:disable goog */
 
 // ==UserScript==
-// @name         Google Docs Dark Mode (CURRENTLY SUCKS, GIANT BETA)
+// @name         Google Docs - Dark Mode (BROKEN)
 // @namespace    https://zachhardesty.com
 // @version      0.0.0
 // @description  best dark mode out there!

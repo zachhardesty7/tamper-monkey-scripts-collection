@@ -2,7 +2,7 @@
 /* cSpell: ignore cosk icloud */
 
 // ==UserScript==
-// @name         Apple iCloud Notes Dark Theme
+// @name         iCloud Notes - Dark Theme (BROKEN)
 // @namespace    https://zachhardesty.com
 // @version      2.0.0
 // @description  best dark mode out there!

@@ -1,7 +1,7 @@
 /* global onElementReady */
 
 // ==UserScript==
-// @name        Randall's Fix Cart Links
+// @name        Randall's - Add Links Inside Cart
 // @namespace   https://zachhardesty.com/
 // @description fixes lack of href tag on <a /> tag for products in cart
 // @include     https://shop.randalls.com/ecom/modern1/my-cart*

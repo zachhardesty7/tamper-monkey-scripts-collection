@@ -1,7 +1,7 @@
 /* eslint-env browser, jquery, greasemonkey */
 
 // ==UserScript==
-// @name        Amazon UI Cleanup
+// @name        Amazon - Clean UI
 // @namespace   https://zachhardesty.com/
 // @description removes annoying largely not useful elements from Amazon
 // @include     https://*amazon.com*
