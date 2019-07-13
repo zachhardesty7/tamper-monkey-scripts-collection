@@ -9,8 +9,6 @@
 // @match        https://www.binance.com/userCenter/balances*
 // @match        https://www.binance.com/userCenter/depositWithdraw*
 // @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
-// @grant        GM_getValue
-// @grant        GM_setValue
 // ==/UserScript==
 
 // TODO: refactor to eliminate unnecessary library - onElementReady
@@ -19,13 +17,11 @@ function convertBTCToUSD() {
   fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
     .then(resp => resp.json())
     .then((data) => {
-      GM_setValue('BTCUSD', data.BTC.USD)
       // if elem are loaded then add USD value below BTC val
-      onElementReady('.td.ng-scope', false, addBTCConversionRate)
+      onElementReady('.td.ng-scope', false, (e) => addBTCConversionRate(e, data.BTC.USD))
 
       return null
     })
-
     .catch((error) => {
       console.log(error)
     })
@@ -34,8 +30,7 @@ function convertBTCToUSD() {
 // runs on the addition of each ticker
 // adds rough dollar conversion using stored global data below BTC value
 // @args el node of most recently added ticker
-function addBTCConversionRate(el) {
-  const BTCUSD = GM_getValue('BTCUSD')
+function addBTCConversionRate(el, BTCUSD) {
   const BTCElement = el.firstElementChild.children[5]
 
   if (BTCElement.textContent !== 0) {
@@ -51,4 +46,4 @@ function addBTCConversionRate(el) {
   }
 }
 
-document.addEventListener('load', convertBTCToUSD)
+window.addEventListener('load', convertBTCToUSD)
