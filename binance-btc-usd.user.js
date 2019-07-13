@@ -11,9 +11,7 @@
 // @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
 
-// TODO: refactor to eliminate unnecessary library - onElementReady
-
-(function convertBTCToUSD() {
+function convertBTCToUSD() {
 	fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
 		.then(resp => resp.json())
 		.then((data) => {
@@ -25,7 +23,7 @@
 		.catch((error) => {
 			console.error(error)
 		})
-})()
+}
 
 /**
  * runs on the addition of each ticker and
@@ -49,3 +47,5 @@ function addBTCConversionRate(el, BTCUSD) {
 		BTCElement.append(USDValElem)
 	}
 }
+
+convertBTCToUSD()
