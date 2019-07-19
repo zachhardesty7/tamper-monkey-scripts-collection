@@ -7,207 +7,12 @@
 // @namespace   https://zachhardesty.com/
 // @description removes annoying largely not useful elements from Amazon
 // @include     https://*amazon.com*
-// @version     1.1.0
+// @version     1.2.0
 // @require     https://gist.githubusercontent.com/zachhardesty7/ea61364567ce66b94edb81f922efecef/raw/c23ba499828992d632266194384c72ff28dfad6e/onElementReady.js
 // ==/UserScript==
 
-/**
- * hide elements via a styleshee instead of
- * directly selecting elements and applying style via document.querySelectorAll
- *
- * `getEl`, `getElAll`, `on`, and `setAttr` are shared between the two modes
- * `setStyle`, `setStyleAll`, `hide`, and `hideAll` are defined individually
- *
- * `hideParentX` is only active when `USE_STYLESHEET` is false
- *
- */
-const USE_STYLESHEET = false
 let STYLES = ''
-
 window.addEventListener('load', hideElements)
-
-function attachStyles() {
-	const stylesheet = document.createElement('style')
-	const head = document.head || document.getElementsByTagName('head')[0]
-	stylesheet.id = 'hiding' // to edit later
-	stylesheet.type = 'text/css'
-	stylesheet.appendChild(document.createTextNode(STYLES))
-	head.appendChild(stylesheet)
-}
-
-/**
- * define functions (hiders) used to hide elements based on mode
- *
- * @returns {{ getEl: Function, getElAll: Function, on: Function, setAttr: Function, setStyle: Function, setStyleAll: Function, hide: Function, hideAll: Function, hideParentX: Function}} hiders
- */
-function defineHiders() {
-	/**
-  * retrieves node from selector or passes through el(s) or false otherwise,
-  * designed to allow repeatedly calling on return value without breaking
-  *
-  * @param {DOMTargetItem} target - selector or el
-  * @param {number} i - position of item to return if selector finds multiple matches
-  * @returns {Element | object | boolean} targeted DOM el or input object or false otherwise
-  */
-	const getEl = (target, i = 0) => (
-		typeof (target) === 'string'
-			? document.querySelectorAll(target) && document.querySelectorAll(target)[i]
-			: typeof (target) === 'object' && target
-	)
-
-	/**
-  * retrieves nodes from selector or passes through el(s) or false otherwise,
-  * designed to allow repeatedly calling on return value without breaking
-  *
-  * @param {DOMTargetItems} target - selector or els
-  * @returns {Element | object | boolean} targeted DOM el or input object or false otherwise
-  */
-	const getElAll = target => (
-		typeof (target) === 'string'
-			? Array.from(document.querySelectorAll(target))
-			: typeof (target) === 'object' && Array.from(target)
-	)
-
-	/**
-  * adds an event listener func to a given selector (if it exists)
-  *
-  * @param {DOMTargetItem} target - selector or els
-  * @param {Event} event - trigger to listen for
-  * @param {Function} func - executed after event trigger
-  * @returns {void}
-  */
-	const on = (target, event, func) => {
-		const el = getEl(target)
-		if (el && el.addEventListener) el.addEventListener(event, func)
-	}
-
-	/**
-  * sets property on a given selector (if it exists)
-  *
-  * @param {DOMTargetItem} target - selector or el
-  * @param {string} attr - trigger to listen for
-  * @param {string} val - desired property value
-  * @param {number} i - position of item to assign to if selector finds multiple matches
-  * @returns {void}
-  */
-	const setAttr = (target, attr, val, i = 0) => {
-		const el = getEl(target, i)
-		if (el) el[attr] = val
-	}
-
-	if (USE_STYLESHEET) {
-		const setStyleGlobal = (selector, styles, i = 0) => {
-			STYLES += `
-				${selector}:nth-child(${i + 1}) {
-					${styles}
-				}
-			`
-		}
-
-		const setStyleAllGlobal = (selector, styles) => {
-			STYLES += `
-				${selector} {
-					${styles}
-				}
-			`
-		}
-
-		const hideGlobal = (selector, i) => {
-			setStyleGlobal(selector, 'display: none !important;', i)
-		}
-
-		const hideAllGlobal = (selector) => {
-			setStyleAllGlobal(selector, 'display: none !important;')
-		}
-
-		return {
-			getEl,
-			getElAll,
-			on,
-			setAttr,
-			setStyle: setStyleGlobal,
-			setStyleAll: setStyleAllGlobal,
-			hide: hideGlobal,
-			hideAll: hideAllGlobal,
-			hideParentX: () => {},
-		}
-	}
-
-	/**
-  * sets style on a given selector (if it exists), extends setAttr
-  *
-  * @param {DOMTargetItem} target - selector or el
-  * @param {string} val - desired style property value
-  * @param {number} i - position of item to assign to if selector finds multiple matches
-  * @returns {void}
-  */
-	const setStyle = (target, val, i = 0) => {
-		setAttr(target, 'style', val, i)
-	}
-
-	/**
-  * sets style on all results of a given selector (if it exists), extends setAttr
-  *
-  * @param {DOMTargetItem} target - selector or els
-  * @param {string} val - desired style property value
-  * @returns {void}
-  */
-	const setStyleAll = (target, val) => {
-		getElAll(target).forEach(setStyle)
-	}
-
-	/**
-  * sets style to 'display: none' on a given selector (if it exists), extends setStyle
-  *
-  * @param {DOMTargetItem} target - selector or el
-  * @param {number} i - position of item to hide if selector finds multiple matches
-  * @returns {void}
-  */
-	const hide = (target, i = 0) => {
-		setStyle(target, 'display: none !important;', i)
-	}
-
-	/**
-  * sets style to 'display: none' on all results of a given selector (if they exist), extends hide
-  *
-  * @param {DOMTargetItem} target - selector or el
-  * @returns {void}
-  */
-	const hideAll = (target) => {
-		getElAll(target).forEach(hide)
-	}
-
-	/**
-  * sets style to 'display: none' on a given selector's `X`
-  * parent (if chain exists), extends setStyle
-  *
-  * @param {DOMTargetItem} target - selector or el
-  * @param {number} x - vertical depth of item from parent to hide
-  * @param {number} i - position of item to assign to if selector finds multiple matches
-  * @returns {void}
-  */
-	const hideParentX = (target, x = 0, i = 0) => {
-		let el = getEl(target, i)
-
-		for (let count = 0; count < x; count += 1) {
-			el = el && el.parentElement
-		}
-
-		hide(el)
-	}
-
-	return {
-		getEl,
-		getElAll,
-		on,
-		setAttr,
-		setStyle,
-		setStyleAll,
-		hide,
-		hideAll,
-		hideParentX,
-	}
-}
 
 /**
  * create functions to add null checking and prevent script errors
@@ -216,18 +21,6 @@ function defineHiders() {
  * @typedef {string | Element | null} DOMTargetItem
  */
 function hideElements() {
-	const {
-		getEl,
-		getElAll,
-		on,
-		setAttr,
-		setStyle,
-		setStyleAll,
-		hide,
-		hideAll,
-		hideParentX,
-	} = defineHiders()
-
 	const link = window.location.href
 
 	// product-based pages
@@ -365,7 +158,7 @@ function hideElements() {
 		// onElementReady('#recommendations', false, e => hide(e))
 		// setStyle('.a-section.deliveries', 'magin-bottom: 0px;')
 		// console.log('test')
-		hideAll('#recommendations') // all main sections
+		hideAllGlobal('#recommendations') // all main sections
 		// hideParentX('.a-section.deliveries > div.a-fixed-right-grid') // history related
 	}
 
@@ -428,5 +221,200 @@ function hideElements() {
 		setStyle('#navFooter .navFooterVerticalColumn.navAccessibility', 'display: table;')
 	})
 
-	if (USE_STYLESHEET) attachStyles()
+	if (STYLES) attachStyles()
+}
+
+/**********************
+ *  helper functions  *
+ **********************/
+
+/**
+ * read from global `STYLES` and append string to document head as CSS
+ *
+ * @returns {void}
+ */
+const attachStyles = () => {
+	const stylesheet = document.createElement('style')
+	const head = document.head || document.getElementsByTagName('head')[0]
+	stylesheet.id = 'hiding' // to edit later
+	stylesheet.type = 'text/css'
+	stylesheet.appendChild(document.createTextNode(STYLES))
+	head.appendChild(stylesheet)
+}
+
+/**
+ * retrieves node from selector or passes through el(s) or false otherwise,
+ * designed to allow repeatedly calling on return value without breaking
+ *
+ * @param {DOMTargetItem} target - selector or el
+ * @param {number} i - position of item to return if selector finds multiple matches
+ * @returns {Element | object | boolean} targeted DOM el or input object or false otherwise
+ */
+const getEl = (target, i = 0) => (
+	typeof (target) === 'string'
+		? document.querySelectorAll(target) && document.querySelectorAll(target)[i]
+		: typeof (target) === 'object' && target
+)
+
+/**
+ * retrieves nodes from selector or passes through el(s) or false otherwise,
+ * designed to allow repeatedly calling on return value without breaking
+ *
+ * @param {DOMTargetItems} target - selector or els
+ * @returns {Element | object | boolean} targeted DOM el or input object or false otherwise
+ */
+const getElAll = target => (
+	typeof (target) === 'string'
+		? Array.from(document.querySelectorAll(target))
+		: typeof (target) === 'object' && Array.from(target)
+)
+
+/**
+ * adds an event listener func to a given selector (if it exists)
+ *
+ * @param {DOMTargetItem} target - selector or els
+ * @param {Event} event - trigger to listen for
+ * @param {Function} func - executed after event trigger
+ * @returns {void}
+ */
+const on = (target, event, func) => {
+	const el = getEl(target)
+	if (el && el.addEventListener) el.addEventListener(event, func)
+}
+
+/**
+ * sets property on a given selector (if it exists)
+ *
+ * @param {DOMTargetItem} target - selector or el
+ * @param {string} attr - trigger to listen for
+ * @param {string} val - desired property value
+ * @param {number} i - position of item to assign to if selector finds multiple matches
+ * @returns {void}
+ */
+const setAttr = (target, attr, val, i = 0) => {
+	const el = getEl(target, i)
+	if (el) el[attr] = val
+}
+
+/**
+ * sets style on a given selector (if it exists), extends setAttr
+ *
+ * @param {DOMTargetItem} target - selector or el
+ * @param {string} val - desired style property value
+ * @param {number} i - position of item to assign to if selector finds multiple matches
+ * @returns {void}
+ */
+const setStyle = (target, val, i = 0) => {
+	setAttr(target, 'style', val, i)
+}
+
+/**
+ * sets style on all results of a given selector (if it exists), extends setAttr
+ *
+ * @param {DOMTargetItem} target - selector or els
+ * @param {string} val - desired style property value
+ * @returns {void}
+ */
+const setStyleAll = (target, val) => {
+	getElAll(target).forEach(setStyle)
+}
+
+/**
+ * sets style to 'display: none' on a given selector (if it exists), extends setStyle
+ *
+ * @param {DOMTargetItem} target - selector or el
+ * @param {number} i - position of item to hide if selector finds multiple matches
+ * @returns {void}
+ */
+const hide = (target, i = 0) => {
+	setStyle(target, 'display: none !important;', i)
+}
+
+/**
+ * sets style to 'display: none' on all results of a given selector (if they exist), extends hide
+ *
+ * @param {DOMTargetItem} target - selector or el
+ * @returns {void}
+ */
+const hideAll = (target) => {
+	getElAll(target).forEach(hide)
+}
+
+/**
+ * sets style to 'display: none' on a given selector's `X`
+ * parent (if chain exists), extends setStyle
+ *
+ * @param {DOMTargetItem} target - selector or el
+ * @param {number} x - vertical depth of item from parent to hide
+ * @param {number} i - position of item to assign to if selector finds multiple matches
+ * @returns {void}
+ */
+const hideParentX = (target, x = 0, i = 0) => {
+	let el = getEl(target, i)
+
+	for (let count = 0; count < x; count += 1) {
+		el = el && el.parentElement
+	}
+
+	hide(el)
+}
+
+/**
+ * sets style on a given selector via a StyleSheet,
+ * designed to allow `:nth-child(n)`
+ *
+ * **NOTE**: DO NOT USE
+ *
+ * @private
+ * @param {DOMTargetItem} target - selector or el
+ * @param {string} styles - desired style property value
+ * @param {number} i - nth-child item to hide
+ * @returns {void}
+ */
+const setStyleGlobal = (target, styles, i = 0) => {
+	STYLES += `
+		${target}:nth-child(${i + 1}) {
+			${styles}
+		}
+	`
+}
+
+/**
+ * sets style on a given selector via a StyleSheet
+ *
+ * @param {DOMTargetItem} target - selector or el
+ * @param {string} styles - desired style property value
+ * @returns {void}
+ */
+const setStyleAllGlobal = (target, styles) => {
+	STYLES += `
+		${target} {
+			${styles}
+		}
+	`
+}
+
+/**
+ * sets style to `display: none !important;` on a given selector via a StyleSheet,
+ * designed to allow `:nth-child(n)`
+ *
+ * **NOTE**: DO NOT USE
+ *
+ * @private
+ * @param {DOMTargetItem} target - selector or el
+ * @param {number} i - nth-child item to hide
+ * @returns {void}
+ */
+const hideGlobal = (target, i) => {
+	setStyleGlobal(target, 'display: none !important;', i)
+}
+
+/**
+ * sets style to `display: none !important;` on a given selector via a StyleSheet
+ *
+ * @param {DOMTargetItem} target - selector or el
+ * @returns {void}
+ */
+const hideAllGlobal = (target) => {
+	setStyleAllGlobal(target, 'display: none !important;')
 }
