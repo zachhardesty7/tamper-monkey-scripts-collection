@@ -6,7 +6,7 @@
 // @namespace   https://zachhardesty.com/
 // @description removes annoying largely not useful elements from Amazon
 // @include     https://*amazon.com*
-// @version     1.0.1
+// @version     1.0.2
 // ==/UserScript==
 
 /**
@@ -82,6 +82,17 @@
 	}
 
 	/**
+  * sets style on all results of a given selector (if it exists), extends setAttr
+  *
+  * @param {DOMTargetItem} target - selector or els
+  * @param {string} val - desired style property value
+  * @returns {void}
+  */
+	const setStyleAll = (target, val) => {
+		getElAll(target).forEach(setStyle)
+	}
+
+	/**
   * sets style to 'display: none' on a given selector (if it exists), extends setStyle
   *
   * @param {DOMTargetItem} target - selector or el
@@ -89,7 +100,7 @@
   * @returns {void}
   */
 	const hide = (target, i = 0) => {
-		setStyle(target, 'display: none', i)
+		setStyle(target, 'display: none !important;', i)
 	}
 
 	/**
@@ -176,9 +187,7 @@
 		hide('#productAlert_feature_div') // amazon hub
 
 		// clean up empty section dividers
-		getElAll('.bucket').forEach((divider) => {
-			setStyle(divider, 'display: block')
-		})
+		setStyleAll('.bucket', 'display: block;')
 		hideAll('.bucketDivider')
 		hide('#promoGrid')
 		hide('#messages')
@@ -225,8 +234,8 @@
 		hideParentX('#fiona-publisher-signup-link', 2)
 		hideParentX('#hero-quick-promo', 1)
 		hide('#extraProductInfoTxtBookFeatureGroup')
-		setStyle('#aplus', 'padding: 15px 0; border-top: lightgrey 1px solid')
-		setStyle('#reviewsMedley', 'margin-bottom: 0 !important')
+		setStyle('#aplus', 'padding: 15px 0; border-top: lightgrey 1px solid;')
+		setStyle('#reviewsMedley', 'margin-bottom: 0 !important;')
 		hide('#superleafProductAlert_feature_div')
 		hide('#dpx-legal_feature_div')
 		hide('#cm_cr_skyfall_medley.cr-skyfall-feedback-section')
@@ -238,31 +247,26 @@
 		hide('#dpx-smarthome-hub_feature_div') // add alexa for voice control
 
 		// remove unnatural black background of title bar on some pages (video game consoles)
-		setStyle('#ppd-top', 'background: none')
-		setStyle('#titleBar.superleaf', 'background: none')
-		setStyle('.superleafParent #wayfinding-breadcrumbs_container', 'background: none')
+		setStyle('#ppd-top', 'background: none;')
+		setStyle('#titleBar.superleaf', 'background: none;')
+		setStyle('.superleafParent #wayfinding-breadcrumbs_container', 'background: none;')
 
 		// fix colors
-		getElAll('.superleafParent #wayfinding-breadcrumbs_feature_div .a-color-tertiary').forEach((breadcrumb) => {
-			setStyle(breadcrumb, 'color: #111 !important')
-		})
-		setStyle('a#breadcrumb-back-link.a-link-normal.a-color-tertiary', 'color: #111 !important')
-		setStyle('#superLeafTitleFeatureGroup #titleSection #title', 'color: black')
-		setStyle('#titleBar.superleaf .a-color-secondary', 'color: #555 !important')
-		setStyle('#titleBar-left', 'color: black')
-		setStyle('#superLeafGameReviews_feature_div .a-icon-popover', 'filter: none')
-		getElAll('#titleBar a:link, #titleBar.superleaf .a-link-normal').forEach((item) => {
-			setStyle(item, 'color: #0066c0 !important')
-		})
-		setStyle('.superleaf .ac-for-text', 'color: #888')
-		setStyle('#superleafActionPanelWrapper', 'box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 4px -1px')
+		setStyleAll('.superleafParent #wayfinding-breadcrumbs_feature_div .a-color-tertiary', 'color: #111 !important;')
+		setStyle('a#breadcrumb-back-link.a-link-normal.a-color-tertiary', 'color: #111 !important;')
+		setStyle('#superLeafTitleFeatureGroup #titleSection #title', 'color: black;')
+		setStyle('#titleBar.superleaf .a-color-secondary', 'color: #555 !important;')
+		setStyle('#titleBar-left', 'color: black;')
+		setStyle('#superLeafGameReviews_feature_div .a-icon-popover', 'filter: none;')
+		setStyleAll('#titleBar a:link, #titleBar.superleaf .a-link-normal', 'color: #0066c0 !important;')
+		setStyle('.superleaf .ac-for-text', 'color: #888;')
+		setStyle('#superleafActionPanelWrapper', 'box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 4px -1px;')
+	}
 	}
 
 	// search page
 	if (link.match(/https*:\/\/.*?amazon\.com\/s\/.*/g)) {
-		Array.from(getElAll('.AdHolder')).forEach((ad) => {
-			hide(ad) // sponsored listings
-		})
+		hideAll('.AdHolder')
 		hide('#centerBelowExtra') // search feedback
 	}
 
@@ -273,7 +277,7 @@
 		hide('#loaded-items')
 
 		// increase spacing of filter icon
-		setStyle('#filter-and-sort span', 'padding-right: 5px')
+		setStyle('#filter-and-sort span', 'padding-right: 5px;')
 	}
 
 	// ideas page
@@ -291,15 +295,15 @@
 	hide('#raw-sitewide-rhf')
 
 	// minimize size and hide useless giant footer section
-	setStyle('#navFooter', 'margin-top: 0px')
+	setStyle('#navFooter', 'margin-top: 0px;')
 	hide('.navFooterLine.navFooterLinkLine.navFooterPadItemLine')
 	hide('.navFooterLine.navFooterLinkLine.navFooterDescLine')
-	setStyle('#navFooter.navLeftFooter .navFooterCopyright', 'padding-bottom: 10px !important')
+	setStyle('#navFooter.navLeftFooter .navFooterCopyright', 'padding-bottom: 10px !important;')
 
 	// hide generally useless last remaining part of footer section
 	hide('#navFooter .navFooterVerticalColumn.navAccessibility')
-	setStyle('.nav-footer-line', 'margin-top: 0px')
-	setStyle('#navBackToTop div', 'margin-bottom: 0px')
+	setStyle('.nav-footer-line', 'margin-top: 0px;')
+	setStyle('#navBackToTop div', 'margin-bottom: 0px;')
 
 	// add button to allow footer display restore
 	setAttr('#navFooter .nav-footer-line', 'innerHTML', `
@@ -314,8 +318,8 @@
 	// activate button to restore footer display
 	on(getEl('#view-footer'), 'click', () => {
 		hide('#view-footer')
-		setStyle('.nav-footer-line', 'margin-top: 30px')
-		setStyle('#navBackToTop div', 'margin-bottom: 30px')
-		setStyle('#navFooter .navFooterVerticalColumn.navAccessibility', 'display: table')
+		setStyle('.nav-footer-line', 'margin-top: 30px;')
+		setStyle('#navBackToTop div', 'margin-bottom: 30px;')
+		setStyle('#navFooter .navFooterVerticalColumn.navAccessibility', 'display: table;')
 	})
 })()
