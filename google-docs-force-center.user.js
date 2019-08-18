@@ -13,12 +13,13 @@
 
 window.addEventListener('load', centerDocs, false)
 
-function centerDocs() {
-	document.querySelector('.kix-appview-editor').style = 'overflow-x: hidden'
+const $$ = (selector = '') => document.querySelector(selector)
 
+function centerDocs() {
 	setInterval(() => {
-		document.querySelector('.kix-appview-editor').scrollLeft =
-      (document.querySelector('.kix-zoomdocumentplugin-outer').scrollWidth -
-      document.querySelector('.kix-appview-editor').clientWidth) / 2
-	}, 250)
+		const editorWidth = $$('.kix-appview-editor').scrollWidth
+		const docWidth = $$('.kix-zoomdocumentplugin-outer').scrollWidth
+		$$('.kix-zoomdocumentplugin-outer').style.left =
+      `${(editorWidth / 2) - (docWidth / 2)}px`
+	})
 }
