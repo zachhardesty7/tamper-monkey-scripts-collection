@@ -1,8 +1,15 @@
 {
   "name": "tamper-monkey-scripts-collection",
   "description": "Tamper Monkey Scripts Collection",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "author": "Zach Hardesty <hello@zachhardesty.com>",
+  "eslintConfig": {
+    "extends": "hardesty",
+    "env": {
+      "browser": true,
+      "greasemonkey": true
+    }
+  },
   "devDependencies": {
     "babel-eslint": "^10.0.2",
     "eslint": "^6.0.1",
