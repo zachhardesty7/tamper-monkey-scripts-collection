@@ -14,7 +14,7 @@
 window.addEventListener('load', centerDocs, false)
 
 function centerDocs() {
-	document.querySelector('.kix-appview-editor').style = 'overflow-x: hidden'
+	document.querySelector('.kix-appview-editor').setAttribute('style', 'overflow-x: hidden')
 
 	setInterval(() => {
 		document.querySelector('.kix-appview-editor').scrollLeft =

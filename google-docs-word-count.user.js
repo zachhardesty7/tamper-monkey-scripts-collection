@@ -1,6 +1,5 @@
 /* eslint-env browser, jquery, greasemonkey */
 /* eslint-disable max-len */
-/* global googleDocsUtil */
 
 // ==UserScript==
 // @name         Google Docs - Word Count (With Options)
@@ -32,7 +31,7 @@
 
 	const display = document.createElement('div')
 	display.id = 'zh-display'
-	display.style = `
+	display.setAttribute('style', `
     position: fixed;
     width: 100%;
     left: 0px;
@@ -46,14 +45,14 @@
     padding-top: 5px;
     padding-left: 5px;
     border-top: 1px solid #d9d9d9;
-  `
+  `)
 	document.querySelector('body').append(display)
 
 	/**
   * update the word count
   */
 	async function setCount() {
-		const doc = googleDocsUtil.getGoogleDocument()
+		const doc = window.googleDocsUtil.getGoogleDocument()
 		let selected = doc.selectedText
 
 		const pages = document.querySelector('.kix-paginateddocumentplugin').children[1].children

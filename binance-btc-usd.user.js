@@ -1,4 +1,3 @@
-/* global onElementReady */
 
 // ==UserScript==
 // @name         Binance - Add BTC to USD Conversion
@@ -16,7 +15,7 @@ function convertBTCToUSD() {
 		.then(resp => resp.json())
 		.then((data) => {
 			// if el are loaded then add USD value below BTC val
-			onElementReady('.td.ng-scope', false, e => addBTCConversionRate(e, data.BTC.USD))
+			window.onElementReady('.td.ng-scope', false, e => addBTCConversionRate(e, data.BTC.USD))
 
 			return null
 		})
@@ -35,15 +34,15 @@ function convertBTCToUSD() {
 function addBTCConversionRate(el, BTCUSD) {
 	const BTCElement = el.firstElementChild.children[5]
 
-	if (BTCElement.textContent !== 0) {
+	if (BTCElement.textContent !== '0') {
 		// convert to pretty USD format
-		const USDVal = (BTCElement.textContent * BTCUSD)
+		const USDVal = (parseFloat(BTCElement.textContent) * BTCUSD)
 			.toFixed(2)
 			.replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
 		const USDValElem = document.createElement('p')
 
 		USDValElem.textContent = `≈ ${USDVal} USD`
-		USDValElem.style = 'color: #a0a0a0'
+		USDValElem.setAttribute('style', 'color: #a0a0a0')
 		BTCElement.append(USDValElem)
 	}
 }

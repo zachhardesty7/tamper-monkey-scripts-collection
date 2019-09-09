@@ -1,4 +1,3 @@
-/* global onElementReady */
 
 // ==UserScript==
 // @name         Google Search - Hide "People also search for"
@@ -11,7 +10,7 @@
 // ==/UserScript==
 
 // only operate once necessary el has loaded
-onElementReady('.exp-outline', true, (el) => {
+window.onElementReady('.exp-outline', true, (el) => {
 	// remove text
 	el.parentElement.querySelector('div').querySelector(':nth-child(3)').remove()
 	// remove border

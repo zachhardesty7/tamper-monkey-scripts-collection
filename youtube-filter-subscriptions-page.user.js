@@ -1,4 +1,3 @@
-/* global onElementReady */
 /* cspell:disable pixelmon */
 
 // ==UserScript==
@@ -30,7 +29,7 @@ const keywords = [
 ]
 
 // only operate once necessary el has loaded
-onElementReady('#dismissable.style-scope.ytd-grid-video-renderer', false, (el) => {
+window.onElementReady('#dismissable.style-scope.ytd-grid-video-renderer', false, (el) => {
 	// remove video
 	keywords.forEach((keyword) => {
 		if (el.querySelector('#details').querySelector('#meta').firstElementChild.textContent.toLowerCase().includes(keyword)) {

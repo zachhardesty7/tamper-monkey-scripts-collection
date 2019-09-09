@@ -1,4 +1,3 @@
-/* global onElementReady */
 
 // ==UserScript==
 // @name        Etsy - Remove Ads
@@ -10,7 +9,7 @@
 // @require     https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
 
-onElementReady('.ad-indicator', false, (el) => {
+window.onElementReady('.ad-indicator', false, (el) => {
 	el
 		.parentElement
 		.parentElement

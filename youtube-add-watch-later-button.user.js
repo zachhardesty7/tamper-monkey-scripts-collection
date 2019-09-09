@@ -72,13 +72,13 @@ function addButton(buttons) {
 	text.textContent = 'later'
 
 	const window = buttons.ownerDocument.defaultView // escape tampermonkey scope
-	link.addEventListener('click', () => { post(window) }) // meat of the script
+	link.addEventListener('click', () => post(window)) // meat of the script
 }
 
 /**
  * initiate the data post
  *
- * @param {Window} window - global object
+ * @param {any} window - escape iFrame
  */
 async function post(window) {
 	// the 3 unique data points required, stored in strange places

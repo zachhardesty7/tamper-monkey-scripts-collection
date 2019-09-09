@@ -1,5 +1,3 @@
-/* global onElementReady */
-
 // ==UserScript==
 // @name        Randall's - Add Links Inside Cart
 // @namespace   https://zachhardesty.com/
@@ -12,7 +10,7 @@
 // IT'S SUCH BAD UX TO NOT INCLUDE AN
 // HREF ON ALL <a /> TAGS
 
-onElementReady('.cartdesc', false, (el) => {
+window.onElementReady('.cartdesc', false, (el) => {
 	const link = el.querySelector('a')
 	link.href = `http://shop.randalls.com${
 		link.onclick.toString().match(/\/product-details\.\d+\.html/gm)

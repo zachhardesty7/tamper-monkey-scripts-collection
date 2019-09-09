@@ -1,5 +1,3 @@
-/* global onElementReady */
-
 // ==UserScript==
 // @name        Mint - Remove Ads
 // @namespace   https://zachhardesty.com/
@@ -51,7 +49,7 @@ const main = () => {
 
 /* dynamic hiding */
 // hide account status bar (if robinhood text included)
-onElementReady('.AccountStatusBarItemView .status.error', false,
+window.onElementReady('.AccountStatusBarItemView .status.error', false,
 	el => el.textContent.includes('Robinhood') &&
 		document.querySelector('.AccountStatusBarView').remove())
 

@@ -1,6 +1,5 @@
 /* eslint-env browser, jquery, greasemonkey */
 /* eslint-disable max-len */
-/* global Chart onElementReady */
 
 // ==UserScript==
 // @name         Binance - Portfolio Distribution Pie Chart
@@ -72,18 +71,18 @@ function getMaxInObject(obj) {
 }
 
 // begin program once data has loaded
-onElementReady('span.btn.btn-deposit.ng-binding.ng-scope', true, () => {
+window.onElementReady('span.btn.btn-deposit.ng-binding.ng-scope', true, () => {
 	// build canvas el
 	const page = document.querySelector('.chargeWithdraw-title')
 	const canvas = document.createElement('canvas')
 	canvas.id = 'zh-chart'
 	canvas.height = 250
 	canvas.width = 250
-	canvas.style = 'height: 250px; width: 250px; display: block; float: right'
+	canvas.setAttribute('style', 'height: 250px; width: 250px; display: block; float: right')
 
 	// insert canvas and capture el
 	page.appendChild(canvas)
-	const ctx = document.querySelector('#zh-chart').getContext('2d')
+	const ctx = /** @type {HTMLCanvasElement} */ (document.querySelector('#zh-chart')).getContext('2d')
 
 	// scrape value of portfolio data in BTC
 	const portfolioRawData = document.querySelectorAll('.td.ng-scope')
@@ -127,7 +126,7 @@ onElementReady('span.btn.btn-deposit.ng-binding.ng-scope', true, () => {
 			}
 
 			// generate pie chart
-			window.myPie = new Chart(ctx, chartConfig)
+			window.myPie = new /** @type {any} */(window).Chart(ctx, chartConfig)
 
 			return null
 		})

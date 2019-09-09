@@ -1,5 +1,3 @@
-/* global P onElementReady */
-
 // ==UserScript==
 // @name        Piazza - Archive with Delete Key
 // @namespace   https://zachhardesty.com/
@@ -11,11 +9,11 @@
 
 // FIXME: can sometimes archive the wrong post if other keys are pressed before delete
 
-onElementReady('.feed_item', false, (el) => {
+window.onElementReady('.feed_item', false, (el) => {
 	// curried function to call on delete press event listener
 	// calls function as if archive dropdown menu item was pressed
 	const archiveItem = archive => (e) => {
-		if (e.key === 'Delete') P.feed.feedItemDropdownMenuCallback(archive)
+		if (e.key === 'Delete') window.P.feed.feedItemDropdownMenuCallback(archive)
 	}
 
 	// set all initial event listeners

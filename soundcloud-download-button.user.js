@@ -1,4 +1,3 @@
-/* global onElementReady */
 /* cspell:disable soundcloudmp */
 
 // ==UserScript==
@@ -29,7 +28,7 @@ function addButton(el) {
 		el.querySelector('.soundActions .sc-button-group').append(button)
 		// add click listener to GM store the url of the song and open anything2mp3
 		el.querySelector('.mp3-button').addEventListener('click', (e) => {
-			GM_setValue('link', el.querySelector('.soundTitle__title').href)
+			window.GM_setValue('link', el.querySelector('.soundTitle__title').href)
 			window.open('https://soundcloudmp3.org/', '_blank')
 		})
 		// else if on individual song page (and not playlist), append SC styled button
@@ -39,7 +38,7 @@ function addButton(el) {
 		toolbar.append(button)
 		// add click listener to GM store the url of the song and open anything2mp3
 		document.querySelector('.mp3-button').addEventListener('click', (e) => {
-			GM_setValue('link', link)
+			window.GM_setValue('link', link)
 			window.open('https://soundcloudmp3.org/', '_blank')
 		})
 	}
@@ -53,12 +52,12 @@ function addButton(el) {
         window.location.href.includes('soundcloud')) {
 		// library that detects ajax changes
 		// requires jQuery - boo
-		onElementReady('.l-listen-wrapper', false, addButton)
-		onElementReady('.lazyLoadingList__list > .soundList__item', false, addButton)
+		window.onElementReady('.l-listen-wrapper', false, addButton)
+		window.onElementReady('.lazyLoadingList__list > .soundList__item', false, addButton)
 	} else if (window.location.href.includes('soundcloudmp3') &&
         document.referrer.includes('soundcloud') &&
         !window.location.href.includes('converter')) {
-		const media = GM_getValue('link')
+		const media = window.GM_getValue('link')
 		document.querySelector('.form-control').value = media
 		document.querySelector('#conversionForm div span button').click()
 	} else if (window.location.href.includes('converter')) {

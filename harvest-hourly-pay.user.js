@@ -23,7 +23,7 @@
 		 */
 		function timeToDecimal(t) {
 			const splitTime = t.split(':')
-			return parseFloat(parseInt(splitTime[0], 10) + parseInt(splitTime[1], 10) / 60)
+			return parseFloat(splitTime[0]) + parseFloat(splitTime[1]) / 60
 		}
 
 		const hoursPerDay = document.querySelectorAll('.day-view-week-nav li a span')

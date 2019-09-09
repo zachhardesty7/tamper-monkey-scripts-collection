@@ -1,5 +1,4 @@
 /* eslint-env browser, jquery, greasemonkey */
-/* global onElementReady */
 
 // ==UserScript==
 // @name        Amazon - Clean UI
@@ -156,7 +155,7 @@ function hideElements() {
 	// subscribe & save page
 	if (link.match(/https*:\/\/.*?amazon\.com\/gp\/subscribe-and-save\/.*/g)) {
 		// onElementReady('#recommendations', false, e => hide(e))
-		// setStyle('.a-section.deliveries', 'magin-bottom: 0px;')
+		// setStyle('.a-section.deliveries', 'margin-bottom: 0px;')
 		// console.log('test')
 		hideAllGlobal('#recommendations') // all main sections
 		// hideParentX('.a-section.deliveries > div.a-fixed-right-grid') // history related
@@ -166,12 +165,12 @@ function hideElements() {
 	if (link.match(/https*:\/\/.*?amazon\.com\/s.*/g)) {
 		hideAll('.AdHolder')
 		hide('#centerBelowExtra') // search feedback
-		hideAll('div[data-component-type="sp-sponsored-result"]') // sponsered res
+		hideAll('div[data-component-type="sp-sponsored-result"]') // sponsored res
 		hide('#rhf[aria-label="Your recently viewed items and featured recommendations"]') // footer full of junk
 		hideAllParentX('.a-section #pdagEncapsulated .slot__ad', 2)
 		hideAllParentX('.s-result-item .sg-col-inner .celwidget div .s-shopping-adviser', 4) // editorial recs
 		hideAllParentX('.s-result-item .sg-col-inner div .s-shopping-adviser', 3) // similar connectors
-		hideAllParentX('.s-result-item .sg-col-inner div .sg-row .sg-col .sg-col-inner .a-section .s-visual-card-navigation-carousel-title-wrapper div[aria-label*="Search for"]', 8) // seach in a category
+		hideAllParentX('.s-result-item .sg-col-inner div .sg-row .sg-col .sg-col-inner .a-section .s-visual-card-navigation-carousel-title-wrapper div[aria-label*="Search for"]', 8) // search in a category
 		hideAllParentX('span[data-component-type="s-bottom-slot"] .a-section span[data-component-type="s-searchgrid-carousel"]', 2) // inspired by your views
 		hideAllParentX('span[data-component-type="s-brand-footer-slot"] .a-section #thirdPartySponsorLinkOuter', 2) // related brands
 		hideAll('span[data-component-type="s-feedback-slot"]') // feedback
@@ -261,8 +260,8 @@ const attachStyles = () => {
  */
 const getEl = (target, i = 0) => (
 	typeof (target) === 'string'
-		? document.querySelectorAll(target) && document.querySelectorAll(target)[i]
-		: typeof (target) === 'object' && target
+		? document.querySelectorAll(target)[i]
+		: target
 )
 
 /**
@@ -270,19 +269,19 @@ const getEl = (target, i = 0) => (
  * designed to allow repeatedly calling on return value without breaking
  *
  * @param {DOMTargetItems} target - selector or els
- * @returns {Element | object | boolean} targeted DOM el or input object or false otherwise
+ * @returns {Element[]} targeted DOM el or input object or false otherwise
  */
-const getElAll = target => (
-	typeof (target) === 'string'
-		? Array.from(document.querySelectorAll(target))
-		: typeof (target) === 'object' && Array.from(target)
-)
+const getElAll = (target) => {
+	if (typeof target === 'string') return Array.from(document.querySelectorAll(target))
+	if (target instanceof Element) return [target]
+	return Array.from(target)
+}
 
 /**
  * adds an event listener func to a given selector (if it exists)
  *
  * @param {DOMTargetItem} target - selector or els
- * @param {Event} event - trigger to listen for
+ * @param {string} event - trigger to listen for
  * @param {Function} func - executed after event trigger
  * @returns {void}
  */
@@ -325,7 +324,7 @@ const setStyle = (target, val, i = 0) => {
  * @returns {void}
  */
 const setStyleAll = (target, val) => {
-	getElAll(target).forEach(setStyle)
+	getElAll(target).forEach(el => setStyle(el, val))
 }
 
 /**
@@ -365,6 +364,7 @@ const hideParentX = (target, x = 0, i = 0) => {
 		el = el && el.parentElement
 	}
 
+	el && console.log(`search target: `, target, `found target: `, el)
 	hide(el)
 }
 

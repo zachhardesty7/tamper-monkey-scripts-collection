@@ -1,5 +1,3 @@
-/* global onElementReady */
-
 // ==UserScript==
 // @name        Reddit - Improve Saved Comments
 // @namespace   https://zachhardesty.com/
@@ -60,4 +58,4 @@ function improveComments(buttons) {
 
 // gross, but Reddit uses styled-components / emotion and has almost no
 // constant selectors that don't change between renders
-onElementReady('div.Comment > div > div > div:last-child > div > div:nth-child(2) > div:nth-child(2) > div:last-child', false, improveComments)
+window.onElementReady('div.Comment > div > div > div:last-child > div > div:nth-child(2) > div:nth-child(2) > div:last-child', false, improveComments)
