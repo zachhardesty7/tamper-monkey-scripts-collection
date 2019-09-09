@@ -6,7 +6,7 @@
 // @namespace   https://zachhardesty.com/
 // @description removes annoying largely not useful elements from Amazon
 // @include     https://*amazon.com*
-// @version     1.3.0
+// @version     1.3.1
 // @require     https://gist.githubusercontent.com/zachhardesty7/ea61364567ce66b94edb81f922efecef/raw/c23ba499828992d632266194384c72ff28dfad6e/onElementReady.js
 // ==/UserScript==
 
@@ -162,9 +162,18 @@ function hideElements() {
 	}
 
 	// search page
-	if (link.match(/https*:\/\/.*?amazon\.com\/s\/.*/g)) {
+	if (link.match(/https*:\/\/.*?amazon\.com\/s.*/g)) {
 		hideAll('.AdHolder')
 		hide('#centerBelowExtra') // search feedback
+		hideAll('div[data-component-type="sp-sponsored-result"]') // sponsered res
+		hide('#rhf[aria-label="Your recently viewed items and featured recommendations"]') // footer full of junk
+		hideAllParentX('.a-section #pdagEncapsulated .slot__ad', 2)
+		hideAllParentX('.s-result-item .sg-col-inner .celwidget div .s-shopping-adviser', 4) // editorial recs
+		hideAllParentX('.s-result-item .sg-col-inner div .s-shopping-adviser', 3) // similar connectors
+		hideAllParentX('.s-result-item .sg-col-inner div .sg-row .sg-col .sg-col-inner .a-section .s-visual-card-navigation-carousel-title-wrapper div[aria-label*="Search for"]', 8) // seach in a category
+		hideAllParentX('span[data-component-type="s-bottom-slot"] .a-section span[data-component-type="s-searchgrid-carousel"]', 2) // inspired by your views
+		hideAllParentX('span[data-component-type="s-brand-footer-slot"] .a-section #thirdPartySponsorLinkOuter', 2) // related brands
+		hideAll('span[data-component-type="s-feedback-slot"]') // feedback
 	}
 
 	// wishlist page
