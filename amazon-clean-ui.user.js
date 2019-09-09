@@ -6,7 +6,7 @@
 // @namespace   https://zachhardesty.com/
 // @description removes annoying largely not useful elements from Amazon
 // @include     https://*amazon.com*
-// @version     1.3.1
+// @version     1.3.2
 // @require     https://gist.githubusercontent.com/zachhardesty7/ea61364567ce66b94edb81f922efecef/raw/c23ba499828992d632266194384c72ff28dfad6e/onElementReady.js
 // ==/UserScript==
 
@@ -82,6 +82,7 @@ function hideElements() {
 		hide('#messages')
 
 		// hide related products and recommendations
+		hide('#sp_detail_thematic')
 		hide('#skyCitySoftMerge_feature_div')
 		hide('#recommendations_feature_div')
 		hideAll('.a-section.similarities-widget')
@@ -113,7 +114,7 @@ function hideElements() {
 		// hide other junk sections
 		hide('#sp_detail')
 		hide('#quickPromoBucketContent')
-		hideParentX('.a-section.askDetailPageSearchWidgetSection', 1)
+		hideParentX('.celwidget .a-section.askDetailPageSearchWidgetSection', 1)
 		hide('#vse-related-videos')
 		hide('.a-section.vse-empty-view-container.bucket')
 		hide('#importantInformation')
@@ -121,7 +122,7 @@ function hideElements() {
 		hide('#view_to_purchase-sims-feature')
 		hide('#store-disclaimer_feature_div')
 		hideParentX('#fiona-publisher-signup-link', 2)
-		hideParentX('#hero-quick-promo', 1)
+		hideParentX('#hero-quick-promo-grid_feature_div #hero-quick-promo', 1)
 		hide('#extraProductInfoTxtBookFeatureGroup')
 		setStyle('#aplus', 'padding: 15px 0; border-top: lightgrey 1px solid;')
 		setStyle('#reviewsMedley', 'margin-bottom: 0 !important;')
