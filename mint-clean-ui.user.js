@@ -40,7 +40,7 @@ const main = () => {
 		.promotions-personalized-offers-ui {
 			display: none !important;
 		}
-`
+	`
 
 	const stylesheet = document.createElement('style')
 	const head = document.head || document.getElementsByTagName('head')[0]
