@@ -1,5 +1,4 @@
 /* eslint-env browser, jquery, greasemonkey */
-/* cspell:disable alexa */
 /* global onElementReady */
 
 // ==UserScript==
@@ -7,7 +6,7 @@
 // @namespace   https://zachhardesty.com/
 // @description removes annoying largely not useful elements from Amazon
 // @include     https://*amazon.com*
-// @version     1.2.0
+// @version     1.3.0
 // @require     https://gist.githubusercontent.com/zachhardesty7/ea61364567ce66b94edb81f922efecef/raw/c23ba499828992d632266194384c72ff28dfad6e/onElementReady.js
 // ==/UserScript==
 
@@ -345,7 +344,7 @@ const hideAll = (target) => {
  * parent (if chain exists), extends setStyle
  *
  * @param {DOMTargetItem} target - selector or el
- * @param {number} x - vertical depth of item from parent to hide
+ * @param {number} x - vertical upward depth of item from child to hide
  * @param {number} i - position of item to assign to if selector finds multiple matches
  * @returns {void}
  */
@@ -358,6 +357,20 @@ const hideParentX = (target, x = 0, i = 0) => {
 
 	hide(el)
 }
+
+/**
+ * sets style to 'display: none' on each given selector's `X`
+ * parent (if chain exists), extends setStyle
+ *
+ * @param {DOMTargetItem} target - selector or el
+ * @param {number} x - vertical upward depth of item from child to hide
+ * @returns {void}
+ */
+const hideAllParentX = (target, x = 0) => {
+	getElAll(target).forEach(el => hideParentX(el, x))
+}
+
+/** FUTURE USE FUNCTIONS */
 
 /**
  * sets style on a given selector via a StyleSheet,
