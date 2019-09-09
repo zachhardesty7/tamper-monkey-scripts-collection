@@ -1,9 +1,9 @@
 
 // ==UserScript==
 // @name         Binance - Add BTC to USD Conversion
-// @namespace    https://zachhardesty.com
+// @namespace    https://zachhardesty.coms
 // @version      1.2.0
-// @description  adds a quick and rough conversion to get value of coin in USD on "balance" page and on "deposits & withdrawals" page
+// @description  rough conversion to get USD val of coin on "balance" & "deposits/withdrawals" page
 // @author       Zach Hardesty
 // @match        https://www.binance.com/userCenter/balances*
 // @match        https://www.binance.com/userCenter/depositWithdraw*

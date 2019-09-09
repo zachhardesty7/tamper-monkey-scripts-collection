@@ -3,7 +3,7 @@
 // @name         Google Search - Hide "People also search for"
 // @namespace    https://zachhardesty.com
 // @version      1.0.0
-// @description  hide the annoying popup below the search result you just clicked on when you return to the search page
+// @description  hide annoying popup below most recently visited the search result
 // @author       Zach Hardesty
 // @match        https://www.google.com/search*
 // @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
