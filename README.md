@@ -16,7 +16,8 @@ Tampermonkey browser extension (download links)
 
 ### Installation
 
-Download and import .zip into Tampermonkey under the utilities tab.
+Visit the [OpenUser website](https://openuserjs.org/users/zachhardesty7/scripts) to download
+and install any scripts! Scripts are automatically kept up to date with this repository.
 
 ### Execution
 
