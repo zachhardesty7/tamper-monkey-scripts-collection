@@ -10,12 +10,20 @@
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js
 // @require     https://gist.github.com/raw/2625891/waitForKeyElements.js
 
+// @license     GPL-3.0-only; https://www.gnu.org/licenses/gpl-3.0.en.html
+// @copyright   2019, Zach Hardesty (https://zachhardesty.com/)
 // ==/UserScript==
 
+/**
+ *
+ */
 function genCode() {
 	return Math.random().toString(36).replace('0.', '').substring('1')
 }
 
+/**
+ *
+ */
 function sendCode(jNode) {
 	const el = document.querySelector('.tab-pane.active .gift-card-sender')
 	const field = el.querySelector('.form-control.input-lg')
@@ -34,6 +42,9 @@ const css = `
   }
 `
 // waitForKeyElements('.gift-card-sender', () => setTimeout(sendCode, 3000))
+/**
+ *
+ */
 function t(jNode) {
 	jNode[0].querySelector('li:nth-child(2) a').click()
 	const style = document.createElement('style')
@@ -50,6 +61,9 @@ function t(jNode) {
 }
 waitForKeyElements('.nav.nav-tabs', t)
 
+/**
+ *
+ */
 function x(jNode) {
 	console.log(jNode[0].textContent)
 }

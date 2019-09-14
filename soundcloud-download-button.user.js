@@ -11,6 +11,8 @@
 // @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // @grant        GM_getValue
 // @grant        GM_setValue
+// @license     GPL-3.0-only; https://www.gnu.org/licenses/gpl-3.0.en.html
+// @copyright   2019, Zach Hardesty (https://zachhardesty.com/)
 // ==/UserScript==
 
 /**

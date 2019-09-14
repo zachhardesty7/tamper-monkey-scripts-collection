@@ -9,6 +9,8 @@
 // @author       Zach Hardesty
 // @match        https://docs.google.com/document/*
 // @grant        none
+// @license     GPL-3.0-only; https://www.gnu.org/licenses/gpl-3.0.en.html
+// @copyright   2019, Zach Hardesty (https://zachhardesty.com/)
 // ==/UserScript==
 
 window.addEventListener('load', centerDocs, false)

@@ -8,6 +8,8 @@
 // @description  display big banner if project's last commit over 6 months ago and giant banner if over 1 year ago
 // @author       Zach Hardesty
 // @match        https://github.com/*/*
+// @license     GPL-3.0-only; https://www.gnu.org/licenses/gpl-3.0.en.html
+// @copyright   2019, Zach Hardesty (https://zachhardesty.com/)
 // ==/UserScript==
 
 (function calcAge() {

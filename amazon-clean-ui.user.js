@@ -6,7 +6,9 @@
 // @description removes annoying largely not useful elements from Amazon
 // @include     https://*amazon.com*
 // @version     1.3.2
-// @require     https://gist.githubusercontent.com/zachhardesty7/ea61364567ce66b94edb81f922efecef/raw/c23ba499828992d632266194384c72ff28dfad6e/onElementReady.js
+// @require https://gist.githubusercontent.com/zachhardesty7/ea61364567ce66b94edb81f922efecef/raw/c23ba499828992d632266194384c72ff28dfad6e/onElementReady.js
+// @license     GPL-3.0-only; https://www.gnu.org/licenses/gpl-3.0.en.html
+// @copyright   2019, Zach Hardesty (https://zachhardesty.com/)
 // ==/UserScript==
 
 let STYLES = ''

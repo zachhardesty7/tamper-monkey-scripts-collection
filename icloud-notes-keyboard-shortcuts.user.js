@@ -11,6 +11,8 @@
 // @match        https://www.icloud.com/applications/notes*
 // @require      https://robwu.nl/s/canvas-interceptor.js
 // @grant        none
+// @license     GPL-3.0-only; https://www.gnu.org/licenses/gpl-3.0.en.html
+// @copyright   2019, Zach Hardesty (https://zachhardesty.com/)
 // ==/UserScript==
 
 (function addShortcuts() {

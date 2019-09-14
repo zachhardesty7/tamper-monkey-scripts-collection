@@ -10,6 +10,8 @@
 // @match        https://docs.google.com/document/*
 // @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // @grant        none
+// @license     GPL-3.0-only; https://www.gnu.org/licenses/gpl-3.0.en.html
+// @copyright   2019, Zach Hardesty (https://zachhardesty.com/)
 // ==/UserScript==
 
 // strikingly complex (uses DOM bounding boxes) to get currently selected text:
