@@ -2,6 +2,7 @@
 // @name        Mint - Remove Ads
 // @namespace   https://zachhardesty.com/
 // @description removes annoying and inconspicuous search ads from Etsy
+// @updateURL   https://openuserjs.org/meta/zachhardesty7/Mint_-_Remove_Ads.meta.js
 // @include     https://mint.intuit.com*
 // @exclude     https://mint.intuit.com/save.event
 // @version     1.0.0
