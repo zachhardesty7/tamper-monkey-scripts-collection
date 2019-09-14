@@ -2,14 +2,22 @@
 // ==UserScript==
 // @name         Binance - Add BTC to USD Conversion
 // @namespace    https://zachhardesty.coms
-// @version      1.2.0
+// @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @description  rough conversion to get USD val of coin on "balance" & "deposits/withdrawals" page
-// @author       Zach Hardesty
+// @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
+// @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
+// @version      1.2.0
+
+// @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/binance-btc-usd.user.js
+// @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Binance_-_Add_BTC_to_USD_Conversion
+// @supportURL   https://openuserjs.org/scripts/zachhardesty7/Binance_-_Add_BTC_to_USD_Conversion/issues
+
+// @updateURL    https://openuserjs.org/meta/zachhardesty7/Binance_-_Add_BTC_to_USD_Conversion.meta.js
+// @downloadURL  https://openuserjs.org/install/zachhardesty7/Binance_-_Add_BTC_to_USD_Conversion.user.js
+
 // @match        https://www.binance.com/userCenter/balances*
 // @match        https://www.binance.com/userCenter/depositWithdraw*
 // @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
-// @license     GPL-3.0-only; https://www.gnu.org/licenses/gpl-3.0.en.html
-// @copyright   2019, Zach Hardesty (https://zachhardesty.com/)
 // ==/UserScript==
 
 function convertBTCToUSD() {

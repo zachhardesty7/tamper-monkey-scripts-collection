@@ -4,12 +4,20 @@
 // ==UserScript==
 // @name         Github - Inactive Development Warning
 // @namespace    https://zachhardesty.com
-// @version      0.1.0
+// @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @description  display big banner if project's last commit over 6 months ago and giant banner if over 1 year ago
-// @author       Zach Hardesty
+// @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
+// @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
+// @version      0.1.0
+
+// @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/github-inactive-dev-warning.user.js
+// @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Github_-_Inactive_Development_Warning
+// @supportURL   https://openuserjs.org/scripts/zachhardesty7/Github_-_Inactive_Development_Warning/issues
+
+// @updateURL    https://openuserjs.org/meta/zachhardesty7/Github_-_Inactive_Development_Warning.meta.js
+// @downloadURL  https://openuserjs.org/install/zachhardesty7/Github_-_Inactive_Development_Warning.user.js
+
 // @match        https://github.com/*/*
-// @license     GPL-3.0-only; https://www.gnu.org/licenses/gpl-3.0.en.html
-// @copyright   2019, Zach Hardesty (https://zachhardesty.com/)
 // ==/UserScript==
 
 (function calcAge() {

@@ -3,14 +3,23 @@
 /* cspell:disable ytcfg */
 
 // ==UserScript==
-// @name        YouTube - Add Watch Later Button
-// @namespace   https://zachhardesty.com/
-// @description reveals the save and report buttons and makes links right clickable
-// @include     https://www.youtube.com/watch*
-// @version     1.0.1
-// @require     https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
-// @license     GPL-3.0-only; https://www.gnu.org/licenses/gpl-3.0.en.html
-// @copyright   2019, Zach Hardesty (https://zachhardesty.com/)
+// @name         YouTube - Add Watch Later Button
+// @namespace    https://openuserjs.org/users/zachhardesty7
+// @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
+// @description  reveals the save and report buttons and makes links right clickable
+// @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
+// @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
+// @version      1.0.1
+
+// @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
+// @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Watch_Later_Button
+// @supportURL   https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Watch_Later_Button/issues
+
+// @updateURL    https://openuserjs.org/meta/zachhardesty7/YouTube_-_Add_Watch_Later_Button.meta.js
+// @downloadURL  https://openuserjs.org/install/zachhardesty7/YouTube_-_Add_Watch_Later_Button.user.js
+
+// @include      https://www.youtube.com/watch*
+// @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
 
 /**

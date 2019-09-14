@@ -4,14 +4,22 @@
 // ==UserScript==
 // @name         Harvest - Hourly Pay
 // @namespace    https://zachhardesty.com
-// @version      1.0
+// @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @description  adds total money made per day and week to Harvest (excl. taxes)
-// @author       Zach Hardesty
+// @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
+// @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
+// @version      1.0.0
+
+// @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/harvest-hourly-pay.user.js
+// @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Harvest_-_Hourly_Pay
+// @supportURL   https://openuserjs.org/scripts/zachhardesty7/Harvest_-_Hourly_Pay/issues
+
+// @updateURL    https://openuserjs.org/meta/zachhardesty7/Harvest_-_Hourly_Pay.meta.js
+// @downloadURL  https://openuserjs.org/install/zachhardesty7/Harvest_-_Hourly_Pay.user.js
+
 // @match        https://*.harvestapp.com/*
 // @grant        none
 // @downloadURL  https://zachhardesty.com/userscripts/harvest-hourly-pay.user.js
-// @license     GPL-3.0-only; https://www.gnu.org/licenses/gpl-3.0.en.html
-// @copyright   2019, Zach Hardesty (https://zachhardesty.com/)
 // ==/UserScript==
 
 (function harvestPay() {

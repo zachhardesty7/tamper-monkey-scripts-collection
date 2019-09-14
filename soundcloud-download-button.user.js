@@ -3,16 +3,24 @@
 // ==UserScript==
 // @name         Soundcloud - Add External Download Button
 // @namespace    https://zachhardesty.com
-// @version      1.0
+// @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @description  adds a button on main page and song page to download song automatically from https://soundcloudmp3.org/
-// @author       Zach Hardesty
+// @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
+// @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
+// @version      1.0.0
+
+// @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/soundcloud-download-button.user.js
+// @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Soundcloud_-_Add_External_Download_Button
+// @supportURL   https://openuserjs.org/scripts/zachhardesty7/Soundcloud_-_Add_External_Download_Button/issues
+
+// @updateURL    https://openuserjs.org/meta/zachhardesty7/Soundcloud_-_Add_External_Download_Button.meta.js
+// @downloadURL  https://openuserjs.org/install/zachhardesty7/Soundcloud_-_Add_External_Download_Button.user.js
+
 // @match        https://soundcloud.com/*
 // @match        https://soundcloudmp3.org/*
 // @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // @grant        GM_getValue
 // @grant        GM_setValue
-// @license     GPL-3.0-only; https://www.gnu.org/licenses/gpl-3.0.en.html
-// @copyright   2019, Zach Hardesty (https://zachhardesty.com/)
 // ==/UserScript==
 
 /**

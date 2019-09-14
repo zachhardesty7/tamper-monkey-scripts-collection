@@ -1,12 +1,21 @@
 // ==UserScript==
-// @name        Reddit - Improve Saved Comments
-// @namespace   https://zachhardesty.com/
-// @description reveals the save and report buttons and makes links right clickable
-// @include     https://www.reddit.com/user/*/saved/*
-// @version     1.0.0
-// @require     https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
-// @license     GPL-3.0-only; https://www.gnu.org/licenses/gpl-3.0.en.html
-// @copyright   2019, Zach Hardesty (https://zachhardesty.com/)
+// @name         Reddit - Improve Saved Comments
+// @namespace    https://openuserjs.org/users/zachhardesty7
+// @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
+// @description  reveals the save and report buttons and makes links right clickable
+// @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
+// @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
+// @version      1.0.0
+
+// @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-improve-saved-comments.user.js
+// @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Reddit_-_Improve_Saved_Comments
+// @supportURL   https://openuserjs.org/scripts/zachhardesty7/Reddit_-_Improve_Saved_Comments/issues
+
+// @updateURL    https://openuserjs.org/meta/zachhardesty7/Reddit_-_Improve_Saved_Comments.meta.js
+// @downloadURL  https://openuserjs.org/install/zachhardesty7/Reddit_-_Improve_Saved_Comments.user.js
+
+// @include      https://www.reddit.com/user/*/saved/*
+// @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
 
 /**

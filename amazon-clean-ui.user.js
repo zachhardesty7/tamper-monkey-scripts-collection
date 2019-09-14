@@ -1,14 +1,23 @@
 /* eslint-env browser, jquery, greasemonkey */
 
 // ==UserScript==
-// @name        Amazon - Clean UI
-// @namespace   https://zachhardesty.com/
-// @description removes annoying largely not useful elements from Amazon
-// @include     https://*amazon.com*
-// @version     1.3.2
-// @require https://gist.githubusercontent.com/zachhardesty7/ea61364567ce66b94edb81f922efecef/raw/c23ba499828992d632266194384c72ff28dfad6e/onElementReady.js
-// @license     GPL-3.0-only; https://www.gnu.org/licenses/gpl-3.0.en.html
-// @copyright   2019, Zach Hardesty (https://zachhardesty.com/)
+// @name         Amazon - Clean UI
+// @namespace    https://openuserjs.org/users/zachhardesty7
+// @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7) <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
+// @description  removes annoying largely not useful elements from Amazon
+// @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
+// @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
+// @version      1.3.2
+
+// @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/amazon-clean-ui.user.js
+// @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Amazon_-_Clean_UI
+// @supportURL   https://openuserjs.org/scripts/zachhardesty7/Amazon_-_Clean_UI/issues
+
+// @updateURL    https://openuserjs.org/meta/zachhardesty7/Amazon_-_Clean_UI.meta.js
+// @downloadURL  https://openuserjs.org/install/zachhardesty7/Amazon_-_Clean_UI.user.js
+
+// @include      https://*amazon.com*
+// @require      https://gist.githubusercontent.com/zachhardesty7/ea61364567ce66b94edb81f922efecef/raw/c23ba499828992d632266194384c72ff28dfad6e/onElementReady.js
 // ==/UserScript==
 
 let STYLES = ''
