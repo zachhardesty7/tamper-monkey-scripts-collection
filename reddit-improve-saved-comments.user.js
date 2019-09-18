@@ -17,6 +17,7 @@
 // @include      https://www.reddit.com/user/*/saved/*
 // @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
+/* global onElementReady */
 
 /**
  * sometimes you really need access to react internals to fix somebody
@@ -69,4 +70,4 @@ function improveComments(buttons) {
 
 // gross, but Reddit uses styled-components / emotion and has almost no
 // constant selectors that don't change between renders
-window.onElementReady('div.Comment > div > div > div:last-child > div > div:nth-child(2) > div:nth-child(2) > div:last-child', false, improveComments)
+onElementReady('div.Comment > div > div > div:last-child > div > div:nth-child(2) > div:nth-child(2) > div:last-child', false, improveComments)

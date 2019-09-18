@@ -17,11 +17,12 @@
 // @include      https://shop.randalls.com/ecom/modern1/my-cart*
 // @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
+/* global onElementReady */
 
 // IT'S SUCH BAD UX TO NOT INCLUDE AN
 // HREF ON ALL <a /> TAGS
 
-window.onElementReady('.cartdesc', false, (el) => {
+onElementReady('.cartdesc', false, (el) => {
 	const link = el.querySelector('a')
 	link.href = `http://shop.randalls.com${
 		link.onclick.toString().match(/\/product-details\.\d+\.html/gm)

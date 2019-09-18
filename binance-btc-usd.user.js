@@ -19,13 +19,14 @@
 // @match        https://www.binance.com/userCenter/depositWithdraw*
 // @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
+/* global onElementReady */
 
 function convertBTCToUSD() {
 	fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
 		.then(resp => resp.json())
 		.then((data) => {
 			// if el are loaded then add USD value below BTC val
-			window.onElementReady('.td.ng-scope', false, e => addBTCConversionRate(e, data.BTC.USD))
+			onElementReady('.td.ng-scope', false, e => addBTCConversionRate(e, data.BTC.USD))
 
 			return null
 		})

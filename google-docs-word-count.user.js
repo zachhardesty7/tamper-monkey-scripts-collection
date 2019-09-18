@@ -62,7 +62,7 @@
   * update the word count
   */
 	async function setCount() {
-		const doc = window.googleDocsUtil.getGoogleDocument()
+		const doc = googleDocsUtil.getGoogleDocument()
 		let selected = doc.selectedText
 
 		const pages = document.querySelector('.kix-paginateddocumentplugin').children[1].children

@@ -21,6 +21,7 @@
 // @match        https://www.youtube.com/?*
 // @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
+/* global onElementReady */
 
 const keywords = [
 	'pixelmon',
@@ -39,7 +40,7 @@ const keywords = [
 ]
 
 // only operate once necessary el has loaded
-window.onElementReady('#dismissable.style-scope.ytd-grid-video-renderer', false, (el) => {
+onElementReady('#dismissable.style-scope.ytd-grid-video-renderer', false, (el) => {
 	// remove video
 	keywords.forEach((keyword) => {
 		if (el.querySelector('#details').querySelector('#meta').firstElementChild.textContent.toLowerCase().includes(keyword)) {

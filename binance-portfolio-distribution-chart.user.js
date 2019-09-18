@@ -1,4 +1,3 @@
-/* eslint-env browser, jquery, greasemonkey */
 /* eslint-disable max-len */
 
 // ==UserScript==
@@ -22,6 +21,7 @@
 // @require      https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js
 // @require      https://gist.githubusercontent.com/zachhardesty7/ea61364567ce66b94edb81f922efecef/raw/c23ba499828992d632266194384c72ff28dfad6e/onElementReady.js
 // ==/UserScript==
+/* global onElementReady */
 
 const chartColors = {
 	red: 'rgb(255, 99, 132)',
@@ -81,7 +81,7 @@ function getMaxInObject(obj) {
 }
 
 // begin program once data has loaded
-window.onElementReady('span.btn.btn-deposit.ng-binding.ng-scope', true, () => {
+onElementReady('span.btn.btn-deposit.ng-binding.ng-scope', true, () => {
 	// build canvas el
 	const page = document.querySelector('.chargeWithdraw-title')
 	const canvas = document.createElement('canvas')

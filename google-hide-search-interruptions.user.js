@@ -18,9 +18,10 @@
 // @match        https://www.google.com/search*
 // @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
+/* global onElementReady */
 
 // only operate once necessary el has loaded
-window.onElementReady('.exp-outline', true, (el) => {
+onElementReady('.exp-outline', true, (el) => {
 	// remove text
 	el.parentElement.querySelector('div').querySelector(':nth-child(3)').remove()
 	// remove border

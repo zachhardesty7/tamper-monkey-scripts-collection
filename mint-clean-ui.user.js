@@ -18,6 +18,7 @@
 // @exclude      https://mint.intuit.com/save.event
 // @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
+/* global onElementReady */
 
 /* css hiding */
 const main = () => {
@@ -60,7 +61,7 @@ const main = () => {
 
 /* dynamic hiding */
 // hide account status bar (if robinhood text included)
-window.onElementReady('.AccountStatusBarItemView .status.error', false,
+onElementReady('.AccountStatusBarItemView .status.error', false,
 	el => el.textContent.includes('Robinhood') &&
 		document.querySelector('.AccountStatusBarView').remove())
 

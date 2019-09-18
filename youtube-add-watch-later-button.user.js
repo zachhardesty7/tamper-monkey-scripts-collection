@@ -1,4 +1,3 @@
-/* global onElementReady */
 /* eslint-disable no-underscore-dangle */
 /* cspell:disable ytcfg */
 
@@ -21,6 +20,7 @@
 // @include      https://www.youtube.com/watch*
 // @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
+/* global onElementReady */
 
 /**
  * build the button el tediously but like the rest

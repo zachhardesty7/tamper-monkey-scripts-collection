@@ -19,6 +19,7 @@
 // @include      https://*amazon.com*
 // @require      https://gist.githubusercontent.com/zachhardesty7/ea61364567ce66b94edb81f922efecef/raw/c23ba499828992d632266194384c72ff28dfad6e/onElementReady.js
 // ==/UserScript==
+/* global onElementReady */
 
 let STYLES = ''
 window.addEventListener('load', hideElements)

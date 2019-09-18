@@ -19,8 +19,9 @@
 // @include      https://www.etsy.com/market/*
 // @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
+/* global onElementReady */
 
-window.onElementReady('.ad-indicator', false, (el) => {
+onElementReady('.ad-indicator', false, (el) => {
 	el
 		.parentElement
 		.parentElement

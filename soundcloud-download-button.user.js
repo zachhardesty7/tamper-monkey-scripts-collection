@@ -22,6 +22,7 @@
 // @grant        GM_getValue
 // @grant        GM_setValue
 // ==/UserScript==
+/* global onElementReady */
 
 /**
  * adds button to soundcloud
@@ -62,8 +63,8 @@ function addButton(el) {
         window.location.href.includes('soundcloud')) {
 		// library that detects ajax changes
 		// requires jQuery - boo
-		window.onElementReady('.l-listen-wrapper', false, addButton)
-		window.onElementReady('.lazyLoadingList__list > .soundList__item', false, addButton)
+		onElementReady('.l-listen-wrapper', false, addButton)
+		onElementReady('.lazyLoadingList__list > .soundList__item', false, addButton)
 	} else if (window.location.href.includes('soundcloudmp3') &&
         document.referrer.includes('soundcloud') &&
         !window.location.href.includes('converter')) {
