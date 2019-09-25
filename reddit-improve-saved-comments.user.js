@@ -5,7 +5,7 @@
 // @description  reveals the save and report buttons and makes links right clickable
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.0.0
+// @version      1.0.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-improve-saved-comments.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Reddit_-_Improve_Saved_Comments
@@ -31,43 +31,46 @@ const getReactInstance = DOMNode => DOMNode[Object.keys(DOMNode)[0]]
 /**
  * add features to comments
  *
- * @param {HTMLCollection} buttons - set of buttons under comments
+ * @param {HTMLCollection} button - triple dot more button under comments
  */
-function improveComments(buttons) {
-	const moreButton = buttons.querySelector('button:nth-child(4)')
-	const moreComponent = getReactInstance(moreButton)
+function improveComments(button) {
+	const moreComponent = getReactInstance(button)
+	const moreComponentProps = moreComponent.return.return.memoizedProps
+	const genericButtonClass = button.parentElement.children[0].className
 
-	const report = document.createElement('button')
-	report.textContent = 'Report'
-	report.className = buttons.children[0].className
-	report.onclick = moreComponent.return.return.memoizedProps.children[0].props.onClick
+	const reportButton = document.createElement('button')
+	reportButton.textContent = 'Report'
+	reportButton.className = genericButtonClass
+	// navigate react obj
+	reportButton.onclick = moreComponentProps.children[0].props.onClick
 
 	// does not dynamically update text content
-	const save = document.createElement('button')
-	save.textContent = 'Save / Unsave'
-	save.className = buttons.children[0].className
-	save.onclick = moreComponent.return.return.memoizedProps.children[1].props.onClick
-
-	// TODO: might have more items in the dropdown
-	moreButton.remove()
-	buttons.appendChild(report)
-	buttons.appendChild(save)
+	const saveButton = document.createElement('button')
+	saveButton.textContent = 'Save / Unsave'
+	saveButton.className = genericButtonClass
+	saveButton.onclick = moreComponentProps.children[1].props.onClick
 
 	// not defined in a separate function just because this is a quick
 	// way to ensure that all of the important parts are loaded
-	const comment = buttons.parentElement.parentElement.parentElement
+	const comment = button.parentElement.parentElement.parentElement.parentElement
 		.parentElement.parentElement.parentElement.parentElement
 
-	// wrap the entirety of the comment
+	// wrap the entirety of the comment in link el
 	const container = comment.parentElement
 	const wrapper = document.createElement('a')
+	// link to comment page hidden in react instance
 	wrapper.href = getReactInstance(comment).return.memoizedProps.comment.permalink
 	wrapper.append(comment) // move all original DOM children
 	wrapper.onclick = e => e.preventDefault() // allow original click handler to take over
 
 	container.append(wrapper)
+
+	// TODO: might have more items in the dropdown
+	button.parentElement.appendChild(reportButton)
+	button.parentElement.appendChild(saveButton)
+	button.remove()
 }
 
 // gross, but Reddit uses styled-components / emotion and has almost no
-// constant selectors that don't change between renders
-onElementReady('div.Comment > div > div > div:last-child > div > div:nth-child(2) > div:nth-child(2) > div:last-child', false, improveComments)
+// constant selectors that don't change between renders, detail allows react to hydrate first
+onElementReady('div.Comment > div > div > div:last-child > div > div:nth-child(2) > div:nth-child(2) > div:last-child > button:last-child[aria-haspopup]', false, improveComments)
