@@ -8,7 +8,7 @@
 // @description  display big banner if project's last commit over 6 months ago and giant banner if over 1 year ago
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      0.1.0
+// @version      1.0.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/github-inactive-dev-warning.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Github_-_Inactive_Development_Warning
@@ -21,9 +21,9 @@
 // ==/UserScript==
 
 (function calcAge() {
-	const date = new Date(document.querySelector('.repository-content .commit-tease').lastElementChild.lastElementChild.firstElementChild.attributes[0].textContent)
-	const dif = (Date.now() - date.getUTCMilliseconds()) / 1000 / 60 / 60 / 24 // in days
-	if (dif > 365) { renderWarning() } else if (dif > 182.5) { renderCaution() }
+	const date = new Date(document.querySelector('.commit-tease.js-details-container.Details > div > span > relative-time').attributes[0].textContent)
+	const diff = (Date.now() - date.getTime()) / 1000 / 60 / 60 / 24 // in days
+	if (diff > 365) { renderWarning() } else if (diff > 182.5) { renderCaution() }
 })()
 
 /**
