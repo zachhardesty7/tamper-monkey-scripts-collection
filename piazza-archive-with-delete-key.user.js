@@ -18,13 +18,17 @@
 // ==/UserScript==
 /* global P */
 
+// TODO: add undo shortcut
+// TODO: when switching to next convo, go up if previous movement was up
+// FIXME: handle jumping multiple headers if empty
+
 /**
  * ret prev item in cur week if exists or back up and move to prev week to get last item
  *
  * @param {Element} el - target
- * @returns {Element} result
+ * @returns {HTMLElement} result
  */
-const getPrevItem = el => (
+const getPrevItem = el => /** @type {HTMLElement} */ (
 	el.previousElementSibling ||
 	el.parentElement.parentElement.previousElementSibling.lastElementChild.lastElementChild
 )
@@ -33,13 +37,18 @@ const getPrevItem = el => (
  * ret next item in cur week if exists or back up and move to next week to get first item
  *
  * @param {Element} el - target
- * @returns {Element} result
+ * @returns {HTMLElement} result
  */
-const getNextItem = el => (
+const getNextItem = el => /** @type {HTMLElement} */ (
 	el.nextElementSibling ||
 	el.parentElement.parentElement.nextElementSibling.lastElementChild.firstElementChild
 )
 
+/**
+ * navigate posts on key press
+ *
+ * @param {KeyboardEvent} e - keydown event
+ */
 const onKeydownHandler = (e) => {
 	// move to prev feed item
 	if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {

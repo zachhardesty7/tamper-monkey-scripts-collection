@@ -25,13 +25,14 @@
 /**
  * build the button el tediously but like the rest
  *
- * TODO: add user feedback
+ * TODO: add UI feedback
  *
- * @param {HTMLCollection} buttons - html node
+ * @param {HTMLElement} buttons - html node
  */
 function addButton(buttons) {
-	const container = document.createElement('ytd-button-renderer')
-	container.buttonRenderer = true
+	const container = document.createElement('ytd-button-renderer');
+	// eslint-disable-line jsdoc/valid-types
+	/** @type {HTMLElement & { buttonRenderer: boolean }} */ (container).buttonRenderer = true
 	container.style.color = 'var(--yt-spec-icon-inactive)'
 	container.className = buttons.lastElementChild.className
 	buttons.appendChild(container)
@@ -57,19 +58,20 @@ function addButton(buttons) {
 	svg.setAttribute('viewBox', '0 0 24 24')
 	svg.setAttribute('preserveAspectRatio', 'xMidYMid meet')
 	svg.setAttribute('focusable', 'false')
-	svg.setAttribute('class', buttons.children[buttons.children.length - 2].lastElementChild.firstElementChild
-		.firstElementChild.firstElementChild.firstElementChild.className.baseVal)
+	svg.setAttribute('class',
+		buttons.children[buttons.children.length - 2].lastElementChild.firstElementChild
+			.firstElementChild.firstElementChild.firstElementChild.getAttribute('class'))
 	svg.setAttribute('style', 'pointer-events: none; display: block; width: 100%; height: 100%;')
 	icon.append(svg)
 
 	const g = document.createElementNS('http://www.w3.org/2000/svg', 'g')
-	g.setAttribute('class', buttons.children[buttons.children.length - 2].lastElementChild.firstElementChild
-		.firstElementChild.firstElementChild.firstElementChild.firstElementChild.className.baseVal)
+	g.setAttribute('class', buttons.children[buttons.children.length - 2].lastElementChild.firstElementChild.firstElementChild
+		.firstElementChild.firstElementChild.firstElementChild.getAttribute('class'))
 	svg.append(g)
 
 	const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
 	path.setAttribute('class', buttons.children[buttons.children.length - 2].lastElementChild.firstElementChild.firstElementChild
-		.firstElementChild.firstElementChild.firstElementChild.firstElementChild.className.baseVal)
+		.firstElementChild.firstElementChild.firstElementChild.firstElementChild.getAttribute('class'))
 	path.setAttribute('d', 'M12 3.67c-4.58 0-8.33 3.75-8.33 8.33s3.75 8.33 8.33 8.33 8.33-3.75 8.33-8.33S16.58 3.67 12 3.67zm3.5 11.83l-4.33-2.67v-5h1.25v4.34l3.75 2.25-.67 1.08z')
 	g.append(path)
 

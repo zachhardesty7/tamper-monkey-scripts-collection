@@ -24,6 +24,5 @@
 onElementReady('.exp-outline', true, (el) => {
 	// remove text
 	el.parentElement.querySelector('div').querySelector(':nth-child(3)').remove()
-	// remove border
-	el.remove()
+	el.remove() // remove border
 })

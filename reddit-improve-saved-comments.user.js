@@ -23,15 +23,15 @@
  * sometimes you really need access to react internals to fix somebody
  * else's broken app and add no-brainer features
  *
- * @param {Element} DOMNode - arbitrary DOM node with a hidden react instance
- * @returns {{}} react instance object
+ * @param {HTMLElement} DOMNode - arbitrary DOM node with a hidden react instance
+ * @returns {object} react instance object
  */
 const getReactInstance = DOMNode => DOMNode[Object.keys(DOMNode)[0]]
 
 /**
  * add features to comments
  *
- * @param {HTMLCollection} button - triple dot more button under comments
+ * @param {HTMLElement} button - triple dot more button under comments
  */
 function improveComments(button) {
 	const moreComponent = getReactInstance(button)

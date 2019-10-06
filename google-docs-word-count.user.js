@@ -21,6 +21,7 @@
 // @require      https://raw.githubusercontent.com/JensPLarsen/ChromeExtension-GoogleDocsUtil/master/googleDocsUtil.js
 // @grant        none
 // ==/UserScript==
+/* global googleDocsUtil */
 
 // heavy inspiration from:
 // https://greasyfork.org/en/scripts/22057-google-docs-wordcount/code

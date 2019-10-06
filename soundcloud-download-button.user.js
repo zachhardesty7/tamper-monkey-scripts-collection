@@ -34,12 +34,13 @@ function addButton(el) {
 	const button = document.createElement('button')
 	button.textContent = 'External Download'
 	// if on soundcloud home and song node is not a playlist, append SC styled button
-	if (link.includes('stream') && !el.querySelector('.soundTitle__title').href.includes('/sets/')) {
+	const songLink = /** @type {HTMLAnchorElement} */ (el.querySelector('.soundTitle__title')).href
+	if (link.includes('stream') && !songLink.includes('/sets/')) {
 		button.className = 'mp3-button sc-button sc-button-small'
 		el.querySelector('.soundActions .sc-button-group').append(button)
 		// add click listener to GM store the url of the song and open anything2mp3
 		el.querySelector('.mp3-button').addEventListener('click', (e) => {
-			window.GM_setValue('link', el.querySelector('.soundTitle__title').href)
+			window.GM_setValue('link', songLink)
 			window.open('https://soundcloudmp3.org/', '_blank')
 		})
 		// else if on individual song page (and not playlist), append SC styled button
@@ -68,16 +69,18 @@ function addButton(el) {
 	} else if (window.location.href.includes('soundcloudmp3') &&
         document.referrer.includes('soundcloud') &&
         !window.location.href.includes('converter')) {
-		const media = window.GM_getValue('link')
-		document.querySelector('.form-control').value = media
-		document.querySelector('#conversionForm div span button').click()
+		/** @type {HTMLInputElement} */
+		(document.querySelector('.form-control')).value = window.GM_getValue('link');
+		/** @type {HTMLInputElement} */
+		(document.querySelector('#conversionForm div span button')).click()
 	} else if (window.location.href.includes('converter')) {
 		// hide modal breaks download plus it goes away after the download is triggered
 		// onElementReady('.modal-footer button', false,
 		//   document.querySelector(".modal-footer button").click());
 		const timer = setInterval(() => {
 			if (document.querySelector('#ready-group').className !== 'hidden') {
-				document.querySelector('#download-btn').click()
+				/** @type {HTMLInputElement} */
+				(document.querySelector('#download-btn')).click()
 				clearInterval(timer)
 			}
 		}, 100)
