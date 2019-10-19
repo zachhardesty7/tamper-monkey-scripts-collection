@@ -5,7 +5,7 @@
 // @description  bind the delete key to quickly archive posts
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.1.1
+// @version      2.2.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/piazza-archive-with-delete-key.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Piazza_-_Archive_with_Delete_Key
@@ -19,13 +19,15 @@
 /* global P */
 
 // TODO: add undo shortcut
-// TODO: when switching to next convo, go up if previous movement was up
+// TODO: set direction when clicking on posts also
 
 let lastDeletedItemId
+let lastMovement // 'up' or 'down'
 
 /**
  * ret prev item in cur week if exists or back up and move to prev week to get last item
  *
+ * @see `getNextItem()`
  * @param {Element} el - target
  * @returns {?HTMLElement} result
  */
@@ -47,17 +49,20 @@ const getPrevItem = (el) => {
  * ret next item in cur week if exists or back up and move to next week to get first item
  *
  * @param {Element} el - target
- * @returns {HTMLElement} result
+ * @returns {?HTMLElement} result
  */
 const getNextItem = (el) => {
+	// sibling from same week
 	if (el.nextElementSibling) return /** @type {HTMLElement} */ (el.nextElementSibling)
 
+	// back up selection to next week
 	let parent = el.parentElement.parentElement.nextElementSibling
+	// return first proceeding week with a post in it
 	while (parent) {
-		if (parent.lastElementChild && parent.lastElementChild.lastElementChild) {
-			return /** @type {HTMLElement} */ (parent.lastElementChild.lastElementChild)
+		if (parent.lastElementChild && parent.lastElementChild.firstElementChild) {
+			return /** @type {HTMLElement} */ (parent.lastElementChild.firstElementChild)
 		}
-		parent = parent.nextElementSibling
+		parent = parent.nextElementSibling // update to next week
 	}
 
 	return null
@@ -73,18 +78,22 @@ const onKeydownHandler = (e) => {
 	if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
 		const prevItem = getPrevItem(document.querySelector('.feed_item.selected'))
 		prevItem && prevItem.click()
+		lastMovement = 'up'
 	}
 
 	// move to next feed item
 	if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
 		const nextItem = getNextItem(document.querySelector('.feed_item.selected'))
 		nextItem && nextItem.click()
+		lastMovement = 'down'
 	}
 
 	// del & move to next feed item
 	if (e.key === 'Delete') {
 		const item = document.querySelector('.feed_item.selected')
-		getNextItem(item).click() // change view
+		lastMovement === 'up' // change view
+			? getPrevItem(item).click()
+			: getNextItem(item).click()
 		lastDeletedItemId = (item.id)
 		P.feed.delFeedItem(item.id)
 	}
