@@ -5,7 +5,7 @@
 // @description  bind the delete key to quickly archive posts
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.1.0
+// @version      2.2.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/piazza-archive-with-delete-key.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Piazza_-_Archive_with_Delete_Key
@@ -20,18 +20,26 @@
 
 // TODO: add undo shortcut
 // TODO: when switching to next convo, go up if previous movement was up
-// FIXME: handle jumping multiple headers if empty
 
 /**
  * ret prev item in cur week if exists or back up and move to prev week to get last item
  *
  * @param {Element} el - target
- * @returns {HTMLElement} result
+ * @returns {?HTMLElement} result
  */
-const getPrevItem = el => /** @type {HTMLElement} */ (
-	el.previousElementSibling ||
-	el.parentElement.parentElement.previousElementSibling.lastElementChild.lastElementChild
-)
+const getPrevItem = (el) => {
+	if (el.previousElementSibling) return /** @type {HTMLElement} */ (el.previousElementSibling)
+
+	let parent = el.parentElement.parentElement.previousElementSibling
+	while (parent) {
+		if (parent.lastElementChild && parent.lastElementChild.lastElementChild) {
+			return /** @type {HTMLElement} */ (parent.lastElementChild.lastElementChild)
+		}
+		parent = parent.previousElementSibling
+	}
+
+	return null
+}
 
 /**
  * ret next item in cur week if exists or back up and move to next week to get first item
@@ -39,10 +47,19 @@ const getPrevItem = el => /** @type {HTMLElement} */ (
  * @param {Element} el - target
  * @returns {HTMLElement} result
  */
-const getNextItem = el => /** @type {HTMLElement} */ (
-	el.nextElementSibling ||
-	el.parentElement.parentElement.nextElementSibling.lastElementChild.firstElementChild
-)
+const getNextItem = (el) => {
+	if (el.nextElementSibling) return /** @type {HTMLElement} */ (el.nextElementSibling)
+
+	let parent = el.parentElement.parentElement.nextElementSibling
+	while (parent) {
+		if (parent.lastElementChild && parent.lastElementChild.lastElementChild) {
+			return /** @type {HTMLElement} */ (parent.lastElementChild.lastElementChild)
+		}
+		parent = parent.nextElementSibling
+	}
+
+	return null
+}
 
 /**
  * navigate posts on key press
@@ -52,21 +69,20 @@ const getNextItem = el => /** @type {HTMLElement} */ (
 const onKeydownHandler = (e) => {
 	// move to prev feed item
 	if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-		const item = document.querySelector('.feed_item.selected')
-		getPrevItem(item).click()
+		const prevItem = getPrevItem(document.querySelector('.feed_item.selected'))
+		prevItem && prevItem.click()
 	}
 
 	// move to next feed item
 	if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-		const item = document.querySelector('.feed_item.selected')
-		getNextItem(item).click()
+		const nextItem = getNextItem(document.querySelector('.feed_item.selected'))
+		nextItem && nextItem.click()
 	}
 
 	// del & move to next feed item
 	if (e.key === 'Delete') {
-		const item = document.querySelector('.feed_item.selected')
-		getNextItem(item).click() // change view
-		P.feed.delFeedItem(item.id)
+		const nextItem = getNextItem(document.querySelector('.feed_item.selected'))
+		nextItem && P.feed.delFeedItem(nextItem.id)
 	}
 }
 
