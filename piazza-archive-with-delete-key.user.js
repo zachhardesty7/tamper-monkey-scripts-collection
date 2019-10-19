@@ -5,7 +5,7 @@
 // @description  bind the delete key to quickly archive posts
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.2.0
+// @version      2.1.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/piazza-archive-with-delete-key.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Piazza_-_Archive_with_Delete_Key
@@ -20,6 +20,8 @@
 
 // TODO: add undo shortcut
 // TODO: when switching to next convo, go up if previous movement was up
+
+let lastDeletedItemId
 
 /**
  * ret prev item in cur week if exists or back up and move to prev week to get last item
@@ -81,9 +83,18 @@ const onKeydownHandler = (e) => {
 
 	// del & move to next feed item
 	if (e.key === 'Delete') {
-		const nextItem = getNextItem(document.querySelector('.feed_item.selected'))
-		nextItem && P.feed.delFeedItem(nextItem.id)
+		const item = document.querySelector('.feed_item.selected')
+		getNextItem(item).click() // change view
+		lastDeletedItemId = (item.id)
+		P.feed.delFeedItem(item.id)
 	}
+
+	// cannot read property 'remove' of null
+	// if (e.key === 'z' && e.ctrlKey) {
+	// 	if (lastDeletedItemId) {
+	// 		P.feed.addFeedItem(lastDeletedItemId)
+	// 	}
+	// }
 }
 
 document.addEventListener('keydown', onKeydownHandler)
