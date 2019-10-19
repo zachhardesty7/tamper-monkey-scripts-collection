@@ -5,7 +5,7 @@
 // @description  bind the delete key to quickly archive posts
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.2.0
+// @version      2.3.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/piazza-archive-with-delete-key.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Piazza_-_Archive_with_Delete_Key
@@ -19,10 +19,9 @@
 /* global P */
 
 // TODO: add undo shortcut
-// TODO: set direction when clicking on posts also
 
-let lastDeletedItemId
-let lastMovement // 'up' or 'down'
+// let lastDeletedItemId
+let lastMovement = 'down' // or 'up'
 
 /**
  * ret prev item in cur week if exists or back up and move to prev week to get last item
@@ -94,16 +93,46 @@ const onKeydownHandler = (e) => {
 		lastMovement === 'up' // change view
 			? getPrevItem(item).click()
 			: getNextItem(item).click()
-		lastDeletedItemId = (item.id)
+		// lastDeletedItemId = (item.id)
 		P.feed.delFeedItem(item.id)
 	}
 
-	// cannot read property 'remove' of null
+	// FIXME: cannot read property 'remove' of null
 	// if (e.key === 'z' && e.ctrlKey) {
 	// 	if (lastDeletedItemId) {
 	// 		P.feed.addFeedItem(lastDeletedItemId)
 	// 	}
 	// }
 }
+
+// update direction of last movement direction for each click
+document.addEventListener('click', (e) => {
+	let clickedPost = /** @type {HTMLElement} */ (e.target)
+
+	// traverse up html until the post item is found or `null`
+	while (clickedPost && !clickedPost.className.includes('feed_item')) {
+		clickedPost = clickedPost.parentElement
+	}
+
+	if (clickedPost) {
+		const selected = document.querySelector('.feed_item.selected')
+
+		// id of week the post is in
+		const bucketClicked = clickedPost.parentElement.id
+		const bucketSelected = selected.parentElement.id
+
+		if (bucketClicked > bucketSelected) lastMovement = 'down'
+		else if (bucketClicked < bucketSelected) lastMovement = 'up'
+		else { // posts in the same week
+			// get position within the week
+			const positionClicked = [...clickedPost.parentElement.children].indexOf(clickedPost)
+			const positionSelected = [...selected.parentElement.children].indexOf(selected)
+
+			if (positionClicked < positionSelected) lastMovement = 'up'
+			else if (positionClicked > positionSelected) lastMovement = 'down'
+			// don't update lastMovement if already selected item is clicked
+		}
+	}
+})
 
 document.addEventListener('keydown', onKeydownHandler)
