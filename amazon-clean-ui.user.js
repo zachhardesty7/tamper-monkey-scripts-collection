@@ -7,7 +7,7 @@
 // @description  removes annoying largely not useful elements from Amazon
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.3.2
+// @version      1.3.3
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/amazon-clean-ui.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Amazon_-_Clean_UI
@@ -207,7 +207,7 @@ function hideElements() {
 	// hide nav ads
 	hide('#nav-upnav')
 	hide('#nav-subnav')
-	hide('#nav-belt .nav-right')
+	hide('#nav-main .nav-right')
 
 	// hide recent items
 	hide('#raw-sitewide-rhf')
@@ -336,7 +336,7 @@ const setStyle = (target, val, i = 0) => {
  * @returns {void}
  */
 const setStyleAll = (target, val) => {
-	getElAll(target).forEach(el => setStyle(el, val))
+	getElAll(target).forEach((el) => setStyle(el, val))
 }
 
 /**
@@ -376,7 +376,6 @@ const hideParentX = (target, x = 0, i = 0) => {
 		el = el && el.parentElement
 	}
 
-	el && console.log(`search target: `, target, `found target: `, el)
 	hide(el)
 }
 
@@ -389,7 +388,7 @@ const hideParentX = (target, x = 0, i = 0) => {
  * @returns {void}
  */
 const hideAllParentX = (target, x = 0) => {
-	getElAll(target).forEach(el => hideParentX(el, x))
+	getElAll(target).forEach((el) => hideParentX(el, x))
 }
 
 /** FUTURE USE FUNCTIONS */
