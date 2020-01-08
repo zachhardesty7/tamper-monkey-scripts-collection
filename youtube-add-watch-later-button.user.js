@@ -8,7 +8,7 @@
 // @description  reveals the save and report buttons and makes links right clickable
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.1.1
+// @version      1.2.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Watch_Later_Button
@@ -37,8 +37,6 @@ queryForElements = (selector, callback) => {
 
 /**
  * build the button el tediously but like the rest
- *
- * TODO: add UI feedback
  *
  * @param {HTMLElement} buttons - html node
  */
@@ -108,6 +106,20 @@ function addButton(buttons) {
 	link.append(text)
 	text.style.color = 'var(--yt-spec-text-secondary)'
 	text.textContent = 'later'
+
+	// TODO: will be incorrect if already in WL
+	// change to blue when added to WL
+	container.addEventListener('click', () => {
+		const flippedColorCon = container.style.color === 'var(--yt-spec-icon-inactive)'
+			? 'var(--yt-spec-call-to-action)'
+			: 'var(--yt-spec-icon-inactive)'
+		container.style.color = flippedColorCon
+
+		const flippedColorText = text.style.color === 'var(--yt-spec-text-secondary)'
+			? 'var(--yt-spec-call-to-action)'
+			: 'var(--yt-spec-text-secondary)'
+		text.style.color = flippedColorText
+	})
 
 	const window = buttons.ownerDocument.defaultView // escape tampermonkey scope
 	link.addEventListener('click', () => post(window)) // meat of the script
