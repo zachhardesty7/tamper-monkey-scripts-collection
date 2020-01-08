@@ -21,3 +21,6 @@ declare var P: any;
 // youtube
 declare var ytInitialData: any;
 declare var ytcfg: any;
+
+// from onElementReady gist
+declare var queryForElements: (selector: string, callback: Function) => void;

@@ -8,7 +8,7 @@
 // @description  reveals the save and report buttons and makes links right clickable
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.0.1
+// @version      1.1.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Watch_Later_Button
@@ -17,10 +17,23 @@
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/YouTube_-_Add_Watch_Later_Button.meta.js
 // @downloadURL  https://openuserjs.org/install/zachhardesty7/YouTube_-_Add_Watch_Later_Button.user.js
 
-// @include      https://www.youtube.com/watch*
+// @include      https://www.youtube.com*
 // @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
 // ==/UserScript==
-/* global onElementReady */
+// prevent eslint from complaining when redefining private function queryForElements from gist
+// eslint-disable-next-line no-unused-vars
+/* global onElementReady, queryForElements:true */
+
+/**
+ * Query for new DOM nodes matching a specified selector.
+ *
+ * @override - function in gist that's a "require" above
+ */
+queryForElements = (selector, callback) => {
+	// Search for elements by selector
+	const elementList = document.querySelectorAll(selector) || []
+	elementList.forEach((element) => callback(element))
+}
 
 /**
  * build the button el tediously but like the rest
@@ -30,18 +43,31 @@
  * @param {HTMLElement} buttons - html node
  */
 function addButton(buttons) {
+	const zh = document.querySelector('#zh-wl')
+	// noop if button already present in correct place
+	if (zh && zh.parentElement.id === 'top-level-buttons') return
+
+	// YT hydration of DOM can shift elements
+	if (zh && !(zh.parentElement.id !== 'top-level-buttons')) {
+		console.log('watch later button found in wrong place, fixing')
+		zh.remove()
+	}
+
+	// normal action
+	console.info('no watch later button found, adding new button')
 	const container = document.createElement('ytd-button-renderer');
+
 	// eslint-disable-line jsdoc/valid-types
 	/** @type {HTMLElement & { buttonRenderer: boolean }} */ (container).buttonRenderer = true
 	container.style.color = 'var(--yt-spec-icon-inactive)'
 	container.className = buttons.lastElementChild.className
+	container.id = 'zh-wl'
 	buttons.appendChild(container)
 
 	const link = document.createElement('a')
 	link.className = buttons.children[buttons.children.length - 2].firstElementChild.className
 	container.append(link)
 
-	// button container automatically builds the 'button' el... maybe?
 	const buttonContainer = document.createElement('yt-icon-button')
 	buttonContainer.id = 'button'
 	buttonContainer.className = buttons.children[buttons.children.length - 2]
