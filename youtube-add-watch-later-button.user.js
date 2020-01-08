@@ -8,7 +8,7 @@
 // @description  reveals the save and report buttons and makes links right clickable
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.1.0
+// @version      1.1.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Watch_Later_Button
@@ -49,12 +49,12 @@ function addButton(buttons) {
 
 	// YT hydration of DOM can shift elements
 	if (zh && !(zh.parentElement.id !== 'top-level-buttons')) {
-		console.log('watch later button found in wrong place, fixing')
+		console.debug('watch later button found in wrong place, fixing')
 		zh.remove()
 	}
 
 	// normal action
-	console.info('no watch later button found, adding new button')
+	console.debug('no watch later button found, adding new button')
 	const container = document.createElement('ytd-button-renderer');
 
 	// eslint-disable-line jsdoc/valid-types
