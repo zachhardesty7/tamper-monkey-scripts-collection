@@ -8,7 +8,7 @@
 // @description  reveals the save and report buttons and makes links right clickable
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.2.0
+// @version      1.2.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Watch_Later_Button
@@ -41,14 +41,16 @@ queryForElements = (selector, callback) => {
  * @param {HTMLElement} buttons - html node
  */
 function addButton(buttons) {
-	const zh = document.querySelector('#zh-wl')
+	const zh = document.querySelectorAll('#zh-wl')
 	// noop if button already present in correct place
-	if (zh && zh.parentElement.id === 'top-level-buttons') return
+	if (zh.length === 1 && zh[0].parentElement.id === 'top-level-buttons') return
 
 	// YT hydration of DOM can shift elements
-	if (zh && !(zh.parentElement.id !== 'top-level-buttons')) {
-		console.debug('watch later button found in wrong place, fixing')
-		zh.remove()
+	if (zh.length >= 1) {
+		console.debug('watch later button(s) found in wrong place, fixing')
+		zh.forEach((wl) => {
+			if (wl.id !== 'top-level-buttons') wl.remove()
+		})
 	}
 
 	// normal action
