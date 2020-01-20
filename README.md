@@ -127,9 +127,9 @@ limitations under the License.
 [tampermonkey-firefox]: https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/
 [tampermonkey-opera]: https://addons.opera.com/en/extensions/details/tampermonkey-beta/
 [tampermonkey-website]: https://tampermonkey.net/
-[harvest-img]: https://zachhardesty.com/github/harvest.png
-[binance-img-pie]: https://zachhardesty.com/github/pie.png
-[binance-img-bal]: https://zachhardesty.com/github/bal.png
-[binance-img-exchange]: https://zachhardesty.com/github/exchange.png
-[soundcloud-img]: https://zachhardesty.com/github/soundcloud.png
-[docs-img]: https://zachhardesty.com/github/docs.png
+[harvest-img]: ./readme/harvest.png
+[binance-img-pie]: ./readme/pie.png
+[binance-img-bal]: ./readme/balUSD.png
+[binance-img-exchange]: ./readme/exchange.png
+[soundcloud-img]: ./readme/soundcloud.png
+[docs-img]: ./readme/docs.png

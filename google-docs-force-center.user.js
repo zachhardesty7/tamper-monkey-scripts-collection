@@ -1,4 +1,3 @@
-/* eslint-env browser, jquery, greasemonkey */
 /* eslint-disable max-len */
 
 // ==UserScript==
@@ -11,14 +10,13 @@
 // @version      0.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/google-docs-force-center.user.js
-// @homepageURL  https://openuserjs.org/scripts/zachhardesty7/oogle_Docs_-_Force_Center_Document_View
-// @supportURL   https://openuserjs.org/scripts/zachhardesty7/oogle_Docs_-_Force_Center_Document_View/issues
+// @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Google_Docs_-_Force_Center_Document_View
+// @supportURL   https://openuserjs.org/scripts/zachhardesty7/Google_Docs_-_Force_Center_Document_View/issues
 
-// @updateURL    https://openuserjs.org/meta/zachhardesty7/oogle_Docs_-_Force_Center_Document_View.meta.js
+// @updateURL    https://openuserjs.org/meta/zachhardesty7/Google_Docs_-_Force_Center_Document_View.meta.js
 // @downloadURL  https://openuserjs.org/install/zachhardesty7/oogle_Docs_-_Force_Center_Document_View.user.js
 
 // @match        https://docs.google.com/document/*
-// @grant        none
 // ==/UserScript==
 
 window.addEventListener('load', centerDocs, false)

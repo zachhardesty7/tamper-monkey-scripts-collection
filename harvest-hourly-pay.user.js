@@ -18,8 +18,6 @@
 // @downloadURL  https://openuserjs.org/install/zachhardesty7/Harvest_-_Hourly_Pay.user.js
 
 // @match        https://*.harvestapp.com/*
-// @grant        none
-// @downloadURL  https://zachhardesty.com/userscripts/harvest-hourly-pay.user.js
 // ==/UserScript==
 
 (function harvestPay() {

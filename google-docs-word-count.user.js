@@ -18,8 +18,8 @@
 // @downloadURL  https://openuserjs.org/install/zachhardesty7/Google_Docs_-_Word_Count_(With_Options).user.js
 
 // @match        https://docs.google.com/document/*
+
 // @require      https://raw.githubusercontent.com/JensPLarsen/ChromeExtension-GoogleDocsUtil/master/googleDocsUtil.js
-// @grant        none
 // ==/UserScript==
 /* global googleDocsUtil */
 
