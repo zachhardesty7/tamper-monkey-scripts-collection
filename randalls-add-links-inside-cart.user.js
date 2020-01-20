@@ -23,8 +23,8 @@
 // HREF ON ALL <a /> TAGS
 
 onElementReady('.cartdesc', false, (el) => {
-	const link = el.querySelector('a')
-	link.href = `http://shop.randalls.com${
-		link.onclick.toString().match(/\/product-details\.\d+\.html/gm)
-	}`
+  const link = el.querySelector('a')
+  link.href = `http://shop.randalls.com${
+    link.onclick.toString().match(/\/product-details\.\d+\.html/gm)
+  }`
 })

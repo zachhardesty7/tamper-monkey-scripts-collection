@@ -22,7 +22,7 @@
 
 // only operate once necessary el has loaded
 onElementReady('.exp-outline', true, (el) => {
-	// remove text
-	el.parentElement.querySelector('div').querySelector(':nth-child(3)').remove()
-	el.remove() // remove border
+  // remove text
+  el.parentElement.querySelector('div').querySelector(':nth-child(3)').remove()
+  el.remove() // remove border
 })

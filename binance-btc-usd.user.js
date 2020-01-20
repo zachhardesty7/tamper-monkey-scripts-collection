@@ -22,17 +22,17 @@
 /* global onElementReady */
 
 function convertBTCToUSD() {
-	fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
-		.then(resp => resp.json())
-		.then((data) => {
-			// if el are loaded then add USD value below BTC val
-			onElementReady('.td.ng-scope', false, e => addBTCConversionRate(e, data.BTC.USD))
+  fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
+    .then((resp) => resp.json())
+    .then((data) => {
+      // if el are loaded then add USD value below BTC val
+      onElementReady('.td.ng-scope', false, (e) => addBTCConversionRate(e, data.BTC.USD))
 
-			return null
-		})
-		.catch((error) => {
-			console.error(error)
-		})
+      return null
+    })
+    .catch((error) => {
+      console.error(error)
+    })
 }
 
 /**
@@ -43,19 +43,19 @@ function convertBTCToUSD() {
  * @param {number} BTCUSD - literal value
  */
 function addBTCConversionRate(el, BTCUSD) {
-	const BTCElement = el.firstElementChild.children[5]
+  const BTCElement = el.firstElementChild.children[5]
 
-	if (BTCElement.textContent !== '0') {
-		// convert to pretty USD format
-		const USDVal = (parseFloat(BTCElement.textContent) * BTCUSD)
-			.toFixed(2)
-			.replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
-		const USDValElem = document.createElement('p')
+  if (BTCElement.textContent !== '0') {
+    // convert to pretty USD format
+    const USDVal = (parseFloat(BTCElement.textContent) * BTCUSD)
+      .toFixed(2)
+      .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
+    const USDValElem = document.createElement('p')
 
-		USDValElem.textContent = `≈ ${USDVal} USD`
-		USDValElem.setAttribute('style', 'color: #a0a0a0')
-		BTCElement.append(USDValElem)
-	}
+    USDValElem.textContent = `≈ ${USDVal} USD`
+    USDValElem.setAttribute('style', 'color: #a0a0a0')
+    BTCElement.append(USDValElem)
+  }
 }
 
 convertBTCToUSD()

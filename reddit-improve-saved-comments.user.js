@@ -34,42 +34,47 @@ const getReactInstance = (DOMNode) => DOMNode[Object.keys(DOMNode)[0]]
  * @param {HTMLElement} button - triple dot more button under comments
  */
 function improveComments(button) {
-	const moreComponent = getReactInstance(button)
-	const moreComponentProps = moreComponent.return.return.memoizedProps
-	const genericButtonClass = button.parentElement.children[0].className
+  const moreComponent = getReactInstance(button)
+  const moreComponentProps = moreComponent.return.return.memoizedProps
+  const genericButtonClass = button.parentElement.children[0].className
 
-	const reportButton = document.createElement('button')
-	reportButton.textContent = 'Report'
-	reportButton.className = genericButtonClass
-	// navigate react obj
-	reportButton.onclick = moreComponentProps.children[0].props.onClick
+  const reportButton = document.createElement('button')
+  reportButton.textContent = 'Report'
+  reportButton.className = genericButtonClass
+  // navigate react obj
+  reportButton.onclick = moreComponentProps.children[0].props.onClick
 
-	// does not dynamically update text content
-	const saveButton = document.createElement('button')
-	saveButton.textContent = 'Save / Unsave'
-	saveButton.className = genericButtonClass
-	saveButton.onclick = moreComponentProps.children[1].props.onClick
+  // does not dynamically update text content
+  const saveButton = document.createElement('button')
+  saveButton.textContent = 'Save / Unsave'
+  saveButton.className = genericButtonClass
+  saveButton.onclick = moreComponentProps.children[1].props.onClick
 
-	// not defined in a separate function just because this is a quick
-	// way to ensure that all of the important parts are loaded
-	const comment = button.parentElement.parentElement.parentElement.parentElement
-		.parentElement.parentElement.parentElement.parentElement
+  // not defined in a separate function just because this is a quick
+  // way to ensure that all of the important parts are loaded
+  const comment = button.parentElement.parentElement.parentElement.parentElement
+    .parentElement.parentElement.parentElement.parentElement
 
-	// wrap the entirety of the comment in link el
-	const container = comment.parentElement
-	const wrapper = document.createElement('a')
-	// link to comment page hidden in react instance
-	wrapper.href = getReactInstance(comment).return.memoizedProps.comment.permalink
-	wrapper.append(comment) // move all original DOM children
-	wrapper.onclick = (e) => e.preventDefault() // allow original click handler to take over
+  // wrap the entirety of the comment in link el
+  const container = comment.parentElement
+  const wrapper = document.createElement('a')
+  // link to comment page hidden in react instance
+  wrapper.href = getReactInstance(comment).return.memoizedProps.comment.permalink
+  wrapper.append(comment) // move all original DOM children
+  wrapper.onclick = (e) => e.preventDefault() // allow original click handler to take over
 
-	container.append(wrapper)
+  container.append(wrapper)
 
-	button.parentElement.appendChild(reportButton)
-	button.parentElement.appendChild(saveButton)
-	button.remove()
+  button.parentElement.appendChild(reportButton)
+  button.parentElement.appendChild(saveButton)
+  button.remove()
 }
 // gross, but Reddit uses styled-components / emotion and has almost no
 // constant selectors that don't change between renders, detail allows react to hydrate first
-window.addEventListener('load', () =>	onElementReady('div.Comment > div > div > div:last-child > div > div:nth-child(2) > div:nth-child(2) > div:last-child > button:last-child[aria-haspopup][aria-expanded][aria-label]', false, improveComments),
-	false)
+window.addEventListener('load', () => {
+  onElementReady(
+    'div.Comment > div > div > div:last-child > div > div:nth-child(2) > div:nth-child(2) > div:last-child > button:last-child[aria-haspopup][aria-expanded][aria-label]',
+    false,
+    improveComments,
+  )
+}, false)

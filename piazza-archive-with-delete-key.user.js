@@ -31,17 +31,17 @@ let lastMovement = 'down' // or 'up'
  * @returns {?HTMLElement} result
  */
 const getPrevItem = (el) => {
-	if (el.previousElementSibling) return /** @type {HTMLElement} */ (el.previousElementSibling)
+  if (el.previousElementSibling) return /** @type {HTMLElement} */ (el.previousElementSibling)
 
-	let parent = el.parentElement.parentElement.previousElementSibling
-	while (parent) {
-		if (parent.lastElementChild && parent.lastElementChild.lastElementChild) {
-			return /** @type {HTMLElement} */ (parent.lastElementChild.lastElementChild)
-		}
-		parent = parent.previousElementSibling
-	}
+  let parent = el.parentElement.parentElement.previousElementSibling
+  while (parent) {
+    if (parent.lastElementChild && parent.lastElementChild.lastElementChild) {
+      return /** @type {HTMLElement} */ (parent.lastElementChild.lastElementChild)
+    }
+    parent = parent.previousElementSibling
+  }
 
-	return null
+  return null
 }
 
 /**
@@ -51,20 +51,20 @@ const getPrevItem = (el) => {
  * @returns {?HTMLElement} result
  */
 const getNextItem = (el) => {
-	// sibling from same week
-	if (el.nextElementSibling) return /** @type {HTMLElement} */ (el.nextElementSibling)
+  // sibling from same week
+  if (el.nextElementSibling) return /** @type {HTMLElement} */ (el.nextElementSibling)
 
-	// back up selection to next week
-	let parent = el.parentElement.parentElement.nextElementSibling
-	// return first proceeding week with a post in it
-	while (parent) {
-		if (parent.lastElementChild && parent.lastElementChild.firstElementChild) {
-			return /** @type {HTMLElement} */ (parent.lastElementChild.firstElementChild)
-		}
-		parent = parent.nextElementSibling // update to next week
-	}
+  // back up selection to next week
+  let parent = el.parentElement.parentElement.nextElementSibling
+  // return first proceeding week with a post in it
+  while (parent) {
+    if (parent.lastElementChild && parent.lastElementChild.firstElementChild) {
+      return /** @type {HTMLElement} */ (parent.lastElementChild.firstElementChild)
+    }
+    parent = parent.nextElementSibling // update to next week
+  }
 
-	return null
+  return null
 }
 
 /**
@@ -73,66 +73,66 @@ const getNextItem = (el) => {
  * @param {KeyboardEvent} e - keydown event
  */
 const onKeydownHandler = (e) => {
-	// move to prev feed item
-	if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-		const prevItem = getPrevItem(document.querySelector('.feed_item.selected'))
-		prevItem && prevItem.click()
-		lastMovement = 'up'
-	}
+  // move to prev feed item
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    const prevItem = getPrevItem(document.querySelector('.feed_item.selected'))
+    prevItem && prevItem.click()
+    lastMovement = 'up'
+  }
 
-	// move to next feed item
-	if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-		const nextItem = getNextItem(document.querySelector('.feed_item.selected'))
-		nextItem && nextItem.click()
-		lastMovement = 'down'
-	}
+  // move to next feed item
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+    const nextItem = getNextItem(document.querySelector('.feed_item.selected'))
+    nextItem && nextItem.click()
+    lastMovement = 'down'
+  }
 
-	// del & move to next feed item
-	if (e.key === 'Delete') {
-		const item = document.querySelector('.feed_item.selected')
-		lastMovement === 'up' // change view
-			? getPrevItem(item).click()
-			: getNextItem(item).click()
-		// lastDeletedItemId = (item.id)
-		P.feed.delFeedItem(item.id)
-	}
+  // del & move to next feed item
+  if (e.key === 'Delete') {
+    const item = document.querySelector('.feed_item.selected')
+    lastMovement === 'up' // change view
+      ? getPrevItem(item).click()
+      : getNextItem(item).click()
+    // lastDeletedItemId = (item.id)
+    P.feed.delFeedItem(item.id)
+  }
 
-	// FIXME: cannot read property 'remove' of null
-	// if (e.key === 'z' && e.ctrlKey) {
-	// 	if (lastDeletedItemId) {
-	// 		P.feed.addFeedItem(lastDeletedItemId)
-	// 	}
-	// }
+  // FIXME: cannot read property 'remove' of null
+  // if (e.key === 'z' && e.ctrlKey) {
+  //   if (lastDeletedItemId) {
+  //     P.feed.addFeedItem(lastDeletedItemId)
+  //   }
+  // }
 }
 
 // update direction of last movement direction for each click
 document.addEventListener('click', (e) => {
-	let clickedPost = /** @type {HTMLElement} */ (e.target)
+  let clickedPost = /** @type {HTMLElement} */ (e.target)
 
-	// traverse up html until the post item is found or `null`
-	while (clickedPost && !clickedPost.className.includes('feed_item')) {
-		clickedPost = clickedPost.parentElement
-	}
+  // traverse up html until the post item is found or `null`
+  while (clickedPost && !clickedPost.className.includes('feed_item')) {
+    clickedPost = clickedPost.parentElement
+  }
 
-	if (clickedPost) {
-		const selected = document.querySelector('.feed_item.selected')
+  if (clickedPost) {
+    const selected = document.querySelector('.feed_item.selected')
 
-		// id of week the post is in
-		const bucketClicked = clickedPost.parentElement.id
-		const bucketSelected = selected.parentElement.id
+    // id of week the post is in
+    const bucketClicked = clickedPost.parentElement.id
+    const bucketSelected = selected.parentElement.id
 
-		if (bucketClicked > bucketSelected) lastMovement = 'down'
-		else if (bucketClicked < bucketSelected) lastMovement = 'up'
-		else { // posts in the same week
-			// get position within the week
-			const positionClicked = [...clickedPost.parentElement.children].indexOf(clickedPost)
-			const positionSelected = [...selected.parentElement.children].indexOf(selected)
+    if (bucketClicked > bucketSelected) lastMovement = 'down'
+    else if (bucketClicked < bucketSelected) lastMovement = 'up'
+    else { // posts in the same week
+      // get position within the week
+      const positionClicked = [...clickedPost.parentElement.children].indexOf(clickedPost)
+      const positionSelected = [...selected.parentElement.children].indexOf(selected)
 
-			if (positionClicked < positionSelected) lastMovement = 'up'
-			else if (positionClicked > positionSelected) lastMovement = 'down'
-			// don't update lastMovement if already selected item is clicked
-		}
-	}
+      if (positionClicked < positionSelected) lastMovement = 'up'
+      else if (positionClicked > positionSelected) lastMovement = 'down'
+      // don't update lastMovement if already selected item is clicked
+    }
+  }
 })
 
 document.addEventListener('keydown', onKeydownHandler)

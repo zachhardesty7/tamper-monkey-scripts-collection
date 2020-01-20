@@ -22,47 +22,47 @@
 
 /* css hiding */
 const main = () => {
-	const styles = `
-		/* feedback modal */
-		.QSIPopOver.SI_6RSOI27plGNzMeV_PopOverContainer {
-			display: none !important;
-		}
+  const styles = `
+    /* feedback modal */
+    .QSIPopOver.SI_6RSOI27plGNzMeV_PopOverContainer {
+      display: none !important;
+    }
 
-		/* right help widget */
-		.nr-side-widget {
-			display: none !important;
-		}
+    /* right help widget */
+    .nr-side-widget {
+      display: none !important;
+    }
 
-		.adviceWidget {
-			display: none !important;
-		}
+    .adviceWidget {
+      display: none !important;
+    }
 
-		.feedbackWidget {
-			display: none !important;
-		}
+    .feedbackWidget {
+      display: none !important;
+    }
 
-		/* bills page feedback widget */
-		.FeedbackView {
-			display: none !important;
-		}
+    /* bills page feedback widget */
+    .FeedbackView {
+      display: none !important;
+    }
 
-		/* homepage ad */
-		.promotions-personalized-offers-ui {
-			display: none !important;
-		}
-	`
+    /* homepage ad */
+    .promotions-personalized-offers-ui {
+      display: none !important;
+    }
+  `
 
-	const stylesheet = document.createElement('style')
-	const head = document.head || document.getElementsByTagName('head')[0]
-	stylesheet.type = 'text/css'
-	stylesheet.appendChild(document.createTextNode(styles))
-	head.appendChild(stylesheet)
+  const stylesheet = document.createElement('style')
+  const head = document.head || document.getElementsByTagName('head')[0]
+  stylesheet.type = 'text/css'
+  stylesheet.appendChild(document.createTextNode(styles))
+  head.appendChild(stylesheet)
 }
 
 /* dynamic hiding */
 // hide account status bar (if robinhood text included)
 onElementReady('.AccountStatusBarItemView .status.error', false,
-	el => el.textContent.includes('Robinhood') &&
-		document.querySelector('.AccountStatusBarView').remove())
+  (el) => el.textContent.includes('Robinhood') &&
+    document.querySelector('.AccountStatusBarView').remove())
 
 main()

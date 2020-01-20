@@ -749,10 +749,10 @@ eslint-config-airbnb@^18.0.1:
     object.assign "^4.1.0"
     object.entries "^1.1.0"
 
-eslint-config-hardesty@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-hardesty/-/eslint-config-hardesty-1.2.0.tgz#ce1ee321249b620a4a86ccdb70c0622bfbde4dc6"
-  integrity sha512-WXrb1I5g0zFLKxoRl+69JL6U9BLL6HJDksVkpJ1ncCkpzwDXyH1fek7f7/mpE3M/jpfj5lxMIGW9XF9usZJPNg==
+eslint-config-hardesty@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-hardesty/-/eslint-config-hardesty-1.3.0.tgz#48c99f70637eb5ec5938d9453c5907ca6e6fbc89"
+  integrity sha512-ax8/8u4/CD6lXI+LbvUD4xvEhP8sF4I5shStV3Z/6Oy7QIXtaLcdPf/gBrG9HfxjB6p3p82jHVxVzKCF5Ox7aw==
   dependencies:
     escape-regex-string "^1.0.6"
     eslint-config-airbnb "^18.0.1"

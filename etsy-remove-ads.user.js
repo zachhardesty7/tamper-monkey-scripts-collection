@@ -22,13 +22,13 @@
 /* global onElementReady */
 
 onElementReady('.ad-indicator', false, (el) => {
-	el
-		.parentElement
-		.parentElement
-		.parentElement
-		.parentElement
-		.parentElement
-		.parentElement
-		.parentElement
-		.remove()
+  el
+    .parentElement
+    .parentElement
+    .parentElement
+    .parentElement
+    .parentElement
+    .parentElement
+    .parentElement
+    .remove()
 })
