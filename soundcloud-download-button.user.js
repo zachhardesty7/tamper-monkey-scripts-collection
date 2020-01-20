@@ -7,7 +7,7 @@
 // @description  adds a button on main page and song page to download song automatically from https://soundcloudmp3.org/
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.1.0
+// @version      2.0.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/soundcloud-download-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Soundcloud_-_Add_External_Download_Button
@@ -34,13 +34,12 @@ function addButton(el) {
   const button = document.createElement('button')
   button.textContent = 'External Download'
   // if on soundcloud home and song node is not a playlist, append SC styled button
-  const songLink = /** @type {HTMLAnchorElement} */ (el.querySelector('.soundTitle__title')).href
-  if (link.includes('stream') && !songLink.includes('/sets/')) {
+
+  if (link.includes('stream') && !(/** @type {HTMLAnchorElement} */(el.querySelector('.soundTitle__title')).href.includes('/sets/'))) {
     button.className = 'mp3-button sc-button sc-button-small'
     el.querySelector('.soundActions .sc-button-group').append(button)
     // add click listener to GM store the url of the song and open anything2mp3
     el.querySelector('.mp3-button').addEventListener('click', (e) => {
-      window.GM_setValue('link', songLink)
       window.open(`https://loader.to/?link=${link}&f=1&s=1&e=1&r=ddownr`, '_blank')
     })
     // else if on individual song page (and not playlist), append SC styled button
@@ -66,14 +65,17 @@ function addButton(el) {
     // requires jQuery - boo
     onElementReady('.l-listen-wrapper', false, addButton)
     onElementReady('.lazyLoadingList__list > .soundList__item', false, addButton)
-  } else if (window.location.href.includes('converter')) {
+  } else if (window.location.href.includes('loader.to')) {
     // hide modal breaks download plus it goes away after the download is triggered
     // onElementReady('.modal-footer button', false,
     //   document.querySelector(".modal-footer button").click());
     const timer = setInterval(() => {
-      if (/** @type {HTMLProgressElement} */(document.querySelector('#ds .card .section:last-of-type > progress')).value === 1000) {
+      /** @type {HTMLProgressElement} */
+      const progress = document.querySelector('#ds .card .section:last-of-type > progress')
+      if (progress.value === 1000) {
         /** @type {HTMLLinkElement} */
-        (document.querySelector('#ds .card .section:last-of-type > a')).click()
+        const button = document.querySelector('#ds .card .section:last-of-type > a')
+        button.click()
         clearInterval(timer)
       }
     }, 100)
