@@ -5,7 +5,7 @@
 // @description  reveals the save and report buttons and makes links right clickable
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.0.1
+// @version      1.1.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-improve-saved-comments.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Reddit_-_Improve_Saved_Comments
@@ -26,7 +26,7 @@
  * @param {HTMLElement} DOMNode - arbitrary DOM node with a hidden react instance
  * @returns {object} react instance object
  */
-const getReactInstance = DOMNode => DOMNode[Object.keys(DOMNode)[0]]
+const getReactInstance = (DOMNode) => DOMNode[Object.keys(DOMNode)[0]]
 
 /**
  * add features to comments
@@ -61,16 +61,15 @@ function improveComments(button) {
 	// link to comment page hidden in react instance
 	wrapper.href = getReactInstance(comment).return.memoizedProps.comment.permalink
 	wrapper.append(comment) // move all original DOM children
-	wrapper.onclick = e => e.preventDefault() // allow original click handler to take over
+	wrapper.onclick = (e) => e.preventDefault() // allow original click handler to take over
 
 	container.append(wrapper)
 
-	// TODO: might have more items in the dropdown
 	button.parentElement.appendChild(reportButton)
 	button.parentElement.appendChild(saveButton)
 	button.remove()
 }
-
 // gross, but Reddit uses styled-components / emotion and has almost no
 // constant selectors that don't change between renders, detail allows react to hydrate first
-onElementReady('div.Comment > div > div > div:last-child > div > div:nth-child(2) > div:nth-child(2) > div:last-child > button:last-child[aria-haspopup]', false, improveComments)
+window.addEventListener('load', () =>	onElementReady('div.Comment > div > div > div:last-child > div > div:nth-child(2) > div:nth-child(2) > div:last-child > button:last-child[aria-haspopup][aria-expanded][aria-label]', false, improveComments),
+	false)
