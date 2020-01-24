@@ -5,7 +5,7 @@
 // @description  bind the delete key to quickly archive posts
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.3.0
+// @version      2.3.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/piazza-archive-with-delete-key.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Piazza_-_Archive_with_Delete_Key
@@ -41,7 +41,10 @@ const getPrevItem = (el) => {
     parent = parent.previousElementSibling
   }
 
-  return null
+  // must be at start of posts so force get next
+  const item = getNextItem(el)
+  if (!item) throw new Error('cannot find any other posts') // prevent inf loop
+  return item
 }
 
 /**
@@ -54,7 +57,7 @@ const getNextItem = (el) => {
   // sibling from same week
   if (el.nextElementSibling) return /** @type {HTMLElement} */ (el.nextElementSibling)
 
-  // back up selection to next week
+  // back up element to week div and select next week
   let parent = el.parentElement.parentElement.nextElementSibling
   // return first proceeding week with a post in it
   while (parent) {
@@ -64,7 +67,10 @@ const getNextItem = (el) => {
     parent = parent.nextElementSibling // update to next week
   }
 
-  return null
+  // must be at end of posts so force get prev
+  const item = getPrevItem(el)
+  if (!item) throw new Error('cannot find any other posts') // prevent inf loop
+  return item
 }
 
 /**
@@ -90,9 +96,10 @@ const onKeydownHandler = (e) => {
   // del & move to next feed item
   if (e.key === 'Delete') {
     const item = document.querySelector('.feed_item.selected')
-    lastMovement === 'up' // change view
-      ? getPrevItem(item).click()
-      : getNextItem(item).click()
+    const newItem = lastMovement === 'up' // change view
+      ? getPrevItem(item)
+      : getNextItem(item)
+    newItem && newItem.click()
     // lastDeletedItemId = (item.id)
     P.feed.delFeedItem(item.id)
   }
