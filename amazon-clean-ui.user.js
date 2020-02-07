@@ -7,7 +7,7 @@
 // @description  removes annoying largely not useful elements from Amazon
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.4.3
+// @version      1.4.4
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/amazon-clean-ui.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Amazon_-_Clean_UI
@@ -310,7 +310,7 @@ function hideElements() {
     setStyleX('#reviewsMedley', 'margin-bottom: 0 !important;')
     hide('#superleafProductAlert_feature_div')
     hide('#dpx-legal_feature_div')
-    hide('#cm_cr_skyfall_medley.cr-skyfall-feedback-section')
+    hide('#cm_cr_skyfall_medley .cr-skyfall-feedback-section') // is feedback helpful? // FIXME:
     hide('#flipAndSampleAudio')
     hide('#authorFollow_feature_div')
     hideX('.askQuestionExamples')
@@ -318,9 +318,8 @@ function hideElements() {
     hide('#hsxShCelDpAmznCertBdg') // works w alexa
     hide('#dpx-smarthome-hub_feature_div') // add alexa for voice control
     hide('#pldn-deep-link') // suggestion to use smile
-    hideX('#productDetailsTable td.bucket div.content div.bucket') // better price & seller support links
+    hide('#productDetailsTable td.bucket div.content div.bucket') // better price & seller support links
     hide('#moreBuyingChoices_feature_div') // have one to sell?
-    hideX('.cr-skyfall-feedback-section') // is feedback helpful? // FIXME:
     hide('#trialBox') // report copyright issues
 
     // remove unnatural black background of title bar on some pages (video game consoles)
