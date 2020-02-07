@@ -7,7 +7,7 @@
 // @description  removes annoying largely not useful elements from Amazon
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.3.4
+// @version      1.4.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/amazon-clean-ui.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Amazon_-_Clean_UI
@@ -176,7 +176,7 @@ function hideElements() {
     // onElementReady('#recommendations', false, e => hide(e))
     // setStyle('.a-section.deliveries', 'margin-bottom: 0px;')
     // console.log('test')
-    hideAllGlobal('#recommendations') // all main sections
+    hideAll('#recommendations') // all main sections
     // hideParentX('.a-section.deliveries > div.a-fixed-right-grid') // history related
   }
 
@@ -249,6 +249,7 @@ function hideElements() {
   })
 
   if (STYLES) attachStyles()
+  // console.log('[INFO]: hideElements -> STYLES', STYLES)
 }
 
 /**********************
@@ -336,14 +337,18 @@ const setStyle = (target, val, i = 0) => {
 }
 
 /**
- * sets style on all results of a given selector (if it exists), extends setAttr
+ * sets style on a given selector via a StyleSheet
  *
  * @param {DOMTargetItem} target - selector or els
  * @param {string} val - desired style property value
  * @returns {void}
  */
 const setStyleAll = (target, val) => {
-  getElAll(target).forEach((el) => setStyle(el, val))
+  STYLES += `
+    ${target} {
+      ${val}
+    }
+  `
 }
 
 /**
@@ -364,7 +369,7 @@ const hide = (target, i = 0) => {
  * @returns {void}
  */
 const hideAll = (target) => {
-  getElAll(target).forEach(hide)
+  setStyleAll(target, 'display: none !important;')
 }
 
 /**
@@ -398,64 +403,15 @@ const hideAllParentX = (target, x = 0) => {
   getElAll(target).forEach((el) => hideParentX(el, x))
 }
 
-/** FUTURE USE FUNCTIONS */
-
-/**
- * sets style on a given selector via a StyleSheet,
- * designed to allow `:nth-child(n)`
- *
- * **NOTE**: DO NOT USE
- *
- * @private
- * @param {DOMTargetItem} target - selector or el
- * @param {string} styles - desired style property value
- * @param {number} i - nth-child item to hide
- * @returns {void}
- */
-const setStyleGlobal = (target, styles, i = 0) => {
-  STYLES += `
-    ${target}:nth-child(${i + 1}) {
-      ${styles}
-    }
-  `
-}
-
-/**
- * sets style on a given selector via a StyleSheet
- *
- * @param {DOMTargetItem} target - selector or el
- * @param {string} styles - desired style property value
- * @returns {void}
- */
-const setStyleAllGlobal = (target, styles) => {
-  STYLES += `
-    ${target} {
-      ${styles}
-    }
-  `
-}
+/** TEMP USE FUNCTIONS */
 
 /**
  * sets style to `display: none !important;` on a given selector via a StyleSheet,
- * designed to allow `:nth-child(n)`
- *
- * **NOTE**: DO NOT USE
  *
  * @private
  * @param {DOMTargetItem} target - selector or el
- * @param {number} i - nth-child item to hide
  * @returns {void}
  */
-const hideGlobal = (target, i) => {
-  setStyleGlobal(target, 'display: none !important;', i)
-}
-
-/**
- * sets style to `display: none !important;` on a given selector via a StyleSheet
- *
- * @param {DOMTargetItem} target - selector or el
- * @returns {void}
- */
-const hideAllGlobal = (target) => {
-  setStyleAllGlobal(target, 'display: none !important;')
+const hideGlobal = (target) => {
+  setStyleAll(target, 'display: none !important;')
 }
