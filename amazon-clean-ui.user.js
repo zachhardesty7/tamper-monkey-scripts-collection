@@ -7,7 +7,7 @@
 // @description  removes annoying largely not useful elements from Amazon
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.4.2
+// @version      1.4.3
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/amazon-clean-ui.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Amazon_-_Clean_UI
@@ -19,7 +19,6 @@
 // @include      https://*amazon.com*
 // @require      https://gist.githubusercontent.com/zachhardesty7/ea61364567ce66b94edb81f922efecef/raw/c23ba499828992d632266194384c72ff28dfad6e/onElementReady.js
 // ==/UserScript==
-/* global onElementReady */
 
 let STYLES = ''
 let READY = false
@@ -206,139 +205,139 @@ function hideElements() {
   // product-based pages
   if (link.match(/https*:\/\/.*?amazon\.com\/dp\/.*/g) || link.match(/https*:\/\/.*?amazon\.com\/gp\/product\/.*/g) || link.match(/https*:\/\/.*?amazon\.com\/.*\/dp\/.*/g)) {
     // hide nav junk / banner ads
-    hideX('#navSwmHoliday')
-    hideX('#universal-detail-ilm')
-    hideX('#detail-ilm_div')
+    hide('#navSwmHoliday')
+    hide('#universal-detail-ilm')
+    hide('#detail-ilm_div')
     hideX('#dp div', 0) // TODO: dangerous, replace with more precise selector
     hideX('#dp div', 1) // TODO: dangerous, replace with more precise selector
 
     // hide sharing
-    hideX('#tellAFriendBox_feature_div')
-    hideX('#tellAFriendBylineBox_feature_div')
+    hide('#tellAFriendBox_feature_div')
+    hide('#tellAFriendBylineBox_feature_div')
 
     // hide product sales help & options nobody uses (protection plan, etc)
-    hideX('#image-canvas-caption')
-    hideX('#issuancePriceblockAmabot_feature_div')
-    hideX('#alternativeOfferEligibilityMessaging_feature_div')
-    hideX('#productSupportAndReturnPolicy_feature_div')
-    hideX('#smileEligibility_feature_div')
-    hideX('#addServices_feature_div')
-    hideX('#edpIngress_feature_div')
-    hideX('#hqpWrapper')
-    hideX('#HLCXComparisonJumplink_feature_div')
-    hideX('#olp_feature_div')
+    hide('#image-canvas-caption')
+    hide('#issuancePriceblockAmabot_feature_div')
+    hide('#alternativeOfferEligibilityMessaging_feature_div')
+    hide('#productSupportAndReturnPolicy_feature_div')
+    hide('#smileEligibility_feature_div')
+    hide('#addServices_feature_div')
+    hide('#edpIngress_feature_div')
+    hide('#hqpWrapper')
+    hide('#HLCXComparisonJumplink_feature_div')
+    hide('#olp_feature_div')
     hideX('#moreBuyingChoices_feature_div > div > .a-section.a-padding-base')
-    hideX('#hqp')
-    hideX('#mbb_feature_div')
-    hideX('#simpleBundle_feature_div')
-    hideX('#buyNow_feature_div')
-    hideX('#oneClick_feature_div')
+    hide('#hqp')
+    hide('#mbb_feature_div')
+    hide('#simpleBundle_feature_div')
+    hide('#buyNow_feature_div')
+    hide('#oneClick_feature_div')
     hideParentX('#oneClickSignIn', 1)
-    hideX('#glowContextualIngressPt_feature_div')
-    hideX('#digitalDashLowProminence_feature_div')
-    hideX('#digitalDashLowProminenceAccordion_feature_div')
-    hideX('#digital-dash-create-high-prominence')
-    hideX('#buyNow')
+    hide('#glowContextualIngressPt_feature_div')
+    hide('#digitalDashLowProminence_feature_div')
+    hide('#digitalDashLowProminenceAccordion_feature_div')
+    hide('#digital-dash-create-high-prominence')
+    hide('#buyNow')
     hideParentX('#add-to-registry-wedding-button', 2)
     hideParentX('.oneclick-guide', 1)
     hideParentX('.oneclick-guide', 2, 1)
-    hideX('#tradeInInstantSavings_feature_div')
-    hideX('#digital-dash-create')
-    hideX('#tradeInButton_feature_div')
-    hideX('#add-to-baby-button-group')
+    hide('#tradeInInstantSavings_feature_div')
+    hide('#digital-dash-create')
+    hide('#tradeInButton_feature_div')
+    hide('#add-to-baby-button-group')
     // getEl('.a-column.a-span6.a-span-last').lastElementChild.style = 'display: none'
 
     // misc ads -- does not prevent loading or tracking
-    hideX('#amsDetailRight_feature_div')
-    hideX('#dp-ads-center-promo_feature_div')
-    hideX('#ape_Detail_dp-ads-center-promo_Desktop_placement')
-    hideX('#ADPlaceholder')
-    hideX('#ape_Detail_ad-endcap-1_Glance_placement')
-    hideX('#productAlert_feature_div') // amazon hub
+    hide('#amsDetailRight_feature_div')
+    hide('#dp-ads-center-promo_feature_div')
+    hide('#ape_Detail_dp-ads-center-promo_Desktop_placement')
+    hide('#ADPlaceholder')
+    hide('#ape_Detail_ad-endcap-1_Glance_placement')
+    hide('#productAlert_feature_div') // amazon hub
 
     // clean up empty section dividers
     setStyle('.bucket', 'display: block;')
     hide('.bucketDivider')
-    hideX('#promoGrid')
-    hideX('#messages')
+    hide('#promoGrid')
+    hide('#messages')
 
     // hide related products and recommendations
-    hideX('#sp_detail_thematic')
-    hideX('#skyCitySoftMerge_feature_div')
-    hideX('#recommendations_feature_div')
+    hide('#sp_detail_thematic')
+    hide('#skyCitySoftMerge_feature_div')
+    hide('#recommendations_feature_div')
     hide('.a-section.similarities-widget')
     hideX('[name="goKindleStaticPopDiv"]')
-    hideX('#sims-fbt')
-    hideX('#heroQuickPromoBooksAtf_feature_div') // book suggestion under product summary
-    hideX('#heroQuickPromo_feature_div') // get alexa for Win10
-    hideX('#bundleV2_feature_div')
-    hideX('#cerberus_feature_div')
-    hideX('#p13n-m-desktop-dp-sims_session-similarities-sims-feature-3')
-    hideX('#p13n-m-desktop-dp-sims_purchase-similarities-sims-feature-3')
-    hideX('#p13n-m-desktop-dp-sims_purchase-similarities-sims-feature-2')
-    hideX('#relatedMaterials_feature_div')
-    hideX('#beautyRecommendations_feature_div')
-    hideX('#rhf')
-    hideX('#sponsoredProducts2_feature_div')
-    hideX('#sims-consolidated-2_feature_div')
-    hideX('#dpx-btf-hlcx-comparison_feature_div')
-    hideX('#HLCXComparisonWidget_feature_div')
-    hideX('#featureAwarenessWidget_feature_div')
+    hide('#sims-fbt')
+    hide('#heroQuickPromoBooksAtf_feature_div') // book suggestion under product summary
+    hide('#heroQuickPromo_feature_div') // get alexa for Win10
+    hide('#bundleV2_feature_div')
+    hide('#cerberus_feature_div')
+    hide('#p13n-m-desktop-dp-sims_session-similarities-sims-feature-3')
+    hide('#p13n-m-desktop-dp-sims_purchase-similarities-sims-feature-3')
+    hide('#p13n-m-desktop-dp-sims_purchase-similarities-sims-feature-2')
+    hide('#relatedMaterials_feature_div')
+    hide('#beautyRecommendations_feature_div')
+    hide('#rhf')
+    hide('#sponsoredProducts2_feature_div')
+    hide('#sims-consolidated-2_feature_div')
+    hide('#dpx-btf-hlcx-comparison_feature_div')
+    hide('#HLCXComparisonWidget_feature_div')
+    hide('#featureAwarenessWidget_feature_div')
     hideParentX('#widget_container .a-carousel-container', 1)
     hideX('.a-section', getElAll('.a-section').length - 5)
-    hideX('#beautyBadging_feature_div') // Luxury Beauty green tag
-    hideX('#almMultiOfferEgress_feature_div') // "other ways to buy"
-    hideX('#ccxssContent') // post ATC recommendations panel
+    hide('#beautyBadging_feature_div') // Luxury Beauty green tag
+    hide('#almMultiOfferEgress_feature_div') // "other ways to buy"
+    hide('#ccxssContent') // post ATC recommendations panel
     // hide('#attach-accessories') // post ATC recommendations panel FIXME: broken due to lazy load
     // REVIEW: experimental, hide junk at the bottom of the page without ID or class
     hide('#dpx-giveaway_feature_div ~ div')
     hide('#dpx-giveaway_feature_div ~ table')
 
     // hide other junk sections
-    hideX('#sp_detail')
-    hideX('#quickPromoBucketContent')
+    hide('#sp_detail')
+    hide('#quickPromoBucketContent')
     hideParentX('.celwidget .a-section.askDetailPageSearchWidgetSection', 1)
-    hideX('#vse-related-videos')
+    hide('#vse-related-videos')
     hideX('.a-section.vse-empty-view-container.bucket')
-    hideX('#importantInformation')
-    hideX('#giveaway_feature_div')
-    hideX('#view_to_purchase-sims-feature')
-    hideX('#store-disclaimer_feature_div')
+    hide('#importantInformation')
+    hide('#giveaway_feature_div')
+    hide('#view_to_purchase-sims-feature')
+    hide('#store-disclaimer_feature_div')
     hideParentX('#fiona-publisher-signup-link', 2)
     hideParentX('#hero-quick-promo-grid_feature_div #hero-quick-promo', 1)
-    hideX('#extraProductInfoTxtBookFeatureGroup')
+    hide('#extraProductInfoTxtBookFeatureGroup')
     setStyleX('#aplus', 'padding: 15px 0; border-top: lightgrey 1px solid;')
     setStyleX('#reviewsMedley', 'margin-bottom: 0 !important;')
-    hideX('#superleafProductAlert_feature_div')
-    hideX('#dpx-legal_feature_div')
-    hideX('#cm_cr_skyfall_medley.cr-skyfall-feedback-section')
-    hideX('#flipAndSampleAudio')
-    hideX('#authorFollow_feature_div')
+    hide('#superleafProductAlert_feature_div')
+    hide('#dpx-legal_feature_div')
+    hide('#cm_cr_skyfall_medley.cr-skyfall-feedback-section')
+    hide('#flipAndSampleAudio')
+    hide('#authorFollow_feature_div')
     hideX('.askQuestionExamples')
-    hideX('#acBadge_feature_div')
-    hideX('#hsxShCelDpAmznCertBdg') // works w alexa
-    hideX('#dpx-smarthome-hub_feature_div') // add alexa for voice control
-    hideX('#pldn-deep-link') // suggestion to use smile
+    hide('#acBadge_feature_div')
+    hide('#hsxShCelDpAmznCertBdg') // works w alexa
+    hide('#dpx-smarthome-hub_feature_div') // add alexa for voice control
+    hide('#pldn-deep-link') // suggestion to use smile
     hideX('#productDetailsTable td.bucket div.content div.bucket') // better price & seller support links
-    hideX('#moreBuyingChoices_feature_div') // have one to sell?
+    hide('#moreBuyingChoices_feature_div') // have one to sell?
     hideX('.cr-skyfall-feedback-section') // is feedback helpful? // FIXME:
-    hideX('#trialBox') // report copyright issues
+    hide('#trialBox') // report copyright issues
 
     // remove unnatural black background of title bar on some pages (video game consoles)
-    setStyleX('#ppd-top', 'background: none;')
-    setStyleX('#titleBar.superleaf', 'background: none;')
+    setStyle('#ppd-top', 'background: none;')
+    setStyle('#titleBar.superleaf', 'background: none;')
     setStyleX('.superleafParent #wayfinding-breadcrumbs_container', 'background: none;')
 
     // fix colors
     setStyle('.superleafParent #wayfinding-breadcrumbs_feature_div .a-color-tertiary', 'color: #111 !important;')
-    setStyleX('a#breadcrumb-back-link.a-link-normal.a-color-tertiary', 'color: #111 !important;')
+    setStyle('a#breadcrumb-back-link.a-link-normal.a-color-tertiary', 'color: #111 !important;')
     setStyleX('#superLeafTitleFeatureGroup #titleSection #title', 'color: black;')
     setStyleX('#titleBar.superleaf .a-color-secondary', 'color: #555 !important;')
-    setStyleX('#titleBar-left', 'color: black;')
+    setStyle('#titleBar-left', 'color: black;')
     setStyleX('#superLeafGameReviews_feature_div .a-icon-popover', 'filter: none;')
     setStyle('#titleBar a:link, #titleBar.superleaf .a-link-normal', 'color: #0066c0 !important;')
     setStyleX('.superleaf .ac-for-text', 'color: #888;')
-    setStyleX('#superleafActionPanelWrapper', 'box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 4px -1px;')
+    setStyle('#superleafActionPanelWrapper', 'box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 4px -1px;')
   }
 
   // subscribe & save page
@@ -353,9 +352,9 @@ function hideElements() {
   // search page
   if (link.match(/https*:\/\/.*?amazon\.com\/s.*/g)) {
     hide('.AdHolder')
-    hideX('#centerBelowExtra') // search feedback
+    hide('#centerBelowExtra') // search feedback
     hide('div[data-component-type="sp-sponsored-result"]') // sponsored res
-    hideX('#rhf[aria-label="Your recently viewed items and featured recommendations"]') // footer full of junk
+    hide('#rhf[aria-label="Your recently viewed items and featured recommendations"]') // footer full of junk
     hideAllParentX('.a-section #pdagEncapsulated .slot__ad', 2)
     hideAllParentX('.s-result-item .sg-col-inner .celwidget div .s-shopping-adviser', 4) // editorial recs
     hideAllParentX('.s-result-item .sg-col-inner div .s-shopping-adviser', 3) // similar connectors
@@ -368,8 +367,8 @@ function hideElements() {
   // wishlist page
   if (link.match(/https*:\/\/.*?amazon\.com\/hz\/wishlist\/ls.*/g)) {
     // hide recommendations
-    hideX('#rhf')
-    hideX('#loaded-items')
+    hide('#rhf')
+    hide('#loaded-items')
 
     // increase spacing of filter icon
     setStyleX('#filter-and-sort span', 'padding-right: 5px;')
@@ -377,20 +376,20 @@ function hideElements() {
 
   // ideas page
   if (link.match(/https*:\/\/.*?amazon\.com\/ideas\/.*/g)) {
-    hideX('#rhf') // hide recommendations
+    hide('#rhf') // hide recommendations
   }
 
   /* site-wide modifications */
   // hide nav ads
-  hideX('#nav-upnav')
-  hideX('#nav-subnav')
+  hide('#nav-upnav')
+  hide('#nav-subnav')
   hideX('#nav-main .nav-right')
 
   // hide recent items
-  hideX('#raw-sitewide-rhf')
+  hide('#raw-sitewide-rhf')
 
   // minimize size and hide useless giant footer section
-  setStyleX('#navFooter', 'margin-top: 0px;')
+  setStyle('#navFooter', 'margin-top: 0px;')
   hideX('.navFooterLine.navFooterLinkLine.navFooterPadItemLine')
   hideX('.navFooterLine.navFooterLinkLine.navFooterDescLine')
   setStyleX('#navFooter.navLeftFooter .navFooterCopyright', 'padding-bottom: 10px !important;')
@@ -412,7 +411,7 @@ function hideElements() {
 
   // activate button to restore footer display
   on(getElX('#view-footer'), 'click', () => {
-    hideX('#view-footer')
+    hide('#view-footer')
     setStyleX('.nav-footer-line', 'margin-top: 30px;')
     setStyleX('#navBackToTop div', 'margin-bottom: 30px;')
     setStyleX('#navFooter .navFooterVerticalColumn.navAccessibility', 'display: table;')
