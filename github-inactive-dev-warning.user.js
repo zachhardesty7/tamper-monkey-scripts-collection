@@ -8,7 +8,7 @@
 // @description  display big banner if project's last commit over 6 months ago and giant banner if over 1 year ago
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.0.2
+// @version      1.0.3
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/github-inactive-dev-warning.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Github_-_Inactive_Development_Warning
@@ -34,8 +34,8 @@ onElementReady('.commit-tease.js-details-container.Details > div > span > relati
  */
 function displayMessage(el) {
   document
-    .querySelector('.repohead-details-container')
-    .insertAdjacentElement('afterend', el)
+    .querySelector('.repohead')
+    .insertAdjacentElement('beforebegin', el)
 }
 
 function renderWarning() {
