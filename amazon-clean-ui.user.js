@@ -7,7 +7,7 @@
 // @description  removes annoying largely not useful elements from Amazon
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.4.4
+// @version      1.5.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/amazon-clean-ui.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Amazon_-_Clean_UI
@@ -292,6 +292,9 @@ function hideElements() {
     // REVIEW: experimental, hide junk at the bottom of the page without ID or class
     hide('#dpx-giveaway_feature_div ~ div')
     hide('#dpx-giveaway_feature_div ~ table')
+    hide('#va-related-videos-widget_feature_div') // videos for related products
+    hide('#rvs-vse-related-videos') // videos for this item and related products
+    hide('.threepsl.MultiBrandCreativeDesktop.celwidget') // brands related to category
 
     // hide other junk sections
     hide('#sp_detail')
