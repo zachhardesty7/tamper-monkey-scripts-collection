@@ -1,5 +1,3 @@
-/* eslint-disable max-len */
-
 // ==UserScript==
 // @name         Binance - Portfolio Distribution Pie Chart
 // @namespace    https://zachhardesty.com
@@ -7,7 +5,7 @@
 // @description  adds a simple visual representation of portfolio distribution (USD) on "balance" and "deposits & withdrawals" pages
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.0.0
+// @version      1.0.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/binance-portfolio-distribution-chart.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Binance_-_Portfolio_Distribution_Pie_Chart
@@ -24,24 +22,26 @@
 /* global onElementReady */
 
 const chartColors = {
-  red: 'rgb(255, 99, 132)',
-  orange: 'rgb(255, 159, 64)',
-  yellow: 'rgb(255, 205, 86)',
-  green: 'rgb(75, 192, 192)',
-  blue: 'rgb(54, 162, 235)',
-  grey: 'rgb(201, 203, 207)',
-  purple: 'rgb(153, 102, 255)',
-  teal: '#59d2fe',
+  red: "rgb(255, 99, 132)",
+  orange: "rgb(255, 159, 64)",
+  yellow: "rgb(255, 205, 86)",
+  green: "rgb(75, 192, 192)",
+  blue: "rgb(54, 162, 235)",
+  grey: "rgb(201, 203, 207)",
+  purple: "rgb(153, 102, 255)",
+  teal: "#59d2fe",
 }
 
 const chartConfig = {
-  type: 'pie',
+  type: "pie",
   data: {
-    datasets: [{
-      data: [],
-      backgroundColor: [],
-      label: 'Dataset 1',
-    }],
+    datasets: [
+      {
+        data: [],
+        backgroundColor: [],
+        label: "Dataset 1",
+      },
+    ],
     labels: [],
   },
   options: {
@@ -56,7 +56,7 @@ const chartConfig = {
     },
     title: {
       display: true,
-      text: 'Portfolio Distribution',
+      text: "Portfolio Distribution",
     },
   },
 }
@@ -68,7 +68,7 @@ const chartConfig = {
  * @returns {string} matching key
  */
 function getMaxInObject(obj) {
-  let maxKey = ''
+  let maxKey = ""
   let maxVal = 0
   Object.keys(obj).forEach((key) => {
     if (obj[key] > maxVal) {
@@ -81,32 +81,39 @@ function getMaxInObject(obj) {
 }
 
 // begin program once data has loaded
-onElementReady('span.btn.btn-deposit.ng-binding.ng-scope', true, () => {
+onElementReady("span.btn.btn-deposit.ng-binding.ng-scope", true, () => {
   // build canvas el
-  const page = document.querySelector('.chargeWithdraw-title')
-  const canvas = document.createElement('canvas')
-  canvas.id = 'zh-chart'
+  const page = document.querySelector(".chargeWithdraw-title")
+  const canvas = document.createElement("canvas")
+  canvas.id = "zh-chart"
   canvas.height = 250
   canvas.width = 250
-  canvas.setAttribute('style', 'height: 250px; width: 250px; display: block; float: right')
+  canvas.setAttribute(
+    "style",
+    "height: 250px; width: 250px; display: block; float: right"
+  )
 
   // insert canvas and capture el
-  page.appendChild(canvas)
-  const ctx = /** @type {HTMLCanvasElement} */ (document.querySelector('#zh-chart')).getContext('2d')
+  page.append(canvas)
+  const ctx = /** @type {HTMLCanvasElement} */ (document.querySelector(
+    "#zh-chart"
+  )).getContext("2d")
 
   // scrape value of portfolio data in BTC
-  const portfolioRawData = document.querySelectorAll('.td.ng-scope')
+  const portfolioRawData = document.querySelectorAll(".td.ng-scope")
   const portfolio = {}
   portfolioRawData.forEach((el) => {
-    const name = el.firstElementChild.children[0].textContent.replace(/\s/g, '')
-    const val = parseFloat(el.firstElementChild.children[5].firstChild.textContent)
+    const name = el.firstElementChild.children[0].textContent.replace(/\s/g, "")
+    const val = Number.parseFloat(
+      el.firstElementChild.children[5].firstChild.textContent
+    )
     if (val !== 0) {
       portfolio[name] = val
     }
   })
 
   // get cur BTC to USD conversion rate
-  fetch('https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD')
+  fetch("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD")
     .then((response) => response.json())
     .then((data) => {
       // capture 6 largest assets for pie chart
@@ -125,8 +132,10 @@ onElementReady('span.btn.btn-deposit.ng-binding.ng-scope', true, () => {
       })
 
       // update chart data with other category
-      chartConfig.data.datasets[0].data.push((otherCryptosVal * data.USD).toFixed(2))
-      chartConfig.data.labels.push('other')
+      chartConfig.data.datasets[0].data.push(
+        (otherCryptosVal * data.USD).toFixed(2)
+      )
+      chartConfig.data.labels.push("other")
 
       // randomize color order and update config
       const keys = Object.keys(chartColors)
@@ -136,7 +145,7 @@ onElementReady('span.btn.btn-deposit.ng-binding.ng-scope', true, () => {
       }
 
       // generate pie chart
-      window.myPie = new /** @type {any} */(window).Chart(ctx, chartConfig)
+      window.myPie = new /** @type {any} */ (window).Chart(ctx, chartConfig)
 
       return null
     })

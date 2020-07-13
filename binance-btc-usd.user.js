@@ -1,4 +1,3 @@
-
 // ==UserScript==
 // @name         Binance - Add BTC to USD Conversion
 // @namespace    https://zachhardesty.coms
@@ -6,7 +5,7 @@
 // @description  rough conversion to get USD val of coin on "balance" & "deposits/withdrawals" page
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.2.0
+// @version      1.2.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/binance-btc-usd.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Binance_-_Add_BTC_to_USD_Conversion
@@ -22,11 +21,13 @@
 /* global onElementReady */
 
 function convertBTCToUSD() {
-  fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD')
+  fetch("https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD")
     .then((resp) => resp.json())
     .then((data) => {
       // if el are loaded then add USD value below BTC val
-      onElementReady('.td.ng-scope', false, (e) => addBTCConversionRate(e, data.BTC.USD))
+      onElementReady(".td.ng-scope", false, (e) =>
+        addBTCConversionRate(e, data.BTC.USD)
+      )
 
       return null
     })
@@ -45,15 +46,15 @@ function convertBTCToUSD() {
 function addBTCConversionRate(el, BTCUSD) {
   const BTCElement = el.firstElementChild.children[5]
 
-  if (BTCElement.textContent !== '0') {
+  if (BTCElement.textContent !== "0") {
     // convert to pretty USD format
-    const USDVal = (parseFloat(BTCElement.textContent) * BTCUSD)
+    const USDVal = (Number.parseFloat(BTCElement.textContent) * BTCUSD)
       .toFixed(2)
-      .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
-    const USDValElem = document.createElement('p')
+      .replace(/(\d)(?=(\d{3})+\.)/g, "$1,")
+    const USDValElem = document.createElement("p")
 
     USDValElem.textContent = `≈ ${USDVal} USD`
-    USDValElem.setAttribute('style', 'color: #a0a0a0')
+    USDValElem.setAttribute("style", "color: #a0a0a0")
     BTCElement.append(USDValElem)
   }
 }

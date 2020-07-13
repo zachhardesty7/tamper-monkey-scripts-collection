@@ -1,4 +1,3 @@
-
 // ==UserScript==
 // @name         Google Search - Hide "People also search for"
 // @namespace    https://zachhardesty.com
@@ -6,7 +5,7 @@
 // @description  hide annoying popup below most recently visited the search result
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.0.0
+// @version      1.0.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/google-hide-search-interruptions.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Google_Search_-_Hide_People_also_search_for
@@ -21,8 +20,8 @@
 /* global onElementReady */
 
 // only operate once necessary el has loaded
-onElementReady('.exp-outline', true, (el) => {
+onElementReady(".exp-outline", true, (el) => {
   // remove text
-  el.parentElement.querySelector('div').querySelector(':nth-child(3)').remove()
+  el.parentElement.querySelector("div").querySelector(":nth-child(3)").remove()
   el.remove() // remove border
 })

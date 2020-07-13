@@ -1,6 +1,3 @@
-/* eslint-env browser, jquery, greasemonkey */
-/* eslint-disable max-len */
-
 // ==UserScript==
 // @name         Google Docs - Word Count (With Options)
 // @namespace    https://zachhardesty.com
@@ -8,7 +5,7 @@
 // @description  adds a word counter with options to Google Docs
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      0.2.0
+// @version      0.2.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/google-docs-word-count.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Google_Docs_-_Word_Count_(With_Options)
@@ -31,7 +28,7 @@
 // may implement only necessary functions to save space, library size: (15.4 KB)
 // https://github.com/JensPLarsen/ChromeExtension-GoogleDocsUtil
 
-(function displayCount() {
+;(function displayCount() {
   // words not counted between these when true
   const BRACKETS = true
   const PARENTHESIS = true
@@ -40,9 +37,11 @@
 
   const SELECTED = true // if selected text present, word count only counts it
 
-  const display = document.createElement('div')
-  display.id = 'zh-display'
-  display.setAttribute('style', `
+  const display = document.createElement("div")
+  display.id = "zh-display"
+  display.setAttribute(
+    "style",
+    `
     position: fixed;
     width: 100%;
     left: 0px;
@@ -56,8 +55,9 @@
     padding-top: 5px;
     padding-left: 5px;
     border-top: 1px solid #d9d9d9;
-  `)
-  document.querySelector('body').append(display)
+  `
+  )
+  document.querySelector("body").append(display)
 
   /**
    * update the word count
@@ -66,21 +66,22 @@
     const doc = googleDocsUtil.getGoogleDocument()
     let selected = doc.selectedText
 
-    const pages = document.querySelector('.kix-paginateddocumentplugin').children[1].children
-    let body = ''
-    Array.from(pages).forEach((page) => {
+    const pages = document.querySelector(".kix-paginateddocumentplugin")
+      .children[1].children
+    let body = ""
+    ;[...pages].forEach((page) => {
       const content = page.lastElementChild.firstElementChild
       const text = content.textContent
 
       // pages that are unloaded will appear to have no text
       // add a marker to the cumulative body to indicate that
       // a word count should not be displayed
-      if (text === '') body += ' ~~ '
+      if (text === "") body += " ~~ "
       body += text
     })
 
     // clean extra spaces
-    body = body.replace(/\u00A0/g, ' ').trim()
+    body = body.replace(/\u00A0/g, " ").trim()
 
     // generate regex from settings
     // must escape \'s in JS
@@ -88,31 +89,49 @@
     //   /(“(.(?!“))+”)|(\((.(?!\())+\)|\[(.(?!\[))+\])
     //     |Works Cited(\n.*)*|(Unit \d (Primary Source Analysis|Exam: Part \d - #\d+))/g
     const regex = []
-    if (BRACKETS) regex.push('\\[(.(?!\\[))+\\]')
-    if (PARENTHESIS) regex.push('\\((.(?!\\())+\\)')
-    if (QUOTES) regex.push('Works Cited(.|\\n.*)*|(Unit \\d (Primary Source Analysis|Exam: Part \\d( - #\\d+)*))')
-    if (MISC) regex.push('(“(.(?!“))+”)')
+    if (BRACKETS) regex.push("\\[(.(?!\\[))+\\]")
+    if (PARENTHESIS) regex.push("\\((.(?!\\())+\\)")
+    if (QUOTES)
+      regex.push(
+        "Works Cited(.|\\n.*)*|(Unit \\d (Primary Source Analysis|Exam: Part \\d( - #\\d+)*))"
+      )
+    if (MISC) regex.push("(“(.(?!“))+”)")
 
     // apply regex filtering to body
     regex.forEach((reg) => {
-      selected = selected.replace(new RegExp(reg, 'g'), ' ')
+      selected = selected.replace(new RegExp(reg, "g"), " ")
     })
 
     // apply regex filtering to selected text if necessary
     let filtered = body
     regex.forEach((reg) => {
-      filtered = filtered.replace(new RegExp(reg, 'g'), ' ')
+      filtered = filtered.replace(new RegExp(reg, "g"), " ")
     })
 
     // remove extra spaces and line breaks and get counts
-    const words = filtered.trim().replace(/\u00A0/g, ' ').replace(/ {2,}/g, ' ').split(' ')
-    if (words.includes('~~')) { // empty or unloaded pages present
-      document.querySelector('#zh-display').textContent = `Word Count: (scroll to bottom & remove empty pages) | Pages: ${pages.length}`
+    const words = filtered
+      .trim()
+      .replace(/\u00A0/g, " ")
+      .replace(/ {2,}/g, " ")
+      .split(" ")
+    if (words.includes("~~")) {
+      // empty or unloaded pages present
+      document.querySelector(
+        "#zh-display"
+      ).textContent = `Word Count: (scroll to bottom & remove empty pages) | Pages: ${pages.length}`
     } else if (selected.length > 0 && SELECTED) {
-      selected = selected.trim().replace(/\u00A0/g, ' ').replace(/ {2,}/g, ' ').split(' ')
-      document.querySelector('#zh-display').textContent = `Word Count: ${selected.length} of ${words.length} (selected) | Pages: ${pages.length}`
+      selected = selected
+        .trim()
+        .replace(/\u00A0/g, " ")
+        .replace(/ {2,}/g, " ")
+        .split(" ")
+      document.querySelector(
+        "#zh-display"
+      ).textContent = `Word Count: ${selected.length} of ${words.length} (selected) | Pages: ${pages.length}`
     } else {
-      document.querySelector('#zh-display').textContent = `Word Count: ${words.length} | Pages: ${pages.length}`
+      document.querySelector(
+        "#zh-display"
+      ).textContent = `Word Count: ${words.length} | Pages: ${pages.length}`
     }
   }
 
