@@ -37,7 +37,9 @@ onElementReady(
  * @param {HTMLElement} el - target
  */
 function displayMessage(el) {
-  document.querySelector(".repohead").insertAdjacentElement("beforebegin", el)
+  document
+    .querySelector("#js-repo-pjax-container")
+    .insertAdjacentElement("beforebegin", el)
 }
 
 function renderWarning() {
