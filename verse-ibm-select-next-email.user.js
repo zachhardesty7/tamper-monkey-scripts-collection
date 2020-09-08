@@ -3,9 +3,9 @@
 // @namespace    https://openuserjs.org/users/zachhardesty7
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @description  load up next email when the current one is deleted
-// @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
+// @copyright    2020, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.0.0
+// @version      1.1.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/verse-ibm-select-next-email.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/IBM_Verse_-_Auto-Select_Next_Email
@@ -20,36 +20,43 @@
 /* global onElementReady */
 
 /**
- * add features to comments
+ * move to next email, triggers on delete and/or archive click
  *
- * @param {HTMLElement} button - triple dot more button under comments
+ * @param {HTMLElement} selectedEmail - email that's parent of clicked button
  */
-function f(button) {
-  const selectedEmail =
-    button.parentElement.parentElement.parentElement.parentElement
+function handleDeleteClick(selectedEmail) {
+  let nextEmail
 
-  button.addEventListener("click", () => {
-    let nextEmail
+  // is last email
+  if (selectedEmail.nextElementSibling.tagName === "SPAN") {
+    nextEmail =
+      selectedEmail.previousElementSibling.attributes["aria-labelledby"].value
+  } else {
+    nextEmail =
+      selectedEmail.nextElementSibling.attributes["aria-labelledby"].value
+  }
 
-    // is last email
-    if (selectedEmail.nextElementSibling.tagName === "SPAN") {
-      nextEmail =
-        selectedEmail.previousElementSibling.attributes["aria-labelledby"].value
-    } else {
-      nextEmail =
-        selectedEmail.nextElementSibling.attributes["aria-labelledby"].value
-    }
-
-    /** @type {HTMLElement} */
-    const item = document.querySelector(`[aria-labelledby="${nextEmail}"]`)
-    if (item) item.click()
-  })
+  /** @type {HTMLElement} */
+  const item = document.querySelector(`[aria-labelledby="${nextEmail}"]`)
+  if (item) item.click()
 }
 
 window.addEventListener(
   "load",
   () => {
-    onElementReady("button.triage-action.remove", {}, f)
+    onElementReady("button.triage-action.remove", {}, (button) => {
+      /** email container element */
+      const parentCon =
+        button.parentElement.parentElement.parentElement.parentElement
+
+      // trigger on archive
+      button.addEventListener("click", () => handleDeleteClick(parentCon))
+
+      // trigger on delete
+      button.previousElementSibling.addEventListener("click", () =>
+        handleDeleteClick(parentCon)
+      )
+    })
   },
   false
 )
