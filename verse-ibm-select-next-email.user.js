@@ -5,7 +5,7 @@
 // @description  load up next email when the current one is deleted
 // @copyright    2020, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.0.1
+// @version      2.0.2
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/verse-ibm-select-next-email.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/IBM_Verse_-_Auto-Select_Next_Email
@@ -30,7 +30,7 @@ window.addEventListener(
       button.addEventListener(
         "click",
         () => {
-          nextEmailCon.click()
+          nextEmailCon && nextEmailCon.click()
         },
         { once: true }
       )
@@ -45,7 +45,7 @@ window.addEventListener(
       archiveButtonCon.addEventListener(
         "click",
         () => {
-          nextEmailCon.click()
+          nextEmailCon && nextEmailCon.click()
         },
         { once: true }
       )
@@ -54,7 +54,7 @@ window.addEventListener(
       archiveButtonCon.previousElementSibling.addEventListener(
         "click",
         () => {
-          nextEmailCon.click()
+          nextEmailCon && nextEmailCon.click()
         },
         { once: true }
       )
