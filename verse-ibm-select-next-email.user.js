@@ -5,7 +5,7 @@
 // @description  load up next email when the current one is deleted
 // @copyright    2020, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.0.0
+// @version      2.0.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/verse-ibm-select-next-email.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/IBM_Verse_-_Auto-Select_Next_Email
@@ -62,11 +62,14 @@ window.addEventListener(
       emailCon.addEventListener("click", (e) => {
         const targetEl = /** @type {HTMLElement} */ (e.target)
 
-        // trigger update
+        // trigger update if last or second last elem
         if (targetEl.tagName !== "svg" && targetEl.tagName !== "rect") {
           nextEmailCon =
             emailCon.nextElementSibling &&
-            emailCon.nextElementSibling.tagName === "SPAN"
+            (emailCon.nextElementSibling.tagName === "SPAN" ||
+              (emailCon.nextElementSibling.nextElementSibling &&
+                emailCon.nextElementSibling.nextElementSibling.tagName ===
+                  "SPAN"))
               ? emailCon.previousElementSibling
               : emailCon.nextElementSibling
         }
