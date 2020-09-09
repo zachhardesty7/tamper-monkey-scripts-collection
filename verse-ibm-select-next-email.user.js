@@ -5,7 +5,7 @@
 // @description  load up next email when the current one is deleted
 // @copyright    2020, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.1.0
+// @version      2.0.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/verse-ibm-select-next-email.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/IBM_Verse_-_Auto-Select_Next_Email
@@ -19,43 +19,58 @@
 // ==/UserScript==
 /* global onElementReady */
 
-/**
- * move to next email, triggers on delete and/or archive click
- *
- * @param {HTMLElement} selectedEmail - email that's parent of clicked button
- */
-function handleDeleteClick(selectedEmail) {
-  let nextEmail
-
-  // is last email
-  if (selectedEmail.nextElementSibling.tagName === "SPAN") {
-    nextEmail =
-      selectedEmail.previousElementSibling.attributes["aria-labelledby"].value
-  } else {
-    nextEmail =
-      selectedEmail.nextElementSibling.attributes["aria-labelledby"].value
-  }
-
-  /** @type {HTMLElement} */
-  const item = document.querySelector(`[aria-labelledby="${nextEmail}"]`)
-  if (item) item.click()
-}
+let nextEmailCon = null
 
 window.addEventListener(
   "load",
   () => {
-    onElementReady("button.triage-action.remove", {}, (button) => {
-      /** email container element */
-      const parentCon =
-        button.parentElement.parentElement.parentElement.parentElement
-
-      // trigger on archive
-      button.addEventListener("click", () => handleDeleteClick(parentCon))
-
-      // trigger on delete
-      button.previousElementSibling.addEventListener("click", () =>
-        handleDeleteClick(parentCon)
+    // heading  buttons
+    onElementReady("button.action.pim-delete.icon", {}, (button) => {
+      // trigger on click heading del
+      button.addEventListener(
+        "click",
+        () => {
+          nextEmailCon.click()
+        },
+        { once: true }
       )
+    })
+
+    onElementReady("li.seq-msg-row", { findOnce: true }, (emailCon) => {
+      const archiveButtonCon = emailCon.querySelector(
+        "button.triage-action.remove"
+      )
+
+      // trigger on click inline archive
+      archiveButtonCon.addEventListener(
+        "click",
+        () => {
+          nextEmailCon.click()
+        },
+        { once: true }
+      )
+
+      // trigger on click inline delete
+      archiveButtonCon.previousElementSibling.addEventListener(
+        "click",
+        () => {
+          nextEmailCon.click()
+        },
+        { once: true }
+      )
+
+      emailCon.addEventListener("click", (e) => {
+        const targetEl = /** @type {HTMLElement} */ (e.target)
+
+        // trigger update
+        if (targetEl.tagName !== "svg" && targetEl.tagName !== "rect") {
+          nextEmailCon =
+            emailCon.nextElementSibling &&
+            emailCon.nextElementSibling.tagName === "SPAN"
+              ? emailCon.previousElementSibling
+              : emailCon.nextElementSibling
+        }
+      })
     })
   },
   false
