@@ -5,7 +5,7 @@
 // @description  removes annoying largely not useful elements from Amazon
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.5.1
+// @version      1.6.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/amazon-clean-ui.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Amazon_-_Clean_UI
@@ -244,6 +244,9 @@ function hideElements() {
     hide("#digital-dash-create")
     hide("#tradeInButton_feature_div")
     hide("#add-to-baby-button-group")
+    hide("#productSupportInsideMOBB_feature_div") // tech support included
+    hide("#cpsiaProductSafetyWarning_feature_div") // choking hazard
+    hide("#b2bUpsell_feature_div") // save w business acct
     // getEl('.a-column.a-span6.a-span-last').lastElementChild.style = 'display: none'
 
     // misc ads -- does not prevent loading or tracking
@@ -291,9 +294,15 @@ function hideElements() {
     // REVIEW: experimental, hide junk at the bottom of the page without ID or class
     hide("#dpx-giveaway_feature_div ~ div")
     hide("#dpx-giveaway_feature_div ~ table")
-    hide("#va-related-videos-widget_feature_div") // videos for related products
+    // TEST: sub components already hidden, hiding parent makes weird spacing
+    // hide("#va-related-videos-widget_feature_div") // videos for related products
     hide("#rvs-vse-related-videos") // videos for this item and related products
     hide(".threepsl.MultiBrandCreativeDesktop.celwidget") // brands related to category
+    hide(".threepsl.MultiBrandLifestyleCreativeDesktop.celwidget") // brands related to category
+    hide(".thirdPartySponsorLink--twoAds") // brands related to category
+    hide('[cel_widget_id="desktop-dp-sims_amazonlive-percolate-detail-page"]') // live streams
+    hide('[cel_widget_id="desktop-dp-sims_SponsoredProductsSimsDpDesktop"]') // related products
+    hide('[cel_widget_id="desktop-dp-sims_day0-sims-6523"]') // page w related products bottom text
 
     // hide other junk sections
     hide("#sp_detail")
@@ -401,6 +410,9 @@ function hideElements() {
       2
     ) // related brands
     hide('span[data-component-type="s-feedback-slot"]') // feedback
+    hideAllParentX('span[data-component-type="s-ads-metrics"]', 1) // sponsored product search brand (little giant)
+    hideAllParentX('[cel_widget_id="MAIN-VIDEO_SINGLE_PRODUCT"]', 1) // sponsored product search brand (little giant)
+    hideAllParentX('[cel_widget_id="MAIN-FEEDBACK"]', 1) // sponsored product search brand (little giant)
   }
 
   // wishlist page
@@ -422,7 +434,8 @@ function hideElements() {
   // hide nav ads
   hide("#nav-upnav")
   hide("#nav-subnav")
-  hideX("#nav-main .nav-right")
+  hide("#nav-main") // delivery location & useless links
+  // hide("#nav-main .nav-right")
 
   // hide recent items
   hide("#raw-sitewide-rhf")
