@@ -5,7 +5,7 @@
 // @description  removes annoying largely not useful elements from Amazon
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.6.0
+// @version      1.6.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/amazon-clean-ui.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Amazon_-_Clean_UI
@@ -451,6 +451,7 @@ function hideElements() {
 
   // hide generally useless last remaining part of footer section
   hideX("#navFooter .navFooterVerticalColumn.navAccessibility")
+  hideX("#navFooter .navFooterCopyright")
   setStyleX(".nav-footer-line", "margin-top: 0px;")
   setStyleX("#navBackToTop div", "margin-bottom: 0px;")
 
@@ -469,15 +470,17 @@ function hideElements() {
   )
 
   // activate button to restore footer display
-  on(getElX("#view-footer"), "click", () => {
-    hide("#view-footer")
-    setStyleX(".nav-footer-line", "margin-top: 30px;")
-    setStyleX("#navBackToTop div", "margin-bottom: 30px;")
-    setStyleX(
-      "#navFooter .navFooterVerticalColumn.navAccessibility",
-      "display: table;"
-    )
-  })
+  QUEUE.push(() =>
+    on(getElX("#view-footer"), "click", () => {
+      hideX("#view-footer")
+      setStyleX(".nav-footer-line", "margin-top: 30px;")
+      setStyleX("#navBackToTop div", "margin-bottom: 30px;")
+      setStyleX(
+        "#navFooter .navFooterVerticalColumn.navAccessibility",
+        "display: table;"
+      )
+    })
+  )
 
   if (STYLES) attachStyles()
   // console.log('[INFO]: hideElements -> STYLES', STYLES)
