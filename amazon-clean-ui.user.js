@@ -5,7 +5,7 @@
 // @description  removes annoying largely not useful elements from Amazon
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.6.1
+// @version      1.7.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/amazon-clean-ui.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Amazon_-_Clean_UI
@@ -225,7 +225,9 @@ function hideElements() {
     hide("#hqpWrapper")
     hide("#HLCXComparisonJumplink_feature_div")
     hide("#olp_feature_div")
-    hideX("#moreBuyingChoices_feature_div > div > .a-section.a-padding-base")
+    hide(
+      "#moreBuyingChoices_feature_div > div > .a-section.a-padding-base:first-child"
+    )
     hide("#hqp")
     hide("#mbb_feature_div")
     hide("#simpleBundle_feature_div")
@@ -268,7 +270,7 @@ function hideElements() {
     hide("#skyCitySoftMerge_feature_div")
     hide("#recommendations_feature_div")
     hide(".a-section.similarities-widget")
-    hideX('[name="goKindleStaticPopDiv"]')
+    hide('[name="goKindleStaticPopDiv"]:first-child')
     hide("#sims-fbt")
     hide("#heroQuickPromoBooksAtf_feature_div") // book suggestion under product summary
     hide("#heroQuickPromo_feature_div") // get alexa for Win10
@@ -303,13 +305,17 @@ function hideElements() {
     hide('[cel_widget_id="desktop-dp-sims_amazonlive-percolate-detail-page"]') // live streams
     hide('[cel_widget_id="desktop-dp-sims_SponsoredProductsSimsDpDesktop"]') // related products
     hide('[cel_widget_id="desktop-dp-sims_day0-sims-6523"]') // page w related products bottom text
+    hide(
+      '[cel_widget_id="desktop-dp-sims_SponsoredProductsSimsDpDesktopThematic"]'
+    ) // 4 star related prods
+    hide("#valuePick_feature_div") // similar item to consider
 
     // hide other junk sections
     hide("#sp_detail")
     hide("#quickPromoBucketContent")
     hideParentX(".celwidget .a-section.askDetailPageSearchWidgetSection", 1)
     hide("#vse-related-videos")
-    hideX(".a-section.vse-empty-view-container.bucket")
+    hide(".a-section.vse-empty-view-container.bucket:first-child")
     hide("#importantInformation")
     hide("#giveaway_feature_div")
     hide("#view_to_purchase-sims-feature")
@@ -317,14 +323,14 @@ function hideElements() {
     hideParentX("#fiona-publisher-signup-link", 2)
     hideParentX("#hero-quick-promo-grid_feature_div #hero-quick-promo", 1)
     hide("#extraProductInfoTxtBookFeatureGroup")
-    setStyleX("#aplus", "padding: 15px 0; border-top: lightgrey 1px solid;")
-    setStyleX("#reviewsMedley", "margin-bottom: 0 !important;")
+    setStyle("#aplus", "padding: 15px 0; border-top: lightgrey 1px solid;")
+    setStyle("#reviewsMedley", "margin-bottom: 0 !important;")
     hide("#superleafProductAlert_feature_div")
     hide("#dpx-legal_feature_div")
     hide("#cm_cr_skyfall_medley .cr-skyfall-feedback-section") // is feedback helpful? // FIXME:
     hide("#flipAndSampleAudio")
     hide("#authorFollow_feature_div")
-    hideX(".askQuestionExamples")
+    hide(".askQuestionExamples:first-child")
     hide("#acBadge_feature_div")
     hide("#hsxShCelDpAmznCertBdg") // works w alexa
     hide("#dpx-smarthome-hub_feature_div") // add alexa for voice control
@@ -336,7 +342,7 @@ function hideElements() {
     // remove unnatural black background of title bar on some pages (video game consoles)
     setStyle("#ppd-top", "background: none;")
     setStyle("#titleBar.superleaf", "background: none;")
-    setStyleX(
+    setStyle(
       ".superleafParent #wayfinding-breadcrumbs_container",
       "background: none;"
     )
@@ -350,24 +356,24 @@ function hideElements() {
       "a#breadcrumb-back-link.a-link-normal.a-color-tertiary",
       "color: #111 !important;"
     )
-    setStyleX(
+    setStyle(
       "#superLeafTitleFeatureGroup #titleSection #title",
       "color: black;"
     )
-    setStyleX(
-      "#titleBar.superleaf .a-color-secondary",
+    setStyle(
+      "#titleBar.superleaf .a-color-secondary:first-child",
       "color: #555 !important;"
     )
     setStyle("#titleBar-left", "color: black;")
-    setStyleX(
-      "#superLeafGameReviews_feature_div .a-icon-popover",
+    setStyle(
+      "#superLeafGameReviews_feature_div .a-icon-popover:first-child",
       "filter: none;"
     )
     setStyle(
       "#titleBar a:link, #titleBar.superleaf .a-link-normal",
       "color: #0066c0 !important;"
     )
-    setStyleX(".superleaf .ac-for-text", "color: #888;")
+    setStyle(".superleaf .ac-for-text:first-child", "color: #888;")
     setStyle(
       "#superleafActionPanelWrapper",
       "box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 4px -1px;"
@@ -422,7 +428,7 @@ function hideElements() {
     hide("#loaded-items")
 
     // increase spacing of filter icon
-    setStyleX("#filter-and-sort span", "padding-right: 5px;")
+    setStyle("#filter-and-sort span:first-child", "padding-right: 5px;")
   }
 
   // ideas page
@@ -444,7 +450,7 @@ function hideElements() {
   setStyle("#navFooter", "margin-top: 0px;")
   hideX(".navFooterLine.navFooterLinkLine.navFooterPadItemLine")
   hideX(".navFooterLine.navFooterLinkLine.navFooterDescLine")
-  setStyleX(
+  setStyle(
     "#navFooter.navLeftFooter .navFooterCopyright",
     "padding-bottom: 10px !important;"
   )
@@ -474,7 +480,7 @@ function hideElements() {
     on(getElX("#view-footer"), "click", () => {
       hideX("#view-footer")
       setStyleX(".nav-footer-line", "margin-top: 30px;")
-      setStyleX("#navBackToTop div", "margin-bottom: 30px;")
+      setStyleX("#navBackToTop div", "margin-bottom: 30px !important;")
       setStyleX(
         "#navFooter .navFooterVerticalColumn.navAccessibility",
         "display: table;"
@@ -483,7 +489,6 @@ function hideElements() {
   )
 
   if (STYLES) attachStyles()
-  // console.log('[INFO]: hideElements -> STYLES', STYLES)
 }
 
 window.addEventListener("load", executeHideElementsJS)
