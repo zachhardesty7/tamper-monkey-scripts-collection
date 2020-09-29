@@ -46,7 +46,7 @@ const attachStyles = () => {
  *
  * @param {DOMTargetItem} target - selector or el
  * @param {number} i - position of item to return if selector finds multiple matches
- * @returns {Element | object | boolean} targeted DOM el or input object or false otherwise
+ * @returns {HTMLElement | object | boolean} targeted DOM el or input object or false otherwise
  */
 const getElX = (target, i = 0) =>
   typeof target === "string" ? document.querySelectorAll(target)[i] : target
@@ -56,7 +56,7 @@ const getElX = (target, i = 0) =>
  * designed to allow repeatedly calling on return value without breaking
  *
  * @param {DOMTargetItems} target - selector or els
- * @returns {Element[]} targeted DOM el or input object or false otherwise
+ * @returns {HTMLElement[]} targeted DOM el or input object or false otherwise
  */
 const getElAll = (target) => {
   if (typeof target === "string") return [...document.querySelectorAll(target)]
@@ -191,8 +191,8 @@ const hideAllParentX = (target, x = 0) => {
 /**
  * create functions to add null checking and prevent script errors
  *
- * @typedef {string | NodeListOf<Element> | Element | Element[] | null} DOMTargetItems
- * @typedef {string | Element | null} DOMTargetItem
+ * @typedef {string | NodeListOf<HTMLElement> | HTMLElement | HTMLElement[] | null} DOMTargetItems
+ * @typedef {string | HTMLElement | null} DOMTargetItem
  */
 function hideElements() {
   const link = window.location.href

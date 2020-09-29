@@ -70,7 +70,6 @@ function addButton(el) {
     ) => {
       const timer = setInterval(() => {
         if (progress.value === 1000) {
-          /** @type {HTMLLinkElement} */
           const button = document.querySelector(
             "#ds .card .section:last-of-type > a"
           )

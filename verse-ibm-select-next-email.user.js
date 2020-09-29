@@ -5,7 +5,7 @@
 // @description  load up next email when the current one is deleted
 // @copyright    2020, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.0.2
+// @version      2.1.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/verse-ibm-select-next-email.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/IBM_Verse_-_Auto-Select_Next_Email
@@ -19,60 +19,81 @@
 // ==/UserScript==
 /* global onElementReady */
 
-let nextEmailCon = null
+/**
+ * the email that should be active after active email is deleted or archived
+ *
+ * @type {HTMLElement}
+ */
+let nextEmail = null
+
+/**
+ * safely move to next email
+ *
+ * will trigger the click function to find the next email
+ *
+ * @param {string} description - message to log
+ * @returns {(event: Event) => void} - function to be called
+ */
+const clickNextEmail = (description) => (event) => {
+  console.log(`clicked ${description}`)
+  nextEmail && nextEmail.click()
+}
 
 window.addEventListener(
   "load",
   () => {
-    // heading  buttons
+    // heading buttons
     onElementReady("button.action.pim-delete.icon", {}, (button) => {
       // trigger on click heading del
-      button.addEventListener(
-        "click",
-        () => {
-          nextEmailCon && nextEmailCon.click()
-        },
-        { once: true }
-      )
+      button.addEventListener("click", clickNextEmail("header del"), {
+        once: true,
+      })
     })
 
-    onElementReady("li.seq-msg-row", { findOnce: true }, (emailCon) => {
-      const archiveButtonCon = emailCon.querySelector(
-        "button.triage-action.remove"
-      )
-
+    onElementReady("li.seq-msg-row", { findOnce: true }, (clickedEmail) => {
       // trigger on click inline archive
-      archiveButtonCon.addEventListener(
-        "click",
-        () => {
-          nextEmailCon && nextEmailCon.click()
-        },
-        { once: true }
-      )
+      clickedEmail
+        .querySelector("button.triage-action.remove")
+        .addEventListener("click", clickNextEmail("inline archive"), {
+          once: true,
+        })
 
       // trigger on click inline delete
-      archiveButtonCon.previousElementSibling.addEventListener(
-        "click",
-        () => {
-          nextEmailCon && nextEmailCon.click()
-        },
-        { once: true }
-      )
+      clickedEmail
+        .querySelector("button.triage-action.delete")
+        .addEventListener("click", clickNextEmail("inline del"), {
+          once: true,
+        })
 
-      emailCon.addEventListener("click", (e) => {
+      // find next email
+      // also triggered on calling `clickNextEmail`
+      clickedEmail.addEventListener("click", (e) => {
         const targetEl = /** @type {HTMLElement} */ (e.target)
 
-        // trigger update if last or second last elem
-        if (targetEl.tagName !== "svg" && targetEl.tagName !== "rect") {
-          nextEmailCon =
-            emailCon.nextElementSibling &&
-            (emailCon.nextElementSibling.tagName === "SPAN" ||
-              (emailCon.nextElementSibling.nextElementSibling &&
-                emailCon.nextElementSibling.nextElementSibling.tagName ===
-                  "SPAN"))
-              ? emailCon.previousElementSibling
-              : emailCon.nextElementSibling
-        }
+        /** subtract out the invisible span element from the total sibling count */
+        const emailCount = clickedEmail.parentElement.childElementCount - 1
+
+        // don't update if user clicked on an inline button icon
+        // `clickNextEmail` handles to prevent double click
+        if (targetEl.tagName === "svg" || targetEl.tagName === "rect") return
+
+        if (emailCount < 2) return
+
+        /**
+         * @param {HTMLElement} el - input
+         * @returns {boolean} whether or not the input is the last email
+         */
+        const isLastEmail = (el) =>
+          !el.nextElementSibling || el.nextElementSibling.tagName === "SPAN"
+
+        if (isLastEmail(clickedEmail))
+          nextEmail = clickedEmail.previousElementSibling
+        // when second-to-last is also first email
+        else if (emailCount === 2) nextEmail = clickedEmail.nextElementSibling
+        // when second-to-last and many emails visible
+        else if (isLastEmail(clickedEmail.nextElementSibling))
+          nextEmail = clickedEmail.previousElementSibling
+        else nextEmail = clickedEmail.nextElementSibling
       })
     })
   },

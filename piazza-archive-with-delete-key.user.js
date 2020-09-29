@@ -26,19 +26,17 @@ let lastMovement = "down" // or 'up'
 /**
  * ret prev item in cur week if exists or back up and move to prev week to get last item
  *
- * @see `getNextItem()`
+ * @see {getNextItem}
  * @param {Element} el - target
  * @returns {?HTMLElement} result
  */
 const getPrevItem = (el) => {
-  if (el.previousElementSibling)
-    return /** @type {HTMLElement} */ (el.previousElementSibling)
+  if (el.previousElementSibling) return el.previousElementSibling
 
   let parent = el.parentElement.parentElement.previousElementSibling
   while (parent) {
     if (parent.lastElementChild && parent.lastElementChild.lastElementChild) {
-      return /** @type {HTMLElement} */ (parent.lastElementChild
-        .lastElementChild)
+      return parent.lastElementChild.lastElementChild
     }
     parent = parent.previousElementSibling
   }
@@ -57,16 +55,14 @@ const getPrevItem = (el) => {
  */
 const getNextItem = (el) => {
   // sibling from same week
-  if (el.nextElementSibling)
-    return /** @type {HTMLElement} */ (el.nextElementSibling)
+  if (el.nextElementSibling) return el.nextElementSibling
 
   // back up element to week div and select next week
   let parent = el.parentElement.parentElement.nextElementSibling
   // return first proceeding week with a post in it
   while (parent) {
     if (parent.lastElementChild && parent.lastElementChild.firstElementChild) {
-      return /** @type {HTMLElement} */ (parent.lastElementChild
-        .firstElementChild)
+      return parent.lastElementChild.firstElementChild
     }
     parent = parent.nextElementSibling // update to next week
   }
