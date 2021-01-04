@@ -5,7 +5,7 @@
 // @description  hide annoying popup below most recently visited the search result
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.0.1
+// @version      1.1.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/google-hide-search-interruptions.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Google_Search_-_Hide_People_also_search_for
@@ -15,7 +15,7 @@
 // @downloadURL  https://openuserjs.org/install/zachhardesty7/Google_Search_-_Hide_People_also_search_for.user.js
 
 // @match        https://www.google.com/search*
-// @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
+// @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887593
 // ==/UserScript==
 /* global onElementReady */
 

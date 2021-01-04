@@ -5,7 +5,7 @@
 // @description  reveals the save and report buttons and makes links right clickable
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.2.2
+// @version      1.3.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Watch_Later_Button
@@ -15,7 +15,7 @@
 // @downloadURL  https://openuserjs.org/install/zachhardesty7/YouTube_-_Add_Watch_Later_Button.user.js
 
 // @include      https://www.youtube.com*
-// @require      https://gist.githubusercontent.com/raw/ee7a6b80315148ad1fb6847e72a22313/
+// @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887593
 // ==/UserScript==
 // prevent eslint from complaining when redefining private function queryForElements from gist
 // eslint-disable-next-line no-unused-vars

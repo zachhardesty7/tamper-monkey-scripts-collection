@@ -5,7 +5,7 @@
 // @description  removes annoying largely not useful elements from Amazon
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.7.0
+// @version      1.8.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/amazon-clean-ui.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Amazon_-_Clean_UI
@@ -15,7 +15,7 @@
 // @downloadURL  https://openuserjs.org/install/zachhardesty7/Amazon_-_Clean_UI.user.js
 
 // @include      https://*amazon.com*
-// @require      https://gist.githubusercontent.com/zachhardesty7/ea61364567ce66b94edb81f922efecef/raw/c23ba499828992d632266194384c72ff28dfad6e/onElementReady.js
+// @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887593
 // ==/UserScript==
 
 let STYLES = ""
