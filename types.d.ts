@@ -11,6 +11,25 @@ declare const Chart: any
 
 // google
 declare const googleDocsUtil: any
+declare interface GoogleDocNode {
+  index: number
+  line: number
+  lineIndex: number
+  node: Element
+  lineElement: Element
+  text: string
+}
+declare interface GoogleDoc {
+  nodes: GoogleDocNode[]
+  text: string[]
+  selectedText: string
+  caret: {
+    index: number
+    lineIndex: number
+    line: number
+  }
+  selectionRect: DOMRect
+}
 
 // piazza
 declare const P: any
@@ -63,12 +82,13 @@ declare interface Element {
 }
 
 declare interface Element {
+  style: CSSStyleDeclaration
   firstElementChild: HTMLElement | null
   lastElementChild: HTMLElement | null
 }
 
 declare interface Document {
-  readonly scrollingElement: HTMLElement | null
+  // readonly scrollingElement: HTMLElement | null
   elementFromPoint(x: number, y: number): HTMLElement | null
   elementsFromPoint(x: number, y: number): HTMLElement[]
   getElementsByClassName(classNames: string): HTMLCollectionOf<HTMLElement>
