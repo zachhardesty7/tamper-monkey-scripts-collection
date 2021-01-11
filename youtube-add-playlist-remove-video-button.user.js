@@ -5,7 +5,7 @@
 // @description  adds a remove button next to each video on each playlist page
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.1.0
+// @version      1.1.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Playlist_Remove_Video_Button
@@ -15,7 +15,7 @@
 // @downloadURL  https://openuserjs.org/install/zachhardesty7/YouTube_-_Add_Playlist_Remove_Video_Button.user.js
 
 // @include      https://www.youtube.com/playlist?list=*
-// @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887593
+// @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887637
 // ==/UserScript==
 // prevent eslint from complaining when redefining private function queryForElements from gist
 // eslint-disable-next-line no-unused-vars

@@ -5,7 +5,7 @@
 // @description  removes annoying and inconspicuous search ads from Etsy
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.1.0
+// @version      1.1.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/mint-clean-ui.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Mint_-_Remove_Ads
@@ -16,7 +16,7 @@
 
 // @include      https://mint.intuit.com*
 // @exclude      https://mint.intuit.com/save.event
-// @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887593
+// @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887637
 // ==/UserScript==
 /* global onElementReady */
 

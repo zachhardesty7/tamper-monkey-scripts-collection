@@ -5,7 +5,7 @@
 // @description  display big banner if project's last commit over 6 months ago and giant banner if over 1 year ago
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.2.0
+// @version      1.2.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/github-inactive-dev-warning.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Github_-_Inactive_Development_Warning
@@ -15,7 +15,7 @@
 // @downloadURL  https://openuserjs.org/install/zachhardesty7/Github_-_Inactive_Development_Warning.user.js
 
 // @match        https://github.com/*/*
-// @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887593
+// @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887637
 // ==/UserScript==
 /* global onElementReady */
 
