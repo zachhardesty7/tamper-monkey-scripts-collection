@@ -5,7 +5,7 @@
 // @description  reveals the save and report buttons and makes links right clickable
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.2.1
+// @version      1.2.2
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-improve-saved-comments.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Reddit_-_Improve_Saved_Comments
@@ -85,7 +85,7 @@ window.addEventListener(
   () => {
     onElementReady(
       "div.Comment > div > div > div:last-child > div > div:nth-child(2) > div:nth-child(2) > div:last-child > button:last-child[aria-haspopup][aria-expanded][aria-label]",
-      false,
+      { findOnce: false },
       improveComments
     )
   },

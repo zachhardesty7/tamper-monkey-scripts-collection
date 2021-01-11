@@ -5,7 +5,7 @@
 // @description  removes annoying and inconspicuous search ads from Etsy
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.1.1
+// @version      1.1.2
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/mint-clean-ui.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Mint_-_Remove_Ads
@@ -63,7 +63,7 @@ const main = () => {
 // hide account status bar (if robinhood text included)
 onElementReady(
   ".AccountStatusBarItemView .status.error",
-  false,
+  { findOnce: false },
   (el) =>
     el.textContent.includes("Robinhood") &&
     document.querySelector(".AccountStatusBarView").remove()

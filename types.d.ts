@@ -38,12 +38,21 @@ declare const P: any
 declare const ytInitialData: any
 declare const ytcfg: any
 
-// from onElementReady gist
+/**
+ * Query for new DOM nodes matching a specified selector.
+ *
+ * @override
+ */
 declare const onElementReady: (
   selector: string,
   options: { findFirst?: boolean; findOnce?: boolean },
   callback: (el: HTMLElement) => void
 ) => void
+/**
+ * Query for new DOM nodes matching a specified selector.
+ *
+ * @override
+ */
 declare const queryForElements: (
   selector: string,
   options: { findFirst?: boolean; findOnce?: boolean },

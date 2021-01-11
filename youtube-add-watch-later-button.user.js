@@ -5,7 +5,7 @@
 // @description  reveals the save and report buttons and makes links right clickable
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.3.1
+// @version      1.3.2
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Watch_Later_Button
@@ -241,6 +241,6 @@ async function post(window) {
 // this makes it much more likely to target right one, but at the cost of being brittle
 onElementReady(
   "#info #info-contents #menu #top-level-buttons",
-  false,
+  { findOnce: false },
   addButton
 )

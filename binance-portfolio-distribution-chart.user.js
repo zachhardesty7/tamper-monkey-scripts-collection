@@ -5,7 +5,7 @@
 // @description  adds a simple visual representation of portfolio distribution (USD) on "balance" and "deposits & withdrawals" pages
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.1.1
+// @version      1.1.2
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/binance-portfolio-distribution-chart.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Binance_-_Portfolio_Distribution_Pie_Chart
@@ -81,75 +81,83 @@ function getMaxInObject(obj) {
 }
 
 // begin program once data has loaded
-onElementReady("span.btn.btn-deposit.ng-binding.ng-scope", true, () => {
-  // build canvas el
-  const page = document.querySelector(".chargeWithdraw-title")
-  const canvas = document.createElement("canvas")
-  canvas.id = "zh-chart"
-  canvas.height = 250
-  canvas.width = 250
-  canvas.setAttribute(
-    "style",
-    "height: 250px; width: 250px; display: block; float: right"
-  )
-
-  // insert canvas and capture el
-  page.append(canvas)
-  const ctx = /** @type {HTMLCanvasElement} */ (document.querySelector(
-    "#zh-chart"
-  )).getContext("2d")
-
-  // scrape value of portfolio data in BTC
-  const portfolioRawData = document.querySelectorAll(".td.ng-scope")
-  const portfolio = {}
-  portfolioRawData.forEach((el) => {
-    const name = el.firstElementChild.children[0].textContent.replace(/\s/g, "")
-    const val = Number.parseFloat(
-      el.firstElementChild.children[5].firstChild.textContent
+onElementReady(
+  "span.btn.btn-deposit.ng-binding.ng-scope",
+  { findOnce: true },
+  () => {
+    // build canvas el
+    const page = document.querySelector(".chargeWithdraw-title")
+    const canvas = document.createElement("canvas")
+    canvas.id = "zh-chart"
+    canvas.height = 250
+    canvas.width = 250
+    canvas.setAttribute(
+      "style",
+      "height: 250px; width: 250px; display: block; float: right"
     )
-    if (val !== 0) {
-      portfolio[name] = val
-    }
-  })
 
-  // get cur BTC to USD conversion rate
-  fetch("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD")
-    .then((response) => response.json())
-    .then((data) => {
-      // capture 6 largest assets for pie chart
-      for (let i = 0; i < 6; i += 1) {
-        const maxName = getMaxInObject(portfolio)
-        const maxVal = (portfolio[maxName] * data.USD).toFixed(2)
-        chartConfig.data.datasets[0].data.push(maxVal)
-        chartConfig.data.labels.push(maxName)
-        delete portfolio[maxName]
-      }
+    // insert canvas and capture el
+    page.append(canvas)
+    const ctx = /** @type {HTMLCanvasElement} */ (document.querySelector(
+      "#zh-chart"
+    )).getContext("2d")
 
-      // accumulate remaining assets for "other" category of pie chart
-      let otherCryptosVal = 0
-      Object.values(portfolio).forEach((tickerVal) => {
-        otherCryptosVal += tickerVal
-      })
-
-      // update chart data with other category
-      chartConfig.data.datasets[0].data.push(
-        (otherCryptosVal * data.USD).toFixed(2)
+    // scrape value of portfolio data in BTC
+    const portfolioRawData = document.querySelectorAll(".td.ng-scope")
+    const portfolio = {}
+    portfolioRawData.forEach((el) => {
+      const name = el.firstElementChild.children[0].textContent.replace(
+        /\s/g,
+        ""
       )
-      chartConfig.data.labels.push("other")
-
-      // randomize color order and update config
-      const keys = Object.keys(chartColors)
-      keys.sort(() => Math.random() - 0.5)
-      for (let i = 0; i < chartConfig.data.datasets[0].data.length; i += 1) {
-        chartConfig.data.datasets[0].backgroundColor.push(keys[i])
+      const val = Number.parseFloat(
+        el.firstElementChild.children[5].firstChild.textContent
+      )
+      if (val !== 0) {
+        portfolio[name] = val
       }
-
-      // generate pie chart
-      window.myPie = new /** @type {any} */ (window).Chart(ctx, chartConfig)
-
-      return null
     })
-    .catch((error) => {
-      console.log(error)
-    })
-})
+
+    // get cur BTC to USD conversion rate
+    fetch("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD")
+      .then((response) => response.json())
+      .then((data) => {
+        // capture 6 largest assets for pie chart
+        for (let i = 0; i < 6; i += 1) {
+          const maxName = getMaxInObject(portfolio)
+          const maxVal = (portfolio[maxName] * data.USD).toFixed(2)
+          chartConfig.data.datasets[0].data.push(maxVal)
+          chartConfig.data.labels.push(maxName)
+          delete portfolio[maxName]
+        }
+
+        // accumulate remaining assets for "other" category of pie chart
+        let otherCryptosVal = 0
+        Object.values(portfolio).forEach((tickerVal) => {
+          otherCryptosVal += tickerVal
+        })
+
+        // update chart data with other category
+        chartConfig.data.datasets[0].data.push(
+          (otherCryptosVal * data.USD).toFixed(2)
+        )
+        chartConfig.data.labels.push("other")
+
+        // randomize color order and update config
+        const keys = Object.keys(chartColors)
+        keys.sort(() => Math.random() - 0.5)
+        for (let i = 0; i < chartConfig.data.datasets[0].data.length; i += 1) {
+          chartConfig.data.datasets[0].backgroundColor.push(keys[i])
+        }
+
+        // generate pie chart
+        // @ts-ignore
+        window.myPie = new /** @type {any} */ (window).Chart(ctx, chartConfig)
+
+        return null
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+)

@@ -5,7 +5,7 @@
 // @description  rough conversion to get USD val of coin on "balance" & "deposits/withdrawals" page
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.3.1
+// @version      1.3.2
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/binance-btc-usd.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Binance_-_Add_BTC_to_USD_Conversion
@@ -25,7 +25,7 @@ function convertBTCToUSD() {
     .then((resp) => resp.json())
     .then((data) => {
       // if el are loaded then add USD value below BTC val
-      onElementReady(".td.ng-scope", false, (e) =>
+      onElementReady(".td.ng-scope", { findOnce: false }, (e) =>
         addBTCConversionRate(e, data.BTC.USD)
       )
 

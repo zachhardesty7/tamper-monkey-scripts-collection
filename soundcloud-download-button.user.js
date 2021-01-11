@@ -5,7 +5,7 @@
 // @description  adds a button on main page and song page to download song automatically from https://soundcloudmp3.org/
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.1.1
+// @version      2.1.2
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/soundcloud-download-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Soundcloud_-_Add_External_Download_Button
@@ -62,28 +62,32 @@ function addButton(el) {
 // auto-run on soundcloud mp3
 // if referred from soundcloud, grab data from GM storage
 // paste and submit to begin conversion to mp3
-;(function mp3() {
+function mp3() {
   const { href } = window.location
   if (href.includes("loader.to")) {
-    onElementReady("#ds .card .section:last-of-type > progress", false, (
-      /** @type {HTMLProgressElement} */ progress
-    ) => {
-      const timer = setInterval(() => {
-        if (progress.value === 1000) {
-          const button = document.querySelector(
-            "#ds .card .section:last-of-type > a"
-          )
-          button.click()
-          clearInterval(timer)
-        }
-      }, 100)
-    })
+    onElementReady(
+      "#ds .card .section:last-of-type > progress",
+      { findOnce: false },
+      (/** @type {HTMLProgressElement} */ progress) => {
+        const timer = setInterval(() => {
+          if (progress.value === 1000) {
+            const button = document.querySelector(
+              "#ds .card .section:last-of-type > a"
+            )
+            button.click()
+            clearInterval(timer)
+          }
+        }, 100)
+      }
+    )
   } else {
-    onElementReady(".l-listen-wrapper", false, addButton)
+    onElementReady(".l-listen-wrapper", { findOnce: false }, addButton)
     onElementReady(
       ".lazyLoadingList__list > .soundList__item",
-      false,
+      { findOnce: false },
       addButton
     )
   }
-})()
+}
+
+mp3()

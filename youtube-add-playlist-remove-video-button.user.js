@@ -5,7 +5,7 @@
 // @description  adds a remove button next to each video on each playlist page
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.1.1
+// @version      1.1.2
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Playlist_Remove_Video_Button
@@ -22,11 +22,7 @@
 /* global onElementReady, queryForElements:true */
 /* eslint-disable no-underscore-dangle */
 
-/**
- * Query for new DOM nodes matching a specified selector.
- *
- * @override
- */
+// @ts-ignore
 queryForElements = (selector, callback) => {
   // search for elements by selector
   const elementList = document.querySelectorAll(selector) || []
@@ -128,6 +124,7 @@ function addButton(buttons) {
 
   const {
     setVideoId,
+    // @ts-ignore
   } = window.ytInitialData.contents.twoColumnBrowseResultsRenderer.tabs[0].tabRenderer.content.sectionListRenderer.contents[0].itemSectionRenderer.contents[0].playlistVideoListRenderer.contents[
     videoIndex
   ].playlistVideoRenderer
@@ -206,6 +203,6 @@ async function post(window, setVideoId) {
 // this makes it much more likely to target right one, but at the cost of being brittle
 onElementReady(
   ".ytd-playlist-video-list-renderer #content.ytd-playlist-video-renderer #menu.ytd-playlist-video-renderer ",
-  false,
+  { findOnce: false },
   addButton
 )
