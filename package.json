@@ -1,7 +1,7 @@
 {
   "name": "tamper-monkey-scripts-collection",
   "description": "Tamper Monkey Scripts Collection",
-  "version": "1.17.0",
+  "version": "1.17.1",
   "author": "Zach Hardesty <hello@zachhardesty.com>",
   "license": "MIT",
   "eslintConfig": {
