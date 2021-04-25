@@ -5,7 +5,7 @@
 // @description  reveals the save and report buttons and makes links right clickable
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.3.3
+// @version      1.3.4
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Watch_Later_Button
@@ -54,17 +54,20 @@ function addButton(buttons) {
 
   // normal action
   console.debug("no watch later button found, adding new button")
-  /** @type {HTMLElement & { buttonRenderer: boolean }} */
+  /** @type {HTMLElement & { buttonRenderer: boolean, isIconButton?: boolean, styleActionButton?: boolean }} */
   // @ts-ignore
   const container = document.createElement("ytd-button-renderer")
 
-  container.buttonRenderer = true
+  // needed for on click style
   container.style.color = "var(--yt-spec-icon-inactive)"
+  container.setAttribute("style-action-button", "true")
+  container.setAttribute("is-icon-button", "true")
   container.className = buttons.lastElementChild.className
   container.id = "zh-wl"
   buttons.append(container)
 
   const link = document.createElement("a")
+  link.tabIndex = -1
   link.className =
     buttons.children[buttons.children.length - 2].firstElementChild.className
   container.append(link)
@@ -82,7 +85,9 @@ function addButton(buttons) {
     buttons.children[
       buttons.children.length - 2
     ].lastElementChild.firstElementChild.firstElementChild.firstElementChild.className
-  buttonContainer.lastElementChild.append(icon)
+  buttonContainer.firstElementChild.append(icon)
+
+  buttonContainer.firstElementChild["aria-label"] = "Save to Watch Later"
 
   // copy icon from hovering video thumbnails
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
@@ -131,11 +136,12 @@ function addButton(buttons) {
 
   const text = document.createElement("yt-formatted-string")
   text.id = "text"
+  link.append(text)
   text.className =
     buttons.children[
       buttons.children.length - 2
     ].lastElementChild.lastElementChild.className
-  link.append(text)
+  // needed to style on click
   text.style.color = "var(--yt-spec-text-secondary)"
   text.textContent = "later"
 
