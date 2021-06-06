@@ -5,7 +5,7 @@
 // @description  reveals the save and report buttons and makes links right clickable
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.3.4
+// @version      1.3.5
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Watch_Later_Button
@@ -21,6 +21,8 @@
 // eslint-disable-next-line no-unused-vars
 /* global onElementReady, queryForElements:true */
 /* eslint-disable no-underscore-dangle */
+
+const BUTTONS_CONTAINER_ID = "top-level-buttons-computed"
 
 /**
  * Query for new DOM nodes matching a specified selector.
@@ -42,13 +44,13 @@ queryForElements = (selector, _, callback) => {
 function addButton(buttons) {
   const zh = document.querySelectorAll("#zh-wl")
   // noop if button already present in correct place
-  if (zh.length === 1 && zh[0].parentElement.id === "top-level-buttons") return
+  if (zh.length === 1 && zh[0].parentElement.id === BUTTONS_CONTAINER_ID) return
 
   // YT hydration of DOM can shift elements
   if (zh.length >= 1) {
     console.debug("watch later button(s) found in wrong place, fixing")
     zh.forEach((wl) => {
-      if (wl.id !== "top-level-buttons") wl.remove()
+      if (wl.id !== BUTTONS_CONTAINER_ID) wl.remove()
     })
   }
 
@@ -246,7 +248,7 @@ async function post(window) {
 // YouTube uses a bunch of duplicate 'id' tag values. why?
 // this makes it much more likely to target right one, but at the cost of being brittle
 onElementReady(
-  "#info #info-contents #menu #top-level-buttons",
+  `#info #info-contents #menu #${BUTTONS_CONTAINER_ID}`,
   { findOnce: false },
   addButton
 )
