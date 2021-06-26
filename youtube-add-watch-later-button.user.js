@@ -5,7 +5,7 @@
 // @description  reveals the save and report buttons and makes links right clickable
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.3.5
+// @version      1.4.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Watch_Later_Button
@@ -23,6 +23,9 @@
 /* eslint-disable no-underscore-dangle */
 
 const BUTTONS_CONTAINER_ID = "top-level-buttons-computed"
+const ACTIVE_STYLE = "var(--yt-spec-call-to-action)"
+const INACTIVE_BUTTON_STYLE = "var(--yt-spec-icon-inactive)"
+const INACTIVE_TEXT_STYLE = "var(--yt-spec-text-secondary)"
 
 /**
  * Query for new DOM nodes matching a specified selector.
@@ -56,12 +59,21 @@ function addButton(buttons) {
 
   // normal action
   console.debug("no watch later button found, adding new button")
-  /** @type {HTMLElement & { buttonRenderer: boolean, isIconButton?: boolean, styleActionButton?: boolean }} */
-  // @ts-ignore
-  const container = document.createElement("ytd-button-renderer")
+  const playlistSaveButton = document.querySelector(
+    "#top-level-buttons-computed > ytd-button-renderer:nth-child(4)"
+  )
 
-  // needed for on click style
-  container.style.color = "var(--yt-spec-icon-inactive)"
+  // needed to force the node to load so we can determine if it's already in WL or not
+  playlistSaveButton.click()
+  playlistSaveButton.click()
+
+  /**
+   * @typedef {HTMLElement & { buttonRenderer: boolean, isIconButton?: boolean, styleActionButton?: boolean }} ytdButtonRenderer
+   */
+  const container = /** @type {ytdButtonRenderer} */ (document.createElement(
+    "ytd-button-renderer"
+  ))
+
   container.setAttribute("style-action-button", "true")
   container.setAttribute("is-icon-button", "true")
   container.className = buttons.lastElementChild.className
@@ -143,106 +155,39 @@ function addButton(buttons) {
     buttons.children[
       buttons.children.length - 2
     ].lastElementChild.lastElementChild.className
-  // needed to style on click
-  text.style.color = "var(--yt-spec-text-secondary)"
+  text.style.color = INACTIVE_TEXT_STYLE
   text.textContent = "later"
 
-  // TODO: will be incorrect if already in WL
-  // change to blue when added to WL
-  container.addEventListener("click", () => {
-    const flippedColorCon =
-      container.style.color === "var(--yt-spec-icon-inactive)"
-        ? "var(--yt-spec-call-to-action)"
-        : "var(--yt-spec-icon-inactive)"
-    container.style.color = flippedColorCon
+  let hasListener = false
+  onElementReady(
+    "#playlists .ytd-add-to-playlist-renderer #checkbox",
+    { findOnce: false },
+    (checkbox) => {
+      if (!hasListener && checkbox.textContent.trim() === "Watch later") {
+        hasListener = true
+        console.debug("no click listener, adding new click listener")
+        const watchLaterCheckbox = /** @type {HTMLInputElement} */ (checkbox)
 
-    const flippedColorText =
-      text.style.color === "var(--yt-spec-text-secondary)"
-        ? "var(--yt-spec-call-to-action)"
-        : "var(--yt-spec-text-secondary)"
-    text.style.color = flippedColorText
-  })
+        container.style.color = watchLaterCheckbox?.checked
+          ? ACTIVE_STYLE
+          : INACTIVE_BUTTON_STYLE
+        text.style.color = watchLaterCheckbox?.checked
+          ? ACTIVE_STYLE
+          : INACTIVE_TEXT_STYLE
 
-  const window = buttons.ownerDocument.defaultView // escape tampermonkey scope
-  link.addEventListener("click", () => post(window)) // meat of the script
-}
+        container.addEventListener("click", () => {
+          watchLaterCheckbox?.click()
 
-/**
- * initiate the data post
- *
- * @param {any} window - escape iFrame
- */
-async function post(window) {
-  // the 3 unique data points required, stored in strange places
-  const {
-    csn,
-  } = window.ytInitialData.responseContext.webResponseContextExtensionData.ytConfigData
-  const addedVideoId =
-    window.ytInitialData.currentVideoEndpoint.watchEndpoint.videoId
-  const token = window.ytcfg.data_.XSRF_TOKEN // location varies when minified build changes
-
-  // // get exact playlist ID
-  // document.querySelector('#top-level-buttons').children[3].click()
-  // // wait until loaded
-  // const playlists = await new Promise((resolve, reject) => {
-  //   const intervalId = setInterval(() => {
-  //     const el = document.querySelector('#playlists')
-  //     const backdrop = document.querySelector('.opened')
-  //     if (el
-  //       && el.firstElementChild && el.firstElementChild.querySelector('#checkbox') && backdrop) {
-  //       && el.firstElementChild.querySelector('#checkbox') && backdrop) {
-  //       && backdrop
-  //     ) {
-  //       clearInterval(intervalId)
-  //       resolve(el)
-  //     }
-  //   }, 100)
-  // })
-
-  // document.querySelector('.opened').click()
-  // const playlist = playlists.firstElementChild.__data.data
-  //   .addToPlaylistServiceEndpoint.playlistEditEndpoint.playlistId
-
-  // encode the form as URI body, starts from an obj bc it's cleaner
-  const body = new URLSearchParams({
-    sej: JSON.stringify({
-      clickTrackingParams: "HASTOBECERTAINLENGTHBUTCONTENTIRRELEVANT=",
-      commandMetadata: {
-        webCommandMetadata: {
-          url: "/service_ajax",
-          sendPost: true,
-        },
-      },
-      playlistEditEndpoint: {
-        playlistId: "WL",
-        // playlistId: playlist, // still does not provide visual feedback
-        actions: [
-          {
-            addedVideoId,
-            action: "ACTION_ADD_VIDEO",
-          },
-        ],
-      },
-    }),
-    csn,
-    session_token: token,
-  })
-
-  // snagged from inspecting other WL post operations
-  fetch("https://www.youtube.com/service_ajax?name=playlistEditEndpoint", {
-    credentials: "include",
-    headers: {
-      accept: "*/*",
-      "accept-language": "en-US,en;q=0.9",
-      "cache-control": "no-cache",
-      "content-type": "application/x-www-form-urlencoded",
-      pragma: "no-cache",
-    },
-    referrerPolicy: "origin-when-cross-origin",
-    body,
-    method: "POST",
-    mode: "cors",
-  })
+          container.style.color = watchLaterCheckbox?.checked
+            ? ACTIVE_STYLE
+            : INACTIVE_BUTTON_STYLE
+          text.style.color = watchLaterCheckbox?.checked
+            ? ACTIVE_STYLE
+            : INACTIVE_TEXT_STYLE
+        })
+      }
+    }
+  )
 }
 
 // YouTube uses a bunch of duplicate 'id' tag values. why?
