@@ -34,14 +34,14 @@ function timeToDecimal(t) {
     const hoursPerDay = document.querySelectorAll(
       ".day-view-week-nav li a span"
     )
-    hoursPerDay.forEach((time) => {
+    for (const time of hoursPerDay) {
       if (!time.textContent.includes("$")) {
         /* eslint-disable-next-line no-param-reassign */
         time.textContent += ` | $${Math.round(
           timeToDecimal(time.textContent) * rate
         )}`
       }
-    })
+    }
     const hoursPerWeek = document.querySelector(
       "#day-view-week-nav-total .test-week-total"
     )

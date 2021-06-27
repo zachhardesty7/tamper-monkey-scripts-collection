@@ -92,15 +92,15 @@ const displayCount = () => {
     if (MISC) regex.push("(“(.(?!“))+”)")
 
     // apply regex filtering to body
-    regex.forEach((reg) => {
+    for (const reg of regex) {
       selected = selected.replace(new RegExp(reg, "g"), " ")
-    })
+    }
 
     // apply regex filtering to selected text if necessary
     let filtered = body
-    regex.forEach((reg) => {
+    for (const reg of regex) {
       filtered = filtered.replace(new RegExp(reg, "g"), " ")
-    })
+    }
 
     // remove extra spaces and line breaks and get counts
     const words = filtered
@@ -201,7 +201,8 @@ function getGoogleDocument() {
         classNames.wordNode
       )
       for (const wordhtmlgeneratorWordNode of wordhtmlgeneratorWordNodes) {
-        const wordhtmlgeneratorWordNodeRect = wordhtmlgeneratorWordNode.getBoundingClientRect()
+        const wordhtmlgeneratorWordNodeRect =
+          wordhtmlgeneratorWordNode.getBoundingClientRect()
         if (
           caretRect &&
           doesRectsOverlap(wordhtmlgeneratorWordNodeRect, caretRect)
@@ -353,7 +354,7 @@ function getLocalCaretIndex(caretX, element, simulateElement) {
   let currentMinimumDistance = -1
   const containerRect = container.getBoundingClientRect()
 
-  letterSpans.forEach((letterSpan, i) => {
+  for (const [i, letterSpan] of letterSpans.entries()) {
     const rect = letterSpan.getBoundingClientRect()
     const left = rect.left - containerRect.left
     const right = left + rect.width
@@ -372,7 +373,7 @@ function getLocalCaretIndex(caretX, element, simulateElement) {
       index = i + 1
       currentMinimumDistance = rightDistance
     }
-  })
+  }
 
   // Clean up
   container.remove()

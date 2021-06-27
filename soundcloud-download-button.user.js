@@ -25,7 +25,7 @@
  *
  * @param {HTMLElement} el - most recently added children (for lazy load)
  */
-function addButton(el) {
+function addSoundcloudDownloadButton(el) {
   const link = window.location.href
   const button = document.createElement("button")
   button.textContent = "External Download"
@@ -34,9 +34,9 @@ function addButton(el) {
   if (
     link.includes("stream") &&
     !(
-      /** @type {HTMLAnchorElement} */ (el.querySelector(
-        ".soundTitle__title"
-      )).href.includes("/sets/")
+      /** @type {HTMLAnchorElement} */ (
+        el.querySelector(".soundTitle__title")
+      ).href.includes("/sets/")
     )
   ) {
     button.className = "mp3-button sc-button sc-button-small"
@@ -81,11 +81,15 @@ function mp3() {
       }
     )
   } else {
-    onElementReady(".l-listen-wrapper", { findOnce: false }, addButton)
+    onElementReady(
+      ".l-listen-wrapper",
+      { findOnce: false },
+      addSoundcloudDownloadButton
+    )
     onElementReady(
       ".lazyLoadingList__list > .soundList__item",
       { findOnce: false },
-      addButton
+      addSoundcloudDownloadButton
     )
   }
 }

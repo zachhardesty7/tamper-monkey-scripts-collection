@@ -70,12 +70,12 @@ const chartConfig = {
 function getMaxInObject(obj) {
   let maxKey = ""
   let maxVal = 0
-  Object.keys(obj).forEach((key) => {
+  for (const key of Object.keys(obj)) {
     if (obj[key] > maxVal) {
       maxVal = obj[key]
       maxKey = key
     }
-  })
+  }
 
   return maxKey
 }
@@ -98,14 +98,14 @@ onElementReady(
 
     // insert canvas and capture el
     page.append(canvas)
-    const ctx = /** @type {HTMLCanvasElement} */ (document.querySelector(
-      "#zh-chart"
-    )).getContext("2d")
+    const ctx = /** @type {HTMLCanvasElement} */ (
+      document.querySelector("#zh-chart")
+    ).getContext("2d")
 
     // scrape value of portfolio data in BTC
     const portfolioRawData = document.querySelectorAll(".td.ng-scope")
     const portfolio = {}
-    portfolioRawData.forEach((el) => {
+    for (const el of portfolioRawData) {
       const name = el.firstElementChild.children[0].textContent.replace(
         /\s/g,
         ""
@@ -116,7 +116,7 @@ onElementReady(
       if (val !== 0) {
         portfolio[name] = val
       }
-    })
+    }
 
     // get cur BTC to USD conversion rate
     fetch("https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD")
@@ -133,9 +133,9 @@ onElementReady(
 
         // accumulate remaining assets for "other" category of pie chart
         let otherCryptosVal = 0
-        Object.values(portfolio).forEach((tickerVal) => {
+        for (const tickerVal of Object.values(portfolio)) {
           otherCryptosVal += tickerVal
-        })
+        }
 
         // update chart data with other category
         chartConfig.data.datasets[0].data.push(

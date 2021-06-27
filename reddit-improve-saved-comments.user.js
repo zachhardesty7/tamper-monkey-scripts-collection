@@ -66,9 +66,8 @@ function improveComments(button) {
   const container = comment.parentElement
   const wrapper = document.createElement("a")
   // link to comment page hidden in react instance
-  wrapper.href = getReactInstance(
-    comment
-  ).return.memoizedProps.comment.permalink
+  wrapper.href =
+    getReactInstance(comment).return.memoizedProps.comment.permalink
   wrapper.append(comment) // move all original DOM children
   wrapper.addEventListener("click", (e) => e.preventDefault()) // allow original click handler to take over
 

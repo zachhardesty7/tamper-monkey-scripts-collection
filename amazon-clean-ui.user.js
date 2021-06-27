@@ -3,7 +3,7 @@
 // @namespace    https://openuserjs.org/users/zachhardesty7
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7) <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @description  removes annoying largely not useful elements from Amazon
-// @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
+// @copyright    2019-2021, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
 // @version      1.8.1
 
@@ -183,7 +183,11 @@ const hideParentX = (target, x = 0, i = 0) => {
  * @returns {void}
  */
 const hideAllParentX = (target, x = 0) => {
-  const statement = () => getElAll(target).forEach((el) => hideParentX(el, x))
+  const statement = () => {
+    for (const el of getElAll(target)) {
+      hideParentX(el, x)
+    }
+  }
 
   READY ? statement() : QUEUE.push(statement)
 }
@@ -194,14 +198,14 @@ const hideAllParentX = (target, x = 0) => {
  * @typedef {string | NodeListOf<HTMLElement> | HTMLElement | HTMLElement[] | null} DOMTargetItems
  * @typedef {string | HTMLElement | null} DOMTargetItem
  */
-function hideElements() {
+function addElementsToHideQueue() {
   const link = window.location.href
 
   // product-based pages
   if (
-    link.match(/https*:\/\/.*?amazon\.com\/dp\/.*/g) ||
-    link.match(/https*:\/\/.*?amazon\.com\/gp\/product\/.*/g) ||
-    link.match(/https*:\/\/.*?amazon\.com\/.*\/dp\/.*/g)
+    /https*:\/\/.*?amazon\.com\/dp\/.*/g.test(link) ||
+    /https*:\/\/.*?amazon\.com\/gp\/product\/.*/g.test(link) ||
+    /https*:\/\/.*?amazon\.com\/.*\/dp\/.*/g.test(link)
   ) {
     // hide nav junk / banner ads
     hide("#navSwmHoliday")
@@ -381,7 +385,7 @@ function hideElements() {
   }
 
   // subscribe & save page
-  if (link.match(/https*:\/\/.*?amazon\.com\/gp\/subscribe-and-save\/.*/g)) {
+  if (/https*:\/\/.*?amazon\.com\/gp\/subscribe-and-save\/.*/g.test(link)) {
     // onElementReady('#recommendations', false, e => hide(e))
     // setStyle('.a-section.deliveries', 'margin-bottom: 0px;')
     // console.log('test')
@@ -390,7 +394,7 @@ function hideElements() {
   }
 
   // search page
-  if (link.match(/https*:\/\/.*?amazon\.com\/s.*/g)) {
+  if (/https*:\/\/.*?amazon\.com\/s.*/g.test(link)) {
     hide(".AdHolder")
     hide("#centerBelowExtra") // search feedback
     hide('div[data-component-type="sp-sponsored-result"]') // sponsored res
@@ -422,7 +426,7 @@ function hideElements() {
   }
 
   // wishlist page
-  if (link.match(/https*:\/\/.*?amazon\.com\/hz\/wishlist\/ls.*/g)) {
+  if (/https*:\/\/.*?amazon\.com\/hz\/wishlist\/ls.*/g.test(link)) {
     // hide recommendations
     hide("#rhf")
     hide("#loaded-items")
@@ -432,7 +436,7 @@ function hideElements() {
   }
 
   // ideas page
-  if (link.match(/https*:\/\/.*?amazon\.com\/ideas\/.*/g)) {
+  if (/https*:\/\/.*?amazon\.com\/ideas\/.*/g.test(link)) {
     hide("#rhf") // hide recommendations
   }
 
@@ -492,9 +496,11 @@ function hideElements() {
 }
 
 window.addEventListener("load", executeHideElementsJS)
-hideElements()
+addElementsToHideQueue()
 
 function executeHideElementsJS() {
   READY = true
-  QUEUE.forEach((statement) => statement())
+  for (const statement of QUEUE) {
+    statement()
+  }
 }

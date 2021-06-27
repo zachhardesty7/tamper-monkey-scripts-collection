@@ -143,7 +143,9 @@ document.addEventListener("click", (e) => {
 
       if (positionClicked < positionSelected) lastMovement = "up"
       else if (positionClicked > positionSelected) lastMovement = "down"
-      // don't update lastMovement if already selected item is clicked
+      else {
+        /* don't update lastMovement if already selected item is clicked */
+      }
     }
   }
 })

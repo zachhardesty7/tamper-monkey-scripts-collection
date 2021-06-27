@@ -43,7 +43,7 @@ onElementReady(
   { findOnce: false },
   (el) => {
     // remove video
-    keywords.forEach((keyword) => {
+    for (const keyword of keywords) {
       if (
         el
           .querySelector("#details")
@@ -53,6 +53,6 @@ onElementReady(
       ) {
         el.parentElement.remove()
       }
-    })
+    }
   }
 )

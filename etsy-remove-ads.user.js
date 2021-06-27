@@ -3,7 +3,7 @@
 // @namespace    https://openuserjs.org/users/zachhardesty7
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @description  removes annoying and inconspicuous search ads from Etsy
-// @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
+// @copyright    2019-2021, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
 // @version      1.1.2
 
