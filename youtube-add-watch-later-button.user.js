@@ -3,9 +3,9 @@
 // @namespace    https://openuserjs.org/users/zachhardesty7
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @description  reveals the save and report buttons and makes links right clickable
-// @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
+// @copyright    2019-2021, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.4.0
+// @version      1.4.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Watch_Later_Button
@@ -14,7 +14,7 @@
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/YouTube_-_Add_Watch_Later_Button.meta.js
 // @downloadURL  https://openuserjs.org/install/zachhardesty7/YouTube_-_Add_Watch_Later_Button.user.js
 
-// @include      https://www.youtube.com*
+// @include      https://www.youtube.com/watch*
 // @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887637
 // ==/UserScript==
 // prevent eslint from complaining when redefining private function queryForElements from gist
@@ -36,7 +36,7 @@ const INACTIVE_TEXT_STYLE = "var(--yt-spec-text-secondary)"
 queryForElements = (selector, _, callback) => {
   // Search for elements by selector
   const elementList = document.querySelectorAll(selector) || []
-  elementList.forEach((element) => callback(element))
+  for (const element of elementList) callback(element)
 }
 
 /**
@@ -52,9 +52,9 @@ function addButton(buttons) {
   // YT hydration of DOM can shift elements
   if (zh.length >= 1) {
     console.debug("watch later button(s) found in wrong place, fixing")
-    zh.forEach((wl) => {
+    for (const wl of zh) {
       if (wl.id !== BUTTONS_CONTAINER_ID) wl.remove()
-    })
+    }
   }
 
   // normal action
@@ -70,9 +70,9 @@ function addButton(buttons) {
   /**
    * @typedef {HTMLElement & { buttonRenderer: boolean, isIconButton?: boolean, styleActionButton?: boolean }} ytdButtonRenderer
    */
-  const container = /** @type {ytdButtonRenderer} */ (document.createElement(
-    "ytd-button-renderer"
-  ))
+  const container = /** @type {ytdButtonRenderer} */ (
+    document.createElement("ytd-button-renderer")
+  )
 
   container.setAttribute("style-action-button", "true")
   container.setAttribute("is-icon-button", "true")
