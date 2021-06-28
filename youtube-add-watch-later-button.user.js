@@ -5,7 +5,7 @@
 // @description  adds a new button next to like that quick adds / removes the active video from your "Watch later" playlist
 // @copyright    2019-2021, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.4.3
+// @version      1.4.4
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Watch_Later_Button
@@ -14,7 +14,7 @@
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/YouTube_-_Add_Watch_Later_Button.meta.js
 // @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/YouTube_-_Add_Watch_Later_Button.user.js
 
-// @include      https://www.youtube.com/watch*
+// @include      https://www.youtube.com*
 // @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887637
 // ==/UserScript==
 // prevent eslint from complaining when redefining private function queryForElements from gist
