@@ -7,9 +7,10 @@
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
 // @version      2.2.3
 
-// @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/verse-ibm-select-next-email
+// @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/tree/master/verse-ibm-select-next-email
+// @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/tree/master/verse-ibm-select-next-email
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/IBM_Verse_-_Auto-Select_Next_Email
-// @supportURL   https://openuserjs.org/scripts/zachhardesty7/IBM_Verse_-_Auto-Select_Next_Email/issues
+// @supportURL   https://github.com/zachhardesty7/tamper-monkey-scripts-collection/issues
 
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/IBM_Verse_-_Auto-Select_Next_Email.meta.js
 // @downloadURL  https://openuserjs.org/install/zachhardesty7/IBM_Verse_-_Auto-Select_Next_Email.user.js
