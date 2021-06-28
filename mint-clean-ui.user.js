@@ -5,14 +5,14 @@
 // @description  removes annoying and inconspicuous ads from Mint
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.1.3
+// @version      1.1.4
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/mint-clean-ui.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Mint_-_Remove_Ads
-// @supportURL   https://openuserjs.org/scripts/zachhardesty7/Mint_-_Remove_Ads/issues
+// @supportURL   https://github.com/zachhardesty7/tamper-monkey-scripts-collection/issues
 
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/Mint_-_Remove_Ads.meta.js
-// @downloadURL  https://openuserjs.org/install/zachhardesty7/Mint_-_Remove_Ads.user.js
+// @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/Mint_-_Remove_Ads.user.js
 
 // @include      https://mint.intuit.com*
 // @exclude      https://mint.intuit.com/save.event

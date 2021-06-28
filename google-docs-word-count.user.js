@@ -5,14 +5,14 @@
 // @description  adds a word counter with options to Google Docs
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.0.0
+// @version      1.0.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/google-docs-word-count.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Google_Docs_-_Word_Count_(With_Options)
-// @supportURL   https://openuserjs.org/scripts/zachhardesty7/Google_Docs_-_Word_Count_(With_Options)/issues
+// @supportURL   https://github.com/zachhardesty7/tamper-monkey-scripts-collection/issues
 
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/Google_Docs_-_Word_Count_(With_Options).meta.js
-// @downloadURL  https://openuserjs.org/install/zachhardesty7/Google_Docs_-_Word_Count_(With_Options).user.js
+// @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/Google_Docs_-_Word_Count_(With_Options).user.js
 
 // @match        https://docs.google.com/document/*
 // ==/UserScript==

@@ -5,14 +5,14 @@
 // @description  adds total money made per day and week to Harvest (excl. taxes)
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.0.1
+// @version      1.0.2
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/harvest-hourly-pay.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Harvest_-_Hourly_Pay
-// @supportURL   https://openuserjs.org/scripts/zachhardesty7/Harvest_-_Hourly_Pay/issues
+// @supportURL   https://github.com/zachhardesty7/tamper-monkey-scripts-collection/issues
 
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/Harvest_-_Hourly_Pay.meta.js
-// @downloadURL  https://openuserjs.org/install/zachhardesty7/Harvest_-_Hourly_Pay.user.js
+// @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/Harvest_-_Hourly_Pay.user.js
 
 // @match        https://*.harvestapp.com/*
 // ==/UserScript==

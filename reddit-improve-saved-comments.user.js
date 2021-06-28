@@ -5,14 +5,14 @@
 // @description  reveals the save and report buttons and makes links right clickable
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.2.2
+// @version      1.2.3
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-improve-saved-comments.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Reddit_-_Improve_Saved_Comments
-// @supportURL   https://openuserjs.org/scripts/zachhardesty7/Reddit_-_Improve_Saved_Comments/issues
+// @supportURL   https://github.com/zachhardesty7/tamper-monkey-scripts-collection/issues
 
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/Reddit_-_Improve_Saved_Comments.meta.js
-// @downloadURL  https://openuserjs.org/install/zachhardesty7/Reddit_-_Improve_Saved_Comments.user.js
+// @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/Reddit_-_Improve_Saved_Comments.user.js
 
 // @include      https://www.reddit.com/user/*/saved/*
 // @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887637

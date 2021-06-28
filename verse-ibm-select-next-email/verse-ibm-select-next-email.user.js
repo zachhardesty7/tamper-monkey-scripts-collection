@@ -5,7 +5,7 @@
 // @description  load up next email when the current one is deleted
 // @copyright    2020, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.2.3
+// @version      2.2.4
 
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/tree/master/verse-ibm-select-next-email
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/tree/master/verse-ibm-select-next-email
@@ -13,7 +13,7 @@
 // @supportURL   https://github.com/zachhardesty7/tamper-monkey-scripts-collection/issues
 
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/IBM_Verse_-_Auto-Select_Next_Email.meta.js
-// @downloadURL  https://openuserjs.org/install/zachhardesty7/IBM_Verse_-_Auto-Select_Next_Email.user.js
+// @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/IBM_Verse_-_Auto-Select_Next_Email.user.js
 
 // @include      https://mail.notes.na.collabserv.com/verse*
 // @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887637

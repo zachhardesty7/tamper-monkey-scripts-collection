@@ -5,14 +5,14 @@
 // @description  adds a simple visual representation of portfolio distribution (USD) on "balance" and "deposits & withdrawals" pages
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.1.2
+// @version      1.1.3
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/binance-portfolio-distribution-chart.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Binance_-_Portfolio_Distribution_Pie_Chart
-// @supportURL   https://openuserjs.org/scripts/zachhardesty7/Binance_-_Portfolio_Distribution_Pie_Chart/issues
+// @supportURL   https://github.com/zachhardesty7/tamper-monkey-scripts-collection/issues
 
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/Binance_-_Portfolio_Distribution_Pie_Chart.meta.js
-// @downloadURL  https://openuserjs.org/install/zachhardesty7/Binance_-_Portfolio_Distribution_Pie_Chart.user.js
+// @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/Binance_-_Portfolio_Distribution_Pie_Chart.user.js
 
 // @match        https://www.binance.com/userCenter/balances*
 // @match        https://www.binance.com/userCenter/depositWithdraw*

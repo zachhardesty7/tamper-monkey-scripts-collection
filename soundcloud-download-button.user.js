@@ -5,14 +5,14 @@
 // @description  adds a button on main page and song page to download song automatically from https://soundcloudmp3.org/
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.1.2
+// @version      2.1.3
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/soundcloud-download-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Soundcloud_-_Add_External_Download_Button
-// @supportURL   https://openuserjs.org/scripts/zachhardesty7/Soundcloud_-_Add_External_Download_Button/issues
+// @supportURL   https://github.com/zachhardesty7/tamper-monkey-scripts-collection/issues
 
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/Soundcloud_-_Add_External_Download_Button.meta.js
-// @downloadURL  https://openuserjs.org/install/zachhardesty7/Soundcloud_-_Add_External_Download_Button.user.js
+// @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/Soundcloud_-_Add_External_Download_Button.user.js
 
 // @match        https://soundcloud.com/*
 // @match        https://loader.to/*

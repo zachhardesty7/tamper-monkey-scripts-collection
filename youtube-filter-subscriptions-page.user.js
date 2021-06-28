@@ -5,7 +5,7 @@
 // @description  hide videos with given title keywords
 // @copyright    2019-2021, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.0.0
+// @version      2.0.1
 
 // @grant       GM_getValue
 // @grant       GM_setValue
@@ -13,10 +13,10 @@
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-filter-subscriptions-page.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Filter_Subscriptions_Page
-// @supportURL   https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Filter_Subscriptions_Page/issues
+// @supportURL   https://github.com/zachhardesty7/tamper-monkey-scripts-collection/issues
 
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/YouTube_-_Filter_Subscriptions_Page.meta.js
-// @downloadURL  https://openuserjs.org/install/zachhardesty7/YouTube_-_Filter_Subscriptions_Page.user.js
+// @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/YouTube_-_Filter_Subscriptions_Page.user.js
 
 // @match        https://www.youtube.com/feed/subscriptions*
 // @match        https://www.youtube.com/

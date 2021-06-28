@@ -5,14 +5,14 @@
 // @description  rough conversion to get USD val of coin on "balance" & "deposits/withdrawals" page
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.3.2
+// @version      1.3.3
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/binance-btc-usd.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Binance_-_Add_BTC_to_USD_Conversion
-// @supportURL   https://openuserjs.org/scripts/zachhardesty7/Binance_-_Add_BTC_to_USD_Conversion/issues
+// @supportURL   https://github.com/zachhardesty7/tamper-monkey-scripts-collection/issues
 
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/Binance_-_Add_BTC_to_USD_Conversion.meta.js
-// @downloadURL  https://openuserjs.org/install/zachhardesty7/Binance_-_Add_BTC_to_USD_Conversion.user.js
+// @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/Binance_-_Add_BTC_to_USD_Conversion.user.js
 
 // @match        https://www.binance.com/userCenter/balances*
 // @match        https://www.binance.com/userCenter/depositWithdraw*
