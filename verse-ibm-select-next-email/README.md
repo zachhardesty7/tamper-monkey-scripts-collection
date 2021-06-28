@@ -7,7 +7,7 @@
 
 ## Description
 
-Automatically moes to the next email when archiving an email in your inbox.
+Automatically move to the next email when archiving an email in your inbox.
 
 ## Screenshot
 
