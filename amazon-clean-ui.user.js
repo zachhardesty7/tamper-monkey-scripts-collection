@@ -5,7 +5,7 @@
 // @description  removes annoying largely not useful elements from Amazon
 // @copyright    2019-2021, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.8.3
+// @version      1.9.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/amazon-clean-ui.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Amazon_-_Clean_UI
@@ -319,6 +319,7 @@ function addElementsToHideQueue() {
     hide("#quickPromoBucketContent")
     hideParentX(".celwidget .a-section.askDetailPageSearchWidgetSection", 1)
     hide("#vse-related-videos")
+    hide("#vseVideoWidget_cardDeck")
     hide(".a-section.vse-empty-view-container.bucket:first-child")
     hide("#importantInformation")
     hide("#giveaway_feature_div")
