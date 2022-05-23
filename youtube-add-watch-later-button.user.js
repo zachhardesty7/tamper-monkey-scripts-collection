@@ -5,7 +5,7 @@
 // @description  adds a new button next to like that quick adds / removes the active video from your "Watch later" playlist
 // @copyright    2019-2021, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.5.1
+// @version      1.5.2
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Watch_Later_Button
@@ -45,6 +45,7 @@ queryForElements = (selector, _, callback) => {
  * build the button el tediously but like the rest
  *
  * @param {HTMLElement} buttons - html node
+ * @returns {void}
  */
 function addButton(buttons) {
   const zh = document.querySelectorAll("#zh-wl")
@@ -66,7 +67,6 @@ function addButton(buttons) {
   )
 
   // needed to force the node to load so we can determine if it's already in WL or not
-  playlistSaveButton.click()
   playlistSaveButton.click()
 
   /**
@@ -134,6 +134,20 @@ function addButton(buttons) {
       "#text"
     ).className
   text.textContent = "later"
+
+  let count = 0
+  const interval = setInterval(() => {
+    if (count < 5) {
+      count += 1
+      document
+        .querySelector(
+          "html > body > tp-yt-iron-overlay-backdrop.opened[opened]"
+        )
+        ?.click()
+    } else {
+      clearInterval(interval)
+    }
+  }, 500)
 
   let hasListener = false
   onElementReady(
