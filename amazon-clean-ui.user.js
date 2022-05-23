@@ -5,7 +5,7 @@
 // @description  removes annoying largely not useful elements from Amazon
 // @copyright    2019-2021, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.8.2
+// @version      1.8.3
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/amazon-clean-ui.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Amazon_-_Clean_UI
@@ -211,7 +211,7 @@ function addElementsToHideQueue() {
     hide("#navSwmHoliday")
     hide("#universal-detail-ilm")
     hide("#detail-ilm_div")
-    hideX("#dp div", 0) // TODO: dangerous, replace with more precise selector
+    // hideX("#dp div", 0) // TODO: eats whole page sometimes
     hideX("#dp div", 1) // TODO: dangerous, replace with more precise selector
 
     // hide sharing
@@ -421,7 +421,11 @@ function addElementsToHideQueue() {
     ) // related brands
     hide('span[data-component-type="s-feedback-slot"]') // feedback
     hideAllParentX('span[data-component-type="s-ads-metrics"]', 1) // sponsored product search brand (little giant)
+    hideAllParentX("div[data-ad-feedback]", 1) // sponsored product search brand (little giant)
+    // div.a-section.a-spacing-none.s-result-item.s-flex-full-width.s-widget.s-widget-spacing-large:nth-of-type(1)
+    // #ad-feedback-text-auto-sparkle-hsa-tetris
     hideAllParentX('[cel_widget_id="MAIN-VIDEO_SINGLE_PRODUCT"]', 1) // sponsored product search brand (little giant)
+    // .a-section.sbv-product .sbv-ad-feedback
     hideAllParentX('[cel_widget_id="MAIN-FEEDBACK"]', 1) // sponsored product search brand (little giant)
   }
 
