@@ -5,7 +5,7 @@
 // @description  adds a new button next to like that quick adds / removes the active video from your "Watch later" playlist
 // @copyright    2019-2021, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.5.2
+// @version      2.0.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Watch_Later_Button
@@ -45,9 +45,9 @@ queryForElements = (selector, _, callback) => {
  * build the button el tediously but like the rest
  *
  * @param {HTMLElement} buttons - html node
- * @returns {void}
+ * @returns {Promise<void>}
  */
-function addButton(buttons) {
+async function addButton(buttons) {
   const zh = document.querySelectorAll("#zh-wl")
   // noop if button already present in correct place
   if (zh.length === 1 && zh[0].parentElement.id === BUTTONS_CONTAINER_ID) return
@@ -73,37 +73,29 @@ function addButton(buttons) {
    * @typedef {HTMLElement & { buttonRenderer: boolean, isIconButton?: boolean, styleActionButton?: boolean }} ytdButtonRenderer
    */
   const container = /** @type {ytdButtonRenderer} */ (
-    document.createElement("ytd-button-renderer")
+    document.createElement("ytd-toggle-button-renderer")
   )
 
-  container.setAttribute("style-action-button", "true")
-  container.setAttribute("is-icon-button", "true")
-  container.className = buttons.lastElementChild.className
+  const shareButtonContainer = buttons.children[1]
+
+  container.className = shareButtonContainer.className // style-scope ytd-menu-renderer
   container.id = "zh-wl"
   buttons.append(container)
 
-  const link = document.createElement("a")
-  link.tabIndex = -1
-  link.className =
-    buttons.children[buttons.children.length - 2].firstElementChild.className
-  container.append(link)
-
-  const buttonContainer = document.createElement("yt-icon-button")
-  buttonContainer.id = "button"
+  const buttonContainer = document.createElement("button")
+  // TODO: use more dynamic className
   buttonContainer.className =
-    buttons.children[
-      buttons.children.length - 2
-    ].lastElementChild.firstElementChild.className
-  link.append(buttonContainer)
+    "yt-spec-button-shape-next yt-spec-button-shape-next--tonal yt-spec-button-shape-next--mono yt-spec-button-shape-next--size-m yt-spec-button-shape-next--icon-leading"
+  container.firstElementChild.append(buttonContainer)
+  buttonContainer["aria-label"] = "Save to Watch Later"
+
+  const iconContainer = document.createElement("div")
+  // TODO: use more dynamic className
+  iconContainer.className = "yt-spec-button-shape-next__icon"
+  buttonContainer.append(iconContainer)
 
   const icon = document.createElement("yt-icon")
-  icon.className =
-    buttons.children[
-      buttons.children.length - 2
-    ].lastElementChild.firstElementChild.firstElementChild.firstElementChild.className
   buttonContainer.firstElementChild.append(icon)
-
-  buttonContainer.firstElementChild["aria-label"] = "Save to Watch Later"
 
   // copy icon from hovering video thumbnails
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
@@ -126,61 +118,138 @@ function addButton(buttons) {
   path.setAttribute("d", SVG_PATH_HOLLOW)
   g.append(path)
 
-  const text = document.createElement("yt-formatted-string")
-  text.id = "text"
-  link.append(text)
+  const textContainer = document.createElement("div")
+  buttonContainer.append(textContainer)
+  // TODO: use more dynamic className
+  textContainer.className =
+    "cbox yt-spec-button-shape-next--button-text-content"
+
+  const text = document.createElement("span")
+  textContainer.append(text)
+  // TODO: use more dynamic className
   text.className =
-    buttons.children[buttons.children.length - 2].querySelector(
-      "#text"
-    ).className
-  text.textContent = "later"
+    "yt-core-attributed-string yt-core-attributed-string--white-space-no-wrap"
+  text.textContent = "Later"
 
-  let count = 0
-  const interval = setInterval(() => {
-    if (count < 5) {
-      count += 1
-      document
-        .querySelector(
-          "html > body > tp-yt-iron-overlay-backdrop.opened[opened]"
-        )
-        ?.click()
-    } else {
-      clearInterval(interval)
-    }
-  }, 500)
+  container.addEventListener("click", async () => {
+    const data = document
+      .querySelector(`#above-the-fold #menu #${BUTTONS_CONTAINER_ID}`)
+      .__dataHost.__data.items.find(
+        (item) => item.menuServiceItemRenderer?.icon.iconType === "PLAYLIST_ADD"
+      ).menuServiceItemRenderer
 
-  let hasListener = false
-  onElementReady(
-    "#playlists .ytd-add-to-playlist-renderer #checkbox",
-    { findOnce: false },
-    (checkbox) => {
-      if (!hasListener && checkbox.textContent.trim() === "Watch later") {
-        hasListener = true
-        console.debug("no click listener, adding new click listener")
-        const watchLaterCheckbox = /** @type {HTMLInputElement} */ (checkbox)
+    const videoId = data.serviceEndpoint.addToPlaylistServiceEndpoint.videoId
 
-        path.setAttribute(
-          "d",
-          watchLaterCheckbox?.checked ? SVG_PATH_FILLED : SVG_PATH_HOLLOW
-        )
+    const SAPISIDHASH = await getSApiSidHash(
+      document.cookie.split("SAPISID=")[1].split("; ")[0],
+      window.origin
+    )
 
-        container.addEventListener("click", () => {
-          watchLaterCheckbox?.click()
+    const isVideoInWatchLaterBeforeRequest = await isVideoInWatchLater()
 
-          path.setAttribute(
-            "d",
-            watchLaterCheckbox?.checked ? SVG_PATH_FILLED : SVG_PATH_HOLLOW
-          )
-        })
-      }
+    const action = isVideoInWatchLaterBeforeRequest
+      ? "ACTION_REMOVE_VIDEO_BY_VIDEO_ID"
+      : "ACTION_ADD_VIDEO"
+
+    await fetch(`https://www.youtube.com/youtubei/v1/browse/edit_playlist`, {
+      headers: {
+        authorization: `SAPISIDHASH ${SAPISIDHASH}`,
+      },
+      body: JSON.stringify({
+        context: {
+          client: {
+            clientName: "WEB",
+            clientVersion: ytcfg.data_.INNERTUBE_CLIENT_VERSION,
+          },
+        },
+        actions: [
+          {
+            ...(isVideoInWatchLaterBeforeRequest
+              ? { removedVideoId: videoId }
+              : { addedVideoId: videoId }),
+            action,
+          },
+        ],
+        playlistId: "WL",
+      }),
+      method: "POST",
+    })
+
+    path.setAttribute(
+      "d",
+      isVideoInWatchLaterBeforeRequest ? SVG_PATH_HOLLOW : SVG_PATH_FILLED
+    )
+  })
+
+  // TODO: fetch correct status on page load
+  // path.setAttribute(
+  //   "d",
+  //   (await isVideoInWatchLater()) ? SVG_PATH_FILLED : SVG_PATH_HOLLOW
+  // )
+}
+
+async function isVideoInWatchLater() {
+  const data = document
+    .querySelector(`#above-the-fold #menu #${BUTTONS_CONTAINER_ID}`)
+    .__dataHost.__data.items.find(
+      (item) => item.menuServiceItemRenderer?.icon.iconType === "PLAYLIST_ADD"
+    ).menuServiceItemRenderer
+
+  const videoId = data.serviceEndpoint.addToPlaylistServiceEndpoint.videoId
+
+  const SAPISIDHASH = await getSApiSidHash(
+    document.cookie.split("SAPISID=")[1].split("; ")[0],
+    window.origin
+  )
+
+  const response = await fetch(
+    `https://www.youtube.com/youtubei/v1/playlist/get_add_to_playlist`,
+    {
+      headers: { authorization: `SAPISIDHASH ${SAPISIDHASH}` },
+      body: JSON.stringify({
+        context: {
+          client: {
+            clientName: "WEB",
+            clientVersion: ytcfg.data_.INNERTUBE_CLIENT_VERSION,
+          },
+        },
+        excludeWatchLater: false,
+        videoIds: [videoId],
+      }),
+      method: "POST",
     }
   )
+
+  const json = await response.json()
+
+  return (
+    json.contents[0].addToPlaylistRenderer.playlists[0]
+      .playlistAddToOptionRenderer.containsSelectedVideos === "ALL"
+  )
+}
+
+/** @see https://gist.github.com/eyecatchup/2d700122e24154fdc985b7071ec7764a */
+async function getSApiSidHash(SAPISID, origin) {
+  function sha1(str) {
+    return window.crypto.subtle
+      .digest("SHA-1", new TextEncoder().encode(str))
+      .then((buf) => {
+        return Array.prototype.map
+          .call(new Uint8Array(buf), (x) => ("00" + x.toString(16)).slice(-2))
+          .join("")
+      })
+  }
+
+  const TIMESTAMP_MS = Date.now()
+  const digest = await sha1(`${TIMESTAMP_MS} ${SAPISID} ${origin}`)
+
+  return `${TIMESTAMP_MS}_${digest}`
 }
 
 // YouTube uses a bunch of duplicate 'id' tag values. why?
 // this makes it much more likely to target right one, but at the cost of being brittle
 onElementReady(
-  `#info #info-contents #menu #${BUTTONS_CONTAINER_ID}`,
+  `#above-the-fold #menu #${BUTTONS_CONTAINER_ID}`,
   { findOnce: false },
   addButton
 )
