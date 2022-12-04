@@ -39,6 +39,11 @@ declare const P: any
 declare const ytInitialData: any
 declare const ytcfg: any
 
+// FrakerFaceZ on Twitch
+declare interface FFZHTMLVideoElement extends HTMLVideoElement {
+  _ffz_compressor?: DynamicsCompressorNode
+}
+
 /**
  * Query for new DOM nodes matching a specified selector.
  *
