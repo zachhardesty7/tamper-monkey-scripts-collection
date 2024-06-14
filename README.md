@@ -16,8 +16,7 @@ Tampermonkey browser extension (download links)
 
 ### Installation
 
-Visit the [OpenUser website](https://openuserjs.org/users/zachhardesty7/scripts) to download
-and install any scripts! Scripts are automatically kept up to date with this repository.
+Visit my profile the [OpenUser website](https://openuserjs.org/users/zachhardesty7/scripts) or the [GreasyFork website](https://greasyfork.org/en/users/371100-zach-hardesty) to download and install any scripts! Scripts are automatically kept up to date with this repository.
 
 ### Execution
 
