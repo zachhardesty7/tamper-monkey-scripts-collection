@@ -2,7 +2,7 @@
 // @name         Google Docs - Word Count with Options
 // @namespace    https://zachhardesty.com
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
-// @description  adds a word counter with options to Google Docs
+// @description  adds a word counter with options to Google Docs (NOTE: Unfortunately, this is currently broken. Fortunately, they basically implemented this: in the top menu click Tools > Word count > check "Display word count while typing". This UserScript never worked that well, especially with longer document and Google has changed their code again to make this even more difficult to fix (aggressive lazy-loading pages). I likely won't fix this, but I'm leaving it up for now.)
 // @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
 // @version      1.0.1
