@@ -1,92 +1,138 @@
 // ==UserScript==
-// @name         Reddit - Improve Saved Comments
+// @name         Reddit - Add Save Button
 // @namespace    https://openuserjs.org/users/zachhardesty7
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
-// @description  reveals the save and report buttons and makes links right clickable
-// @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
+// @description  adds a save button to all comments everywhere & to posts in the saved section of your profile (https://www.reddit.com/user/USERNAME/saved/)
+// @copyright    2019-2024, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.2.3
+// @version      2.0.0
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-improve-saved-comments.user.js
+// @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-improve-saved-comments.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Reddit_-_Improve_Saved_Comments
+// @homepage     https://openuserjs.org/scripts/zachhardesty7/Reddit_-_Improve_Saved_Comments
 // @supportURL   https://github.com/zachhardesty7/tamper-monkey-scripts-collection/issues
 
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/Reddit_-_Improve_Saved_Comments.meta.js
 // @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/Reddit_-_Improve_Saved_Comments.user.js
 
-// @include      https://www.reddit.com/user/*/saved/*
+// @match        https://www.reddit.com/user/*/saved/*
+// @match        https://www.reddit.com/r/*/comments/*
 // @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887637
 // ==/UserScript==
+
 /* global onElementReady */
 
+const ID_SAVE = "zh-save"
+
 /**
- * sometimes you really need access to react internals to fix somebody
- * else's broken app and add no-brainer features
- *
- * @param {HTMLElement} DOMNode - arbitrary DOM node with a hidden react instance
- * @returns {object} react instance object
+ * @param {HTMLElement} overflowButton - triple dot more button under comments
+ * @returns {HTMLButtonElement} save button
  */
-const getReactInstance = (DOMNode) => DOMNode[Object.keys(DOMNode)[0]]
+function createSaveButton(overflowButton) {
+  function toggleSaveButton() {
+    const isSavedCurrent = svg.getAttribute("icon-name") === "save-fill"
+
+    svg.setAttribute("icon-name", isSavedCurrent ? "save-outline" : "save-fill")
+    path.setAttribute(
+      "d",
+      isSavedCurrent
+        ? "M4.114 20A1.117 1.117 0 0 1 3 18.884V2.628A1.629 1.629 0 0 1 4.628 1h10.744A1.63 1.63 0 0 1 17 2.628v16.245a1.12 1.12 0 0 1-1.718.946L10 16.479l-5.291 3.346a1.11 1.11 0 0 1-.595.175Zm.514-17.75a.378.378 0 0 0-.378.378v16.009L10 15l5.75 3.636V2.628a.378.378 0 0 0-.378-.378H4.628Z"
+        : "M15.372 1H4.628A1.629 1.629 0 0 0 3 2.628v16.256a1.113 1.113 0 0 0 1.709.941L10 16.479l5.282 3.34A1.12 1.12 0 0 0 17 18.873V2.628A1.63 1.63 0 0 0 15.372 1Z",
+    )
+    innerSpan2.textContent = isSavedCurrent ? "Save" : "Remove from saved"
+  }
+
+  const isSavedInitial =
+    overflowButton.shadowRoot.querySelector("svg[icon-name='save-fill']") !== null
+
+  const button = document.createElement("button")
+  button.setAttribute("rpl", "")
+  button.setAttribute(
+    "class",
+    "button border-md text-12 button-plain disabled:text-interactive-content-disabled text-secondary inline-flex items-center px-sm hover:text-secondary hover:bg-secondary-background-hover hover:border-secondary-background-hover",
+  )
+  button.setAttribute(
+    "style",
+    "height: var(--size-button-sm-h); font: var(--font-button-sm)",
+  )
+  button.setAttribute("slot", "overflow")
+  button.id = "zh-save"
+  button.addEventListener("click", () => {
+    overflowButton.shadowRoot.querySelector(".save-comment-menu-button > div").click()
+  })
+
+  const span = document.createElement("span")
+  span.setAttribute("class", "flex items-center")
+  button.append(span)
+
+  const innerSpan1 = document.createElement("span")
+  innerSpan1.setAttribute("class", "flex text-16 mr-[var(--rem6)]")
+  span.append(innerSpan1)
+
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
+  svg.setAttribute("rpl", "")
+  // svg.setAttribute("aria-hidden", "true")
+  svg.setAttribute("fill", "currentColor")
+  svg.setAttribute("height", "16")
+  svg.setAttribute("icon-name", isSavedInitial ? "save-fill" : "save-outline")
+
+  svg.setAttribute("viewBox", "0 0 20 20")
+  svg.setAttribute("width", "16")
+  svg.setAttribute("xmlns", "http://www.w3.org/2000/svg")
+  innerSpan1.append(svg)
+
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path")
+  path.setAttribute(
+    "d",
+    isSavedInitial
+      ? "M15.372 1H4.628A1.629 1.629 0 0 0 3 2.628v16.256a1.113 1.113 0 0 0 1.709.941L10 16.479l5.282 3.34A1.12 1.12 0 0 0 17 18.873V2.628A1.63 1.63 0 0 0 15.372 1Z"
+      : "M4.114 20A1.117 1.117 0 0 1 3 18.884V2.628A1.629 1.629 0 0 1 4.628 1h10.744A1.63 1.63 0 0 1 17 2.628v16.245a1.12 1.12 0 0 1-1.718.946L10 16.479l-5.291 3.346a1.11 1.11 0 0 1-.595.175Zm.514-17.75a.378.378 0 0 0-.378.378v16.009L10 15l5.75 3.636V2.628a.378.378 0 0 0-.378-.378H4.628Z",
+  )
+  svg.append(path)
+
+  const innerSpan2 = document.createElement("span")
+  innerSpan2.textContent = isSavedInitial ? "Remove from saved" : "Save"
+  span.append(innerSpan2)
+
+  // const screenReaderContent = document.createElement("faceplate-screen-reader-content")
+  // screenReaderContent.textContent = " save "
+  // button.append(screenReaderContent)
+
+  overflowButton.shadowRoot
+    .querySelector(".save-comment-menu-button > div")
+    .addEventListener("click", () => {
+      toggleSaveButton()
+    })
+
+  return button
+}
 
 /**
  * add features to comments
  *
- * @param {HTMLElement} button - triple dot more button under comments
+ * @param {HTMLElement} overflowButton - triple dot more button under comments
  */
-function improveComments(button) {
-  const moreComponent = getReactInstance(button)
-  const moreComponentProps = moreComponent.return.return.memoizedProps
-  const genericButtonClass = button.parentElement.children[0].className
+function improveComments(overflowButton) {
+  const zh = overflowButton.parentElement.querySelectorAll(`#${ID_SAVE}`)
+  // noop if button already present in correct place
+  if (zh.length === 1 && zh[0].parentElement.getAttribute("slot") === "actionRow") {
+    return
+  }
 
-  const reportButton = document.createElement("button")
-  reportButton.textContent = "Report"
-  reportButton.className = genericButtonClass
-  // navigate react obj
-  reportButton.addEventListener(
-    "click",
-    moreComponentProps.children[0].props.onClick
-  )
+  const saveButton = createSaveButton(overflowButton)
 
-  // does not dynamically update text content
-  const saveButton = document.createElement("button")
-  saveButton.textContent = "Save / Unsave"
-  saveButton.className = genericButtonClass
-  saveButton.addEventListener(
-    "click",
-    moreComponentProps.children[1].props.onClick
-  )
-
-  // not defined in a separate function just because this is a quick
-  // way to ensure that all of the important parts are loaded
-  const comment =
-    button.parentElement.parentElement.parentElement.parentElement.parentElement
-      .parentElement.parentElement.parentElement
-
-  // wrap the entirety of the comment in link el
-  const container = comment.parentElement
-  const wrapper = document.createElement("a")
-  // link to comment page hidden in react instance
-  wrapper.href =
-    getReactInstance(comment).return.memoizedProps.comment.permalink
-  wrapper.append(comment) // move all original DOM children
-  wrapper.addEventListener("click", (e) => e.preventDefault()) // allow original click handler to take over
-
-  container.append(wrapper)
-
-  button.parentElement.append(reportButton)
-  button.parentElement.append(saveButton)
-  button.remove()
+  overflowButton.before(saveButton)
 }
-// gross, but Reddit uses styled-components / emotion and has almost no
-// constant selectors that don't change between renders, detail allows react to hydrate first
+
 window.addEventListener(
   "load",
   () => {
     onElementReady(
-      "div.Comment > div > div > div:last-child > div > div:nth-child(2) > div:nth-child(2) > div:last-child > button:last-child[aria-haspopup][aria-expanded][aria-label]",
+      "shreddit-overflow-menu[slot='overflow'][source='comment']",
       { findOnce: false },
-      improveComments
+      improveComments,
     )
   },
-  false
+  false,
 )
