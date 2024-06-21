@@ -1,10 +1,13 @@
-// shim / compait
+// shim / compat
 declare const WebKitMutationObserver: any
 
 // greasemonkey
 declare const GM_getValue: <T>(key: string, defaultValue: T) => T
 declare const GM_setValue: <T>(key: string, value: T) => void
-declare const GM_registerMenuCommand: (message: string, callback: () => void) => void
+declare const GM_registerMenuCommand: (
+  message: string,
+  callback: () => void,
+) => void
 
 // Chart.js
 declare const myPie: Function
@@ -39,7 +42,7 @@ declare const P: any
 declare const ytInitialData: any
 declare const ytcfg: any
 
-// FrakerFaceZ on Twitch
+// FrankerFaceZ on Twitch
 declare interface FFZHTMLVideoElement extends HTMLVideoElement {
   _ffz_compressor?: DynamicsCompressorNode
 }
@@ -52,7 +55,7 @@ declare interface FFZHTMLVideoElement extends HTMLVideoElement {
 declare const onElementReady: (
   selector: string,
   options: { findFirst?: boolean; findOnce?: boolean },
-  callback: (el: HTMLElement) => void
+  callback: (el: HTMLElement) => void,
 ) => void
 /**
  * Query for new DOM nodes matching a specified selector.
@@ -62,7 +65,7 @@ declare const onElementReady: (
 declare const queryForElements: (
   selector: string,
   options: { findFirst?: boolean; findOnce?: boolean },
-  callback: (el: HTMLElement) => void
+  callback: (el: HTMLElement) => void,
 ) => void
 
 /**
@@ -78,21 +81,21 @@ declare interface Element {
   getElementsByTagName(qualifiedName: string): HTMLCollectionOf<HTMLElement>
   getElementsByTagNameNS(
     namespaceURI: string,
-    localName: string
+    localName: string,
   ): HTMLCollectionOf<HTMLElement>
   insertAdjacentElement(
     position: InsertPosition,
-    insertedElement: Element
+    insertedElement: Element,
   ): HTMLElement | null
   addEventListener<K extends keyof ElementEventMap>(
     type: K,
     listener: (this: Element, ev: ElementEventMap[K]) => any,
-    options?: boolean | AddEventListenerOptions
+    options?: boolean | AddEventListenerOptions,
   ): void
   removeEventListener<K extends keyof ElementEventMap>(
     type: K,
     listener: (this: Element, ev: ElementEventMap[K]) => any,
-    options?: boolean | EventListenerOptions
+    options?: boolean | EventListenerOptions,
   ): void
 }
 
@@ -110,19 +113,19 @@ declare interface Document {
 
   // keep these so we get advanced types when possible
   querySelector<K extends keyof HTMLElementTagNameMap>(
-    selectors: K
+    selectors: K,
   ): HTMLElementTagNameMap[K] | null
   querySelector<K extends keyof SVGElementTagNameMap>(
-    selectors: K
+    selectors: K,
   ): SVGElementTagNameMap[K] | null
   querySelector(selectors: string): HTMLElement | null
 
   // keep these so we get advanced types when possible
   querySelectorAll<K extends keyof HTMLElementTagNameMap>(
-    selectors: K
+    selectors: K,
   ): NodeListOf<HTMLElementTagNameMap[K]>
   querySelectorAll<K extends keyof SVGElementTagNameMap>(
-    selectors: K
+    selectors: K,
   ): NodeListOf<SVGElementTagNameMap[K]>
   querySelectorAll(selectors: string): NodeListOf<HTMLElement>
 }
