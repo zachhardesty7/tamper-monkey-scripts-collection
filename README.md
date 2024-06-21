@@ -105,6 +105,9 @@ limitations under the License.
 - [SoundCloud to MP3][soundclouddownload] - With SoundCloud MP3 you can convert and download music in High Quality MP3 format.
 - [ChangeValueDetection][detectorjs] - Simple interval observer to detect change from user, JS, or anything else
 - [Google Docs Word Count][docs-greasemonkey] - Inspiration for my script, changed formatting, style, and added a few filtering options
+- interesting UserScript tools
+  - [UserGui](https://github.com/AugmentedWeb/UserGui) 
+  - [Userscripter](https://github.com/SimonAlling/userscripter)
 
 <!-- Markdown link & img definitions -->
 
