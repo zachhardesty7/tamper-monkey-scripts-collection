@@ -22,18 +22,10 @@ Visit my profile the [OpenUser website](https://openuserjs.org/users/zachhardest
 
 Code will automatically execute on the designated websites!
 
-## Usage
+## Usage / Descriptions
 
-- [Binance][binance]
-  - [binance-btc-usd.user.js](binance-btc-usd.user.js): Add text to display current amounts of crypto in approx. USD value ![balance line with USD conversion][binance-img-bal]
-  - [binance-portfolio-distribution-chart.user.js](binance-portfolio-distribution-chart.user.js): Add chart.js pie chart to display distribution of portfolio holdings ![pie chart of ratios][binance-img-pie]
-- [Harvest][harvest]
-  - [harvest-hourly-pay.user.js](harvest-hourly-pay.user.js): Display pre-tax income based on clocked hours, must update with pay rate, defaults to \$16 / hour ![conversion next to hours worked][harvest-img]
 - [Soundcloud][soundcloud]
   - [soundcloud-download-button.user.js](soundcloud-download-button.user.js): Add seamless download button that uses an external service for any track ![soundcloud external download button][soundcloud-img]
-- [Google Docs][gdocs]
-  - [google-docs-force-center.user.js](google-docs-force-center.user.js): Center document on screen and prevent horizontal scrolling
-  - [google-docs-word-count.user.js](google-docs-word-count.user.js): Separate count for seeing word count of selected text ![footer count][docs-img]
 - Google Search
   - [google-hide-search-interruptions.user.js](google-hide-search-interruptions.user.js): simple script that hides the "People also search for" prompt that sometimes appears when returning to the same search results
 - [Etsy][etsy]
@@ -49,6 +41,19 @@ Code will automatically execute on the designated websites!
   - [reddit-improve-saved-comments.user.js](reddit-improve-saved-comments.user.js): add a save button to all comments everywhere & to posts in the saved section of your profile
 
 _For more information on Tampermonkey itself, please refer to their [website][tampermonkey-website]._
+
+### Archived
+
+These scripts will no longer be maintained or updated by myself. They are kept here for historical purposes. Feel free to submit a PR if you'd like to help update one of them!
+
+- [Binance][binance]
+  - [binance-btc-usd.user.js](binance-btc-usd.user.js): Add text to display current amounts of crypto in approx. USD value ![balance line with USD conversion][binance-img-bal]
+  - [binance-portfolio-distribution-chart.user.js](binance-portfolio-distribution-chart.user.js): Add chart.js pie chart to display distribution of portfolio holdings ![pie chart of ratios][binance-img-pie]
+- [Google Docs][gdocs]
+  - [google-docs-force-center.user.js](google-docs-force-center.user.js): Center document on screen and prevent horizontal scrolling
+  - [google-docs-word-count.user.js](google-docs-word-count.user.js): Separate count for seeing word count of selected text ![footer count][docs-img]
+- [Harvest][harvest]
+  - [harvest-hourly-pay.user.js](harvest-hourly-pay.user.js): Display pre-tax income based on clocked hours, must update with pay rate, defaults to \$16 / hour ![conversion next to hours worked][harvest-img]
 
 ## Known Issues
 
