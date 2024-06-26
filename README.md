@@ -27,14 +27,12 @@ Code will automatically execute on the designated websites!
 - [Binance][binance]
   - Add text to display current amounts of crypto in approx. USD value ![balance line with USD conversion][binance-img-bal]
   - Add chart.js pie chart to display distribution of portfolio holdings ![pie chart of ratios][binance-img-pie]
-  - Add a few extra options for percent of holding to buy or sell ![view of extra option][binance-img-exchange]
 - [Harvest][harvest]
   - Display pre-tax income based on clocked hours, must update with pay rate, defaults to \$16 / hour ![conversion next to hours worked][harvest-img]
 - [Soundcloud][soundcloud]
   - Add seamless download button that uses an external service for any track ![soundcloud external download button][soundcloud-img]
 - [Google Docs][gdocs]
   - Center document on screen and prevent horizontal scrolling
-  - Add a status bar at the bottom of the page to track word count and settings inside of the script to control excluding quotes, parenthesis, brackets, etc from count
   - Separate count for seeing word count of selected text ![footer count][docs-img]
 - Google Search
   - simple script that hides the "People also search for" prompt that sometimes appears when returning to the same search results
@@ -47,22 +45,15 @@ Code will automatically execute on the designated websites!
   - add a watch later button underneath videos to save you a click (on a slow popup menu)
 - Amazon
   - hide all of the junk that clutter Amazon's UI (biased decisions)
-- iCloud Notes
-  - kinda convert your note editor to a beautiful dark theme to ease your eyes (uses an interesting method of intercepting function calls on the canvas context object prototype to theme canvas items)
 - Reddit
-  - on saved posts / comments page
-    - enable middle click to open in new tab for comments
-    - move the save / unsave and report buttons out of the hidden menu
+  - add a save button to all comments everywhere & to posts in the saved section of your profile
 
 _For more information on Tampermonkey itself, please refer to their [website][tampermonkey-website]._
 
 ## Known Issues
 
 - ONLY TESTED ON CHROME
-- iCloud Notes
-  - COMPLETELY BROKEN due to 2d -> webgl canvas
 - Binance
-  - Interacting with new percentages does not trigger an official angular event so it's more of a visual indicator until you press 'buy' or 'sell'
   - Unnecessary usage of 'onElementReady.js'
 - Soundcloud
   - Button does not appear on all types of pages
@@ -133,6 +124,5 @@ limitations under the License.
 [harvest-img]: ./readme/harvest.png
 [binance-img-pie]: ./readme/pie.png
 [binance-img-bal]: ./readme/balUSD.png
-[binance-img-exchange]: ./readme/exchange.png
 [soundcloud-img]: ./readme/soundcloud.png
 [docs-img]: ./readme/docs.png
