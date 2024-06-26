@@ -25,28 +25,28 @@ Code will automatically execute on the designated websites!
 ## Usage
 
 - [Binance][binance]
-  - Add text to display current amounts of crypto in approx. USD value ![balance line with USD conversion][binance-img-bal]
-  - Add chart.js pie chart to display distribution of portfolio holdings ![pie chart of ratios][binance-img-pie]
+  - [binance-btc-usd.user.js](binance-btc-usd.user.js): Add text to display current amounts of crypto in approx. USD value ![balance line with USD conversion][binance-img-bal]
+  - [binance-portfolio-distribution-chart.user.js](binance-portfolio-distribution-chart.user.js): Add chart.js pie chart to display distribution of portfolio holdings ![pie chart of ratios][binance-img-pie]
 - [Harvest][harvest]
-  - Display pre-tax income based on clocked hours, must update with pay rate, defaults to \$16 / hour ![conversion next to hours worked][harvest-img]
+  - [harvest-hourly-pay.user.js](harvest-hourly-pay.user.js): Display pre-tax income based on clocked hours, must update with pay rate, defaults to \$16 / hour ![conversion next to hours worked][harvest-img]
 - [Soundcloud][soundcloud]
-  - Add seamless download button that uses an external service for any track ![soundcloud external download button][soundcloud-img]
+  - [soundcloud-download-button.user.js](soundcloud-download-button.user.js): Add seamless download button that uses an external service for any track ![soundcloud external download button][soundcloud-img]
 - [Google Docs][gdocs]
-  - Center document on screen and prevent horizontal scrolling
-  - Separate count for seeing word count of selected text ![footer count][docs-img]
+  - [google-docs-force-center.user.js](google-docs-force-center.user.js): Center document on screen and prevent horizontal scrolling
+  - [google-docs-word-count.user.js](google-docs-word-count.user.js): Separate count for seeing word count of selected text ![footer count][docs-img]
 - Google Search
-  - simple script that hides the "People also search for" prompt that sometimes appears when returning to the same search results
+  - [google-hide-search-interruptions.user.js](google-hide-search-interruptions.user.js): simple script that hides the "People also search for" prompt that sometimes appears when returning to the same search results
 - [Etsy][etsy]
-  - hide ad results on search page
+  - [etsy-remove-ads.user.js](etsy-remove-ads.user.js): hide ad results on search page
 - Github
-  - add a large or giant banner if project hasn't been updated in 6 months or 1+ years respectively
+  - [github-inactive-dev-warning.user.js](github-inactive-dev-warning.user.js): add a large or giant banner if project hasn't been updated in 6 months or 1+ years respectively
 - YouTube
-  - filter out videos on subscription page and home page based on given keyword
-  - add a watch later button underneath videos to save you a click (on a slow popup menu)
+  - [youtube-filter-subscriptions-page.user.js](youtube-filter-subscriptions-page.user.js): filter out videos on subscription page and home page based on given keyword
+  - [youtube-add-watch-later-button.user.js](youtube-add-watch-later-button.user.js): add a watch later button underneath videos to save you a click (on a slow popup menu)
 - Amazon
-  - hide all of the junk that clutter Amazon's UI (biased decisions)
+  - [amazon-clean-ui.user.js](amazon-clean-ui.user.js): hide all of the junk that clutter Amazon's UI (biased decisions)
 - Reddit
-  - add a save button to all comments everywhere & to posts in the saved section of your profile
+  - [reddit-improve-saved-comments.user.js](reddit-improve-saved-comments.user.js): add a save button to all comments everywhere & to posts in the saved section of your profile
 
 _For more information on Tampermonkey itself, please refer to their [website][tampermonkey-website]._
 
