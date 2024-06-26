@@ -35,10 +35,15 @@ Code will automatically execute on the designated websites!
 - YouTube
   - [youtube-filter-subscriptions-page.user.js](youtube-filter-subscriptions-page.user.js): filter out videos on subscription page and home page based on given keyword
   - [youtube-add-watch-later-button.user.js](youtube-add-watch-later-button.user.js): add a watch later button underneath videos to save you a click (on a slow popup menu)
+  - [youtube-add-playlist-remove-video-button.user.js](youtube-add-playlist-remove-video-button.user.js): add a remove button next to each video on each playlist page
 - Amazon
   - [amazon-clean-ui.user.js](amazon-clean-ui.user.js): hide all of the junk that clutter Amazon's UI (biased decisions)
 - Reddit
   - [reddit-improve-saved-comments.user.js](reddit-improve-saved-comments.user.js): add a save button to all comments everywhere & to posts in the saved section of your profile
+- Randalls
+  - [randalls-add-links-inside-cart.user.js](randalls-add-links-inside-cart.user.js): add links to products in your cart by fixing missing href on `<a />` tag
+- FrankerFaceZ (Twitch)
+  - [debug-ffz-twitch-compressor.user.js](debug-ffz-twitch-compressor.user.js): not for general use, but I found it useful for configuring my settings for the FFZ extension audio compressor
 
 _For more information on Tampermonkey itself, please refer to their [website][tampermonkey-website]._
 
@@ -54,6 +59,10 @@ These scripts will no longer be maintained or updated by myself. They are kept h
   - [google-docs-word-count.user.js](google-docs-word-count.user.js): Separate count for seeing word count of selected text ![footer count][docs-img]
 - [Harvest][harvest]
   - [harvest-hourly-pay.user.js](harvest-hourly-pay.user.js): Display pre-tax income based on clocked hours, must update with pay rate, defaults to \$16 / hour ![conversion next to hours worked][harvest-img]
+- Mint (shut down)
+  - [mint-clean-ui.user.js](mint-clean-ui.user.js): removes annoying and inconspicuous ads from Mint
+- Piazza
+  - [piazza-archive-with-delete-key.user.js](piazza-archive-with-delete-key.user.js): bind the delete key to quickly archive posts
 
 ## Known Issues
 
