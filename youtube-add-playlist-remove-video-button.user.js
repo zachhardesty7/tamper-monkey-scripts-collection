@@ -8,19 +8,21 @@
 // @version      2.0.2
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
+// @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Playlist_Remove_Video_Button
+// @homepage     https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Playlist_Remove_Video_Button
 // @supportURL   https://github.com/zachhardesty7/tamper-monkey-scripts-collection/issues
 
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/YouTube_-_Add_Playlist_Remove_Video_Button.meta.js
 // @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/YouTube_-_Add_Playlist_Remove_Video_Button.user.js
 
-// @include      https://www.youtube.com*
+// @match        https://www.youtube.com/*
 // @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887637
 // ==/UserScript==
+
 // prevent eslint from complaining when redefining private function queryForElements from gist
 // eslint-disable-next-line no-unused-vars
 /* global onElementReady, queryForElements:true */
-/* eslint-disable no-underscore-dangle */
 
 const STYLE_SCOPE = "style-scope"
 const YT_ICON = "yt-icon"
@@ -35,7 +37,9 @@ const ZH_MARKER = "zh-delete-button"
 queryForElements = (selector, _, callback) => {
   // search for elements by selector
   const elementList = document.querySelectorAll(selector) || []
-  for (const element of elementList) callback(element)
+  for (const element of elementList) {
+    callback(element)
+  }
 }
 
 /**
@@ -45,7 +49,9 @@ queryForElements = (selector, _, callback) => {
  */
 function addPlaylistVideoDeleteButton(buttons) {
   // noop if button already present
-  if (buttons.querySelector(`.${ZH_MARKER}`)) return
+  if (buttons.querySelector(`.${ZH_MARKER}`)) {
+    return
+  }
 
   // normal action
   const container = document.createElement("div")
@@ -62,7 +68,7 @@ function addPlaylistVideoDeleteButton(buttons) {
   // wrapping button field automatically created
   const icon = document.createElement(YT_ICON)
   icon.className = `${STYLE_SCOPE} ytd-menu-renderer`
-  buttonContainer.firstElementChild.append(icon)
+  buttonContainer.firstElementChild?.append(icon)
 
   // copy icon from triple dot menu
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg")
@@ -72,7 +78,7 @@ function addPlaylistVideoDeleteButton(buttons) {
   svg.setAttribute("class", `${STYLE_SCOPE} ${YT_ICON}`)
   svg.setAttribute(
     "style",
-    "pointer-events: none; display: block; width: 100%; height: 100%;"
+    "pointer-events: none; display: block; width: 100%; height: 100%;",
   )
   icon.append(svg)
 
@@ -84,15 +90,14 @@ function addPlaylistVideoDeleteButton(buttons) {
   path.setAttribute("class", `${STYLE_SCOPE} ${YT_ICON}`)
   path.setAttribute(
     "d",
-    "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+    "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z",
   )
   g.append(path)
 
   buttonContainer.addEventListener("click", () => {
-    const overflowMenuButton =
-      buttons.children[buttons.children.length - 2].firstElementChild
-        .lastElementChild
-    overflowMenuButton.click()
+    const overflowMenuButton = [...buttons.children].at(-2)?.firstElementChild
+      ?.lastElementChild
+    overflowMenuButton?.click()
 
     // allow the menu to be created before clicking (usually too quick to see)
     onElementReady(
@@ -100,10 +105,10 @@ function addPlaylistVideoDeleteButton(buttons) {
       { findOnce: false },
       (menuButton) => {
         // TODO: come up with i18n friendly solution
-        if (menuButton.textContent.includes("Remove from")) {
+        if (menuButton.textContent?.includes("Remove from")) {
           menuButton.click()
         }
-      }
+      },
     )
   })
 }
@@ -113,5 +118,5 @@ function addPlaylistVideoDeleteButton(buttons) {
 onElementReady(
   "ytd-playlist-video-renderer.ytd-playlist-video-list-renderer",
   { findOnce: false },
-  addPlaylistVideoDeleteButton
+  addPlaylistVideoDeleteButton,
 )
