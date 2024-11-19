@@ -42,6 +42,8 @@ Code will automatically execute on the designated websites!
   - [reddit-improve-saved-comments.user.js](reddit-improve-saved-comments.user.js): add a save button to all comments everywhere & to posts in the saved section of your profile
 - Randalls
   - [randalls-add-links-inside-cart.user.js](randalls-add-links-inside-cart.user.js): add links to products in your cart by fixing missing href on `<a />` tag
+- [Swagbucks gift cards][swagbucks-gift-cards]
+  - [swagbucks-sort-gift-cards-by-cashback.user.js](swagbucks-sort-gift-cards-by-cashback.user.js): add links to products in your cart by fixing missing href on `<a />` tag
 - FrankerFaceZ (Twitch)
   - [debug-ffz-twitch-compressor.user.js](debug-ffz-twitch-compressor.user.js): not for general use, but I found it useful for configuring my settings for the FFZ extension audio compressor
 
@@ -111,7 +113,7 @@ limitations under the License.
 - [ChangeValueDetection][detectorjs] - Simple interval observer to detect change from user, JS, or anything else
 - [Google Docs Word Count][docs-greasemonkey] - Inspiration for my script, changed formatting, style, and added a few filtering options
 - interesting UserScript tools
-  - [UserGui](https://github.com/AugmentedWeb/UserGui) 
+  - [UserGui](https://github.com/AugmentedWeb/UserGui)
   - [Userscripter](https://github.com/SimonAlling/userscripter)
 
 <!-- Markdown link & img definitions -->
@@ -121,6 +123,7 @@ limitations under the License.
 [soundcloud]: https://soundcloud.com/
 [gdocs]: https://www.google.com/docs/about/
 [etsy]: https://www.etsy.com/
+[swagbucks-gift-cards]: https://www.swagbucks.com/mygiftcardsplus
 [standard]: https://github.com/standard/standard
 [chartjs]: https://github.com/chartJS/Chart.js
 [api]: https://min-api.cryptocompare.com/
