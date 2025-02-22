@@ -3,9 +3,9 @@
 // @namespace    https://openuserjs.org/users/zachhardesty7
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @description  adds a save button to all comments everywhere & to posts in the saved section of your profile (https://www.reddit.com/user/USERNAME/saved/)
-// @copyright    2019-2024, Zach Hardesty (https://zachhardesty.com/)
+// @copyright    2019-2025, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.0.0
+// @version      2.0.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-improve-saved-comments.user.js
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-improve-saved-comments.user.js
@@ -50,7 +50,7 @@ function createSaveButton(overflowButton) {
   button.setAttribute("rpl", "")
   button.setAttribute(
     "class",
-    "button border-md text-12 button-plain disabled:text-interactive-content-disabled text-secondary inline-flex items-center px-sm hover:text-secondary hover:bg-secondary-background-hover hover:border-secondary-background-hover",
+    "button border-md font-semibold text-12 button-plain-weak inline-flex items-center px-sm",
   )
   button.setAttribute(
     "style",
