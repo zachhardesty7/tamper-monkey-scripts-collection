@@ -5,7 +5,7 @@
 // @description  adds a save button to all comments everywhere & to posts in the saved section of your profile (https://www.reddit.com/user/USERNAME/saved/)
 // @copyright    2019-2025, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.0.1
+// @version      2.0.2
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-improve-saved-comments.user.js
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-improve-saved-comments.user.js
@@ -129,7 +129,9 @@ window.addEventListener(
   "load",
   () => {
     onElementReady(
-      "shreddit-overflow-menu[slot='overflow'][source='comment']",
+      // `[item-state]` needed to ensure saved comments have been fully loaded
+      // direct child selector used for post comments to ensure each comment in tree is individually selected
+      ":where(shreddit-profile-comment[item-state], shreddit-comment > shreddit-comment-action-row) shreddit-overflow-menu[slot='overflow'][source='comment']",
       { findOnce: false },
       improveComments,
     )
