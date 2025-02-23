@@ -5,7 +5,7 @@
 // @description  adds a save button to all comments everywhere
 // @copyright    2024-2025, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.0.2
+// @version      2.0.3
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-add-save-button.user.js
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-add-save-button.user.js
@@ -43,6 +43,16 @@ function createSaveButton(overflowButton) {
     innerSpan2.textContent = isSavedCurrent ? "Save" : "Remove from saved"
   }
 
+  const overflowSaveButton = overflowButton.shadowRoot?.querySelector(
+    ".save-comment-menu-button > div",
+  )
+
+  if (!overflowSaveButton) {
+    throw new Error(
+      "cannot find comment's overflow menu save/unsave button, shadow DOM likely not loaded",
+    )
+  }
+
   const isSavedInitial = !!overflowButton.shadowRoot?.querySelector(
     "svg[icon-name='save-fill']",
   )
@@ -60,7 +70,7 @@ function createSaveButton(overflowButton) {
   button.setAttribute("slot", "overflow")
   button.id = "zh-save"
   button.addEventListener("click", () => {
-    overflowButton.shadowRoot.querySelector(".save-comment-menu-button > div").click()
+    overflowSaveButton.click()
   })
 
   const span = document.createElement("span")
@@ -100,11 +110,9 @@ function createSaveButton(overflowButton) {
   // screenReaderContent.textContent = " save "
   // button.append(screenReaderContent)
 
-  overflowButton.shadowRoot
-    .querySelector(".save-comment-menu-button > div")
-    .addEventListener("click", () => {
-      toggleSaveButton()
-    })
+  overflowSaveButton.addEventListener("click", () => {
+    toggleSaveButton()
+  })
 
   return button
 }
@@ -132,7 +140,8 @@ window.addEventListener(
     onElementReady(
       // `[item-state]` needed to ensure saved comments have been fully loaded (first per batch may be missing shadow dom temporarily)
       // direct child selector used for post comments to ensure each comment in tree is independently selected
-      ":where(shreddit-profile-comment[item-state], shreddit-comment > shreddit-comment-action-row) shreddit-overflow-menu[slot='overflow'][source='comment']",
+      // `[aria-hidden][award-count]` needed to ensure post comments have been fully loaded (first per batch may be missing shadow dom temporarily) (alt: `[reply-permalink]` on shreddit-comment-action-row)
+      ":where(shreddit-profile-comment[item-state], shreddit-comment[aria-hidden][award-count] > shreddit-comment-action-row) shreddit-overflow-menu[slot='overflow'][source='comment']",
       { findOnce: false },
       improveComments,
     )
