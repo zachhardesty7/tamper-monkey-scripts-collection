@@ -1,3 +1,4 @@
+// #region - misc
 // shim / compat
 declare const WebKitMutationObserver: any
 
@@ -8,7 +9,9 @@ declare const GM_registerMenuCommand: (
   message: string,
   callback: () => void,
 ) => void
+// #endregion
 
+// #region - scripts
 // Chart.js
 declare const myPie: Function
 declare const Chart: any
@@ -46,13 +49,15 @@ declare const ytcfg: any
 declare interface FFZHTMLVideoElement extends HTMLVideoElement {
   _ffz_compressor?: DynamicsCompressorNode
 }
+// #endregion
 
+// #region - utils
 /**
  * Query for new DOM nodes matching a specified selector.
  *
  * @override
  */
-declare const onElementReady: (
+declare let onElementReady: (
   selector: string,
   options: { findFirst?: boolean; findOnce?: boolean },
   callback: (el: HTMLElement) => void,
@@ -62,12 +67,14 @@ declare const onElementReady: (
  *
  * @override
  */
-declare const queryForElements: (
+declare let queryForElements: (
   selector: string,
   options: { findFirst?: boolean; findOnce?: boolean },
   callback: (el: HTMLElement) => void,
 ) => void
+// #endregion
 
+// #region hide - overrides
 /**
  * <br>
  *
@@ -129,3 +136,4 @@ declare interface Document {
   ): NodeListOf<SVGElementTagNameMap[K]>
   querySelectorAll(selectors: string): NodeListOf<HTMLElement>
 }
+// #endregion
