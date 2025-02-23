@@ -129,8 +129,8 @@ window.addEventListener(
   "load",
   () => {
     onElementReady(
-      // `[item-state]` needed to ensure saved comments have been fully loaded
-      // direct child selector used for post comments to ensure each comment in tree is individually selected
+      // `[item-state]` needed to ensure saved comments have been fully loaded (first per batch may be missing shadow dom temporarily)
+      // direct child selector used for post comments to ensure each comment in tree is independently selected
       ":where(shreddit-profile-comment[item-state], shreddit-comment > shreddit-comment-action-row) shreddit-overflow-menu[slot='overflow'][source='comment']",
       { findOnce: false },
       improveComments,
