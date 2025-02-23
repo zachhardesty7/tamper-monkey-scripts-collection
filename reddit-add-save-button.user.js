@@ -43,8 +43,9 @@ function createSaveButton(overflowButton) {
     innerSpan2.textContent = isSavedCurrent ? "Save" : "Remove from saved"
   }
 
-  const isSavedInitial =
-    overflowButton.shadowRoot.querySelector("svg[icon-name='save-fill']") !== null
+  const isSavedInitial = !!overflowButton.shadowRoot?.querySelector(
+    "svg[icon-name='save-fill']",
+  )
 
   const button = document.createElement("button")
   button.setAttribute("rpl", "")
@@ -114,9 +115,9 @@ function createSaveButton(overflowButton) {
  * @param {HTMLElement} overflowButton - triple dot more button under comments
  */
 function improveComments(overflowButton) {
-  const zh = overflowButton.parentElement.querySelectorAll(`#${ID_SAVE}`)
+  const zh = overflowButton.parentElement?.querySelectorAll(`#${ID_SAVE}`)
   // noop if button already present in correct place
-  if (zh.length === 1 && zh[0].parentElement.getAttribute("slot") === "actionRow") {
+  if (zh?.length === 1 && zh[0].parentElement?.getAttribute("slot") === "actionRow") {
     return
   }
 
