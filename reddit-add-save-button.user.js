@@ -2,19 +2,19 @@
 // @name         Reddit - Add Save Button
 // @namespace    https://openuserjs.org/users/zachhardesty7
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
-// @description  adds a save button to all comments everywhere & to posts in the saved section of your profile (https://www.reddit.com/user/USERNAME/saved/)
-// @copyright    2019-2025, Zach Hardesty (https://zachhardesty.com/)
+// @description  adds a save button to all comments everywhere
+// @copyright    2024-2025, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
 // @version      2.0.2
 
-// @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-improve-saved-comments.user.js
-// @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-improve-saved-comments.user.js
-// @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Reddit_-_Improve_Saved_Comments
-// @homepage     https://openuserjs.org/scripts/zachhardesty7/Reddit_-_Improve_Saved_Comments
+// @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-add-save-button.user.js
+// @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-add-save-button.user.js
+// @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Reddit_-_Add_Save_Button
+// @homepage     https://openuserjs.org/scripts/zachhardesty7/Reddit_-_Add_Save_Button
 // @supportURL   https://github.com/zachhardesty7/tamper-monkey-scripts-collection/issues
 
-// @updateURL    https://openuserjs.org/meta/zachhardesty7/Reddit_-_Improve_Saved_Comments.meta.js
-// @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/Reddit_-_Improve_Saved_Comments.user.js
+// @updateURL    https://openuserjs.org/meta/zachhardesty7/Reddit_-_Add_Save_Button.meta.js
+// @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/Reddit_-_Add_Save_Button.user.js
 
 // @match        https://www.reddit.com/user/*/saved/*
 // @match        https://www.reddit.com/r/*/comments/*
