@@ -5,10 +5,7 @@ declare const WebKitMutationObserver: any
 // greasemonkey
 declare const GM_getValue: <T>(key: string, defaultValue: T) => T
 declare const GM_setValue: <T>(key: string, value: T) => void
-declare const GM_registerMenuCommand: (
-  message: string,
-  callback: () => void,
-) => void
+declare const GM_registerMenuCommand: (message: string, callback: () => void) => void
 // #endregion
 
 // #region - scripts
@@ -78,7 +75,8 @@ declare let queryForElements: (
 /**
  * <br>
  *
- * **converted this stupid type, when possible, to `HTMLElement`** */
+ * **converted this stupid type, when possible, to `HTMLElement`**
+ */
 declare interface Element {
   nextElementSibling: HTMLElement | null
   previousElementSibling: HTMLElement | null
@@ -112,12 +110,17 @@ declare interface Element {
   lastElementChild: HTMLElement | null
 }
 
-declare interface Document {
+declare interface DocumentOrShadowRoot {
   // readonly scrollingElement: HTMLElement | null
   elementFromPoint(x: number, y: number): HTMLElement | null
   elementsFromPoint(x: number, y: number): HTMLElement[]
-  getElementsByClassName(classNames: string): HTMLCollectionOf<HTMLElement>
+}
 
+declare interface Document {
+  getElementsByClassName(classNames: string): HTMLCollectionOf<HTMLElement>
+}
+
+declare interface ParentNode {
   // keep these so we get advanced types when possible
   querySelector<K extends keyof HTMLElementTagNameMap>(
     selectors: K,
