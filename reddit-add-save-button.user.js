@@ -5,7 +5,7 @@
 // @description  adds a save button to all comments and posts everywhere
 // @copyright    2024-2025, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.1.0
+// @version      2.1.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-add-save-button.user.js
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-add-save-button.user.js
@@ -16,7 +16,8 @@
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/Reddit_-_Add_Save_Button.meta.js
 // @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/Reddit_-_Add_Save_Button.user.js
 
-// @match        https://www.reddit.com/user/*/saved/*
+// @match        https://www.reddit.com
+// @match        https://www.reddit.com/user/*
 // @match        https://www.reddit.com/r/*/comments/*
 // @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887637
 // ==/UserScript==
