@@ -5,7 +5,7 @@
 // @description  adds a save button to all comments and posts everywhere
 // @copyright    2024-2025, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.1.2
+// @version      2.1.3
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-add-save-button.user.js
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-add-save-button.user.js
@@ -261,7 +261,8 @@ window.addEventListener(
       // `[item-state]` needed to ensure saved comments have been fully loaded (first per batch may be missing shadow dom temporarily)
       // direct child selector used for post comments to ensure each comment in tree is independently selected
       // `[aria-hidden][award-count]` needed to ensure post comments have been fully loaded (first per batch may be missing shadow dom temporarily) (alt: `[reply-permalink]` on shreddit-comment-action-row)
-      ":where(shreddit-profile-comment[item-state], shreddit-comment[aria-hidden][award-count] > shreddit-comment-action-row) shreddit-overflow-menu[slot='overflow'][source='comment']",
+      // TODO: only sometimes works for post comments, no way to tell if overflow menu loaded or not just via a selector, need to try a new approach of attaching an observer to the shadow root
+      ":where(shreddit-profile-comment[item-state], shreddit-comment[aria-hidden][award-count] > div[slot='actionRow'] > shreddit-comment-action-row) shreddit-overflow-menu[slot='overflow'][source='comment']",
       { findOnce: false },
       improveComments,
     )
