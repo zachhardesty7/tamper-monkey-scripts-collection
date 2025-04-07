@@ -3,7 +3,7 @@
 // @namespace    zachhardesty
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/utils/onElementReady.js
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/utils/onElementReady.js
-// @version      0.9.0
+// @version      0.10.0
 // @description  Detect any new DOM Element by its CSS Selector, then trigger a function. Includes Promise- & Callback interface. Based on ES6 MutationObserver. Ships legacy waitForKeyElements interface, too.
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @icon         https://i.imgur.com/nmbtzlX.png
@@ -23,22 +23,22 @@
  * Query for new DOM nodes matching a specified selector.
  *
  * @param {String} selector - CSS Selector
- * @param {{ findFirst: boolean, findOnce: boolean }} options - Stop querying after first successful pass, find each el only a single time
+ * @param {{ findFirst: boolean, findOnce: boolean, root: Document | ShadowRoot | null }} options - Stop querying after first successful pass, find each el only a single time, query based on specified `root` or `document`
  * @param {function=} callback - Callback
  */
-let queryForElements = (selector, options = { findFirst: false, findOnce: true }, callback) => {
+let queryForElements = (selector, { findFirst = false, findOnce = true, root = document }, callback) => {
     // Remember already-found elements via this attribute
     const attributeName = 'was-queried'
 
     // Search for elements by selector
-    let elementList = document.querySelectorAll(selector) || []    
+    let elementList = root?.querySelectorAll(selector) || []    
     elementList.forEach((element) => {
         if (element.hasAttribute(attributeName)) { return }
         element.setAttribute(attributeName, 'true')
         callback(element)
         
         // run reset after 2 seconds
-        if (!options.findOnce) {
+        if (!findOnce) {
             setTimeout(() => {
                 element.removeAttribute(attributeName)
             }, 2000)
@@ -53,11 +53,11 @@ let queryForElements = (selector, options = { findFirst: false, findOnce: true }
  * Returns a Promise resolving with new Elements, and triggers a callback for every Element.
  *
  * @param {String} selector - CSS Selector
- * @param {{ findFirst: boolean, findOnce: boolean }} options - Stop querying after first successful pass, find each el only a single time
+ * @param {{ findFirst: boolean, findOnce: boolean, root: Document | ShadowRoot | null }} options - Stop querying after first successful pass, find each el only a single time, query based on specified `root` or `document`
  * @param {function=} callback - Callback with Element
  * @returns {Promise<Element>} - Resolves with Element
  */
-let onElementReady = (selector, options = { findFirst: false, findOnce: true }, callback = () => {}) => {
+let onElementReady = (selector, options = { findFirst: false, findOnce: true, root: document }, callback = () => {}) => {
     return new Promise((resolve) => {
         // Initial Query
         queryForElements(selector, options, (element) => {
@@ -73,7 +73,9 @@ let onElementReady = (selector, options = { findFirst: false, findOnce: true }, 
                 callback(element)
             })
 
-            if (options.findFirst) { observer.disconnect() }
+            if (options.findFirst) {
+                observer.disconnect()
+            }
         })
 
         // Observe DOM Changes

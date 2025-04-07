@@ -56,7 +56,7 @@ declare interface FFZHTMLVideoElement extends HTMLVideoElement {
  */
 declare let onElementReady: (
   selector: string,
-  options: { findFirst?: boolean; findOnce?: boolean },
+  options: { findFirst?: boolean; findOnce?: boolean; root?: ShadowRoot | null },
   callback: (el: HTMLElement) => void,
 ) => void
 /**
@@ -66,7 +66,7 @@ declare let onElementReady: (
  */
 declare let queryForElements: (
   selector: string,
-  options: { findFirst?: boolean; findOnce?: boolean },
+  options: { findFirst?: boolean; findOnce?: boolean; root?: ShadowRoot | null },
   callback: (el: HTMLElement) => void,
 ) => void
 // #endregion
