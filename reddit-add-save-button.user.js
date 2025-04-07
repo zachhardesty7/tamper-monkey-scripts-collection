@@ -5,7 +5,7 @@
 // @description  adds a save button to all comments and posts everywhere
 // @copyright    2024-2025, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.1.3
+// @version      2.1.4
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-add-save-button.user.js
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-add-save-button.user.js
@@ -19,7 +19,7 @@
 // @match        https://www.reddit.com/
 // @match        https://www.reddit.com/user/*
 // @match        https://www.reddit.com/r/*/comments/*
-// @require      https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/utils/onElementReady.js
+// @require      https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/refs/tags/onElementReady@0.10.0/utils/onElementReady.js
 // ==/UserScript==
 
 /* global onElementReady */
@@ -44,16 +44,6 @@ function createSaveButton(overflowButton) {
     innerSpan2.textContent = isSavedCurrent ? "Save" : "Remove from saved"
   }
 
-  const overflowSaveButton = overflowButton.shadowRoot?.querySelector(
-    ".save-comment-menu-button > div",
-  )
-
-  if (!overflowSaveButton) {
-    throw new Error(
-      "cannot find comment's overflow menu save/unsave button, shadow DOM likely not loaded",
-    )
-  }
-
   const isSavedInitial = !!overflowButton.shadowRoot?.querySelector(
     "svg[icon-name='save-fill']",
   )
@@ -70,9 +60,6 @@ function createSaveButton(overflowButton) {
   )
   button.setAttribute("slot", "overflow")
   button.id = "zh-save"
-  button.addEventListener("click", () => {
-    overflowSaveButton.click()
-  })
 
   const span = document.createElement("span")
   span.setAttribute("class", "flex items-center")
@@ -111,9 +98,38 @@ function createSaveButton(overflowButton) {
   // screenReaderContent.textContent = " save "
   // button.append(screenReaderContent)
 
-  overflowSaveButton.addEventListener("click", () => {
-    toggleSaveButton()
-  })
+  const overflowSaveButton = overflowButton.shadowRoot?.querySelector(
+    ".save-comment-menu-button > div",
+  )
+
+  if (overflowSaveButton) {
+    overflowSaveButton.addEventListener("click", () => {
+      toggleSaveButton()
+    })
+    button.addEventListener("click", () => {
+      overflowSaveButton.click()
+    })
+  } else {
+    // comments on posts have no hacks to see if the shadow DOM is loaded, so we have to attach a new listener to watch the shadow DOM for changes before attaching the click listeners and checking the save status
+    onElementReady(
+      ".save-comment-menu-button > div",
+      { root: overflowButton.shadowRoot, findFirst: true },
+      (overflowSaveButtonShadow) => {
+        overflowSaveButtonShadow.addEventListener("click", () => {
+          toggleSaveButton()
+        })
+
+        button.addEventListener("click", () => {
+          overflowSaveButtonShadow.click()
+        })
+
+        // fix incorrect button style set in first pass due to it not finding the svg in the shadow DOM
+        if (overflowButton.shadowRoot?.querySelector("svg[icon-name='save-fill']")) {
+          toggleSaveButton()
+        }
+      },
+    )
+  }
 
   return button
 }
@@ -260,9 +276,7 @@ window.addEventListener(
     onElementReady(
       // `[item-state]` needed to ensure saved comments have been fully loaded (first per batch may be missing shadow dom temporarily)
       // direct child selector used for post comments to ensure each comment in tree is independently selected
-      // `[aria-hidden][award-count]` needed to ensure post comments have been fully loaded (first per batch may be missing shadow dom temporarily) (alt: `[reply-permalink]` on shreddit-comment-action-row)
-      // TODO: only sometimes works for post comments, no way to tell if overflow menu loaded or not just via a selector, need to try a new approach of attaching an observer to the shadow root
-      ":where(shreddit-profile-comment[item-state], shreddit-comment[aria-hidden][award-count] > div[slot='actionRow'] > shreddit-comment-action-row) shreddit-overflow-menu[slot='overflow'][source='comment']",
+      ":where(shreddit-profile-comment[item-state], shreddit-comment > div[slot='actionRow'] > shreddit-comment-action-row) shreddit-overflow-menu[slot='overflow'][source='comment']",
       { findOnce: false },
       improveComments,
     )
