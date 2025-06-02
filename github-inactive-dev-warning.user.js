@@ -8,7 +8,9 @@
 // @version      1.3.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/github-inactive-dev-warning.user.js
+// @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/github-inactive-dev-warning.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Github_-_Inactive_Development_Warning
+// @homepage     https://openuserjs.org/scripts/zachhardesty7/Github_-_Inactive_Development_Warning
 // @supportURL   https://github.com/zachhardesty7/tamper-monkey-scripts-collection/issues
 
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/Github_-_Inactive_Development_Warning.meta.js
@@ -17,18 +19,20 @@
 // @match        https://github.com/*/*
 // @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887637
 // ==/UserScript==
+
 /* global onElementReady */
 
 onElementReady(
   ".repository-content .Box-header .js-details-container.Details relative-time",
   { findOnce: false },
   (el) => {
-    if (document.querySelector("#zh-banner-warning")) return
+    if (document.querySelector("#zh-banner-warning")) {
+      return
+    }
 
     // @ts-ignore
     const date = new Date(el.attributes.datetime.value)
-    const daysSinceLastCommit =
-      (Date.now() - date.getTime()) / 1000 / 60 / 60 / 24
+    const daysSinceLastCommit = (Date.now() - date.getTime()) / 1000 / 60 / 60 / 24
     if (daysSinceLastCommit > 365) {
       renderWarning()
     } else if (daysSinceLastCommit > 182.5) {
@@ -36,16 +40,14 @@ onElementReady(
     } else {
       /* noop */
     }
-  }
+  },
 )
 
-/**
- * @param {HTMLElement} el - target
- */
+/** @param {HTMLElement} el - target */
 function displayMessage(el) {
   document
     .querySelector("#js-repo-pjax-container")
-    .insertAdjacentElement("beforebegin", el)
+    ?.insertAdjacentElement("beforebegin", el)
 }
 
 function renderWarning() {
@@ -62,7 +64,7 @@ function renderWarning() {
     align-items: center;
     color: white;
     font-size: 36px;
-  `
+  `,
   )
 
   banner.textContent = "WARNING: repo hasn't received an update in 1+ year(s)"
@@ -83,7 +85,7 @@ function renderCaution() {
     justify-content: center;
     align-items: center;
     font-size: 24px;
-  `
+  `,
   )
 
   banner.textContent = "Caution: repo hasn't received an update in 6+ months"
