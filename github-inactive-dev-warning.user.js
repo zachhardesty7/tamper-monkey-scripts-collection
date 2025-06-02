@@ -5,7 +5,7 @@
 // @description  display big banner if project's last commit over 6 months ago and giant banner if over 1 year ago
 // @copyright    2019-2025, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.3.1
+// @version      1.3.2
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/github-inactive-dev-warning.user.js
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/github-inactive-dev-warning.user.js
@@ -23,15 +23,14 @@
 /* global onElementReady */
 
 onElementReady(
-  ".repository-content .Box-header .js-details-container.Details relative-time",
+  "[data-testid='latest-commit-details'] relative-time",
   { findOnce: false },
   (el) => {
     if (document.querySelector("#zh-banner-warning")) {
       return
     }
 
-    // @ts-ignore
-    const date = new Date(el.attributes.datetime.value)
+    const date = new Date(el.getAttribute("datetime") || "")
     const daysSinceLastCommit = (Date.now() - date.getTime()) / 1000 / 60 / 60 / 24
     if (daysSinceLastCommit > 365) {
       renderWarning()
