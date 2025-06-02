@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Github - Inactive Development Warning
-// @namespace    https://zachhardesty.com
+// @namespace    https://openuserjs.org/users/zachhardesty7
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @description  display big banner if project's last commit over 6 months ago and giant banner if over 1 year ago
-// @copyright    2019-2021, Zach Hardesty (https://zachhardesty.com/)
+// @copyright    2019-2025, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
 // @version      1.3.1
 
@@ -17,7 +17,7 @@
 // @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/Github_-_Inactive_Development_Warning.user.js
 
 // @match        https://github.com/*/*
-// @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887637
+// @require      https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/refs/tags/onElementReady@0.10.0/utils/onElementReady.js
 // ==/UserScript==
 
 /* global onElementReady */
