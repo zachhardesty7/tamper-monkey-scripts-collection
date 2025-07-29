@@ -5,7 +5,7 @@
 // @description  make video links inside playlists (e.g. watch later, liked videos) open outside the playlist
 // @copyright    2025, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.0.0
+// @version      1.0.1
 
 // @grant        GM_getValue
 // @grant        GM_setValue
@@ -20,7 +20,7 @@
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/YouTube_-_Open_Playlist_Video_Outside_Playlist.meta.js
 // @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/YouTube_-_Open_Playlist_Video_Outside_Playlist.user.js
 
-// @match        https://www.youtube.com/playlist/*
+// @match        https://www.youtube.com/playlist*
 // @require      https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/refs/tags/onElementReady@0.10.0/utils/onElementReady.js
 // ==/UserScript==
 
