@@ -2,10 +2,10 @@
 // @name         YouTube - Open Playlist Video Outside Playlist
 // @namespace    https://openuserjs.org/users/zachhardesty7
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
-// @description  make video links inside playlists (e.g. watch later, liked videos) open outside the playlist
+// @description  make video links inside all playlists (except excluded ones) open outside the playlist
 // @copyright    2025, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.0.1
+// @version      2.0.0
 
 // @grant        GM_getValue
 // @grant        GM_setValue
@@ -47,25 +47,23 @@ function updateLink(link) {
   }
 }
 
-const GM_PLAYLISTS_KEY = "yt-filter-page"
-const GM_PLAYLISTS_DEFAULT = "WL,LL"
-
-let enabledPlaylistIds = GM_getValue(GM_PLAYLISTS_KEY, GM_PLAYLISTS_DEFAULT)
+const GM_PLAYLISTS_KEY = "yt-excluded-playlist-ids"
+let excludedPlaylistIds = GM_getValue(GM_PLAYLISTS_KEY, "")
 const playlistId = new URLSearchParams(window.location.search).get("list")
 
-if (playlistId && enabledPlaylistIds.split(",").includes(playlistId)) {
+if (playlistId && !excludedPlaylistIds.split(",").includes(playlistId)) {
   onElementReady("a[href]:is(#video-title, #thumbnail.ytd-thumbnail)", {}, updateLink)
 }
 
-GM_registerMenuCommand("Set YT Playlist IDs", () => {
+GM_registerMenuCommand("Set Excluded YT Playlist IDs", () => {
   // eslint-disable-next-line no-alert
   const val = prompt(
-    `input a comma separated list of playlist IDs (defaults to '${GM_PLAYLISTS_DEFAULT}', the watch later and liked videos playlists)`,
-    enabledPlaylistIds,
+    `input a comma separated list of playlist IDs to exclude (check the URL after "list=")`,
+    excludedPlaylistIds,
   )
 
   if (val !== null) {
-    enabledPlaylistIds = val
+    excludedPlaylistIds = val
     GM_setValue(GM_PLAYLISTS_KEY, val)
   }
 })
