@@ -9,6 +9,16 @@
       "hardesty",
       "plugin:userscripts/recommended"
     ],
+    "overrides": [
+      {
+        "files": [
+          "**/utils/**"
+        ],
+        "rules": {
+          "userscripts/filename-user": "off"
+        }
+      }
+    ],
     "ignorePatterns": [
       "**/*.ts"
     ],
