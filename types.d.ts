@@ -2,19 +2,12 @@
 // shim / compat
 declare const WebKitMutationObserver: any
 
-// greasemonkey
-declare const GM_getValue: <T>(key: string, defaultValue: T) => T
-declare const GM_setValue: <T>(key: string, value: T) => void
-declare const GM_registerMenuCommand: (message: string, callback: () => void) => void
-// #endregion
-
 // #region - scripts
 // Chart.js
 declare const myPie: Function
 declare const Chart: any
 
 // google
-declare const googleDocsUtil: any
 declare interface GoogleDocNode {
   index: number
   line: number
