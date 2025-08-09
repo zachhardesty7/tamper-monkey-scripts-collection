@@ -1,10 +1,19 @@
+// TODO: review other examples
 {
   "compilerOptions": {
+    "noEmit": true,
+    // prevent files from seeing variables in each other, see https://stackoverflow.com/a/77005521/5299167
+    "moduleDetection": "force",
+    "isolatedModules": true,
     "module": "esnext",
     "target": "esnext",
     "allowJs": true,
-    "outDir": "./never",
-    "checkJs": true
+    "checkJs": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-3.html#override-and-the---noimplicitoverride-flag
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
   },
-  "exclude": ["node_modules", "**/node_modules/*"]
+  "exclude": ["node_modules", "**/node_modules/*"],
 }
