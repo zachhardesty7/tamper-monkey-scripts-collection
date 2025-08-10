@@ -58,8 +58,6 @@ function getThemeSettings() {
       bg: '#fef7c5',
       text: '#1e2227',
       border: '#edd789',
-      close: '#58626d',
-      closeHover: '#1e2227',
       warningColor: '#996606' // Light theme warning color
     };
   } else if (darkTheme === 'dark') {
@@ -67,8 +65,6 @@ function getThemeSettings() {
       bg: '#262014',
       text: '#f0f0f0',
       border: '#614612',
-      close: '#9097a0',
-      closeHover: '#d0d6df',
       warningColor: '#d19826' // Dark theme warning color
     };
   } else { // soft_dark or default
@@ -76,44 +72,9 @@ function getThemeSettings() {
       bg: '#36342c',
       text: '#f0f0f0',
       border: '#665122',
-      close: '#9097a0',
-      closeHover: '#d0d6df',
       warningColor: '#c58f29' // Soft dark theme warning color
     };
   }
-}
-
-function createCloseButton(theme) {
-  const closeBtn = document.createElement("button");
-  closeBtn.setAttribute("style", `
-    background: transparent;
-    border: transparent;
-    color: ${theme.close};
-    width: 24px;
-    height: 24px;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
-    cursor: pointer;
-    padding: 0;
-    transition: color 0.1s ease-in-out;
-    font-size: 18px;
-    flex-shrink: 0;
-  `);
-  closeBtn.innerHTML = "&times;";
-  closeBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    document.querySelector("#zh-inactive-dev-warning")?.remove();
-  });
-  closeBtn.addEventListener("mouseenter", () => {
-    closeBtn.style.color = theme.closeHover;
-  });
-  closeBtn.addEventListener("mouseleave", () => {
-    closeBtn.style.color = theme.close;
-  });
-  return closeBtn;
 }
 
 function createWarningIcon(theme) {
@@ -162,7 +123,6 @@ function renderWarning() {
   message.appendChild(createWarningIcon(theme));
 
   banner.appendChild(message);
-  banner.appendChild(createCloseButton(theme));
 
   displayMessage(banner);
 }
@@ -203,7 +163,6 @@ function renderCaution() {
   message.appendChild(createWarningIcon(theme));
 
   banner.appendChild(message);
-  banner.appendChild(createCloseButton(theme));
 
   displayMessage(banner);
 }
