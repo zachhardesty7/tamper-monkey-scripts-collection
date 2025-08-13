@@ -51,11 +51,11 @@ function displayMessage(el) {
 function getThemeSettings(isSevereWarning = false) {
   const colorMode = document.documentElement.getAttribute('data-color-mode');
   const darkTheme = document.documentElement.getAttribute('data-dark-theme');
-  const lightTheme = document.documentElement.getAttribute('data-light-theme');
   const isLight = colorMode === 'light' ||
                  (colorMode === 'auto' && !window.matchMedia('(prefers-color-scheme: dark)').matches);
 
-  // Check for colorblind themes first
+  // Check for specific dark themes
+  const isSoftDark = darkTheme === 'dark_dimmed';
   const isColorblindDark = darkTheme && (
     darkTheme.includes('colorblind') ||
     darkTheme.includes('tritanopia') ||
@@ -73,27 +73,25 @@ function getThemeSettings(isSevereWarning = false) {
         warningColor: '#c62828'
       };
     } else if (isColorblindDark) {
-      // Special handling for colorblind dark themes
       return {
         bg: '#231010',
         text: '#E47F7F',
         border: '#753535',
         warningColor: '#ff5252'
       };
-    } else if (colorMode === 'dark' || darkTheme === 'dark') {
-      // Standard dark theme
-      return {
-        bg: '#231010',
-        text: '#E47F7F',
-        border: '#753535',
-        warningColor: '#ff5252'
-      };
-    } else {
-      // Default dark theme (including soft dark)
+    } else if (isSoftDark) {
       return {
         bg: '#3a1e1e',
         text: '#ff9e9e',
         border: '#874242',
+        warningColor: '#ff5252'
+      };
+    } else {
+      // Default dark theme
+      return {
+        bg: '#231010',
+        text: '#E47F7F',
+        border: '#753535',
         warningColor: '#ff5252'
       };
     }
@@ -108,27 +106,26 @@ function getThemeSettings(isSevereWarning = false) {
       warningColor: '#996606'
     };
   } else if (isColorblindDark) {
-    // Special handling for colorblind dark themes
     return {
       bg: '#262014',
       text: '#f0f0f0',
       border: '#614612',
       warningColor: '#d19826'
     };
-  } else if (colorMode === 'dark' || darkTheme === 'dark') {
-    // Standard dark theme
-    return {
-      bg: '#262014',
-      text: '#f0f0f0',
-      border: '#614612',
-      warningColor: '#d19826'
-    };
-  } else { // soft_dark or default
+  } else if (isSoftDark) {
     return {
       bg: '#36342c',
       text: '#f0f0f0',
       border: '#665122',
       warningColor: '#c58f29'
+    };
+  } else {
+    // Default dark theme
+    return {
+      bg: '#262014',
+      text: '#f0f0f0',
+      border: '#614612',
+      warningColor: '#d19826'
     };
   }
 }
@@ -144,7 +141,7 @@ function createWarningIcon(theme) {
 }
 
 function renderWarning(years) {
-  const theme = getThemeSettings(true); // Pass true for severe warning colors
+  const theme = getThemeSettings(true);
   const banner = document.createElement("div");
   banner.id = "zh-inactive-dev-warning";
   banner.setAttribute("style", `
