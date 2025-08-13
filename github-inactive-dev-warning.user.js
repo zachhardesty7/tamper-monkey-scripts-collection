@@ -2,7 +2,7 @@
 // @name         Github - Inactive Development Warning
 // @namespace    https://openuserjs.org/users/zachhardesty7
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
-// @description  display big banner if project's last commit over 6 months ago and giant banner if over 1 year ago
+// @description  display yellow banner if project's last commit over 6 months ago and red banner if over 1 year ago
 // @copyright    2019-2025, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
 // @version      1.4.0
@@ -31,7 +31,8 @@ onElementReady(
     const date = new Date(el.getAttribute("datetime") || "");
     const daysSinceLastCommit = (Date.now() - date.getTime()) / 1000 / 60 / 60 / 24;
     if (daysSinceLastCommit > 365) {
-      renderWarning();
+      const years = Math.floor(daysSinceLastCommit / 365);
+      renderWarning(years);
     } else if (daysSinceLastCommit > 182.5) {
       renderCaution();
     }
@@ -47,32 +48,87 @@ function displayMessage(el) {
   }
 }
 
-function getThemeSettings() {
+function getThemeSettings(isSevereWarning = false) {
   const colorMode = document.documentElement.getAttribute('data-color-mode');
   const darkTheme = document.documentElement.getAttribute('data-dark-theme');
+  const lightTheme = document.documentElement.getAttribute('data-light-theme');
   const isLight = colorMode === 'light' ||
                  (colorMode === 'auto' && !window.matchMedia('(prefers-color-scheme: dark)').matches);
 
+  // Check for colorblind themes first
+  const isColorblindDark = darkTheme && (
+    darkTheme.includes('colorblind') ||
+    darkTheme.includes('tritanopia') ||
+    darkTheme.includes('deuteranopia') ||
+    darkTheme.includes('protanopia')
+  );
+
+  if (isSevereWarning) {
+    // Red tint for severe warning (1+ years)
+    if (isLight) {
+      return {
+        bg: '#ffebee',
+        text: '#b71c1c',
+        border: '#ef9a9a',
+        warningColor: '#c62828'
+      };
+    } else if (isColorblindDark) {
+      // Special handling for colorblind dark themes
+      return {
+        bg: '#231010',
+        text: '#E47F7F',
+        border: '#753535',
+        warningColor: '#ff5252'
+      };
+    } else if (colorMode === 'dark' || darkTheme === 'dark') {
+      // Standard dark theme
+      return {
+        bg: '#231010',
+        text: '#E47F7F',
+        border: '#753535',
+        warningColor: '#ff5252'
+      };
+    } else {
+      // Default dark theme (including soft dark)
+      return {
+        bg: '#3a1e1e',
+        text: '#ff9e9e',
+        border: '#874242',
+        warningColor: '#ff5252'
+      };
+    }
+  }
+
+  // Original colors for caution (6+ months)
   if (isLight) {
     return {
       bg: '#fef7c5',
       text: '#1e2227',
       border: '#edd789',
-      warningColor: '#996606' // Light theme warning color
+      warningColor: '#996606'
     };
-  } else if (darkTheme === 'dark') {
+  } else if (isColorblindDark) {
+    // Special handling for colorblind dark themes
     return {
       bg: '#262014',
       text: '#f0f0f0',
       border: '#614612',
-      warningColor: '#d19826' // Dark theme warning color
+      warningColor: '#d19826'
+    };
+  } else if (colorMode === 'dark' || darkTheme === 'dark') {
+    // Standard dark theme
+    return {
+      bg: '#262014',
+      text: '#f0f0f0',
+      border: '#614612',
+      warningColor: '#d19826'
     };
   } else { // soft_dark or default
     return {
       bg: '#36342c',
       text: '#f0f0f0',
       border: '#665122',
-      warningColor: '#c58f29' // Soft dark theme warning color
+      warningColor: '#c58f29'
     };
   }
 }
@@ -87,8 +143,8 @@ function createWarningIcon(theme) {
   return icon;
 }
 
-function renderWarning() {
-  const theme = getThemeSettings();
+function renderWarning(years) {
+  const theme = getThemeSettings(true); // Pass true for severe warning colors
   const banner = document.createElement("div");
   banner.id = "zh-inactive-dev-warning";
   banner.setAttribute("style", `
@@ -117,7 +173,7 @@ function renderWarning() {
   message.appendChild(createWarningIcon(theme));
 
   const text = document.createElement("span");
-  text.textContent = "repo hasn't been updated in 1+ year(s)";
+  text.textContent = `repo hasn't been updated in ${years} year${years > 1 ? 's' : ''}`;
   message.appendChild(text);
 
   message.appendChild(createWarningIcon(theme));
