@@ -5,7 +5,7 @@
 // @description  make video links inside all playlists (except excluded ones) open outside the playlist
 // @copyright    2025, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.0.0
+// @version      2.0.1
 
 // @grant        GM_getValue
 // @grant        GM_setValue
@@ -20,7 +20,7 @@
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/YouTube_-_Open_Playlist_Video_Outside_Playlist.meta.js
 // @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/YouTube_-_Open_Playlist_Video_Outside_Playlist.user.js
 
-// @match        https://www.youtube.com/playlist*
+// @match        https://www.youtube.com/*
 // @require      https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/refs/tags/onElementReady@0.10.0/utils/onElementReady.js
 // ==/UserScript==
 
@@ -32,7 +32,13 @@
  * @param {HTMLElement} link - html node
  */
 function updateLink(link) {
-  if (link instanceof HTMLAnchorElement) {
+  const playlistId = new URLSearchParams(window.location.search).get("list")
+
+  if (
+    playlistId &&
+    !excludedPlaylistIds.split(",").includes(playlistId) &&
+    link instanceof HTMLAnchorElement
+  ) {
     const url = new URL(link.href)
     const newParams = new URLSearchParams()
 
@@ -49,11 +55,9 @@ function updateLink(link) {
 
 const GM_PLAYLISTS_KEY = "yt-excluded-playlist-ids"
 let excludedPlaylistIds = GM_getValue(GM_PLAYLISTS_KEY, "")
-const playlistId = new URLSearchParams(window.location.search).get("list")
 
-if (playlistId && !excludedPlaylistIds.split(",").includes(playlistId)) {
-  onElementReady("a[href]:is(#video-title, #thumbnail.ytd-thumbnail)", {}, updateLink)
-}
+// TODO only run on `https://www.youtube.com/playlist*`
+onElementReady("a[href]:is(#video-title, #thumbnail.ytd-thumbnail)", {}, updateLink)
 
 GM_registerMenuCommand("Set Excluded YT Playlist IDs", () => {
   // eslint-disable-next-line no-alert
