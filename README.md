@@ -1,10 +1,10 @@
-# Tampermonkey Scripts Collection
+# Tampermonkey Userscripts Collection
 
 Making life just a little easier on various websites with simple user interface improvements.
 
 ## Description
 
-This repo hosts a handful of different script files that Tampermonkey injects into the relevant websites. Certain websites just seemed to be missing something or something simple could really improve the functionality. I took it upon myself to add these features in the most seamless way possible. If you encounter any issues, check the known issues below. Uses [Standard JS formatting][standard].
+This repo hosts a handful of different script files that Tampermonkey injects into the relevant websites. Certain websites just seemed to be missing something or a simple change could really improve their functionality. I took it upon myself to add some of these features as seamlessly as possible. If you encounter any problems, check the [known issues below](#known-issues) or [open an issue](https://github.com/zachhardesty7/tamper-monkey-scripts-collection/issues/new).
 
 ## Getting Started
 
@@ -16,7 +16,7 @@ Tampermonkey browser extension (download links)
 
 ### Installation
 
-Visit my profile the [OpenUser website](https://openuserjs.org/users/zachhardesty7/scripts) or the [GreasyFork website](https://greasyfork.org/en/users/371100-zach-hardesty) to download and install any scripts! Scripts are automatically kept up to date with this repository.
+Visit my profile on the [OpenUser website](https://openuserjs.org/users/zachhardesty7/scripts) or the [GreasyFork website](https://greasyfork.org/en/users/371100-zach-hardesty) to browse and install scripts. Scripts on OpenUser and GreasyFork are automatically kept up to date with this repository.
 
 ### Execution
 
@@ -25,25 +25,25 @@ Code will automatically execute on the designated websites!
 ## Usage / Descriptions
 
 - [Soundcloud][soundcloud]
-  - [soundcloud-download-button.user.js](soundcloud-download-button.user.js): Add seamless download button that uses an external service for any track ![soundcloud external download button][soundcloud-img]
+  - [soundcloud-download-button.user.js](soundcloud-download-button.user.js): add a button to songs on the main page and to each song page to automatically download the song from https://soundcloudmp3.org/ ![soundcloud external download button][soundcloud-img]
 - Google Search
   - [google-hide-search-interruptions.user.js](google-hide-search-interruptions.user.js): simple script that hides the "People also search for" prompt that sometimes appears when returning to the same search results
 - [Etsy][etsy]
   - [etsy-remove-ads.user.js](etsy-remove-ads.user.js): hide ad results on search page
 - Github
-  - [github-inactive-dev-warning.user.js](github-inactive-dev-warning.user.js): add a large or giant banner if project hasn't been updated in 6 months or 1+ years respectively
+  - [github-inactive-dev-warning.user.js](github-inactive-dev-warning.user.js): add a "warning" or "error" banner if project hasn't been updated in 6 months or 1+ years respectively
 - YouTube
   - [youtube-filter-subscriptions-page.user.js](youtube-filter-subscriptions-page.user.js): filter out videos on subscription page and home page based on given keyword
   - [youtube-add-watch-later-button.user.js](youtube-add-watch-later-button.user.js): add a watch later button underneath videos to save you a click (on a slow popup menu)
   - [youtube-add-playlist-remove-video-button.user.js](youtube-add-playlist-remove-video-button.user.js): add a remove button next to each video on each playlist page
 - Amazon
-  - [amazon-clean-ui.user.js](amazon-clean-ui.user.js): hide all of the junk that clutter Amazon's UI (biased decisions)
+  - [amazon-clean-ui.user.js](amazon-clean-ui.user.js): hide all of the junk and ads that clutter Amazon's UI (biased decisions)
 - Reddit
   - [reddit-add-save-button.user.js](reddit-add-save-button.user.js): adds a save button to all comments and posts everywhere
 - Randalls
   - [randalls-add-links-inside-cart.user.js](randalls-add-links-inside-cart.user.js): add links to products in your cart by fixing missing href on `<a />` tag
 - [Swagbucks gift cards][swagbucks-gift-cards]
-  - [swagbucks-sort-gift-cards-by-cashback.user.js](swagbucks-sort-gift-cards-by-cashback.user.js): add links to products in your cart by fixing missing href on `<a />` tag
+  - [swagbucks-sort-gift-cards-by-cashback.user.js](swagbucks-sort-gift-cards-by-cashback.user.js): sort the list of available gift cards by their discount values
 - FrankerFaceZ (Twitch)
   - [debug-ffz-twitch-compressor.user.js](debug-ffz-twitch-compressor.user.js): not for general use, but I found it useful for configuring my settings for the FFZ extension audio compressor
 
@@ -69,10 +69,9 @@ These scripts will no longer be maintained or updated by myself. They are kept h
 ## Known Issues
 
 - ONLY TESTED ON CHROME
-- Binance
-  - Unnecessary usage of 'onElementReady.js'
 - Soundcloud
   - Button does not appear on all types of pages
+  - button occasionally duplicates itself
 - Docs
   - Requires user to scroll throughout document to counteract lazy loading of page content
   - Selecting text while using filters can cause some funky word counts (regex would get far too complicated to realistically fix these issues)
@@ -88,7 +87,7 @@ These scripts will no longer be maintained or updated by myself. They are kept h
 
 ## License
 
-Copyright 2018 Zachary Hardesty
+Copyright 2018-2026 Zachary Hardesty
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -104,7 +103,6 @@ limitations under the License.
 
 ## Acknowledgements
 
-- [Javascript Standard Style][standard] - strictly enforced guide of good practices (and no semicolons)
 - [Chart.js][chartjs] - Simple HTML5 Charts using the canvas element
 - [CryptoCompare API][api] - The best free API for getting cryptocurrency live pricing data
 - [onElementReady.js][waitjs] - A utility function, for Greasemonkey scripts, that detects and handles AJAX content.
@@ -124,7 +122,6 @@ limitations under the License.
 [gdocs]: https://www.google.com/docs/about/
 [etsy]: https://www.etsy.com/
 [swagbucks-gift-cards]: https://www.swagbucks.com/mygiftcardsplus
-[standard]: https://github.com/standard/standard
 [chartjs]: https://github.com/chartJS/Chart.js
 [api]: https://min-api.cryptocompare.com/
 [waitjs]: https://gist.github.com/BrockA/2625891
