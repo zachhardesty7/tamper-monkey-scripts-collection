@@ -39,7 +39,7 @@ Code will automatically execute on the designated websites!
 - Amazon
   - [amazon-clean-ui.user.js](amazon-clean-ui.user.js): hide all of the junk that clutter Amazon's UI (biased decisions)
 - Reddit
-  - [reddit-improve-saved-comments.user.js](reddit-improve-saved-comments.user.js): add a save button to all comments everywhere & to posts in the saved section of your profile
+  - [reddit-add-save-button.user.js](reddit-add-save-button.user.js): adds a save button to all comments and posts everywhere
 - Randalls
   - [randalls-add-links-inside-cart.user.js](randalls-add-links-inside-cart.user.js): add links to products in your cart by fixing missing href on `<a />` tag
 - [Swagbucks gift cards][swagbucks-gift-cards]
