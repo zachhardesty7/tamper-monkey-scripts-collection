@@ -16,7 +16,7 @@ Tampermonkey browser extension (download links)
 
 ### Installation
 
-Visit my profile on the [OpenUser website](https://openuserjs.org/users/zachhardesty7/scripts) or the [GreasyFork website](https://greasyfork.org/en/users/371100-zach-hardesty) to browse and install scripts. Scripts on OpenUser and GreasyFork are automatically kept up to date with this repository.
+Visit my profile on the [OpenUser website](https://openuserjs.org/users/zachhardesty7/scripts) or the [GreasyFork website](https://greasyfork.org/en/users/371100-zach-hardesty) to browse and install scripts. Scripts on OpenUser and GreasyFork are automatically kept up to date with this repository. Alternatively, click the "Install" link next to script names [below](usage--descriptions).
 
 ### Execution
 
@@ -25,27 +25,27 @@ Code will automatically execute on the designated websites!
 ## Usage / Descriptions
 
 - [Soundcloud][soundcloud]
-  - [soundcloud-download-button.user.js](soundcloud-download-button.user.js): add a button to songs on the main page and to each song page to automatically download the song from https://soundcloudmp3.org/ ![soundcloud external download button][soundcloud-img]
+  - [soundcloud-download-button.user.js](https://openuserjs.org/scripts/zachhardesty7/Soundcloud_-_Add_External_Download_Button) ([Install](https://openuserjs.org/install/zachhardesty7/Soundcloud_-_Add_External_Download_Button.user.js), [Source](soundcloud-download-button.user.js)): add a button to songs on the main page and to each song page to automatically download the song from https://soundcloudmp3.org/ ![soundcloud external download button][soundcloud-img]
 - Google Search
-  - [google-hide-search-interruptions.user.js](google-hide-search-interruptions.user.js): simple script that hides the "People also search for" prompt that sometimes appears when returning to the same search results
+  - [google-hide-search-interruptions.user.js](https://openuserjs.org/scripts/zachhardesty7/Google_Search_-_Hide_People_also_search_for) ([Install](https://openuserjs.org/install/zachhardesty7/Google_Search_-_Hide_People_also_search_for.user.js), [Source](google-hide-search-interruptions.user.js)): simple script that hides the "People also search for" prompt that sometimes appears when returning to the same search results
 - [Etsy][etsy]
-  - [etsy-remove-ads.user.js](etsy-remove-ads.user.js): hide ad results on search page
+  - [etsy-remove-ads.user.js](https://openuserjs.org/scripts/zachhardesty7/Etsy_-_Remove_Ads) ([Install](https://openuserjs.org/install/zachhardesty7/Etsy_-_Remove_Ads.user.js), [Source](etsy-remove-ads.user.js)): hide ad results on search page
 - Github
-  - [github-inactive-dev-warning.user.js](github-inactive-dev-warning.user.js): add a "warning" or "error" banner if project hasn't been updated in 6 months or 1+ years respectively
+  - [github-inactive-dev-warning.user.js](https://openuserjs.org/scripts/zachhardesty7/Github_-_Inactive_Development_Warning) ([Install](https://openuserjs.org/install/zachhardesty7/Github_-_Inactive_Development_Warning.user.js), [Source](github-inactive-dev-warning.user.js)): add a "warning" or "error" banner if project hasn't been updated in 6 months or 1+ years respectively
 - YouTube
-  - [youtube-filter-subscriptions-page.user.js](youtube-filter-subscriptions-page.user.js): filter out videos on subscription page and home page based on given keyword
-  - [youtube-add-watch-later-button.user.js](youtube-add-watch-later-button.user.js): add a watch later button underneath videos to save you a click (on a slow popup menu)
-  - [youtube-add-playlist-remove-video-button.user.js](youtube-add-playlist-remove-video-button.user.js): add a remove button next to each video on each playlist page
+  - [youtube-filter-subscriptions-page.user.js](https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Filter_Subscriptions_Page) ([Install](https://openuserjs.org/install/zachhardesty7/YouTube_-_Filter_Subscriptions_Page.user.js), [Source](youtube-filter-subscriptions-page.user.js)): filter out videos on subscription page and home page based on given keyword
+  - [youtube-add-watch-later-button.user.js](https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Watch_Later_Button) ([Install](https://openuserjs.org/install/zachhardesty7/YouTube_-_Add_Watch_Later_Button.user.js), [Source](youtube-add-watch-later-button.user.js)): add a watch later button underneath videos to save you a click (on a slow popup menu)
+  - [youtube-add-playlist-remove-video-button.user.js](https://openuserjs.org/scripts/zachhardesty7/YouTube_-_Add_Playlist_Remove_Video_Button) ([Install](https://openuserjs.org/install/zachhardesty7/YouTube_-_Add_Playlist_Remove_Video_Button.user.js), [Source](youtube-add-playlist-remove-video-button.user.js)): add a remove button next to each video on each playlist page
 - Amazon
-  - [amazon-clean-ui.user.js](amazon-clean-ui.user.js): hide all of the junk and ads that clutter Amazon's UI (biased decisions)
+  - [amazon-clean-ui.user.js](https://openuserjs.org/scripts/zachhardesty7/Amazon_-_Clean_UI) ([Install](https://openuserjs.org/install/zachhardesty7/Amazon_-_Clean_UI.user.js), [Source](amazon-clean-ui.user.js)): hide all of the junk and ads that clutter Amazon's UI (biased decisions)
 - Reddit
-  - [reddit-add-save-button.user.js](reddit-add-save-button.user.js): adds a save button to all comments and posts everywhere
+  - [reddit-add-save-button.user.js](https://openuserjs.org/scripts/zachhardesty7/Reddit_-_Add_Save_Button) ([Install](https://openuserjs.org/install/zachhardesty7/Reddit_-_Add_Save_Button.user.js), [Source](reddit-add-save-button.user.js)): adds a save button to all comments and posts everywhere
 - Randalls
-  - [randalls-add-links-inside-cart.user.js](randalls-add-links-inside-cart.user.js): add links to products in your cart by fixing missing href on `<a />` tag
+  - [randalls-add-links-inside-cart.user.js](https://openuserjs.org/scripts/zachhardesty7/Randalls_-_Add_Links_Inside_Cart) ([Install](https://openuserjs.org/install/zachhardesty7/Randalls_-_Add_Links_Inside_Cart.user.js), [Source](randalls-add-links-inside-cart.user.js)): add links to products in your cart by fixing missing href on `<a />` tag
 - [Swagbucks gift cards][swagbucks-gift-cards]
-  - [swagbucks-sort-gift-cards-by-cashback.user.js](swagbucks-sort-gift-cards-by-cashback.user.js): sort the list of available gift cards by their discount values
+  - [swagbucks-sort-gift-cards-by-cashback.user.js](https://openuserjs.org/scripts/zachhardesty7/Swagbucks_-_sort_gift_cards_by_cashback) ([Install](https://openuserjs.org/install/zachhardesty7/Swagbucks_-_sort_gift_cards_by_cashback.user.js), [Source](swagbucks-sort-gift-cards-by-cashback.user.js)): sort the list of available gift cards by their discount values
 - FrankerFaceZ (Twitch)
-  - [debug-ffz-twitch-compressor.user.js](debug-ffz-twitch-compressor.user.js): not for general use, but I found it useful for configuring my settings for the FFZ extension audio compressor
+  - debug-ffz-twitch-compressor.user.js ([Source](debug-ffz-twitch-compressor.user.js)): not for general use, but I found it useful for configuring my settings for the FFZ extension audio compressor
 
 _For more information on Tampermonkey itself, please refer to their [website][tampermonkey-website]._
 
@@ -54,17 +54,17 @@ _For more information on Tampermonkey itself, please refer to their [website][ta
 These scripts will no longer be maintained or updated by myself. They are kept here for historical purposes. Feel free to submit a PR if you'd like to help update one of them!
 
 - [Binance][binance]
-  - [binance-btc-usd.user.js](binance-btc-usd.user.js): Add text to display current amounts of crypto in approx. USD value ![balance line with USD conversion][binance-img-bal]
-  - [binance-portfolio-distribution-chart.user.js](binance-portfolio-distribution-chart.user.js): Add chart.js pie chart to display distribution of portfolio holdings ![pie chart of ratios][binance-img-pie]
+  - [binance-btc-usd.user.js](https://openuserjs.org/scripts/zachhardesty7/Binance_-_Add_BTC_to_USD_Conversion) ([Install](https://openuserjs.org/install/zachhardesty7/Binance_-_Add_BTC_to_USD_Conversion.user.js), [Source](binance-btc-usd.user.js)): Add text to display current amounts of crypto in approx. USD value ![balance line with USD conversion][binance-img-bal]
+  - [binance-portfolio-distribution-chart.user.js](https://openuserjs.org/scripts/zachhardesty7/Binance_-_Portfolio_Distribution_Pie_Chart) ([Install](https://openuserjs.org/install/zachhardesty7/Binance_-_Portfolio_Distribution_Pie_Chart.user.js), [Source](binance-portfolio-distribution-chart.user.js)): Add chart.js pie chart to display distribution of portfolio holdings ![pie chart of ratios][binance-img-pie]
 - [Google Docs][gdocs]
-  - [google-docs-force-center.user.js](google-docs-force-center.user.js): Center document on screen and prevent horizontal scrolling
-  - [google-docs-word-count.user.js](google-docs-word-count.user.js): Separate count for seeing word count of selected text ![footer count][docs-img]
+  - [google-docs-force-center.user.js](https://openuserjs.org/scripts/zachhardesty7/Google_Docs_-_Force_Center_Document_View) ([Install](https://openuserjs.org/install/zachhardesty7/Google_Docs_-_Force_Center_Document_View.user.js), [Source](google-docs-force-center.user.js)): Center document on screen and prevent horizontal scrolling
+  - [google-docs-word-count.user.js](<https://openuserjs.org/scripts/zachhardesty7/Google_Docs_-_Word_Count_(With_Options)>) ([Install](<https://openuserjs.org/install/zachhardesty7/Google_Docs_-_Word_Count_(With_Options).user.js>), [Source](google-docs-word-count.user.js)): Separate count for seeing word count of selected text ![footer count][docs-img]
 - [Harvest][harvest]
-  - [harvest-hourly-pay.user.js](harvest-hourly-pay.user.js): Display pre-tax income based on clocked hours, must update with pay rate, defaults to \$16 / hour ![conversion next to hours worked][harvest-img]
+  - [harvest-hourly-pay.user.js](https://openuserjs.org/scripts/zachhardesty7/Harvest_-_Hourly_Pay) ([Install](https://openuserjs.org/install/zachhardesty7/Harvest_-_Hourly_Pay.user.js), [Source](harvest-hourly-pay.user.js)): Display pre-tax income based on clocked hours, must update with pay rate, defaults to \$16 / hour ![conversion next to hours worked][harvest-img]
 - Mint (shut down)
-  - [mint-clean-ui.user.js](mint-clean-ui.user.js): removes annoying and inconspicuous ads from Mint
+  - [mint-clean-ui.user.js](https://openuserjs.org/scripts/zachhardesty7/Mint_-_Remove_Ads) ([Install](https://openuserjs.org/install/zachhardesty7/Mint_-_Remove_Ads.user.js), [Source](mint-clean-ui.user.js)): removes annoying and inconspicuous ads from Mint
 - Piazza
-  - [piazza-archive-with-delete-key.user.js](piazza-archive-with-delete-key.user.js): bind the delete key to quickly archive posts
+  - [piazza-archive-with-delete-key.user.js](https://openuserjs.org/scripts/zachhardesty7/Piazza_-_Archive_with_Delete_Key) ([Install](https://openuserjs.org/install/zachhardesty7/Piazza_-_Archive_with_Delete_Key.user.js), [Source](piazza-archive-with-delete-key.user.js)): bind the delete key to quickly archive posts
 
 ## Known Issues
 
