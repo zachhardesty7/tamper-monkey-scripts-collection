@@ -42,25 +42,54 @@ declare interface FFZHTMLVideoElement extends HTMLVideoElement {
 // #endregion
 
 // #region - utils
+interface OnElementReadyOptions {
+  /**
+   * stop querying after first successful pass and remove mutation observer
+   *
+   * @default false
+   */
+  findFirst?: boolean
+  /**
+   * find each element only a single time
+   *
+   * @default true
+   */
+  findOnce?: boolean
+  /**
+   * query based on specified `root` or `document`
+   *
+   * @default document
+   */
+  root?: Document | ShadowRoot | null
+}
+
+/** callback executed on each found/changed element */
+type OnElementReadyCallback = (el: HTMLElement) => void
+
+/** resolves with first found element */
+type OnElementReadyReturn = Promise<Element>
+
 /**
- * Query for new DOM nodes matching a specified selector.
- *
- * @override
+ * Wait for elements with a given CSS selector to enter the DOM. Returns a `Promise`
+ * resolving with found/changed element and triggers a callback for every found/changed
+ * element.
  */
 declare let onElementReady: (
+  /** CSS selector of elements to search / monitor */
   selector: string,
-  options: { findFirst?: boolean; findOnce?: boolean; root?: ShadowRoot | null },
-  callback: (el: HTMLElement) => void,
-) => void
+  options?: OnElementReadyOptions,
+  /** callback executed on each found/changed element */
+  callback?: OnElementReadyCallback,
+) => Promise<Element>
+
 /**
- * Query for new DOM nodes matching a specified selector.
- *
- * @override
+ * Internal function used by {@link onElementReady} to query for new DOM nodes matching a
+ * specified selector.
  */
 declare let queryForElements: (
   selector: string,
-  options: { findFirst?: boolean; findOnce?: boolean; root?: ShadowRoot | null },
-  callback: (el: HTMLElement) => void,
+  options: OnElementReadyOptions,
+  callback: OnElementReadyCallback,
 ) => void
 // #endregion
 

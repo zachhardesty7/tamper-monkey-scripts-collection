@@ -10,80 +10,65 @@
 // @match        *://*/*
 // ==/UserScript==
 
-/**
- * ESLint
- *
- * @exports
- */
-/* exported onElementReady, waitForKeyElements */
+// Remember already found elements via this attribute
+const QUERIED_ATTRIBUTE_NAME = "was-queried"
+
+const DEFAULT_OPTIONS = /** @type {const} @satisfies {OnElementReadyOptions} */ ({
+  findFirst: false,
+  findOnce: true,
+  root: document,
+})
 
 /**
- * Query for new DOM nodes matching a specified selector.
+ * Internal function used by {@link onElementReady} to query for new DOM nodes matching a
+ * specified selector.
  *
  * @private
- * @param {String} selector - CSS Selector
- * @param {{
- *   findFirst: boolean
- *   findOnce: boolean
- *   root: Document | ShadowRoot | null
- * }} options
- *   - Stop querying after first successful pass, find each el only a single time, query
- *       based on specified `root` or `document`
- *
- * @param {function} [callback] - Callback
+ * @param {string} selector
+ * @param {OnElementReadyOptions} options
+ * @param {OnElementReadyCallback} callback
  */
-let queryForElements = (
-  selector,
-  { findFirst = false, findOnce = true, root = document },
-  callback,
-) => {
-  // Remember already-found elements via this attribute
-  const attributeName = "was-queried"
+// eslint-disable-next-line prefer-const
+let queryForElements = (selector, options, callback) => {
+  const finalOptions = { ...DEFAULT_OPTIONS, ...options }
 
   // Search for elements by selector
-  let elementList = root?.querySelectorAll(selector) || []
-  elementList.forEach((element) => {
-    if (element.hasAttribute(attributeName)) {
-      return
+  const elementList = finalOptions.root?.querySelectorAll(selector) || []
+  for (const element of elementList) {
+    if (element.hasAttribute(QUERIED_ATTRIBUTE_NAME)) {
+      continue
     }
 
-    element.setAttribute(attributeName, "true")
+    element.setAttribute(QUERIED_ATTRIBUTE_NAME, "true")
     callback(element)
 
     // run reset after 2 seconds
-    if (!findOnce) {
+    if (!finalOptions.findOnce) {
       setTimeout(() => {
-        element.removeAttribute(attributeName)
+        element.removeAttribute(QUERIED_ATTRIBUTE_NAME)
       }, 2000)
     }
-  })
+  }
 }
 
 /**
- * Wait for Elements with a given CSS selector to enter the DOM. Returns a Promise
- * resolving with new Elements, and triggers a callback for every Element.
+ * Wait for elements with a given CSS selector to enter the DOM. Returns a `Promise`
+ * resolving with found/changed element and triggers a callback for every found/changed
+ * element.
  *
- * @param {String} selector - CSS Selector
- * @param {{
- *   findFirst: boolean
- *   findOnce: boolean
- *   root: Document | ShadowRoot | null
- * }} options
- *   - Stop querying after first successful pass, find each el only a single time, query
- *       based on specified `root` or `document`
- *
- * @param {function} [callback] - Callback with Element
- * @returns {Promise<Element>} - Resolves with Element
+ * @param {string} selector
+ * @param {OnElementReadyOptions} [options]
+ * @param {OnElementReadyCallback} [callback]
+ * @returns {OnElementReadyReturn}
  * @public
  */
-let onElementReady = (
-  selector,
-  options = { findFirst: false, findOnce: true, root: document },
-  callback = () => {},
-) => {
+// eslint-disable-next-line prefer-const
+let onElementReady = (selector, options = DEFAULT_OPTIONS, callback = () => {}) => {
+  const finalOptions = { ...DEFAULT_OPTIONS, ...options }
+
   return new Promise((resolve) => {
     // Initial Query
-    queryForElements(selector, options, (element) => {
+    queryForElements(selector, finalOptions, (element) => {
       resolve(element)
       callback(element)
     })
@@ -91,12 +76,12 @@ let onElementReady = (
     // Continuous Query
     const observer = new MutationObserver(() => {
       // DOM Changes detected
-      queryForElements(selector, options, (element) => {
+      queryForElements(selector, finalOptions, (element) => {
         resolve(element)
         callback(element)
       })
 
-      if (options.findFirst) {
+      if (finalOptions.findFirst) {
         observer.disconnect()
       }
     })
@@ -111,16 +96,13 @@ let onElementReady = (
 }
 
 /**
- * waitForKeyElements Polyfill
- *
  * @deprecated
- * @param {String} selector - CSS selector of elements to search / monitor ('.comment')
- * @param {function} callback - Callback executed on element detection (called with
- *   element as argument)
- * @param {{ findFirst: boolean; findOnce: boolean }} options - Stop querying after
- *   first successful pass, find each el only a single time
- * @returns {Promise<Element>} - Element
+ * @param {string} selector
+ * @param {OnElementReadyCallback} [callback]
+ * @param {OnElementReadyOptions} [options]
+ * @returns {OnElementReadyReturn}
  * @public
  */
+// eslint-disable-next-line no-unused-vars, prefer-const
 let waitForKeyElements = (selector, callback, options) =>
   onElementReady(selector, options, callback)
