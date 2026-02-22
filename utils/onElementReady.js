@@ -12,90 +12,115 @@
 
 /**
  * ESLint
+ *
  * @exports
  */
 /* exported onElementReady, waitForKeyElements */
 
-
 /**
- * @private
- *
  * Query for new DOM nodes matching a specified selector.
  *
+ * @private
  * @param {String} selector - CSS Selector
- * @param {{ findFirst: boolean, findOnce: boolean, root: Document | ShadowRoot | null }} options - Stop querying after first successful pass, find each el only a single time, query based on specified `root` or `document`
- * @param {function=} callback - Callback
+ * @param {{
+ *   findFirst: boolean
+ *   findOnce: boolean
+ *   root: Document | ShadowRoot | null
+ * }} options
+ *   - Stop querying after first successful pass, find each el only a single time, query
+ *       based on specified `root` or `document`
+ *
+ * @param {function} [callback] - Callback
  */
-let queryForElements = (selector, { findFirst = false, findOnce = true, root = document }, callback) => {
-    // Remember already-found elements via this attribute
-    const attributeName = 'was-queried'
+let queryForElements = (
+  selector,
+  { findFirst = false, findOnce = true, root = document },
+  callback,
+) => {
+  // Remember already-found elements via this attribute
+  const attributeName = "was-queried"
 
-    // Search for elements by selector
-    let elementList = root?.querySelectorAll(selector) || []    
-    elementList.forEach((element) => {
-        if (element.hasAttribute(attributeName)) { return }
-        element.setAttribute(attributeName, 'true')
-        callback(element)
-        
-        // run reset after 2 seconds
-        if (!findOnce) {
-            setTimeout(() => {
-                element.removeAttribute(attributeName)
-            }, 2000)
-        }
-    })
+  // Search for elements by selector
+  let elementList = root?.querySelectorAll(selector) || []
+  elementList.forEach((element) => {
+    if (element.hasAttribute(attributeName)) {
+      return
+    }
+
+    element.setAttribute(attributeName, "true")
+    callback(element)
+
+    // run reset after 2 seconds
+    if (!findOnce) {
+      setTimeout(() => {
+        element.removeAttribute(attributeName)
+      }, 2000)
+    }
+  })
 }
 
 /**
- * @public
- *
- * Wait for Elements with a given CSS selector to enter the DOM.
- * Returns a Promise resolving with new Elements, and triggers a callback for every Element.
+ * Wait for Elements with a given CSS selector to enter the DOM. Returns a Promise
+ * resolving with new Elements, and triggers a callback for every Element.
  *
  * @param {String} selector - CSS Selector
- * @param {{ findFirst: boolean, findOnce: boolean, root: Document | ShadowRoot | null }} options - Stop querying after first successful pass, find each el only a single time, query based on specified `root` or `document`
- * @param {function=} callback - Callback with Element
+ * @param {{
+ *   findFirst: boolean
+ *   findOnce: boolean
+ *   root: Document | ShadowRoot | null
+ * }} options
+ *   - Stop querying after first successful pass, find each el only a single time, query
+ *       based on specified `root` or `document`
+ *
+ * @param {function} [callback] - Callback with Element
  * @returns {Promise<Element>} - Resolves with Element
+ * @public
  */
-let onElementReady = (selector, options = { findFirst: false, findOnce: true, root: document }, callback = () => {}) => {
-    return new Promise((resolve) => {
-        // Initial Query
-        queryForElements(selector, options, (element) => {
-            resolve(element)
-            callback(element)
-        })
-
-        // Continuous Query
-        const observer = new MutationObserver(() => {
-            // DOM Changes detected
-            queryForElements(selector, options, (element) => {
-                resolve(element)
-                callback(element)
-            })
-
-            if (options.findFirst) {
-                observer.disconnect()
-            }
-        })
-
-        // Observe DOM Changes
-        observer.observe(document.documentElement, {
-            attributes: false,
-            childList: true,
-            subtree: true
-        })
+let onElementReady = (
+  selector,
+  options = { findFirst: false, findOnce: true, root: document },
+  callback = () => {},
+) => {
+  return new Promise((resolve) => {
+    // Initial Query
+    queryForElements(selector, options, (element) => {
+      resolve(element)
+      callback(element)
     })
+
+    // Continuous Query
+    const observer = new MutationObserver(() => {
+      // DOM Changes detected
+      queryForElements(selector, options, (element) => {
+        resolve(element)
+        callback(element)
+      })
+
+      if (options.findFirst) {
+        observer.disconnect()
+      }
+    })
+
+    // Observe DOM Changes
+    observer.observe(document.documentElement, {
+      attributes: false,
+      childList: true,
+      subtree: true,
+    })
+  })
 }
 
 /**
- * @public
- * @deprecated
- *
  * waitForKeyElements Polyfill
  *
+ * @deprecated
  * @param {String} selector - CSS selector of elements to search / monitor ('.comment')
- * @param {function} callback - Callback executed on element detection (called with element as argument)
- * @param {{ findFirst: boolean, findOnce: boolean }} options - Stop querying after first successful pass, find each el only a single time
+ * @param {function} callback - Callback executed on element detection (called with
+ *   element as argument)
+ * @param {{ findFirst: boolean; findOnce: boolean }} options - Stop querying after
+ *   first successful pass, find each el only a single time
  * @returns {Promise<Element>} - Element
+ * @public
  */
-let waitForKeyElements = (selector, callback, options) => onElementReady(selector, options, callback)
+let waitForKeyElements = (selector, callback, options) =>
+  onElementReady(selector, options, callback)
