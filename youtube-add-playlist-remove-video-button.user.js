@@ -3,9 +3,9 @@
 // @namespace    https://openuserjs.org/users/zachhardesty7
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @description  adds a remove button next to each video on each playlist page
-// @copyright    2019-2021, Zach Hardesty (https://zachhardesty.com/)
+// @copyright    2019-2026, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.0.2
+// @version      2.0.3
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
@@ -17,7 +17,7 @@
 // @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/YouTube_-_Add_Playlist_Remove_Video_Button.user.js
 
 // @match        https://www.youtube.com/*
-// @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887637
+// @require      https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/refs/tags/onElementReady@0.10.0/utils/onElementReady.js
 // ==/UserScript==
 
 // prevent eslint from complaining when redefining private function queryForElements from gist
@@ -30,6 +30,9 @@ const ZH_MARKER = "zh-delete-button"
 
 /**
  * Query for new DOM nodes matching a specified selector.
+ *
+ * removes the 2s cooldown for selecting items since menus are reused and the user might
+ * want to quickly click delete a bunch of times in a row
  *
  * @override
  */
@@ -95,13 +98,13 @@ function addPlaylistVideoDeleteButton(buttons) {
   g.append(path)
 
   buttonContainer.addEventListener("click", () => {
-    const overflowMenuButton = [...buttons.children].at(-2)?.firstElementChild
-      ?.lastElementChild
+    const overflowMenuButton = buttons.querySelector(`#menu:not(.${ZH_MARKER}) #button`)
+
     overflowMenuButton?.click()
 
     // allow the menu to be created before clicking (usually too quick to see)
     onElementReady(
-      "#items > ytd-menu-service-item-renderer",
+      "tp-yt-paper-listbox#items > ytd-menu-service-item-renderer",
       { findOnce: false },
       (menuButton) => {
         // TODO: come up with i18n friendly solution
@@ -116,7 +119,7 @@ function addPlaylistVideoDeleteButton(buttons) {
 // YouTube uses a bunch of duplicate 'id' tag values. why?
 // this makes it much more likely to target right one, but at the cost of being brittle
 onElementReady(
-  "ytd-playlist-video-renderer.ytd-playlist-video-list-renderer",
+  "ytd-playlist-video-list-renderer ytd-playlist-video-renderer.ytd-playlist-video-list-renderer",
   { findOnce: false },
   addPlaylistVideoDeleteButton,
 )
