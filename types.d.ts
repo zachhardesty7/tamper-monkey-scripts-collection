@@ -44,7 +44,8 @@ declare interface FFZHTMLVideoElement extends HTMLVideoElement {
 // #region - utils
 interface OnElementReadyOptions {
   /**
-   * stop querying after first successful pass and remove mutation observer
+   * stop querying (remove mutation observer) after first successful pass that finds
+   * element(s)
    *
    * @default false
    */
