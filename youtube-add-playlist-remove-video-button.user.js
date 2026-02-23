@@ -5,7 +5,7 @@
 // @description  adds a remove button next to each video on each playlist page
 // @copyright    2019-2026, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.0.3
+// @version      2.0.4
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
@@ -17,7 +17,7 @@
 // @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/YouTube_-_Add_Playlist_Remove_Video_Button.user.js
 
 // @match        https://www.youtube.com/*
-// @require      https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/refs/tags/onElementReady@0.10.0/utils/onElementReady.js
+// @require      https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/refs/tags/onElementReady@0.10.1/utils/onElementReady.js
 // ==/UserScript==
 
 // prevent eslint from complaining when redefining private function queryForElements from gist
@@ -28,22 +28,16 @@ const STYLE_SCOPE = "style-scope"
 const YT_ICON = "yt-icon"
 const ZH_MARKER = "zh-delete-button"
 
+// alternate: overflow menu > item (that has child string with child span string)
+// "tp-yt-paper-listbox#items > ytd-menu-service-item-renderer:has(yt-formatted-string span.yt-formatted-string)"
+// alternate: overflow menu > item (that has child "delete" icon)
+// "tp-yt-paper-listbox#items > ytd-menu-service-item-renderer:has(yt-icon path[d='M19 3h-4V2a1 1 0 00-1-1h-4a1 1 0 00-1 1v1H5a2 2 0 00-2 2h18a2 2 0 00-2-2ZM6 19V7H4v12a4 4 0 004 4h8a4 4 0 004-4V7h-2v12a2 2 0 01-2 2H8a2 2 0 01-2-2Zm4-11a1 1 0 00-1 1v8a1 1 0 102 0V9a1 1 0 00-1-1Zm4 0a1 1 0 00-1 1v8a1 1 0 002 0V9a1 1 0 00-1-1Z'])"
 /**
- * Query for new DOM nodes matching a specified selector.
- *
- * removes the 2s cooldown for selecting items since menus are reused and the user might
- * want to quickly click delete a bunch of times in a row
- *
- * @override
+ * overflow menu > item (that has child string with exactly 2 children ('Remove from' &
+ * playlist name))
  */
-// @ts-ignore
-queryForElements = (selector, _, callback) => {
-  // search for elements by selector
-  const elementList = document.querySelectorAll(selector) || []
-  for (const element of elementList) {
-    callback(element)
-  }
-}
+const OVERFLOW_MENU_POPUP_REMOVE_BUTTON_SELECTOR =
+  "tp-yt-paper-listbox#items > ytd-menu-service-item-renderer:has(yt-formatted-string :nth-child(2):nth-last-child(1))"
 
 /**
  * build the button el tediously but like the rest
@@ -98,19 +92,32 @@ function addPlaylistVideoDeleteButton(buttons) {
   g.append(path)
 
   buttonContainer.addEventListener("click", () => {
+    const overflowMenuPopupRemoveButton = document.querySelector(
+      OVERFLOW_MENU_POPUP_REMOVE_BUTTON_SELECTOR,
+    )
+
     const overflowMenuButton = buttons.querySelector(`#menu:not(.${ZH_MARKER}) #button`)
 
     overflowMenuButton?.click()
 
+    if (overflowMenuPopupRemoveButton) {
+      // Schedule click on next tick to allow the overflow menu click to finish updating
+      // the handlers on its menu items (otherwise the click will do nothing or error).
+      // We don't use `setTimeout` because it doesn't trigger before the next repaint,
+      // which would cause a flash of the menu on the screen.
+      requestAnimationFrame(() => {
+        overflowMenuPopupRemoveButton.click()
+      })
+
+      return
+    }
+
     // allow the menu to be created before clicking (usually too quick to see)
     onElementReady(
-      "tp-yt-paper-listbox#items > ytd-menu-service-item-renderer",
-      { findOnce: false },
+      OVERFLOW_MENU_POPUP_REMOVE_BUTTON_SELECTOR,
+      { findOnce: false, findFirst: true },
       (menuButton) => {
-        // TODO: come up with i18n friendly solution
-        if (menuButton.textContent?.includes("Remove from")) {
-          menuButton.click()
-        }
+        menuButton.click()
       },
     )
   })
@@ -120,6 +127,6 @@ function addPlaylistVideoDeleteButton(buttons) {
 // this makes it much more likely to target right one, but at the cost of being brittle
 onElementReady(
   "ytd-playlist-video-list-renderer ytd-playlist-video-renderer.ytd-playlist-video-list-renderer",
-  { findOnce: false },
+  { findOnce: true },
   addPlaylistVideoDeleteButton,
 )
