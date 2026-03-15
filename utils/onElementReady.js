@@ -3,7 +3,10 @@
 // @namespace    zachhardesty
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/utils/onElementReady.js
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/utils/onElementReady.js
-// @version      0.10.1
+// @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
+// @copyright    2026, Zach Hardesty (https://zachhardesty.com/)
+// @version      0.10.2
+
 // @description  Detect any new DOM Element by its CSS Selector, then trigger a function. Includes Promise- & Callback interface. Based on ES6 MutationObserver. Ships legacy waitForKeyElements interface, too.
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @icon         https://i.imgur.com/nmbtzlX.png
