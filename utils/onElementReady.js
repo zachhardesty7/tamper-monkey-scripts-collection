@@ -7,9 +7,8 @@
 // @copyright    2026, Zach Hardesty (https://zachhardesty.com/)
 // @version      0.10.2
 
-// @description  Detect any new DOM Element by its CSS Selector, then trigger a function. Includes Promise- & Callback interface. Based on ES6 MutationObserver. Ships legacy waitForKeyElements interface, too.
+// @description  Detect any new DOM Element by its CSS Selector, then trigger a function. Includes Promise & Callback interface. Based on ES6 MutationObserver. Ships legacy waitForKeyElements interface, too.
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
-// @icon         https://i.imgur.com/nmbtzlX.png
 // @match        *://*/*
 // ==/UserScript==
 
