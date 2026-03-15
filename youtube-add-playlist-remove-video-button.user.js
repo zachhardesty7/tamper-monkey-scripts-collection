@@ -5,7 +5,7 @@
 // @description  adds a remove button next to each video on each playlist page
 // @copyright    2019-2026, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.0.5
+// @version      2.0.6
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/youtube-add-watch-later-button.user.js
@@ -20,9 +20,7 @@
 // @require      https://update.greasyfork.org/scripts/419640/1775486/onElementReady.js
 // ==/UserScript==
 
-// prevent eslint from complaining when redefining private function queryForElements from gist
-// eslint-disable-next-line no-unused-vars
-/* global onElementReady, queryForElements:true */
+/* global onElementReady */
 
 const STYLE_SCOPE = "style-scope"
 const YT_ICON = "yt-icon"
