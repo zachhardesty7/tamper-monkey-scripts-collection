@@ -1,6 +1,7 @@
 // ==UserScript==
-// @name         Library: onElementReady ES7
-// @namespace    zachhardesty
+// @name         onElementReady
+// @namespace    https://zachhardesty.com
+// @exclude      *
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/utils/onElementReady.js
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/utils/onElementReady.js
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
@@ -9,7 +10,6 @@
 
 // @description  Detect any new DOM Element by its CSS Selector, then trigger a function. Includes Promise & Callback interface. Based on ES6 MutationObserver. Ships legacy waitForKeyElements interface, too.
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
-// @match        *://*/*
 // ==/UserScript==
 
 // Remember already found elements via this attribute
