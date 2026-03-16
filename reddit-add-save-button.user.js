@@ -3,9 +3,9 @@
 // @namespace    https://openuserjs.org/users/zachhardesty7
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @description  adds a save button to all comments and posts everywhere
-// @copyright    2024-2025, Zach Hardesty (https://zachhardesty.com/)
+// @copyright    2024-2026, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.1.4
+// @version      2.1.5
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-add-save-button.user.js
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-add-save-button.user.js
@@ -19,7 +19,7 @@
 // @match        https://www.reddit.com/
 // @match        https://www.reddit.com/user/*
 // @match        https://www.reddit.com/r/*/comments/*
-// @require      https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/refs/tags/onElementReady@0.10.0/utils/onElementReady.js
+// @require      https://update.greasyfork.org/scripts/419640/1776135/onElementReady.js
 // ==/UserScript==
 
 /* global onElementReady */

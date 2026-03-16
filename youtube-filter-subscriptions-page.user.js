@@ -3,9 +3,9 @@
 // @namespace    https://zachhardesty.com
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @description  hide videos with given keywords in title on YouTube home and subscriptions pages
-// @copyright    2019-2025, Zach Hardesty (https://zachhardesty.com/)
+// @copyright    2019-2026, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.2.0
+// @version      2.2.1
 
 // @grant        GM_getValue
 // @grant        GM_setValue
@@ -21,7 +21,7 @@
 // @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/YouTube_-_Filter_Subscriptions_Page.user.js
 
 // @match        https://www.youtube.com/*
-// @require      https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/refs/tags/onElementReady@0.10.0/utils/onElementReady.js
+// @require      https://update.greasyfork.org/scripts/419640/1776135/onElementReady.js
 // ==/UserScript==
 
 /* global onElementReady */

@@ -3,9 +3,9 @@
 // @namespace    https://openuserjs.org/users/zachhardesty7
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @description  display yellow banner if project's last commit over 6 months ago and red banner if over 1 year ago
-// @copyright    2019-2025, Zach Hardesty (https://zachhardesty.com/)
+// @copyright    2019-2026, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      1.4.0
+// @version      1.4.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/github-inactive-dev-warning.user.js
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/github-inactive-dev-warning.user.js
@@ -17,7 +17,7 @@
 // @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/Github_-_Inactive_Development_Warning.user.js
 
 // @match        https://github.com/*/*
-// @require      https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/refs/tags/onElementReady@0.10.0/utils/onElementReady.js
+// @require      https://update.greasyfork.org/scripts/419640/1776135/onElementReady.js
 // ==/UserScript==
 
 /* global onElementReady */

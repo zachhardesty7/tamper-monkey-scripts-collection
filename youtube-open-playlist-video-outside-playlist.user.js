@@ -3,9 +3,9 @@
 // @namespace    https://openuserjs.org/users/zachhardesty7
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @description  make video links inside all playlists (except excluded ones) open outside the playlist
-// @copyright    2025, Zach Hardesty (https://zachhardesty.com/)
+// @copyright    2025-2026, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.0.1
+// @version      2.0.2
 
 // @grant        GM_getValue
 // @grant        GM_setValue
@@ -21,7 +21,7 @@
 // @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/YouTube_-_Open_Playlist_Video_Outside_Playlist.user.js
 
 // @match        https://www.youtube.com/*
-// @require      https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/refs/tags/onElementReady@0.10.0/utils/onElementReady.js
+// @require      https://update.greasyfork.org/scripts/419640/1776135/onElementReady.js
 // ==/UserScript==
 
 /* global onElementReady */
