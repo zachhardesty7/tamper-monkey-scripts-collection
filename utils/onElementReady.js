@@ -12,6 +12,8 @@
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // ==/UserScript==
 
+// ORIGINAL CODE BY sidneys: https://gist.github.com/sidneys/ee7a6b80315148ad1fb6847e72a22313
+
 // Remember already found elements via this attribute
 const QUERIED_ATTRIBUTE_NAME = "was-queried"
 
