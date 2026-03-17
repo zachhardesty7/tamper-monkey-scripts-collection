@@ -5,7 +5,7 @@
 // @description  adds a button on main page and song page to download song automatically from https://soundcloudmp3.org/
 // @copyright    2019-2026, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.2.0
+// @version      2.2.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/soundcloud-download-button.user.js
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/soundcloud-download-button.user.js
@@ -42,6 +42,7 @@ const SELECTOR_SONG_PAGE = ".listenEngagement__footer"
  */
 function addSoundcloudDownloadButton(el) {
   const link = window.location.href
+  let songLink = link
   const button = document.createElement("button")
   button.textContent = "External Download"
 
@@ -56,6 +57,9 @@ function addSoundcloudDownloadButton(el) {
   ) {
     button.className = "mp3-button sc-button sc-button-small"
     el.querySelector(".soundActions .sc-button-group")?.append(button)
+    songLink =
+      /** @type {HTMLAnchorElement | null} */ (el.querySelector(".soundTitle__title"))
+        ?.href || link
 
     // else if on individual song page (and not playlist), append SC styled button
   } else if (
@@ -68,7 +72,7 @@ function addSoundcloudDownloadButton(el) {
   }
 
   el.querySelector(".mp3-button")?.addEventListener("click", () => {
-    window.open(`https://loader.to/?link=${link}&f=1&s=1&e=1&r=ddownr`, "_blank")
+    window.open(`https://loader.to/?link=${songLink}&f=1&s=1&e=1&r=ddownr`, "_blank")
   })
 }
 
