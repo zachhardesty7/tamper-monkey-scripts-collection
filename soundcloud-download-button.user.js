@@ -3,7 +3,7 @@
 // @namespace    https://zachhardesty.com
 // @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @description  adds a button on main page and song page to download song automatically from https://soundcloudmp3.org/
-// @copyright    2019, Zach Hardesty (https://zachhardesty.com/)
+// @copyright    2019-2026, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
 // @version      2.1.3
 
@@ -18,7 +18,7 @@
 
 // @match        https://soundcloud.com/*
 // @match        https://loader.to/*
-// @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887637
+// @require      https://update.greasyfork.org/scripts/419640/1776135/onElementReady.js
 // ==/UserScript==
 
 /* global onElementReady */
