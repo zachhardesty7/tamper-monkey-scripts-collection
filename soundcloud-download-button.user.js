@@ -8,7 +8,9 @@
 // @version      2.1.3
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/soundcloud-download-button.user.js
+// @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/soundcloud-download-button.user.js
 // @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Soundcloud_-_Add_External_Download_Button
+// @homepage     https://openuserjs.org/scripts/zachhardesty7/Soundcloud_-_Add_External_Download_Button
 // @supportURL   https://github.com/zachhardesty7/tamper-monkey-scripts-collection/issues
 
 // @updateURL    https://openuserjs.org/meta/zachhardesty7/Soundcloud_-_Add_External_Download_Button.meta.js
@@ -18,6 +20,7 @@
 // @match        https://loader.to/*
 // @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887637
 // ==/UserScript==
+
 /* global onElementReady */
 
 /**
@@ -40,7 +43,7 @@ function addSoundcloudDownloadButton(el) {
     )
   ) {
     button.className = "mp3-button sc-button sc-button-small"
-    el.querySelector(".soundActions .sc-button-group").append(button)
+    el.querySelector(".soundActions .sc-button-group")?.append(button)
     // else if on individual song page (and not playlist), append SC styled button
   } else if (
     !link.includes("stream") &&
@@ -48,14 +51,11 @@ function addSoundcloudDownloadButton(el) {
   ) {
     const toolbar = document.querySelector(".soundActions div:first-child")
     button.className = "mp3-button sc-button sc-button-medium"
-    toolbar.append(button)
+    toolbar?.append(button)
   }
 
-  el.querySelector(".mp3-button").addEventListener("click", () => {
-    window.open(
-      `https://loader.to/?link=${link}&f=1&s=1&e=1&r=ddownr`,
-      "_blank"
-    )
+  el.querySelector(".mp3-button")?.addEventListener("click", () => {
+    window.open(`https://loader.to/?link=${link}&f=1&s=1&e=1&r=ddownr`, "_blank")
   })
 }
 
@@ -68,28 +68,26 @@ function mp3() {
     onElementReady(
       "#ds .card .section:last-of-type > progress",
       { findOnce: false },
-      (/** @type {HTMLProgressElement} */ progress) => {
+      (progress) => {
         const timer = setInterval(() => {
-          if (progress.value === 1000) {
-            const button = document.querySelector(
-              "#ds .card .section:last-of-type > a"
-            )
-            button.click()
+          if (/** @type {HTMLProgressElement} */ (progress).value === 1000) {
+            const button = document.querySelector("#ds .card .section:last-of-type > a")
+            button?.click()
             clearInterval(timer)
           }
         }, 100)
-      }
+      },
     )
   } else {
     onElementReady(
       ".l-listen-wrapper",
       { findOnce: false },
-      addSoundcloudDownloadButton
+      addSoundcloudDownloadButton,
     )
     onElementReady(
       ".lazyLoadingList__list > .soundList__item",
       { findOnce: false },
-      addSoundcloudDownloadButton
+      addSoundcloudDownloadButton,
     )
   }
 }
