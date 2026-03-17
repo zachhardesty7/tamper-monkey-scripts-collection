@@ -151,7 +151,15 @@ declare interface ParentNode {
   querySelector<K extends keyof SVGElementTagNameMap>(
     selectors: K,
   ): SVGElementTagNameMap[K] | null
-  querySelector(selectors: string): HTMLElement | null
+  querySelector<K extends keyof MathMLElementTagNameMap>(
+    selectors: K,
+  ): MathMLElementTagNameMap[K] | null
+  /** @deprecated */
+  querySelector<K extends keyof HTMLElementDeprecatedTagNameMap>(
+    selectors: K,
+  ): HTMLElementDeprecatedTagNameMap[K] | null
+  // replaces default: `querySelector<E extends Element = Element>(selectors: string): E | null`
+  querySelector<E extends HTMLElement = HTMLElement>(selectors: string): E | null
 
   // keep these so we get advanced types when possible
   querySelectorAll<K extends keyof HTMLElementTagNameMap>(
@@ -160,6 +168,19 @@ declare interface ParentNode {
   querySelectorAll<K extends keyof SVGElementTagNameMap>(
     selectors: K,
   ): NodeListOf<SVGElementTagNameMap[K]>
-  querySelectorAll(selectors: string): NodeListOf<HTMLElement>
+  querySelectorAll<K extends keyof MathMLElementTagNameMap>(
+    selectors: K,
+  ): NodeListOf<MathMLElementTagNameMap[K]>
+  /** @deprecated */
+  querySelectorAll<K extends keyof HTMLElementDeprecatedTagNameMap>(
+    selectors: K,
+  ): NodeListOf<HTMLElementDeprecatedTagNameMap[K]>
+  /**
+   * replaces default: `querySelectorAll<E extends Element = Element>(selectors:
+   * string): NodeListOf<E>;`
+   */
+  querySelectorAll<E extends HTMLElement = HTMLElement>(
+    selectors: string,
+  ): NodeListOf<E>
 }
 // #endregion
