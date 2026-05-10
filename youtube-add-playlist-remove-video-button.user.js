@@ -98,7 +98,40 @@ function addPlaylistVideoDeleteButton(buttons) {
 
     overflowMenuButton?.click()
 
-    if (overflowMenuPopupRemoveButton) {
+    const overflowMenuPopup = document.querySelector(
+      "ytd-popup-container tp-yt-iron-dropdown",
+    )
+    if (overflowMenuPopupRemoveButton && overflowMenuPopup) {
+      // new MutationObserver((mutations, observer) => {
+      //   console.log(`🚀 ~ addPlaylistVideoDeleteButton ~ mutations:`, mutations)
+      //   console.log(
+      //     `🚀 ~ addPlaylistVideoDeleteButton ~ mutations.map:`,
+      //     mutations.map(
+      //       (mutation) =>
+      //         `${mutation.target.nodeName} - ${mutation.attributeName}: ${mutation.oldValue} -> ${mutation.target.getAttribute(mutation.attributeName)}`,
+      //     ),
+      //   )
+      //   for (const mutation of mutations) {
+      //     if (
+      //       mutation.attributeName === "aria-hidden" &&
+      //       mutation.target.getAttribute(mutation.attributeName) !== "true"
+      //     ) {
+      //       console.log(`🚀 ~ addPlaylistVideoDeleteButton ~ mutation:`, mutation)
+      //       overflowMenuPopupRemoveButton.click()
+      //       observer.disconnect()
+      //     }
+      //   }
+      // }).observe(overflowMenuPopup, {
+      //   attributeOldValue: true,
+      //   attributes: true,
+      //   childList: false,
+      //   subtree: false,
+      // })
+
+      // setTimeout(() => {
+      //   overflowMenuPopupRemoveButton.click()
+      // })
+
       // Schedule click on next tick to allow the overflow menu click to finish updating
       // the handlers on its menu items (otherwise the click will do nothing or error).
       // We don't use `setTimeout` because it doesn't trigger before the next repaint,
@@ -106,9 +139,30 @@ function addPlaylistVideoDeleteButton(buttons) {
       requestAnimationFrame(() => {
         overflowMenuPopupRemoveButton.click()
       })
-
       return
     }
+
+    // og
+    // $$("tp-yt-paper-listbox#items > ytd-menu-service-item-renderer")
+
+    // overflow menu container
+    // $$("ytd-popup-container tp-yt-iron-dropdown")
+
+    // overflow menu > item (that has child string with child span)
+    // $$("tp-yt-paper-listbox#items > ytd-menu-service-item-renderer:has(yt-formatted-string span.yt-formatted-string)")
+    // overflow menu > item (that has child string with direct child span)
+    // $$("tp-yt-paper-listbox#items > ytd-menu-service-item-renderer:has(yt-formatted-string > span.yt-formatted-string)")
+    // overflow menu > item (that has child string with exactly 2 direct children ('Remove from' & playlist name))
+    // $$("tp-yt-paper-listbox#items > ytd-menu-service-item-renderer:has(yt-formatted-string > :nth-child(2):nth-last-child(1))")
+
+    // overflow menu > item (that has child string with exactly 2 children ('Remove from' & playlist name))
+    // $$("tp-yt-paper-listbox#items > ytd-menu-service-item-renderer:has(yt-formatted-string :nth-child(2):nth-last-child(1))")
+
+    // overflow menu container visible > item (that has child string with exactly 2 children ('Remove from' & playlist name))
+    // $$("tp-yt-iron-dropdown:not([style*='display: none']) tp-yt-paper-listbox#items > ytd-menu-service-item-renderer:has(yt-formatted-string :nth-child(2):nth-last-child(1))")
+
+    // overflow menu > item (that has child "delete" icon)
+    // $$("tp-yt-paper-listbox#items > ytd-menu-service-item-renderer:has(yt-icon path[d='M19 3h-4V2a1 1 0 00-1-1h-4a1 1 0 00-1 1v1H5a2 2 0 00-2 2h18a2 2 0 00-2-2ZM6 19V7H4v12a4 4 0 004 4h8a4 4 0 004-4V7h-2v12a2 2 0 01-2 2H8a2 2 0 01-2-2Zm4-11a1 1 0 00-1 1v8a1 1 0 102 0V9a1 1 0 00-1-1Zm4 0a1 1 0 00-1 1v8a1 1 0 002 0V9a1 1 0 00-1-1Z'])")
 
     // allow the menu to be created before clicking (usually too quick to see)
     onElementReady(
