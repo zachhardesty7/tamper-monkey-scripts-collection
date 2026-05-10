@@ -5,7 +5,7 @@
 // @description  hide videos with given keywords in title on YouTube home and subscriptions pages
 // @copyright    2019-2026, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.2.1
+// @version      2.2.2
 
 // @grant        GM_getValue
 // @grant        GM_setValue
@@ -36,12 +36,14 @@ const SELECTOR_SUBS_PAGE = 'ytd-browse[page-subtype="subscriptions"]'
 
 /** for grid view */
 const SELECTOR_GRID_ITEM = "ytd-rich-item-renderer.ytd-rich-grid-renderer"
-const SELECTOR_GRID_ITEM_TITLE = "a.yt-lockup-metadata-view-model__title"
+const SELECTOR_GRID_ITEM_TITLE = "a.ytLockupMetadataViewModelTitle"
 
 /**
  * for list view
  *
  * @todo - incorrectly selects shorts
+ *
+ * @todo - don't think it's possible to view as list anymore
  */
 const SELECTOR_LIST_ITEM = `ytd-item-section-renderer.ytd-section-list-renderer`
 const SELECTOR_LIST_ITEM_TITLE = `#video-title yt-formatted-string`
