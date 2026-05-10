@@ -103,6 +103,7 @@ function addPlaylistVideoDeleteButton(buttons) {
       // the handlers on its menu items (otherwise the click will do nothing or error).
       // We don't use `setTimeout` because it doesn't trigger before the next repaint,
       // which would cause a flash of the menu on the screen.
+      // An alternate approach would be to use a MutationObserver to detect when the menu items are updated, but it's more complex and less efficient.
       requestAnimationFrame(() => {
         overflowMenuPopupRemoveButton.click()
       })
