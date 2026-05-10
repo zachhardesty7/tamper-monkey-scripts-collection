@@ -62,9 +62,9 @@ async function addButton(buttons) {
 
   // normal action
   console.debug("no watch later button found, adding new button")
-  const playlistSaveButton = document.querySelector(
-    "#top-level-buttons-computed > ytd-button-renderer:last-child"
-  )
+  const playlistSaveButton = document.querySelectorAll(
+        "dislike-button-view-model"
+    )[0]
 
   // needed to force the node to load so we can determine if it's already in WL or not
   playlistSaveButton.click()
