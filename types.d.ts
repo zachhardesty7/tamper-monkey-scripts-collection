@@ -44,6 +44,14 @@ declare interface FFZHTMLVideoElement extends HTMLVideoElement {
 // #region - utils
 interface OnElementReadyOptions {
   /**
+   * delay per queried element before an element change will trigger the callback again
+   *
+   * use `0` to disable cooldown and trigger callback on every change
+   *
+   * @default 2000
+   */
+  cooldownMs?: number
+  /**
    * stop querying (remove mutation observer) after first successful pass that finds
    * element(s)
    *

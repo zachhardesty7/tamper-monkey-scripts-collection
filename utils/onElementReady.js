@@ -18,6 +18,7 @@
 const QUERIED_ATTRIBUTE_NAME = "was-queried"
 
 const DEFAULT_OPTIONS = /** @type {const} @satisfies {OnElementReadyOptions} */ ({
+  cooldownMs: 2000,
   findFirst: false,
   findOnce: true,
   root: document,
@@ -39,18 +40,23 @@ let queryForElements = (selector, options, callback) => {
   // Search for elements by selector
   const elementList = finalOptions.root?.querySelectorAll(selector) || []
   for (const element of elementList) {
-    if (element.hasAttribute(QUERIED_ATTRIBUTE_NAME)) {
+    if (
+      (finalOptions.findOnce || finalOptions.cooldownMs > 0) &&
+      element.hasAttribute(QUERIED_ATTRIBUTE_NAME)
+    ) {
       continue
     }
 
-    element.setAttribute(QUERIED_ATTRIBUTE_NAME, "true")
+    if (finalOptions.findOnce || finalOptions.cooldownMs > 0) {
+      element.setAttribute(QUERIED_ATTRIBUTE_NAME, "true")
+    }
     callback(element)
 
     // run reset after 2 seconds
-    if (!finalOptions.findOnce) {
+    if (!finalOptions.findOnce && finalOptions.cooldownMs > 0) {
       setTimeout(() => {
         element.removeAttribute(QUERIED_ATTRIBUTE_NAME)
-      }, 2000)
+      }, finalOptions.cooldownMs)
     }
   }
 }
