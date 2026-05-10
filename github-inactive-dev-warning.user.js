@@ -5,6 +5,7 @@
 // @description  display yellow banner if project's last commit over 6 months ago and red banner if over 1 year ago
 // @copyright    2019-2026, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
+// @icon         https://github.githubassets.com/pinned-octocat.svg
 // @version      1.4.1
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/github-inactive-dev-warning.user.js
