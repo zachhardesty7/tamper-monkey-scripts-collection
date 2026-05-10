@@ -24,6 +24,51 @@ const DEFAULT_OPTIONS = /** @type {const} @satisfies {OnElementReadyOptions} */ 
   root: document,
 })
 
+const OER_DEBUG_FOUND_ELEMENTS = new WeakMap()
+
+// /**
+//  * Internal function used by {@link onElementReady} to query for new DOM nodes matching a
+//  * specified selector.
+//  *
+//  * @private
+//  * @param {string} selector
+//  * @param {OnElementReadyOptions} options
+//  * @param {OnElementReadyCallback} callback
+//  */
+// // eslint-disable-next-line prefer-const
+// let queryForElements = (selector, options, callback) => {
+//   const finalOptions = { ...DEFAULT_OPTIONS, ...options }
+
+//   /** @param {...unknown} args */
+//   function oerLog(...args) {
+//     if (finalOptions.debug) {
+//       console.log("[onElementReady]", ...args)
+//     }
+//   }
+
+//   // Search for elements by selector
+//   const elementList = finalOptions.root?.querySelectorAll(selector) || []
+//   for (const element of elementList) {
+//     if (
+//       (finalOptions.findOnce || finalOptions.cooldownMs > 0) &&
+//       element.hasAttribute(QUERIED_ATTRIBUTE_NAME)
+//     ) {
+//       continue
+//     }
+
+//     if (finalOptions.findOnce || finalOptions.cooldownMs > 0) {
+//       element.setAttribute(QUERIED_ATTRIBUTE_NAME, "true")
+//     }
+//     callback(element)
+
+//     // run reset after 2 seconds
+//     if (!finalOptions.findOnce && finalOptions.cooldownMs > 0) {
+//       setTimeout(() => {
+//         element.removeAttribute(QUERIED_ATTRIBUTE_NAME)
+//       }, finalOptions.cooldownMs)
+//     }
+//   }
+// }
 /**
  * Internal function used by {@link onElementReady} to query for new DOM nodes matching a
  * specified selector.
@@ -37,24 +82,40 @@ const DEFAULT_OPTIONS = /** @type {const} @satisfies {OnElementReadyOptions} */ 
 let queryForElements = (selector, options, callback) => {
   const finalOptions = { ...DEFAULT_OPTIONS, ...options }
 
+  /** @param {...unknown} args */
+  function oerLog(...args) {
+    if (finalOptions.debug) {
+      console.log("[onElementReady]", ...args)
+    }
+  }
+
   // Search for elements by selector
   const elementList = finalOptions.root?.querySelectorAll(selector) || []
   for (const element of elementList) {
+    if (!OER_DEBUG_FOUND_ELEMENTS.has(element)) {
+      oerLog("found element:", element)
+      OER_DEBUG_FOUND_ELEMENTS.set(element, true)
+    }
+
     if (
       (finalOptions.findOnce || finalOptions.cooldownMs > 0) &&
       element.hasAttribute(QUERIED_ATTRIBUTE_NAME)
     ) {
+      oerLog("skipping already queried element:", element)
       continue
     }
 
     if (finalOptions.findOnce || finalOptions.cooldownMs > 0) {
+      oerLog("marking element as queried:", element)
       element.setAttribute(QUERIED_ATTRIBUTE_NAME, "true")
     }
     callback(element)
 
     // run reset after 2 seconds
     if (!finalOptions.findOnce && finalOptions.cooldownMs > 0) {
+      oerLog("scheduling queried marker reset for element:", element)
       setTimeout(() => {
+        oerLog("resetting queried marker for element:", element)
         element.removeAttribute(QUERIED_ATTRIBUTE_NAME)
       }, finalOptions.cooldownMs)
     }

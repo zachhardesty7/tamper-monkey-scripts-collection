@@ -51,6 +51,7 @@ interface OnElementReadyOptions {
    * @default 2000
    */
   cooldownMs?: number
+  debug?: boolean
   /**
    * stop querying (remove mutation observer) after first successful pass that finds
    * element(s)
