@@ -123,6 +123,70 @@ let queryForElements = (selector, options, callback) => {
 }
 
 /**
+ * Internal function used by {@link onElementReady} to query for new DOM nodes matching a
+ * specified selector.
+ *
+ * @private
+ * @param {string} selector
+ * @param {OnElementReadyOptions} options
+ */
+// eslint-disable-next-line prefer-const
+let queryForElements2 = (selector, options) => {
+  const finalOptions = { ...DEFAULT_OPTIONS, ...options }
+
+  // Search for elements by selector
+  const elementList = finalOptions.root?.querySelectorAll(selector) || []
+  return [...elementList].filter((element) => {
+    if (element.hasAttribute(QUERIED_ATTRIBUTE_NAME)) {
+      return false
+    }
+
+    element.setAttribute(QUERIED_ATTRIBUTE_NAME, "true")
+
+    // run reset after 2 seconds
+    if (!finalOptions.findOnce) {
+      setTimeout(() => {
+        element.removeAttribute(QUERIED_ATTRIBUTE_NAME)
+      }, 2000)
+    }
+
+    return true
+  })
+}
+
+/**
+ * Internal function used by {@link onElementReady} to query for new DOM nodes matching a
+ * specified selector.
+ *
+ * @private
+ * @param {string} selector
+ * @param {OnElementReadyOptions} options
+ */
+// eslint-disable-next-line prefer-const
+let queryForElements2 = (selector, options) => {
+  const finalOptions = { ...DEFAULT_OPTIONS, ...options }
+
+  // Search for elements by selector
+  const elementList = finalOptions.root?.querySelectorAll(selector) || []
+  return [...elementList].filter((element) => {
+    if (element.hasAttribute(QUERIED_ATTRIBUTE_NAME)) {
+      return false
+    }
+
+    element.setAttribute(QUERIED_ATTRIBUTE_NAME, "true")
+
+    // run reset after 2 seconds
+    if (!finalOptions.findOnce) {
+      setTimeout(() => {
+        element.removeAttribute(QUERIED_ATTRIBUTE_NAME)
+      }, 2000)
+    }
+
+    return true
+  })
+}
+
+/**
  * Wait for elements with a given CSS selector to enter the DOM. Returns a `Promise`
  * resolving with found/changed element and triggers a callback for every found/changed
  * element.
@@ -139,24 +203,30 @@ let onElementReady = (selector, options = DEFAULT_OPTIONS, callback = () => {}) 
 
   return new Promise((resolve) => {
     // Initial Query
-    queryForElements(selector, finalOptions, (element) => {
+    const initialElements = queryForElements2(selector, finalOptions)
+    for (const element of initialElements) {
       resolve(element)
       callback(element)
-    })
+    }
+
+    if (finalOptions.findFirst && initialElements.length) {
+      return
+    }
 
     // Continuous Query
     const observer = new MutationObserver(() => {
       // DOM Changes detected
-      queryForElements(selector, finalOptions, (element) => {
+      const continuousElements = queryForElements2(selector, finalOptions)
+      for (const element of continuousElements) {
         resolve(element)
         callback(element)
+      }
 
-        // stop querying after first successful pass and remove mutation observer,
-        // calling multiple times (when mutliple matching elements) seems to work fine
-        if (finalOptions.findFirst) {
-          observer.disconnect()
-        }
-      })
+      // stop querying after first successful pass and remove mutation observer,
+      // calling multiple times (when mutliple matching elements) seems to work fine
+      if (finalOptions.findFirst && continuousElements.length) {
+        observer.disconnect()
+      }
     })
 
     // Observe DOM Changes
