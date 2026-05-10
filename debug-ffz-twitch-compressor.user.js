@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1.0
 // @description  try to take over the world!
-// @author       You
+// @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @match        https://www.twitch.tv/videos/*
 // @icon         https://icons.duckduckgo.com/ip2/twitch.tv.ico
 // @require      https://greasyfork.org/scripts/419640-onelementready/code/onElementReady.js?version=887637

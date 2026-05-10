@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Amazon - Clean UI
 // @namespace    https://openuserjs.org/users/zachhardesty7
-// @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7) <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
+// @author       Zach Hardesty <zachhardesty7@users.noreply.github.com> (https://github.com/zachhardesty7)
 // @description  removes annoying largely not useful elements from Amazon
 // @copyright    2019-2021, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
