@@ -5,7 +5,7 @@
 // @description  adds a save button to all comments and posts everywhere
 // @copyright    2024-2026, Zach Hardesty (https://zachhardesty.com/)
 // @license      GPL-3.0-only; http://www.gnu.org/licenses/gpl-3.0.txt
-// @version      2.1.5
+// @version      2.1.6
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-add-save-button.user.js
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/reddit-add-save-button.user.js
@@ -276,7 +276,7 @@ window.addEventListener(
     onElementReady(
       // `[item-state]` needed to ensure saved comments have been fully loaded (first per batch may be missing shadow dom temporarily)
       // direct child selector used for post comments to ensure each comment in tree is independently selected
-      ":where(shreddit-profile-comment[item-state], shreddit-comment > div[slot='actionRow'] > shreddit-comment-action-row) shreddit-overflow-menu[slot='overflow'][source='comment']",
+      ":where(shreddit-profile-comment[item-state], shreddit-comment div[slot='actionRow'] shreddit-comment-action-row) shreddit-overflow-menu[slot='overflow'][source*='comment']",
       { findOnce: false },
       improveComments,
     )
