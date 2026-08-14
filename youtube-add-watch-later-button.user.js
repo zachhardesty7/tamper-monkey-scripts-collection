@@ -133,7 +133,7 @@ async function addButton(buttons) {
 
   container.addEventListener("click", async () => {
     const data = document
-      .querySelector(`#above-the-fold #menu #${BUTTONS_CONTAINER_ID}`)
+      .querySelector("#above-the-fold #menu #" + BUTTONS_CONTAINER_ID)
       .__dataHost.__data.items.find(
         (item) => item.menuServiceItemRenderer?.icon.iconType === "PLAYLIST_ADD"
       ).menuServiceItemRenderer
@@ -141,7 +141,7 @@ async function addButton(buttons) {
     const videoId = data.serviceEndpoint.addToPlaylistServiceEndpoint.videoId
 
     const SAPISIDHASH = await getSApiSidHash(
-      document.cookie.split("SAPISID=")[1].split("; ")[0],
+      (await cookieStore.get("SAPISID"))?.value,
       window.origin
     )
 
@@ -190,7 +190,7 @@ async function addButton(buttons) {
 
 async function isVideoInWatchLater() {
   const data = document
-    .querySelector(`#above-the-fold #menu #${BUTTONS_CONTAINER_ID}`)
+    .querySelector("#above-the-fold #menu #" + BUTTONS_CONTAINER_ID)
     .__dataHost.__data.items.find(
       (item) => item.menuServiceItemRenderer?.icon.iconType === "PLAYLIST_ADD"
     ).menuServiceItemRenderer
@@ -198,7 +198,7 @@ async function isVideoInWatchLater() {
   const videoId = data.serviceEndpoint.addToPlaylistServiceEndpoint.videoId
 
   const SAPISIDHASH = await getSApiSidHash(
-    document.cookie.split("SAPISID=")[1].split("; ")[0],
+    (await cookieStore.get("SAPISID"))?.value,
     window.origin
   )
 
@@ -249,7 +249,7 @@ async function getSApiSidHash(SAPISID, origin) {
 // YouTube uses a bunch of duplicate 'id' tag values. why?
 // this makes it much more likely to target right one, but at the cost of being brittle
 onElementReady(
-  `#above-the-fold #menu #${BUTTONS_CONTAINER_ID}`,
+  "#above-the-fold #menu #" + BUTTONS_CONTAINER_ID,
   { findOnce: false },
   addButton
 )
