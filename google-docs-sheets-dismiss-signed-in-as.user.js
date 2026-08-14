@@ -9,12 +9,12 @@
 
 // @homepageURL  https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/google-docs-sheets-dismiss-signed-in-as.user.js
 // @homepage     https://github.com/zachhardesty7/tamper-monkey-scripts-collection/raw/master/google-docs-sheets-dismiss-signed-in-as.user.js
-// @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Google_Docs_&_Sheets_-_Dismiss_signed_in_as
-// @homepage     https://openuserjs.org/scripts/zachhardesty7/Google_Docs_&_Sheets_-_Dismiss_signed_in_as
+// @homepageURL  https://openuserjs.org/scripts/zachhardesty7/Google_Docs_Sheets_-_Dismiss_signed_in_as
+// @homepage     https://openuserjs.org/scripts/zachhardesty7/Google_Docs_Sheets_-_Dismiss_signed_in_as
 // @supportURL   https://github.com/zachhardesty7/tamper-monkey-scripts-collection/issues
 
-// @updateURL    https://openuserjs.org/meta/zachhardesty7/Google_Docs_&_Sheets_-_Dismiss_signed_in_as.meta.js
-// @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/Google_Docs_&_Sheets_-_Dismiss_signed_in_as.user.js
+// @updateURL    https://openuserjs.org/meta/zachhardesty7/Google_Docs_Sheets_-_Dismiss_signed_in_as.meta.js
+// @downloadURL  https://openuserjs.org/src/scripts/zachhardesty7/Google_Docs_Sheets_-_Dismiss_signed_in_as.user.js
 
 // @match        https://docs.google.com/*
 // @require      https://update.greasyfork.org/scripts/419640/1776135/onElementReady.js
